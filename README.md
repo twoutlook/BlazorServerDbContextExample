@@ -1,0 +1,2 @@
+# BlazorServerDbContextExample
+https://docs.microsoft.com/en-us/aspnet/core/blazor/blazor-server-ef-core?view=aspnetcore-5.0
