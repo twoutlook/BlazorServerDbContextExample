@@ -44,8 +44,4 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/s
 ---
 
 
-### 教程:
-https://youtu.be/_3QiR07dfL4
 
-### 代碼:
-https://github.com/rstropek/htl-leo-csharp-4/blob/master/exercises/9110-tournament-planner/sample-solution/TournamentPlanner/Program.cs
