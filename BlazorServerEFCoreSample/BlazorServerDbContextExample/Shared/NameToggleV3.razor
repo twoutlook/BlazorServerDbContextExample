@@ -1,0 +1,33 @@
+﻿@inject IContactFiltersV3 Filters
+    &nbsp;
+    <button class="btn btn-secondary btn-sm"
+            disabled="@Filters.Loading"
+            @onclick="ToggleAsync">
+        @Label
+    </button>
+    &nbsp;
+    @code {
+
+        /// <summary>
+        /// Button text based on current state.
+        /// </summary>
+        private string Label => Filters.ShowFirstNameFirst ?
+        "姓在前" :
+        "名在前";
+
+        /// <summary>
+        /// Reference to the <see cref="GridWrapper"/>.
+        /// </summary>
+        [CascadingParameter]
+        public GridWrapper GridWrapper { get; set; }
+
+        /// <summary>
+        /// Toggle name preference.
+        /// </summary>
+        /// <returns>A <see cref="Task"/>.</returns>
+        private Task ToggleAsync()
+        {
+            Filters.ShowFirstNameFirst = !Filters.ShowFirstNameFirst;
+            return GridWrapper.FilterChanged.InvokeAsync(this);
+        }
+    }
