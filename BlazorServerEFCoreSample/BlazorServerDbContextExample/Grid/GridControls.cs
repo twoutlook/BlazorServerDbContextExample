@@ -5,6 +5,8 @@
     /// </summary>
     public class GridControls : IContactFilters
     {
+        private const int V = 10;
+
         /// <summary>
         /// Keep state of paging.
         /// </summary>
@@ -13,6 +15,8 @@
         public GridControls(IPageHelper pageHelper)
         {
             PageHelper = pageHelper;
+
+            PageHelper.PageSize = V;
         }
 
         /// <summary>
