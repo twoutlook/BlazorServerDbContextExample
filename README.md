@@ -13,33 +13,34 @@ https://docs.microsoft.com/en-us/aspnet/core/blazor/blazor-server-ef-core?view=a
 
 
 
-### 1. 使用最簡的 Console 來演示, 其中沒有展開的 DemoContextFactory是另一個梗,先不展開,直接使用。
-![](1.PNG "1.PNG")
+### 1. 官網截屏
+<img src="1.PNG" />
 ---
-### 2. 雖然課程有核心主題, 仍然要有設定的情境, 也透過這個基本設定複習 best practicez。
-![](2.PNG "2.PNG")
+### 2. 代碼所在截屏
+https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample
+![]("2.PNG")
 ---
-### 3. 這是說明[Required]的兩種寫法。
+### 3. 這是範例
 ![](3.PNG "3.PNG")
 ---
-### 4. 這是今天的焦點, 只能寫在這。
+### 4. 先改每頁只顯示十筆
 ![](4.PNG "4.PNG")
 ---
-### 5. 這是刻意讓代碼運行在這裡報錯代碼。
+### 5. 調整欄位
 ![](5.PNG "5.PNG")
 ---
-### 6. 這個 Runtime error 是數據庫回饋的。
+### 6. 調整欄位顯示名稱
 ![](6.PNG "6.PNG")
 ---
 
-### 7. 最後這是一個作業
-![](7.PNG "6.PNG")
+### 7. 第三個版本終於做對了
+![](7.PNG "7.PNG")
 ---
-### 8. 說明了最低要求
-![](8.PNG "6.PNG")
+### 8. 篩選是立即觸發,不必再按任何提交
+![](8.PNG "8.PNG")
 ---
-### 9. 還有一些要注意的事項
-![](9.PNG "6.PNG")
+### 9. 按一個篩選欄位也是可運行的
+![](9.PNG "9.PNG")
 ---
 
 
