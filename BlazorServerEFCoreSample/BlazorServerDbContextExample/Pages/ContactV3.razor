@@ -1,14 +1,14 @@
-﻿@page "/ContactsV2"
-@page "/ContactsV2/{Page:int}"
+﻿@page "/ContactsV3"
+@page "/ContactsV3/{Page:int}"
 
 @using Microsoft.EntityFrameworkCore
 
-@*@inject IContactFilters Filters*@
-@inject IContactFiltersV2 Filters
+
+@inject IContactFiltersV3 Filters
 
 @inject IDbContextFactory<ContactContext> DbFactory
 @inject NavigationManager Nav
-@inject GridQueryAdapter QueryAdapter
+@inject GridQueryAdapterV3 QueryAdapter
 
 <h1>Contacts</h1>
 <GridWrapper @ref="Wrapper"
@@ -19,40 +19,42 @@
             <div class="col-4"><NameToggle /></div>
             <div class="col-8"><TextFilter /></div>
         </div>
-        <div class="row">&nbsp; 這裡的數據是怎麼LOOP的</div>
+        <div class="row">&nbsp; </div>
         <div class="row">
             <div class="col-6">
 
-                Page @Filters.PageHelper.Page of @Filters.PageHelper.PageCount:
-                showing @Filters.PageHelper.PageItems of
-                @Filters.PageHelper.TotalItemCount items.
+                <span>
+                    共 @Filters.PageHelper.TotalItemCount 筆
+                    本頁顯示 @Filters.PageHelper.PageItems 筆
+                </span>
+                <br />
                 <a disabled="@(Filters.Loading || !Filters.PageHelper.HasPrev)"
                    class="btn btn-primary @IsDisabled(Filters.PageHelper.HasPrev)"
-                   href="@Filters.PageHelper.PrevPage">
-                    Previous
+                   href="@Filters.PageHelper.PrevPageStr">
+                    上一頁
                 </a>
+                <span> &nbsp;&nbsp; 筆數:@Filters.PageHelper.PageItems/@Filters.PageHelper.TotalItemCount  &nbsp; 頁數: @Filters.PageHelper.Page /@Filters.PageHelper.PageCount &nbsp;&nbsp;</span>
                 <a disabled="@(Filters.Loading || !Filters.PageHelper.HasNext)"
                    class="btn btn-primary @IsDisabled(Filters.PageHelper.HasNext)"
-                   href="@Filters.PageHelper.NextPage">
-                    Next
+                   href="@Filters.PageHelper.NextPageStr">
+                    下一頁
                 </a>
             </div>
         </div>
         <div class="row">&nbsp;如果改成TABLE,效果的差別在那裡?</div>
         <div class="row contact-header">
-            <div class="col-1">&nbsp; 這裡是 header</div>
+        @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Name))">
-        @*  NOTE by Mark, 2021-01-11 這個控件使用了 IContactFilters      <SortIndicator Column="@(ContactFilterColumns.Name)" />&nbsp;Name*@
-                <SortIndicatorV2 Column="@(ContactFilterColumns.Name)" />&nbsp;Name
+                <SortIndicator Column="@(ContactFilterColumns.Name)" />&nbsp;<span class="oi oi-person"></span>&nbsp;Name姓名
             </div>
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Phone))">
-                <SortIndicator Column="@(ContactFilterColumns.Phone)" />&nbsp;📞 Phone
+                <SortIndicator Column="@(ContactFilterColumns.Phone)" />&nbsp;📞 <span class="oi oi-phone"></span>&nbsp;Phone電話
             </div>
             <div class="col-3"
                  @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Street))">
-                <SortIndicator Column="@(ContactFilterColumns.Street)" />&nbsp;🏠 Street Address
+                <SortIndicator Column="@(ContactFilterColumns.Street)" />&nbsp;🏠 <span class="oi oi-home"></span>Street Address住址
             </div>
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.City))">
@@ -87,7 +89,7 @@
         {
             @foreach (var contact in Contacts)
             {
-                <ContactRowV2 @key=contact CurrentContact="@contact"
+                <ContactRowV2b @key=contact CurrentContact="@contact"
                               DeleteContact="DeleteContactAsync" />
             }
         }
@@ -140,7 +142,7 @@
         // Ensure we're on the same, er, right page.
         if (_lastPage < 1)
         {
-            Nav.NavigateTo("/ContactsV2/1");
+            Nav.NavigateTo("/ContactsV3/1");
             return;
         }
 
@@ -149,12 +151,12 @@
         {
             if (Page < 1)
             {
-                Nav.NavigateTo("/ContactsV2/1");
+                Nav.NavigateTo("/ContactsV3/1");
                 return;
             }
             if (Page > Filters.PageHelper.PageCount)
             {
-                Nav.NavigateTo($"/ContactsV2/{Filters.PageHelper.PageCount}");
+                Nav.NavigateTo($"/ContactsV3/{Filters.PageHelper.PageCount}");
                 return;
             }
         }

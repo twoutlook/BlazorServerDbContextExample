@@ -1,5 +1,5 @@
-﻿@page "/ContactsV2"
-@page "/ContactsV2/{Page:int}"
+﻿@page "/ContactsV2b"
+@page "/ContactsV2b/{Page:int}"
 
 @using Microsoft.EntityFrameworkCore
 
@@ -43,8 +43,7 @@
             <div class="col-1">&nbsp; 這裡是 header</div>
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Name))">
-        @*  NOTE by Mark, 2021-01-11 這個控件使用了 IContactFilters      <SortIndicator Column="@(ContactFilterColumns.Name)" />&nbsp;Name*@
-                <SortIndicatorV2 Column="@(ContactFilterColumns.Name)" />&nbsp;Name
+                <SortIndicator Column="@(ContactFilterColumns.Name)" />&nbsp;Name
             </div>
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Phone))">
@@ -87,7 +86,7 @@
         {
             @foreach (var contact in Contacts)
             {
-                <ContactRowV2 @key=contact CurrentContact="@contact"
+                <ContactRowV2b @key=contact CurrentContact="@contact"
                               DeleteContact="DeleteContactAsync" />
             }
         }
@@ -140,7 +139,7 @@
         // Ensure we're on the same, er, right page.
         if (_lastPage < 1)
         {
-            Nav.NavigateTo("/ContactsV2/1");
+            Nav.NavigateTo("/ContactsV2b/1");
             return;
         }
 
@@ -149,12 +148,12 @@
         {
             if (Page < 1)
             {
-                Nav.NavigateTo("/ContactsV2/1");
+                Nav.NavigateTo("/ContactsV2b/1");
                 return;
             }
             if (Page > Filters.PageHelper.PageCount)
             {
-                Nav.NavigateTo($"/ContactsV2/{Filters.PageHelper.PageCount}");
+                Nav.NavigateTo($"/ContactsV2b/{Filters.PageHelper.PageCount}");
                 return;
             }
         }

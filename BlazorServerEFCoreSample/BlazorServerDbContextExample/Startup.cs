@@ -31,13 +31,17 @@ namespace BlazorServerDbContextExample
 
             // pager
             services.AddScoped<IPageHelper, PageHelper>();
+            services.AddScoped<IPageHelperV3, PageHelperV3>();
 
             // filters
             services.AddScoped<IContactFilters, GridControls>();
             services.AddScoped<IContactFiltersV2, ContactFiltersV2>();
+            //    services.AddScoped<IContactFiltersV2b, ContactFiltersV2>();// NO NEEDS
+            services.AddScoped<IContactFiltersV3, ContactFiltersV3>();
 
             // query adapter (applies filter to contact request).
             services.AddScoped<GridQueryAdapter>();
+            services.AddScoped<GridQueryAdapterV3>();
 
             // service to communicate success on edit between pages
             services.AddScoped<EditSuccess>();
