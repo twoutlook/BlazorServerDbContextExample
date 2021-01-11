@@ -3,7 +3,9 @@
 
 @using Microsoft.EntityFrameworkCore
 
-@inject IContactFilters Filters
+@*@inject IContactFilters Filters*@
+@inject IContactFiltersV2 Filters
+
 @inject IDbContextFactory<ContactContext> DbFactory
 @inject NavigationManager Nav
 @inject GridQueryAdapter QueryAdapter
@@ -85,7 +87,7 @@
             @foreach (var contact in Contacts)
             {
                 <ContactRowV2 @key=contact CurrentContact="@contact"
-                            DeleteContact="DeleteContactAsync" />
+                              DeleteContact="DeleteContactAsync" />
             }
         }
     </div>

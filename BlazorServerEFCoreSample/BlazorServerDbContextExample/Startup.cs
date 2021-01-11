@@ -34,6 +34,7 @@ namespace BlazorServerDbContextExample
 
             // filters
             services.AddScoped<IContactFilters, GridControls>();
+            services.AddScoped<IContactFiltersV2, ContactFiltersV2>();
 
             // query adapter (applies filter to contact request).
             services.AddScoped<GridQueryAdapter>();

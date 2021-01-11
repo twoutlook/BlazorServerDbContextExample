@@ -3,20 +3,20 @@
     /// <summary>
     /// State of grid filters.
     /// </summary>
-    public class GridControls : IContactFilters
+    public class ContactFiltersV2 : IContactFiltersV2
     {
-        //private const int V = 10;
+        private const int V = 10;
 
         /// <summary>
         /// Keep state of paging.
         /// </summary>
         public IPageHelper PageHelper { get; set; }
 
-        public GridControls(IPageHelper pageHelper)
+        public ContactFiltersV2(IPageHelper pageHelper)
         {
             PageHelper = pageHelper;
 
-            PageHelper.PageSize = 20;
+            PageHelper.PageSize = V;
         }
 
         /// <summary>
