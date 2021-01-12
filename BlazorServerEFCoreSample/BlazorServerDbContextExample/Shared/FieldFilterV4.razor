@@ -62,7 +62,7 @@
     <div class="lbl">姓&nbsp;</div>
     <div class="txt"> <input type="text" autofocus @bind="FilterTextF1" /></div>
     <div class="lbl">名&nbsp;</div>
-    <div class="txt"> <input type="text" autofocus @bind="F2" /></div>
+    <div class="txt"> <input type="text" autofocus @bind="FilterTextF2" /></div>
     <div class="lbl">地址&nbsp;</div>
     <div class="txt"> <input type="text" autofocus @bind="F3" /></div>
     <div class="lbl">(保留)&nbsp;</div>
@@ -286,6 +286,20 @@
             }
         }
     }
+
+    private string FilterTextF2
+    {
+        get => F2;
+        set
+        {
+            if (value != F2)
+            {
+                F2 = value;
+                Filters.FilterTextF2 = F2;
+            }
+        }
+    }
+
 
 
     private string xxxFilterPhone

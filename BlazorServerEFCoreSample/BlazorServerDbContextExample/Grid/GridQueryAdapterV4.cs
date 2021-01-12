@@ -68,9 +68,9 @@ namespace BlazorServerDbContextExample.Grid
                 //{ ContactFilterColumnsV4.Name, cs => cs.Where(c => c.FirstName.Contains(_controls.FilterText) || c.LastName.Contains(_controls.FilterText)) },
                 //{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterText)) },
 //{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterLastName)) },
-{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterText)) },
+{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterTextF1)) },
 
-                { ContactFilterColumnsV4.FirstName, cs => cs.Where(c => c.FirstName.Contains(_controls.FilterText)) },
+                { ContactFilterColumnsV4.FirstName, cs => cs.Where(c => c.FirstName.Contains(_controls.FilterTextF2)) },
                 { ContactFilterColumnsV4.State, cs => cs.Where(c => c.State.Contains(_controls.FilterText)) },
                 { ContactFilterColumnsV4.Street, cs => cs.Where(c => c.Street.Contains(_controls.FilterText)) },
                 { ContactFilterColumnsV4.ZipCode, cs => cs.Where(c => c.ZipCode.Contains(_controls.FilterText)) }
@@ -203,16 +203,22 @@ namespace BlazorServerDbContextExample.Grid
             {
                 //var filter = _filterQueries[_controls.FilterColumn];
                 var filter = _filterQueries[ContactFilterColumnsV4.LastName];
-
-
-                sb.Append($"Filter: '{_controls.FilterColumn}' ");
+                //sb.Append($"Filter: '{_controls.FilterColumn}' ");
                 root = filter(root);
-                //root = filterByPhone(root);
-
             }
 
 
-        //    root = cs => cs.Where(c => c.Phone.Contains(_controls.FilterText));
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
+            {
+                //var filter = _filterQueries[_controls.FilterColumn];
+                var filter = _filterQueries[ContactFilterColumnsV4.FirstName];
+                //sb.Append($"Filter: '{_controls.FilterColumn}' ");
+                root = filter(root);
+            }
+
+
+
+            //    root = cs => cs.Where(c => c.Phone.Contains(_controls.FilterText));
 
 
             // apply the expression
