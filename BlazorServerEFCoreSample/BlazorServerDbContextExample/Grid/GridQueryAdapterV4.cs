@@ -53,7 +53,9 @@ namespace BlazorServerDbContextExample.Grid
                 { ContactFilterColumnsV4.City, cs => cs.Where(c => c.City.Contains(_controls.FilterText)) },
                 { ContactFilterColumnsV4.Phone, cs => cs.Where(c => c.Phone.Contains(_controls.FilterText)) },
                 //{ ContactFilterColumnsV4.Name, cs => cs.Where(c => c.FirstName.Contains(_controls.FilterText) || c.LastName.Contains(_controls.FilterText)) },
-                { ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterText)) },
+                //{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterText)) },
+{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterLastName)) },
+
                 { ContactFilterColumnsV4.FirstName, cs => cs.Where(c => c.FirstName.Contains(_controls.FilterText)) },
                 { ContactFilterColumnsV4.State, cs => cs.Where(c => c.State.Contains(_controls.FilterText)) },
                 { ContactFilterColumnsV4.Street, cs => cs.Where(c => c.Street.Contains(_controls.FilterText)) },
@@ -136,7 +138,7 @@ namespace BlazorServerDbContextExample.Grid
             sb.Append(sortDir);
 
             Debug.WriteLine(sb.ToString());
-            Debug.WriteLine("...by Mark, what is filter? "+ _controls.FilterText);
+            Debug.WriteLine("...by Mark, what is filter? " + _controls.FilterText);
 
             // return the unfiltered query for total count, and the filtered for fetching
             return _controls.SortAscending ? root.OrderBy(expression)

@@ -19,6 +19,8 @@
         /// The text of the filter.
         /// </summary>
         string FilterText { get; set; }
+        string FilterLastName { get; set; }
+
 
         /// <summary>
         /// Paging state in <see cref="PageHelper"/>.

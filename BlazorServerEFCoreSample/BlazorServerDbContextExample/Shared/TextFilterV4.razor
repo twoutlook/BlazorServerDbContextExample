@@ -2,11 +2,15 @@
 
 @inject IContactFiltersV4 Filters
 @implements IDisposable
+    姓(模糊):
+    <input type="text" autofocus @bind-value="FilterLastName" @bind-value:event="oninput" />
+
+
     篩選值(模糊):
     <input type="text" autofocus @bind-value="FilterText" @bind-value:event="oninput" />
     <button class="btn btn-danger" @onclick="@(() => FilterText = string.Empty)">清除</button>
     篩選欄位: <select @bind="SelectedColumn">
-        @foreach (ContactFilterColumns column in (ContactFilterColumns[])Enum.GetValues(typeof(ContactFilterColumns)))
+        @foreach (ContactFilterColumnsV4 column in (ContactFilterColumnsV4[])Enum.GetValues(typeof(ContactFilterColumnsV4)))
         {
             <option @attributes="Selected(column)" value="@((int)column)">@(column.ToString())</option>
         }
@@ -48,7 +52,7 @@
         /// </summary>
         /// <param name="column">The <see cref="ContactFilterColumns"/> being evaluated.</param>
         /// <returns>The proper attribute to select the option.</returns>
-        private IEnumerable<KeyValuePair<string, object>> Selected(ContactFilterColumns column)
+        private IEnumerable<KeyValuePair<string, object>> Selected(ContactFilterColumnsV4 column)
         {
             if ((int)column == selectedColumn)
             {
@@ -77,6 +81,29 @@
         }
 
         private string filterText;
+
+        // NOTE by Mark, 2021-01-12
+        private string filterLastName;
+        private string FilterLastName
+        {
+            get => filterLastName;
+            set
+            {
+                if (value != filterLastName)
+                {
+                    filterLastName = value;
+                    // more text means restart the debounce timer
+                    if (timer != null)
+                    {
+                        timer.Dispose();
+                    }
+                    timer = new Timer(DebounceMs);
+                    timer.Elapsed += NotifyTimerElapsed;
+                    timer.Enabled = true;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Text to filter on.
@@ -114,8 +141,22 @@
             {
                 // notify the controls
                 Filters.FilterText = filterText.Trim();
+                //    Filters.FilterLastName = filterLastName.Trim();
+
+
                 await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
             }
+            //if (Filters.FilterLastName != filterLastName)
+            //{
+            //    // notify the controls
+            //    Filters.FilterLastName = filterLastName.Trim();
+            //    //    Filters.FilterLastName = filterLastName.Trim();
+
+
+            //    await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
+            //}
+
+
         }
 
         /// <summary>
