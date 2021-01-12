@@ -36,6 +36,8 @@ namespace BlazorServerDbContextExample.Grid
 
         /// <summary>
         /// Queryables for filtering.
+        /// 
+        /// https://stackoverflow.com/questions/14775658/how-to-use-func-with-iqueryable-that-returns-iorderedqueryable
         /// </summary>
         private readonly Dictionary<ContactFilterColumnsV4, Func<IQueryable<Contact>, IQueryable<Contact>>> _filterQueries;
 
@@ -122,6 +124,15 @@ namespace BlazorServerDbContextExample.Grid
                 root = filter(root);
             }
 
+            if (!string.IsNullOrWhiteSpace(_controls.FilterLastName))
+            {
+                var filter = _filterQueries[ContactFilterColumnsV4.LastName];
+                sb.Append($"Filter LastName: '{_controls.FilterLastName}' ");
+                root = filter(root);
+            }
+
+
+
             // apply the expression
             var expression = _expressions[_controls.SortColumn];
             sb.Append($"Sort: '{_controls.SortColumn}' ");
@@ -137,6 +148,7 @@ namespace BlazorServerDbContextExample.Grid
 
             var sortDir = _controls.SortAscending ? "ASC" : "DESC";
             sb.Append(sortDir);
+            sb.Append("目前輸入的值是:" + _controls.FilterText);
 
             Debug.WriteLine(sb.ToString());
             Debug.WriteLine("...by Mark, what is filter? " + _controls.FilterText);
@@ -144,6 +156,10 @@ namespace BlazorServerDbContextExample.Grid
             // return the unfiltered query for total count, and the filtered for fetching
             return _controls.SortAscending ? root.OrderBy(expression)
                 : root.OrderByDescending(expression);
+
+
+        //https://www.radzen.com/documentation/blazor/filter-by-multiple-fields/
+
         }
     }
 }
