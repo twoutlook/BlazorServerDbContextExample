@@ -1,16 +1,16 @@
-﻿@page "/ContactsV3"
-@page "/ContactsV3/{Page:int}"
+﻿@page "/ContactsV4"
+@page "/ContactsV4/{Page:int}"
 
 @using Microsoft.EntityFrameworkCore
 
 
-@inject IContactFiltersV3 Filters
+@inject IContactFiltersV4 Filters
 
 @inject IDbContextFactory<ContactContext> DbFactory
 @inject NavigationManager Nav
 @inject GridQueryAdapterV3 QueryAdapter
 
-<h1>連繫人V3</h1>
+<h1>連繫人</h1>
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync"
              DeleteRequested="id => Wrapper.DeleteRequestId = id">
@@ -142,7 +142,7 @@
         // Ensure we're on the same, er, right page.
         if (_lastPage < 1)
         {
-            Nav.NavigateTo("/ContactsV3/1");
+            Nav.NavigateTo("/ContactsV4/1");
             return;
         }
 
@@ -151,12 +151,12 @@
         {
             if (Page < 1)
             {
-                Nav.NavigateTo("/ContactsV3/1");
+                Nav.NavigateTo("/ContactsV4/1");
                 return;
             }
             if (Page > Filters.PageHelper.PageCount)
             {
-                Nav.NavigateTo($"/ContactsV3/{Filters.PageHelper.PageCount}");
+                Nav.NavigateTo($"/ContactsV4/{Filters.PageHelper.PageCount}");
                 return;
             }
         }
