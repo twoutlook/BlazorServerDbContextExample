@@ -8,7 +8,10 @@
 
 @inject IDbContextFactory<ContactContext> DbFactory
 @inject NavigationManager Nav
-@inject GridQueryAdapterV3 QueryAdapter
+@* ========================================================================== *@
+@*   NOTE by Mark, 2021-01-12, 這裡的Adapter仍有一個 DI 的 IContactFiltersV4   *@
+@* ========================================================================== *@
+@inject GridQueryAdapterV4 QueryAdapter
 
 <h1>連繫人 V4</h1>
 <GridWrapper @ref="Wrapper"
@@ -17,35 +20,42 @@
     <div class="container-fluid contacts-grid">
         <div class="row">
 
-            <div class="col-8"><TextFilterV3 /></div>
+            <div class="col-8"><TextFilterV4 /></div>
         </div>
 
 
         <div class="row">&nbsp;@*如果改成TABLE,效果的差別在那裡?*@</div>
         <div class="row contact-header">
             @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
-            <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Name))">
-                <SortIndicator Column="@(ContactFilterColumns.Name)" />&nbsp;<span class="oi oi-person"></span>&nbsp;姓名<NameToggleV3 />
+            <div class="col-1"
+                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumnsV4.LastName))">
+                @*         <SortIndicatorV4 Column="@(ContactFilterColumnsV4.LastName)" />*@
+                &nbsp;<span class="oi oi-person"></span>&nbsp;姓
             </div>
+            <div class="col-1"
+                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumnsV4.FirstName))">
+                @*       <SortIndicatorV4 Column="@(ContactFilterColumnsV4.FirstName)" />*@
+                &nbsp;<span class="oi oi-person"></span>&nbsp;名
+            </div>
+
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Phone))">
+                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumnsV4.Phone))">
                 <SortIndicator Column="@(ContactFilterColumns.Phone)" />&nbsp;<span class="oi oi-phone"></span>&nbsp;電話
             </div>
             <div class="col-3"
-                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.Street))">
+                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumnsV4.Street))">
                 <SortIndicator Column="@(ContactFilterColumns.Street)" />&nbsp;<span class="oi oi-home"></span>住址
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.City))">
+                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumnsV4.City))">
                 <SortIndicator Column="@(ContactFilterColumns.City)" />&nbsp;City
             </div>
             <div class="col-1"
-                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.State))">
+                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumnsV4.State))">
                 <SortIndicator Column="@(ContactFilterColumns.State)" />&nbsp;State
             </div>
             <div class="col-1"
-                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumns.ZipCode))">
+                 @onclick="@(async ()=>await ToggleAsync(ContactFilterColumnsV4.ZipCode))">
                 <SortIndicator Column="@(ContactFilterColumns.ZipCode)" />&nbsp;ZipCode
             </div>
             <div class="col-1">
@@ -73,7 +83,7 @@
         {
             @foreach (var contact in Contacts)
             {
-                <ContactRowV3 @key=contact CurrentContact="@contact"
+                <ContactRowV4 @key=contact CurrentContact="@contact"
                               DeleteContact="DeleteContactAsync" />
             }
         }
@@ -190,7 +200,7 @@
     /// </summary>
     /// <param name="col">The <see cref="ContactFilterColumns"/> to toggle.</param>
     /// <returns>A <see cref="Task"/>.</returns>
-    private Task ToggleAsync(ContactFilterColumns col)
+    private Task ToggleAsync(ContactFilterColumnsV4 col)
     {
         if (Filters.SortColumn == col)
         {

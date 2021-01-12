@@ -46,6 +46,7 @@ namespace BlazorServerDbContextExample
             // query adapter (applies filter to contact request).
             services.AddScoped<GridQueryAdapter>();
             services.AddScoped<GridQueryAdapterV3>();
+            services.AddScoped<GridQueryAdapterV4>();
 
             // service to communicate success on edit between pages
             services.AddScoped<EditSuccess>();

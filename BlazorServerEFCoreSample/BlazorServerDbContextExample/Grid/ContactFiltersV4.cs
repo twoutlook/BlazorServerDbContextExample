@@ -32,8 +32,8 @@
         /// <summary>
         /// Column to sort by.
         /// </summary>
-        public ContactFilterColumns SortColumn { get; set; }
-            = ContactFilterColumns.Name;
+        public ContactFilterColumnsV4 SortColumn { get; set; }
+            = ContactFilterColumnsV4.LastName;
 
         /// <summary>
         /// True when sorting ascending, otherwise sort descending.
@@ -43,8 +43,8 @@
         /// <summary>
         /// Column filtered text is against.
         /// </summary>
-        public ContactFilterColumns FilterColumn { get; set; }
-            = ContactFilterColumns.Name;
+        public ContactFilterColumnsV4 FilterColumn { get; set; }
+            = ContactFilterColumnsV4.LastName;
 
         /// <summary>
         /// Text to filter on.

@@ -63,7 +63,7 @@
         /// </summary>
         public int PageCount => (TotalItemCount + PageSize - 1) / PageSize;
 
-        public string BaseUrl { get => "/ContactsV4xxx/"; }
+        public string BaseUrl { get => "/ContactsV4/"; }
   //      string IPageHelperV4.BaseUrl { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

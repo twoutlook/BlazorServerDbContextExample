@@ -8,7 +8,7 @@
         /// <summary>
         /// The <see cref="ContactFilterColumns"/> being filtered on.
         /// </summary>
-        ContactFilterColumns FilterColumn { get; set; }
+        ContactFilterColumnsV4 FilterColumn { get; set; }
 
         /// <summary>
         /// Loading indicator.
@@ -38,6 +38,6 @@
         /// <summary>
         /// The <see cref="ContactFilterColumns"/> being sorted.
         /// </summary>
-        ContactFilterColumns SortColumn { get; set; }
+        ContactFilterColumnsV4 SortColumn { get; set; }
     }
 }
