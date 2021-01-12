@@ -28,7 +28,7 @@ namespace BlazorServerDbContextExample.Grid
                 { ContactFilterColumnsV4.City, c => c.City },
                 { ContactFilterColumnsV4.Phone, c => c.Phone },
                 { ContactFilterColumnsV4.LastName, c => c.LastName },
-                { ContactFilterColumnsV4.FirstName, c => c.LastName },
+                { ContactFilterColumnsV4.FirstName, c => c.FirstName },
                 { ContactFilterColumnsV4.State, c => c.State },
                 { ContactFilterColumnsV4.Street, c => c.Street },
                 { ContactFilterColumnsV4.ZipCode, c => c.ZipCode }
