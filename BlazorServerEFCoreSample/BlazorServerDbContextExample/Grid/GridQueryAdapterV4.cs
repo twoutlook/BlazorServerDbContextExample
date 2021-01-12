@@ -63,17 +63,17 @@ namespace BlazorServerDbContextExample.Grid
             // set up queries
             _filterQueries = new Dictionary<ContactFilterColumnsV4, Func<IQueryable<Contact>, IQueryable<Contact>>>
             {
-                { ContactFilterColumnsV4.City, cs => cs.Where(c => c.City.Contains(_controls.FilterText)) },
-                { ContactFilterColumnsV4.Phone, cs => cs.Where(c => c.Phone.Contains(_controls.FilterText)) },
+                { ContactFilterColumnsV4.City, cs => cs.Where(c => c.City.Contains(_controls.FilterTextF5)) },
+                { ContactFilterColumnsV4.Phone, cs => cs.Where(c => c.Phone.Contains(_controls.FilterTextF3)) },
                 //{ ContactFilterColumnsV4.Name, cs => cs.Where(c => c.FirstName.Contains(_controls.FilterText) || c.LastName.Contains(_controls.FilterText)) },
                 //{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterText)) },
 //{ ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterLastName)) },
 { ContactFilterColumnsV4.LastName, cs => cs.Where(c => c.LastName.Contains(_controls.FilterTextF1)) },
 
                 { ContactFilterColumnsV4.FirstName, cs => cs.Where(c => c.FirstName.Contains(_controls.FilterTextF2)) },
-                { ContactFilterColumnsV4.State, cs => cs.Where(c => c.State.Contains(_controls.FilterText)) },
-                { ContactFilterColumnsV4.Street, cs => cs.Where(c => c.Street.Contains(_controls.FilterText)) },
-                { ContactFilterColumnsV4.ZipCode, cs => cs.Where(c => c.ZipCode.Contains(_controls.FilterText)) }
+                { ContactFilterColumnsV4.State, cs => cs.Where(c => c.State.Contains(_controls.FilterTextF6)) },
+                { ContactFilterColumnsV4.Street, cs => cs.Where(c => c.Street.Contains(_controls.FilterTextF4)) },
+                { ContactFilterColumnsV4.ZipCode, cs => cs.Where(c => c.ZipCode.Contains(_controls.FilterTextF7)) }
             };
         }
 
@@ -216,6 +216,34 @@ namespace BlazorServerDbContextExample.Grid
                 root = filter(root);
             }
 
+
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
+            {
+                var filter = _filterQueries[ContactFilterColumnsV4.Phone];
+                root = filter(root);
+            }
+
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF4))
+            {
+                var filter = _filterQueries[ContactFilterColumnsV4.Street];
+                root = filter(root);
+            }
+
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF5))
+            {
+                var filter = _filterQueries[ContactFilterColumnsV4.City];
+                root = filter(root);
+            }
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF6))
+            {
+                var filter = _filterQueries[ContactFilterColumnsV4.State];
+                root = filter(root);
+            }
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF7))
+            {
+                var filter = _filterQueries[ContactFilterColumnsV4.ZipCode];
+                root = filter(root);
+            }
 
 
             //    root = cs => cs.Where(c => c.Phone.Contains(_controls.FilterText));

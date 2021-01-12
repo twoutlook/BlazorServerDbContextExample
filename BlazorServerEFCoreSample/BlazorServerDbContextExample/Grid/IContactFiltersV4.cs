@@ -26,6 +26,13 @@
 
         string FilterTextF2 { get; set; }
         string FilterTextF3 { get; set; }
+        string FilterTextF4 { get; set; }
+
+
+        string FilterTextF5 { get; set; }
+        string FilterTextF6 { get; set; }
+        string FilterTextF7 { get; set; }
+
 
         string FilterLastName { get; set; }
 

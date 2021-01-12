@@ -53,6 +53,10 @@
         public string FilterTextF1 { get; set; }
         public string FilterTextF2 { get; set; }
         public string FilterTextF3 { get; set; }
+        public string FilterTextF4 { get; set; }
+        public string FilterTextF5 { get; set; }
+        public string FilterTextF6 { get; set; }
+        public string FilterTextF7 { get; set; }
         public string FilterLastName { get; set ; }
     }
 }
