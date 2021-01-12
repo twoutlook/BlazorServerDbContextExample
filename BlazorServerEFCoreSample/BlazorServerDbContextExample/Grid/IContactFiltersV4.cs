@@ -18,7 +18,15 @@
         /// <summary>
         /// The text of the filter.
         /// </summary>
+
         string FilterText { get; set; }
+
+        string FilterTextF1 { get; set; }
+
+
+        string FilterTextF2 { get; set; }
+        string FilterTextF3 { get; set; }
+
         string FilterLastName { get; set; }
 
 

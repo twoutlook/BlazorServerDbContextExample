@@ -50,6 +50,9 @@
         /// Text to filter on.
         /// </summary>
         public string FilterText { get; set; }
+        public string FilterTextF1 { get; set; }
+        public string FilterTextF2 { get; set; }
+        public string FilterTextF3 { get; set; }
         public string FilterLastName { get; set ; }
     }
 }

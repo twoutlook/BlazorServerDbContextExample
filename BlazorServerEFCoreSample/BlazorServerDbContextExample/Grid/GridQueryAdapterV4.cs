@@ -18,6 +18,7 @@ namespace BlazorServerDbContextExample.Grid
         /// Holds state of the grid.
         /// </summary>
         private readonly IContactFiltersV4 _controls;
+        
 
         /// <summary>
         /// Expressions for sorting.
@@ -45,9 +46,19 @@ namespace BlazorServerDbContextExample.Grid
         /// Creates a new instance of the <see cref="GridQueryAdapter"/> class.
         /// </summary>
         /// <param name="controls">The <see cref="IContactFilters"/> to use.</param>
+        /// 
+        private readonly string FilterTextF1;
+
+        Func<IQueryable<Contact>, IQueryable<Contact>> filterByPhone;
         public GridQueryAdapterV4(IContactFiltersV4 controls)
         {
             _controls = controls;
+
+            FilterTextF1 = controls.FilterTextF1;
+
+
+            Func<IQueryable<Contact>, IQueryable<Contact>> filterByPhone = cs => cs.Where(c => c.Phone.Contains(_controls.FilterTextF1));
+
 
             // set up queries
             _filterQueries = new Dictionary<ContactFilterColumnsV4, Func<IQueryable<Contact>, IQueryable<Contact>>>
@@ -80,6 +91,22 @@ namespace BlazorServerDbContextExample.Grid
             _controls.PageHelper.PageItems = collection.Count;
             return collection;
         }
+
+        public async Task<ICollection<Contact>> FetchAsyncV4(IQueryable<Contact> query)
+        {
+            query = FilterAndQueryV4(query);
+
+
+
+
+            await CountAsync(query);
+            var collection = await FetchPageQuery(query)
+                .ToListAsync();
+            _controls.PageHelper.PageItems = collection.Count;
+            return collection;
+        }
+
+
 
         /// <summary>
         /// Get total filtered items count.
@@ -161,5 +188,61 @@ namespace BlazorServerDbContextExample.Grid
         //https://www.radzen.com/documentation/blazor/filter-by-multiple-fields/
 
         }
+
+
+        //Func<IQueryable<Contact>, IQueryable<Contact>> filterByPhone = cs => cs.Where(c => c.Phone.Contains("123"));
+      
+        private IQueryable<Contact> FilterAndQueryV4(IQueryable<Contact> root)
+        {
+            var sb = new System.Text.StringBuilder();
+
+            // apply a filter?
+
+            
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
+            {
+                //var filter = _filterQueries[_controls.FilterColumn];
+                var filter = _filterQueries[ContactFilterColumnsV4.LastName];
+
+
+                sb.Append($"Filter: '{_controls.FilterColumn}' ");
+                root = filter(root);
+                //root = filterByPhone(root);
+
+            }
+
+
+        //    root = cs => cs.Where(c => c.Phone.Contains(_controls.FilterText));
+
+
+            // apply the expression
+            var expression = _expressions[_controls.SortColumn];
+            sb.Append($"Sort: '{_controls.SortColumn}' ");
+
+            // fix up name
+            //if (_controls.SortColumn == ContactFilterColumnsV4.Name && _controls.ShowFirstNameFirst)
+            //{
+            //    sb.Append($"(first name first) ");
+            //    expression = c => c.FirstName;
+            //}
+
+
+
+            var sortDir = _controls.SortAscending ? "ASC" : "DESC";
+            sb.Append(sortDir);
+            sb.Append("目前輸入的值是:" + _controls.FilterText);
+
+            Debug.WriteLine(sb.ToString());
+            Debug.WriteLine("...by Mark, what is filter? " + _controls.FilterText);
+
+            // return the unfiltered query for total count, and the filtered for fetching
+            return _controls.SortAscending ? root.OrderBy(expression)
+                : root.OrderByDescending(expression);
+
+
+            //https://www.radzen.com/documentation/blazor/filter-by-multiple-fields/
+
+        }
     }
+
 }
