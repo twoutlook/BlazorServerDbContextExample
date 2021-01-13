@@ -2,6 +2,8 @@
 @inject IJSRuntime JSRuntime
 @inject IPartFilters Filters
 @implements IDisposable
+
+@using System.Globalization
 <style>
     .grid-container {
         display: inline-grid;
@@ -57,28 +59,65 @@
         margin-bottom: 2px;
     }
 
+    /*https://stackoverflow.com/questions/56545830/how-can-i-make-an-input-element-respect-the-dimensions-of-a-grid-container*/
+    input {
+        min-width: 0;
+    }
+
     .val {
         background-color: antiquewhite
     }
 </style>
 
+
 <div class="row">
-    <div class="col-2 lbl">料號編碼&nbsp;</div>
-    <div class="col-2 txt"> <input type="text" autofocus @bind="FilterTextF1" /></div>
-    <div class="col-2 lbl ">料號名稱&nbsp;</div>
-    <div class="col-2 txt"> <input type="text" autofocus @bind="FilterTextF2" /></div>
-  
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">料號編碼</span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF1">
+        </div>
+    </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">料號名稱</span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF2">
+        </div>
+    </div>
+    @*<div class="col-3 txt ">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </div>
+                <input disabled="disabled" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-3 txt ">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </div>
+                <input  disabled="disabled"  type="text" class="form-control">
+            </div>
+        </div>*@
 </div>
-<div  class="row" >
+
+
+<div class="row">
     <div class=" col-10 ">
         <button class="btn btn-primary " @onclick="UpdateHeading">
             查詢
         </button>
- 
-        查詢參數:
 
-        <span class="val"> @FilterTextF1</span>
-        <span class="val"> @FilterTextF2</span>
+        參數:
+
+        <span class="val"> @FilterTextF1Submit</span>
+        <span class="val"> @FilterTextF2Submit</span>
+        
+        時間:<span class="val">@_dateString</span>
 
 
     </div>
@@ -88,7 +127,12 @@
 
 
 @code {
+    string FilterTextF1Submit;
+    string FilterTextF2Submit;
 
+
+    DateTime SubmitTime;
+    private string _dateString;
     private async void UpdateHeading(MouseEventArgs e)
     {
         //Console.WriteLine("My debug output.");
@@ -98,7 +142,10 @@
         //    Filters.FilterText = F1.Trim();
         //    Filters.FilterLastName = filterLastName.Trim();
 
+        FilterTextF1Submit = FilterTextF1;
+        FilterTextF2Submit = FilterTextF2;
 
+        _dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
 
 
