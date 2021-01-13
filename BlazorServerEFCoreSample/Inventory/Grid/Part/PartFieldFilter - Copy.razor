@@ -33,7 +33,7 @@
 
     .lbl {
         border-radius: 4px;
-        /*margin-left: 8px;*/
+        margin-left: 8px;
         text-align: right;
         background-color: lightgray;
         /*margin-right:4px;*/
@@ -52,34 +52,39 @@
 
     .txt {
         /*border-radius: 5px;*/
-        margin-left: -16px;
+        margin-left: 0px;
         margin-top: 2px;
         margin-bottom: 2px;
     }
-
     .val {
         background-color: antiquewhite
     }
+
+
 </style>
 
-<div class="row">
-    <div class="col-2 lbl">料號編碼&nbsp;</div>
-    <div class="col-2 txt"> <input type="text" autofocus @bind="FilterTextF1" /></div>
-    <div class="col-2 lbl ">料號名稱&nbsp;</div>
-    <div class="col-2 txt"> <input type="text" autofocus @bind="FilterTextF2" /></div>
-  
+<div class="wrapper">
+    <div class="lbl">料號編碼&nbsp;</div>
+    <div class="txt"> <input type="text" autofocus @bind="FilterTextF1" /></div>
+    <div class="lbl">料號名稱&nbsp;</div>
+    <div class="txt"> <input type="text" autofocus @bind="FilterTextF2" /></div>
+    <div class="lbl">&nbsp;</div>
+    <div class="txt"> <input disabled="disabled" type="text" autofocus  /></div>
+    <div class="lbl">&nbsp;</div>
+    <div class="txt"> <input disabled="disabled" type="text" autofocus  /></div>
 </div>
-<div  class="row" >
-    <div class=" col-10 ">
+<div >
+    <div class="btngrid">
         <button class="btn btn-primary " @onclick="UpdateHeading">
             查詢
         </button>
- 
+    </div>
+    <div class="txt">
         查詢參數:
-
+    
         <span class="val"> @FilterTextF1</span>
         <span class="val"> @FilterTextF2</span>
-
+      
 
     </div>
 </div>

@@ -1,29 +1,29 @@
 ﻿@inject IPartFilters Filters
 
-@if (CurrentContact != null)
+@if (CurrentPart != null)
 {
 <div class="row contact-detail">
- 
-    <div class="col-1">@CurrentContact.Cpartnumber</div>
-    <div class="col-1">@CurrentContact.Cpartname</div>
+
+    <div class="col-2">@CurrentPart.Cpartnumber</div>
+    <div class="col-2">@CurrentPart.Cpartname</div>
 
     @if (!DeleteConfirmation)
     {
-        <div class="col-2">@CurrentContact.Cspecifications</div>
-        @*<div class="col-3">@CurrentContact.Street</div>
-        <div class="col-2">@CurrentContact.City</div>
-        <div class="col-1">@CurrentContact.State</div>
-        <div class="col-1">@CurrentContact.ZipCode</div>*@
+        @* <div class="col-3">@CurrentPart.Cspecifications</div>
+            <div class="col-3">@CurrentContact.Street</div>
+                <div class="col-2">@CurrentContact.City</div>
+                <div class="col-1">@CurrentContact.State</div>
+                <div class="col-1">@CurrentContact.ZipCode</div>*@
     }
     else
     {
         @*<div class="col-9">
-            <DeletePrompt Confirmation="ConfirmAsync" />
-        </div>*@
+                <DeletePrompt Confirmation="ConfirmAsync" />
+            </div>*@
     }
 
-    <div class="col-1 text-center">
-        <a title="Edit" href="edit/@CurrentContact.Id">
+    @*<div class="col-1 text-center">
+        <a title="Edit" href="edit/@CurrentPart.Id">
             &nbsp;📝&nbsp;
         </a>
         @if (CanDelete)
@@ -36,7 +36,7 @@
             <span>&nbsp;</span>
         }
         &nbsp;
-    </div>
+    </div>*@
 
 
 </div>
@@ -49,7 +49,7 @@
     /// The <see cref="BasePart"/> being rendered.
     /// </summary>
     [Parameter]
-    public BasePart CurrentContact
+    public BasePart CurrentPart
     {
         get => _currentContact;
         set
@@ -79,12 +79,12 @@
     /// </summary>
     private bool CanDelete => !DeleteConfirmation &&
     (Wrapper.DeleteRequestId == "" ||
-    Wrapper.DeleteRequestId == CurrentContact?.Id);
+    Wrapper.DeleteRequestId == CurrentPart?.Id);
 
     /// <summary>
     /// Navigate to view.
     /// </summary>
-    private string ViewLink => $"View/{CurrentContact?.Id}";
+    private string ViewLink => $"View/{CurrentPart?.Id}";
 
     /// <summary>
     /// Confirm the delete.
@@ -117,7 +117,7 @@
         if (Wrapper.DeleteRequestId == "")
         {
             DeleteConfirmation = true;
-            await Wrapper.DeleteRequested.InvokeAsync(CurrentContact.Id);
+            await Wrapper.DeleteRequested.InvokeAsync(CurrentPart.Id);
         }
     }
 

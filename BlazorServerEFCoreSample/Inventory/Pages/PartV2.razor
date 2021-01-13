@@ -41,19 +41,24 @@
         <div class="row">&nbsp;@*如果改成TABLE,效果的差別在那裡?*@</div>
         <div class="row contact-header">
             @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
-            <div class="col-1"
+            <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartnumber))">
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartnumber)" />
-                &nbsp;<span class="oi oi-person"></span>&nbsp;物料編碼
+                &nbsp;物料編碼
             </div>
-            <div class="col-1"
+            <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-                &nbsp;<span class="oi oi-person"></span>&nbsp;物料名稱
+                &nbsp;物料名稱
             </div>
-            <div class="col-1">
+            @*<div class="col-3"
+                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                &nbsp;規格
+            </div>*@
+            @*<div class="col-1">
                 刪改操作
-            </div>
+            </div>*@
 
         </div>
         @if (Filters.Loading || Parts == null)
@@ -77,7 +82,7 @@
         {
             @foreach (var x in Parts)
             {
-               <PartRow  @key=x CurrentContact="@x"/>
+               <PartRow  @key=x CurrentPart="@x"/>
             }
 
 
