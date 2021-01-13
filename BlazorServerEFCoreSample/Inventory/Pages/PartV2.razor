@@ -162,6 +162,9 @@
         await base.OnParametersSetAsync();
     }
 
+
+    //https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-5.0
+    [Parameter]
     public int Page
     {
         get => Filters.PageHelper.Page;
