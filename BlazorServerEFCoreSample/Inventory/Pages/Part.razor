@@ -1,7 +1,37 @@
 ﻿@page "/part"
 
+@using Inventory.Data
+
 <h1>物料</h1>
+<ul>
+
+    @foreach (var part in partList)
+    {
+    <li>  @part.Cpartnumber  @part.Cpartname</li>
+   }
+</ul>
+
+@code
+{
 
 
+
+
+    private List<BasePart> partList;
+
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        using var context = new TaiweiContext();
+        partList = context.BasePart.OrderBy(o => o.Cpartnumber).Take(10).ToList();
+    }
+
+    protected override void OnInitialized()
+    {
+        //base.OnInitialized();
+        IncrementCount();
+    }
+}
 
 
