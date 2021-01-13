@@ -1,18 +1,14 @@
-﻿@page "/partV1"
+﻿@page "/partV3"
 
 @using Inventory.Data
-@using Microsoft.EntityFrameworkCore
 
-
-
-@inject IDbContextFactory<TaiweiContext> DbFactory
-<h1>物料 ver 1</h1>
+<h1>物料 ver3</h1>
 <ul>
 
     @foreach (var part in partList)
     {
-        <li>  @part.Cpartnumber  @part.Cpartname</li>
-    }
+    <li>  @part.Cpartnumber  @part.Cpartname</li>
+   }
 </ul>
 
 @code
@@ -27,10 +23,7 @@
 
     private void IncrementCount()
     {
-
-
-        //using var context = new TaiweiContext();
-        using var context = DbFactory.CreateDbContext();
+        using var context = new TaiweiContext();
         partList = context.BasePart.OrderBy(o => o.Cpartnumber).Take(10).ToList();
     }
 

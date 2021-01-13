@@ -1,12 +1,24 @@
-﻿@page "/partV1"
+﻿@page "/partV2"
+@page "/partV2/{Page:int}"
 
-@using Inventory.Data
+
+
+
+
 @using Microsoft.EntityFrameworkCore
 
 
+@inject IPartFilters Filters
 
 @inject IDbContextFactory<TaiweiContext> DbFactory
-<h1>物料 ver 1</h1>
+@inject NavigationManager Nav
+@* ========================================================================== *@
+@*   NOTE by Mark, 2021-01-12, 這裡的Adapter仍有一個 DI 的 IContactFiltersV4   *@
+@* ========================================================================== *@
+@inject PartGridQueryAdapter QueryAdapter
+
+
+<h1>物料 ver2</h1>
 <ul>
 
     @foreach (var part in partList)
@@ -27,10 +39,7 @@
 
     private void IncrementCount()
     {
-
-
-        //using var context = new TaiweiContext();
-        using var context = DbFactory.CreateDbContext();
+        using var context = new TaiweiContext();
         partList = context.BasePart.OrderBy(o => o.Cpartnumber).Take(10).ToList();
     }
 
