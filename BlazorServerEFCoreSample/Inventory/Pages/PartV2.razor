@@ -1,5 +1,5 @@
 ﻿@page "/partV2"
-@page "/partV2/{Page:int}"
+@*@page "/partV2/{Page:int}"*@
 
 
 
@@ -18,7 +18,7 @@
 @inject PartGridQueryAdapter QueryAdapter
 
 
-<h1>物料 ver2</h1>
+<h1>物料 ver2 doing...</h1>
 <ul>
 
     @foreach (var part in partList)
@@ -27,9 +27,158 @@
     }
 </ul>
 
+
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync"
+       
+             >
+    <div class="container-fluid contacts-grid">
+        @*<div class="row">
+
+                <div class="col-8"><TextFilterV4 /></div>
+            </div>*@
+
+        <PartFieldFilter />
+        <div class="row">&nbsp;@*如果改成TABLE,效果的差別在那裡?*@</div>
+        <div class="row contact-header">
+            @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
+            <div class="col-1"
+                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartnumber))">
+                <PartSortIndicator Column="@(PartFilterColumns.Cpartnumber)" />
+                &nbsp;<span class="oi oi-person"></span>&nbsp;物料編碼
+            </div>
+            <div class="col-1"
+                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                &nbsp;<span class="oi oi-person"></span>&nbsp;物料名稱
+            </div>
+            <div class="col-1">
+                刪改操作
+            </div>
+
+        </div>
+        @if (Filters.Loading || Parts == null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+        @if (Parts != null && Parts.Count == 0)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-warning">
+                    No contacts found.
+                </div>
+            </div>
+        }
+        @if (Parts != null)
+        {
+            @*@foreach (var contact in Parts)
+            {
+                <PartRow @key=contact CurrentContact="@contact"
+                              DeleteContact="DeleteContactAsync" />
+            }*@
+
+    <div>XXXXXXXXXXXXXXXXXXXXXxxxx to show row</div>
+        }
+
+
+        @*NOTE by Mark, 2021-01-12, 分頁*@
+        <div class="row">&nbsp; </div>
+        <div class="row">
+            <div class="col-6">
+
+
+                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasPrev)"
+                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasPrev)"
+                   href="@Filters.PageHelper.PrevPageStr">
+                    上一頁
+                </a>
+                <span> &nbsp;&nbsp; 筆數:@Filters.PageHelper.PageItems/@Filters.PageHelper.TotalItemCount  &nbsp; 頁數: @Filters.PageHelper.Page /@Filters.PageHelper.PageCount &nbsp;&nbsp;</span>
+                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasNext)"
+                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasNext)"
+                   href="@Filters.PageHelper.NextPageStr">
+                    下一頁
+                </a>
+            </div>
+        </div>
+    </div>
+</GridWrapper>
+
+
 @code
 {
+    private string IsDisabled(bool condition) =>
+    !Filters.Loading && condition ? "" : "disabled";
 
+    /// <summary>
+    /// Keeps track of the last page loaded.
+    /// </summary>
+    private int _lastPage = -1;
+
+    public int Page
+    {
+        get => Filters.PageHelper.Page;
+        set
+        {
+            Filters.PageHelper.Page = value;
+        }
+    }
+
+    /// <summary>
+    /// A wrapper for grid-related activity (like delete).
+    /// </summary>
+    private GridWrapper Wrapper { get; set; }
+
+
+
+    private Task ToggleAsync(PartFilterColumns col)
+    {
+        if (Filters.SortColumn == col)
+        {
+            Filters.SortAscending = !Filters.SortAscending;
+        }
+        else
+        {
+            Filters.SortColumn = col;
+        }
+        return ReloadAsync();
+    }
+    private ICollection<BasePart> Parts { get; set; }
+
+    private async Task ReloadAsync()
+    {
+        if (Filters.Loading || Page < 1)
+        {
+            return;
+        }
+
+        Filters.Loading = true;
+
+        if (Wrapper != null)
+        {
+            Wrapper.DeleteRequestId = "";
+        }
+
+        Parts = null;
+
+        using var context = DbFactory.CreateDbContext();
+
+        // run the query to load the current page
+        //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
+
+        // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
+        Parts = await QueryAdapter.FetchAsyncV4(context.BasePart.AsQueryable());
+
+
+
+
+        // now we're done
+        Filters.Loading = false;
+    }
 
 
 
@@ -39,13 +188,18 @@
 
     private void IncrementCount()
     {
-        using var context = new TaiweiContext();
+        //using var context = new TaiweiContext();
+        using var context = DbFactory.CreateDbContext();
+
+
         partList = context.BasePart.OrderBy(o => o.Cpartnumber).Take(10).ToList();
     }
 
     protected override void OnInitialized()
     {
         //base.OnInitialized();
+
+
         IncrementCount();
     }
 }

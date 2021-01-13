@@ -20,10 +20,10 @@
     /// Call when a contact is requested to be deleted.
     /// </summary>
     [Parameter]
-    public EventCallback<int> DeleteRequested { get; set; }
+    public EventCallback<string> DeleteRequested { get; set; }
 
     /// <summary>
     /// The id of the <see cref="Contact"/> to be deleted.
     /// </summary>
-    public int DeleteRequestId { get; set; }
+    public string DeleteRequestId { get; set; }
 }

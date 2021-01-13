@@ -30,8 +30,7 @@ namespace Inventory3
             services.AddServerSideBlazor();
 
             services.AddDbContextFactory<TaiweiContext>(opt =>
-opt.UseSqlServer(
-        Configuration.GetConnectionString("TaiweiConnection")));
+                opt.UseSqlServer( Configuration.GetConnectionString("TaiweiConnection")));
       //      services.AddSingleton<WeatherForecastService>();
         }
 

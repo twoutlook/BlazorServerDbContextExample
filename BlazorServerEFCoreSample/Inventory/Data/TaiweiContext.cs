@@ -9,9 +9,9 @@ namespace Inventory.Data
 {
     public partial class TaiweiContext : DbContext
     {
-        public TaiweiContext()
-        {
-        }
+        //public TaiweiContext()
+        //{
+        //}
 
         public TaiweiContext(DbContextOptions<TaiweiContext> options)
             : base(options)

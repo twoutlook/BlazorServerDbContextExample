@@ -2,16 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-        //public TaiweiContext()
-        //{
-        //}
+
 #nullable disable
 
 namespace Inventory.Data
 {
     public partial class TaiweiContext : DbContext
     {
-
+        // NOTE by Mark, 2021-01-13, here is the multiple constructors problem
+        //public TaiweiContext()
+        //{
+        //}
 
         public TaiweiContext(DbContextOptions<TaiweiContext> options)
             : base(options)
