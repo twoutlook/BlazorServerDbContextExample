@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Grid\Contact\" />
+    <Folder Include="Grid\Location\" />
+  </ItemGroup>
+
 </Project>
