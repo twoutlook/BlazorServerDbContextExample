@@ -1,14 +1,30 @@
 ﻿@page "/partV2"
+@page "/partV2/{Page:int}"
 
-@using Inventory.Data
+
+
+
+
+@using Microsoft.EntityFrameworkCore
+
+
+@inject IPartFilters Filters
+
+@inject IDbContextFactory<TaiweiContext> DbFactory
+@inject NavigationManager Nav
+@* ========================================================================== *@
+@*   NOTE by Mark, 2021-01-12, 這裡的Adapter仍有一個 DI 的 IContactFiltersV4   *@
+@* ========================================================================== *@
+@inject PartGridQueryAdapter QueryAdapter
+
 
 <h1>物料 ver2</h1>
 <ul>
 
     @foreach (var part in partList)
     {
-    <li>  @part.Cpartnumber  @part.Cpartname</li>
-   }
+        <li>  @part.Cpartnumber  @part.Cpartname</li>
+    }
 </ul>
 
 @code
