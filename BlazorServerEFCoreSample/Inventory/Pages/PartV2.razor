@@ -1,5 +1,5 @@
 ﻿@page "/partV2"
-@*@page "/partV2/{Page:int}"*@
+@page "/partV2/{Page:int}"
 
 
 
@@ -118,6 +118,49 @@
     /// Keeps track of the last page loaded.
     /// </summary>
     private int _lastPage = -1;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Ensure we're on the same, er, right page.
+        if (_lastPage < 1)
+        {
+            //Filters.PageHelper.
+            // Filters.PageHelper.BaseUrl
+            //            Nav.NavigateTo("/ContactsV4/1");
+            Nav.NavigateTo(Filters.PageHelper.BaseUrl+"1");
+
+            return;
+        }
+
+        // Normalize the page values.
+        if (Filters.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                //Nav.NavigateTo("/ContactsV4/1");
+                Nav.NavigateTo(Filters.PageHelper.BaseUrl + "1");
+                return;
+            }
+            if (Page > Filters.PageHelper.PageCount)
+            {
+                //  Nav.NavigateTo($"/ContactsV4/{Filters.PageHelper.PageCount}");
+                Nav.NavigateTo(Filters.PageHelper.BaseUrl +Filters.PageHelper.PageCount);
+                return;
+            }
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Make sure the page really chagned.
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+        await base.OnParametersSetAsync();
+    }
 
     public int Page
     {
