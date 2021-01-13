@@ -19,25 +19,23 @@
 
 
 <h1>物料 ver2 doing...</h1>
-<ul>
+@*<ul>
 
     @foreach (var part in partList)
     {
         <li>  @part.Cpartnumber  @part.Cpartname</li>
     }
-</ul>
+</ul>*@
 
 
 
 <GridWrapper @ref="Wrapper"
-             FilterChanged="ReloadAsync"
-       
-             >
+             FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
         @*<div class="row">
 
-                <div class="col-8"><TextFilterV4 /></div>
-            </div>*@
+            <div class="col-8"><TextFilterV4 /></div>
+        </div>*@
 
         <PartFieldFilter />
         <div class="row">&nbsp;@*如果改成TABLE,效果的差別在那裡?*@</div>
@@ -70,19 +68,19 @@
         {
             <div class="row">
                 <div class="col-12 alert alert-warning">
-                    No contacts found.
+                    No records found.
                 </div>
             </div>
         }
+   
         @if (Parts != null)
         {
-            @*@foreach (var contact in Parts)
+            @foreach (var x in Parts)
             {
-                <PartRow @key=contact CurrentContact="@contact"
-                              DeleteContact="DeleteContactAsync" />
-            }*@
+               <PartRow  @key=x CurrentContact="@x"/>
+            }
 
-    <div>XXXXXXXXXXXXXXXXXXXXXxxxx to show row</div>
+
         }
 
 
@@ -127,7 +125,7 @@
             //Filters.PageHelper.
             // Filters.PageHelper.BaseUrl
             //            Nav.NavigateTo("/ContactsV4/1");
-            Nav.NavigateTo(Filters.PageHelper.BaseUrl+"1");
+            Nav.NavigateTo(Filters.PageHelper.BaseUrl + "1");
 
             return;
         }
@@ -144,7 +142,7 @@
             if (Page > Filters.PageHelper.PageCount)
             {
                 //  Nav.NavigateTo($"/ContactsV4/{Filters.PageHelper.PageCount}");
-                Nav.NavigateTo(Filters.PageHelper.BaseUrl +Filters.PageHelper.PageCount);
+                Nav.NavigateTo(Filters.PageHelper.BaseUrl + Filters.PageHelper.PageCount);
                 return;
             }
         }
