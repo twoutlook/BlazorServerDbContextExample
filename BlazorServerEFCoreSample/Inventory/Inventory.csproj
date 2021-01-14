@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Comp\" />
     <Folder Include="Grid\Contact\" />
   </ItemGroup>
 

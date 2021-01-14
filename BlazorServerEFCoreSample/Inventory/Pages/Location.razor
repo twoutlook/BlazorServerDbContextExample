@@ -8,7 +8,7 @@
 @*   Filters and Adapter        *@
 @* ============================ *@
 @inject ILocationFilters Filters
-@inject PartGridQueryAdapter QueryAdapter
+@inject LocationGridQueryAdapter QueryAdapter
 
 
 <h1>儲位查詢</h1>
@@ -44,14 +44,19 @@
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
                 &nbsp;儲位名稱
             </div>
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
+                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                &nbsp;物料編碼            </div>
+
             @*<div class="col-3"
-                     @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
-                    <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-                    &nbsp;規格
-                </div>*@
+             @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+            <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+            &nbsp;規格
+        </div>*@
             @*<div class="col-1">
-                    刪改操作
-                </div>*@
+            刪改操作
+        </div>*@
 
         </div>
         @if (Filters.Loading || Parts == null)
@@ -75,7 +80,7 @@
         {
             @foreach (var x in Parts)
             {
-                <PartRow @key=x CurrentPart="@x" />
+                <LocationRow @key=x CurrentObj="@x" />
             }
 
 
@@ -189,7 +194,7 @@
         }
         return ReloadAsync();
     }
-    private ICollection<BasePart> Parts { get; set; }
+    private ICollection<StockCurrent> Parts { get; set; }
 
     private async Task ReloadAsync()
     {
@@ -213,7 +218,7 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.BasePart.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.StockCurrent.AsQueryable());
 
 
 
