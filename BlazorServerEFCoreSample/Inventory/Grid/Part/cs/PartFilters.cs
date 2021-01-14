@@ -5,7 +5,7 @@ namespace Inventory.Grid.Part
     /// <summary>
     /// State of grid filters.
     /// </summary>
-   // public class LocationFilters : ILocationFilters
+
     public class PartFilters : IPartFilters
     {
         private const int V = 10;
@@ -15,7 +15,7 @@ namespace Inventory.Grid.Part
         /// </summary>
         public IPageHelper PageHelper { get; set; }
 
-        //public PartFilters(IPartPageHelper pageHelper)
+  
         public PartFilters()
         {
             //PageHelper = pageHelper;
