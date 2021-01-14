@@ -18,7 +18,7 @@
             PageHelper = pageHelper;
 
             PageHelper.PageSize = V;
-            PageHelper.BaseUrl = "/partV2/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
+            PageHelper.BaseUrl = "/part/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
 
         }
