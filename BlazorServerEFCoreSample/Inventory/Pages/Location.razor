@@ -11,7 +11,7 @@
 @inject PartGridQueryAdapter QueryAdapter
 
 
-<h1>物料 ver2 doing...</h1>
+<h1>儲位查詢</h1>
 @*<ul>
 
         @foreach (var part in partList)
@@ -35,14 +35,14 @@
         <div class="row contact-header">
             @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
             <div class="col-2"
-                 @onclick="@(                PartFilterColumns.Cpartnumber))">
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cpositioncode))">
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartnumber)" />
-                &nbsp;物料編碼
+                &nbsp;儲位編碼
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-                &nbsp;物料名稱
+                &nbsp;儲位名稱
             </div>
             @*<div class="col-3"
                      @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
@@ -177,7 +177,7 @@
 
 
 
-    private Task ToggleAsync(PartFilterColumns col)
+    private Task ToggleAsync(LocationFilterColumns col)
     {
         if (Filters.SortColumn == col)
         {

@@ -8,7 +8,7 @@
 @using Microsoft.EntityFrameworkCore
 
 
-@inject ILocationFilters Filters
+@inject IPartFilters Filters
 
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
@@ -18,14 +18,14 @@
 @inject PartGridQueryAdapter QueryAdapter
 
 
-<h1>物料 ver2 doing...</h1>
+<h1>物料查詢</h1>
 @*<ul>
 
-    @foreach (var part in partList)
-    {
-        <li>  @part.Cpartnumber  @part.Cpartname</li>
-    }
-</ul>*@
+        @foreach (var part in partList)
+        {
+            <li>  @part.Cpartnumber  @part.Cpartname</li>
+        }
+    </ul>*@
 
 
 
@@ -34,8 +34,8 @@
     <div class="container-fluid contacts-grid">
         @*<div class="row">
 
-            <div class="col-8"><TextFilterV4 /></div>
-        </div>*@
+                <div class="col-8"><TextFilterV4 /></div>
+            </div>*@
 
         <PartFieldFilter />
         <div class="row">&nbsp;@*如果改成TABLE,效果的差別在那裡?*@</div>
@@ -52,13 +52,13 @@
                 &nbsp;物料名稱
             </div>
             @*<div class="col-3"
-                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
-                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-                &nbsp;規格
-            </div>*@
+                     @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                    <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                    &nbsp;規格
+                </div>*@
             @*<div class="col-1">
-                刪改操作
-            </div>*@
+                    刪改操作
+                </div>*@
 
         </div>
         @if (Filters.Loading || Parts == null)
@@ -77,12 +77,12 @@
                 </div>
             </div>
         }
-   
+
         @if (Parts != null)
         {
             @foreach (var x in Parts)
             {
-               <PartRow  @key=x CurrentPart="@x"/>
+                <PartRow @key=x CurrentPart="@x" />
             }
 
 

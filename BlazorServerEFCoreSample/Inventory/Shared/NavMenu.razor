@@ -16,28 +16,28 @@
 
         <li class="nav-item px-3">
             <NavLink class="nav-link" @onclick="()=>ToggleSubMenuX(1)">
-                <span class="oi oi-list" aria-hidden="true"></span>物料
+                <span class="oi oi-magnifying-glass" aria-hidden="true"></span>查詢
             </NavLink>
             @if (expandSubMenuX[1])
             {
 
                 <ul>
-                    <li>
+                    @*<li>
 
                         <NavLink class="nav-link" href="partV1">
                             <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 基本10筆
                         </NavLink>
-                    </li>
+                    </li>*@
                     <li>
 
                         <NavLink class="nav-link" href="partV2">
-                            <span class="oi oi-pencil" aria-hidden="true"></span>物料查詢V2
+                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span>物料查詢
                         </NavLink>
                     </li>
                     <li>
 
                         <NavLink class="nav-link" href="location">
-                            <span class="oi oi-plus" aria-hidden="true"></span> 儲位查詢
+                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 儲位查詢
                         </NavLink>
                     </li>
                 </ul>
