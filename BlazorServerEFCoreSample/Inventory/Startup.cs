@@ -41,7 +41,7 @@ namespace Inventory
 
 
             services.AddDbContextFactory<TaiweiContext>(opt =>
-    opt.UseSqlServer(
+                opt.UseSqlServer(
                     Configuration.GetConnectionString("TaiweiConnection")));
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

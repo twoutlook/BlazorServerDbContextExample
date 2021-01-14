@@ -1,4 +1,6 @@
-﻿namespace Inventory.Grid.Part
+﻿
+
+namespace Inventory.Grid.Part
 {
     /// <summary>
     /// State of grid filters.
@@ -11,12 +13,13 @@
         /// <summary>
         /// Keep state of paging.
         /// </summary>
-        public IPartPageHelper PageHelper { get; set; }
+        public IPageHelper PageHelper { get; set; }
 
         public PartFilters(IPartPageHelper pageHelper)
         {
-            PageHelper = pageHelper;
+            //PageHelper = pageHelper;
 
+            PageHelper = new PageHelper();
             PageHelper.PageSize = V;
             PageHelper.BaseUrl = "/part/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 

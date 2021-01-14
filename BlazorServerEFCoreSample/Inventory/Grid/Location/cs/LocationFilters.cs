@@ -14,9 +14,15 @@
 
         public LocationFilters(IPageHelper pageHelper)
         {
-            PageHelper = pageHelper;
 
-            PageHelper.PageSize = V;
+            //PageHelper = pageHelper;
+
+            // NOTE by Mark, 2021-01-14
+            // 直接使用元件
+
+            PageHelper = new PageHelper();
+
+            PageHelper.PageSize = 12;
             PageHelper.BaseUrl = "/location/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
 
