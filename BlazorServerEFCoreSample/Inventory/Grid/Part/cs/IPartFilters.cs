@@ -42,7 +42,7 @@
         /// <summary>
         /// Paging state in <see cref="PageHelper"/>.
         /// </summary>
-        IPageHelper PageHelper { get; set; }
+        IPartPageHelper PageHelper { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating if the name is rendered first name first.

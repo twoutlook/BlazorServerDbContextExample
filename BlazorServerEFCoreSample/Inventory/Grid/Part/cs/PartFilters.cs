@@ -11,9 +11,9 @@
         /// <summary>
         /// Keep state of paging.
         /// </summary>
-        public IPageHelper PageHelper { get; set; }
+        public IPartPageHelper PageHelper { get; set; }
 
-        public PartFilters(IPageHelper pageHelper)
+        public PartFilters(IPartPageHelper pageHelper)
         {
             PageHelper = pageHelper;
 

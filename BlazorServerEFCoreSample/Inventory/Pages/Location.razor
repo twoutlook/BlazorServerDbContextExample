@@ -35,12 +35,12 @@
         <div class="row contact-header">
             @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cpositioncode))">
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartnumber)" />
                 &nbsp;儲位編碼
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cpositioncode))">
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
                 &nbsp;儲位名稱
             </div>
