@@ -3,7 +3,7 @@
 
 
 
-
+@using Inventory.Shared
 
 @using Microsoft.EntityFrameworkCore
 
@@ -27,7 +27,7 @@
 
         <PartFieldFilter />
 
-        <div class="row contact-header">
+        <div class="row contact-header" style="font-size:104%">
 
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartnumber))">
@@ -69,30 +69,9 @@
         }
 
 
-        @*<PagePaging Filters="@Filters" />*@
-        <div style="margin-top:4px;margin-left:-16px">
+        <PartPaging Filters="@Filters" />
 
-            <nav>
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a disabled="@(Filters.Loading || !Filters.PageHelper.HasPrev)"
-                           class="btn btn-primary @IsDisabled(Filters.PageHelper.HasPrev)"
-                           href="@Filters.PageHelper.PrevPageStr">
-                            上一頁
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link">&nbsp;&nbsp;總筆數:@Filters.PageHelper.TotalItemCount&nbsp;&nbsp;每頁筆數:@Filters.PageHelper.PageSize&nbsp;&nbsp;頁次:@Filters.PageHelper.Page&nbsp;&nbsp;總頁數:@Filters.PageHelper.PageCount&nbsp;&nbsp;</a></li>
-                    <li class="page-item">
-                        <a disabled="@(Filters.Loading || !Filters.PageHelper.HasNext)"
-                           class="btn btn-primary @IsDisabled(Filters.PageHelper.HasNext)"
-                           href="@Filters.PageHelper.NextPageStr">
-                            下一頁
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
+        
 
     </div>
 </GridWrapper>
