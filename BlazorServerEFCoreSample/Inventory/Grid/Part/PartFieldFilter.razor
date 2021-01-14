@@ -106,21 +106,23 @@
 </div>
 
 
-<div class="row">
-    <div class=" col-10 ">
-        <button class="btn btn-primary " @onclick="UpdateHeading">
-            查詢
-        </button>
+<div style="margin-top: -8px;
+        margin-bottom: 4px;
+        margin-left: -16px">
+    <button class="btn btn-primary " @onclick="UpdateHeading">
+        查詢
+    </button>
 
-        參數:
+    參數:
 
-        <span class="val"> @FilterTextF1Submit</span>
-        <span class="val"> @FilterTextF2Submit</span>
-        
-        時間:<span class="val">@_dateString</span>
+    <span class="val"> @FilterTextF1Submit</span>
+    <span class="val"> @FilterTextF2Submit</span>
+    <span class="val"> @FilterTextF3Submit</span>
+    <span class="val"> @FilterTextF4Submit</span>
+
+    時間:<span class="val">@_dateString</span>
 
 
-    </div>
 </div>
 
 
@@ -129,6 +131,8 @@
 @code {
     string FilterTextF1Submit;
     string FilterTextF2Submit;
+    string FilterTextF3Submit;
+    string FilterTextF4Submit;
 
 
     DateTime SubmitTime;

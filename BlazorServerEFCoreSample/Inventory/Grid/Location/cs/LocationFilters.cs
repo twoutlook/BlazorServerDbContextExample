@@ -5,14 +5,16 @@
     /// </summary>
     public class LocationFilters : ILocationFilters
     {
-        private const int V = 10;
+        //  private const int V = 10;
 
         /// <summary>
         /// Keep state of paging.
         /// </summary>
         public IPageHelper PageHelper { get; set; }
 
-        public LocationFilters(IPageHelper pageHelper)
+        //public LocationFilters(IPageHelper pageHelper)
+        public LocationFilters()
+
         {
 
             //PageHelper = pageHelper;
@@ -22,7 +24,7 @@
 
             PageHelper = new PageHelper();
 
-            PageHelper.PageSize = 12;
+            PageHelper.PageSize = 10;
             PageHelper.BaseUrl = "/location/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
 

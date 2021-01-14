@@ -10,30 +10,16 @@
 @inject ILocationFilters Filters
 @inject LocationGridQueryAdapter QueryAdapter
 
-
-<h1>儲位查詢</h1>
-@*<ul>
-
-        @foreach (var part in partList)
-        {
-            <li>  @part.Cpartnumber  @part.Cpartname</li>
-        }
-    </ul>*@
-
-
+<PageTitle Title="儲位查詢" />
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
-        @*<div class="row">
-
-                <div class="col-8"><TextFilterV4 /></div>
-            </div>*@
 
         <LocationFieldFilter />
       
         <div class="row contact-header">
-            @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
+     
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cpositioncode))">
                 <LocationSortIndicator Column="@(LocationFilterColumns.Cpositioncode)" />

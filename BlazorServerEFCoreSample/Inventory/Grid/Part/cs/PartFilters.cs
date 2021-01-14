@@ -15,7 +15,8 @@ namespace Inventory.Grid.Part
         /// </summary>
         public IPageHelper PageHelper { get; set; }
 
-        public PartFilters(IPartPageHelper pageHelper)
+        //public PartFilters(IPartPageHelper pageHelper)
+        public PartFilters()
         {
             //PageHelper = pageHelper;
 

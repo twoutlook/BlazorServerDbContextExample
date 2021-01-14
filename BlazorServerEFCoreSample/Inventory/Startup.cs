@@ -57,8 +57,8 @@ namespace Inventory
 
 
             // pager
-            services.AddScoped<IPartPageHelper, PartPageHelper>();
-            services.AddScoped<IPageHelper, PageHelper>(); // DOING ...for Loation and general usage 
+            //services.AddScoped<IPartPageHelper, PartPageHelper>();
+            //services.AddScoped<IPageHelper, PageHelper>(); // DOING ...for Loation and general usage 
 
             // filters
             services.AddScoped<IPartFilters, PartFilters>();
