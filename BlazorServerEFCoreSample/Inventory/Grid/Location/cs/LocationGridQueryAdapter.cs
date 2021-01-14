@@ -28,8 +28,12 @@ namespace Inventory.Grid.Location
         private readonly Dictionary<LocationFilterColumns, Expression<Func<StockCurrent, string>>> _expressions
             = new Dictionary<LocationFilterColumns, Expression<Func<StockCurrent, string>>>
             {
-                { LocationFilterColumns.Cposition, c => c.Cposition },
                 { LocationFilterColumns.Cpositioncode, c => c.Cpositioncode },
+                { LocationFilterColumns.Cposition, c => c.Cposition },
+                { LocationFilterColumns.Cinvcode, c => c.Cinvcode },
+                { LocationFilterColumns.Cinvname, c => c.Cinvname },
+                //{ LocationFilterColumns.Iqty, c => c.Iqty },
+
             };
 
         /// <summary>
@@ -54,8 +58,10 @@ namespace Inventory.Grid.Location
             {
                 // NOTE by Mark, 2021-01-13, 按這機制有標準的篩選功能
                 // 要注意基本的 F1, F2
-                { LocationFilterColumns.Cposition, cs => cs.Where(c => c.Cposition.Contains(_controls.FilterTextF1)) },
-                { LocationFilterColumns.Cpositioncode, cs => cs.Where(c => c.Cpositioncode.Contains(_controls.FilterTextF2)) },
+                { LocationFilterColumns.Cpositioncode, cs => cs.Where(c => c.Cpositioncode.Contains(_controls.FilterTextF1)) },
+                { LocationFilterColumns.Cposition, cs => cs.Where(c => c.Cposition.Contains(_controls.FilterTextF2)) },
+                { LocationFilterColumns.Cinvcode, cs => cs.Where(c => c.Cinvcode.Contains(_controls.FilterTextF3)) },
+                { LocationFilterColumns.Cinvname, cs => cs.Where(c => c.Cinvname.Contains(_controls.FilterTextF4)) },
              };
         }
 
@@ -110,15 +116,27 @@ namespace Inventory.Grid.Location
 
             // apply a filter?
 
+            // TODO 
+            // NOTE by Mark, 2021-01-14, 這裡要如何自動化?
 
             if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
             {
-                var filter = _filterQueries[LocationFilterColumns.Cposition];
+                var filter = _filterQueries[LocationFilterColumns.Cpositioncode];
                 root = filter(root);
             }
             if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
             {
-                var filter = _filterQueries[LocationFilterColumns.Cpositioncode];
+                var filter = _filterQueries[LocationFilterColumns.Cposition];
+                root = filter(root);
+            }
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
+            {
+                var filter = _filterQueries[LocationFilterColumns.Cinvcode];
+                root = filter(root);
+            }
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF4))
+            {
+                var filter = _filterQueries[LocationFilterColumns.Cinvname];
                 root = filter(root);
             }
 

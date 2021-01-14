@@ -87,41 +87,45 @@
             <input type="text" class="form-control" autofocus @bind="FilterTextF2">
         </div>
     </div>
-    @*<div class="col-3 txt ">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                </div>
-                <input disabled="disabled" type="text" class="form-control">
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">物料編碼</span>
             </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF3">
         </div>
-        <div class="col-3 txt ">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                </div>
-                <input  disabled="disabled"  type="text" class="form-control">
-            </div>
-        </div>*@
-</div>
-
-
-<div class="row">
-    <div class=" col-10 ">
-        <button class="btn btn-primary " @onclick="UpdateHeading">
-            查詢
-        </button>
-
-        參數:
-
-        <span class="val"> @FilterTextF1Submit</span>
-        <span class="val"> @FilterTextF2Submit</span>
-        
-        時間:<span class="val">@_dateString</span>
-
-
     </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">物料名稱</span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF4">
+        </div>
+    </div>
+
 </div>
+
+
+<div style="margin-top: -8px;
+        margin-bottom: 4px;
+        margin-left: -16px">
+    <button class="btn btn-primary " @onclick="UpdateHeading">
+        查詢
+    </button>
+
+    參數:
+
+    <span class="val"> @FilterTextF1Submit</span>
+    <span class="val"> @FilterTextF2Submit</span>
+    <span class="val"> @FilterTextF3Submit</span>
+    <span class="val"> @FilterTextF4Submit</span>
+
+    時間:<span class="val">@_dateString</span>
+
+
+</div>
+
 
 
 
@@ -129,6 +133,8 @@
 @code {
     string FilterTextF1Submit;
     string FilterTextF2Submit;
+    string FilterTextF3Submit;
+    string FilterTextF4Submit;
 
 
     DateTime SubmitTime;
@@ -144,6 +150,10 @@
 
         FilterTextF1Submit = FilterTextF1;
         FilterTextF2Submit = FilterTextF2;
+        FilterTextF3Submit = FilterTextF3;
+        FilterTextF4Submit = FilterTextF4;
+
+
 
         _dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
@@ -344,46 +354,32 @@
     //    }
     //}
 
-    //private string FilterTextF3
-    //{
-    //    get => F3;
-    //    set
-    //    {
-    //        if (value != F3)
-    //        {
-    //            F3 = value.Trim();
-    //            Filters.FilterTextF3 = F3;
-    //        }
-    //    }
-    //}
+    private string FilterTextF3
+    {
+        get => Filters.FilterTextF3;
+        set => Filters.FilterTextF3 = value.Trim();
+    }
 
-    //private string FilterTextF4
-    //{
-    //    get => Filters.FilterTextF4;
-    //    set => Filters.FilterTextF4 = value.Trim();
-    //    //{
-    //    //    if (value != F3)
-    //    //    {
-    //    //        F3 = value;
-    //    //        Filters.FilterTextF3 = F3;
-    //    //    }
-    //    //}
-    //}
-    //private string FilterTextF5
-    //{
-    //    get => Filters.FilterTextF5;
-    //    set => Filters.FilterTextF5 = value.Trim();
-    //}
-    //private string FilterTextF6
-    //{
-    //    get => Filters.FilterTextF6;
-    //    set => Filters.FilterTextF6 = value.Trim();
-    //}
-    //private string FilterTextF7
-    //{
-    //    get => Filters.FilterTextF7;
-    //    set => Filters.FilterTextF7 = value.Trim();
-    //}
+    private string FilterTextF4
+    {
+        get => Filters.FilterTextF4;
+        set => Filters.FilterTextF4 = value.Trim();
+    }
+    private string FilterTextF5
+    {
+        get => Filters.FilterTextF5;
+        set => Filters.FilterTextF5 = value.Trim();
+    }
+    private string FilterTextF6
+    {
+        get => Filters.FilterTextF6;
+        set => Filters.FilterTextF6 = value.Trim();
+    }
+    private string FilterTextF7
+    {
+        get => Filters.FilterTextF7;
+        set => Filters.FilterTextF7 = value.Trim();
+    }
 
     private string FilterTextF1
     {

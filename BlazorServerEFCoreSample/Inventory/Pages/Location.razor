@@ -31,32 +31,43 @@
             </div>*@
 
         <LocationFieldFilter />
-        <div class="row">&nbsp;@*如果改成TABLE,效果的差別在那裡?*@</div>
+      
         <div class="row contact-header">
             @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
-                <PartSortIndicator Column="@(PartFilterColumns.Cpartnumber)" />
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cpositioncode))">
+                <LocationSortIndicator Column="@(LocationFilterColumns.Cpositioncode)" />
                 &nbsp;儲位編碼
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cpositioncode))">
-                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
+                <LocationSortIndicator Column="@(LocationFilterColumns.Cposition)" />
                 &nbsp;儲位名稱
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
-                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-                &nbsp;物料編碼            </div>
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cinvcode))">
+                <LocationSortIndicator Column="@(LocationFilterColumns.Cinvcode)" />
+                &nbsp;物料編碼
+            </div>
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cinvname))">
+                <LocationSortIndicator Column="@(LocationFilterColumns.Cinvname)" />
+                &nbsp;物料名稱
+            </div>
+            <div class="col-2" >
+                &nbsp;數量
+            </div>
+
+
 
             @*<div class="col-3"
-             @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
-            <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-            &nbsp;規格
-        </div>*@
+                     @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                    <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                    &nbsp;規格
+                </div>*@
             @*<div class="col-1">
-            刪改操作
-        </div>*@
+                    刪改操作
+                </div>*@
 
         </div>
         @if (Filters.Loading || Parts == null)
@@ -88,24 +99,32 @@
 
 
         @*NOTE by Mark, 2021-01-12, 分頁*@
-        <div class="row">&nbsp; </div>
-        <div class="row">
-            <div class="col-6">
 
+        <div style="margin-top:4px;margin-left:-16px">
 
-                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasPrev)"
-                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasPrev)"
-                   href="@Filters.PageHelper.PrevPageStr">
-                    上一頁
-                </a>
-                <span> &nbsp;&nbsp; 筆數:@Filters.PageHelper.PageItems/@Filters.PageHelper.TotalItemCount  &nbsp; 頁數: @Filters.PageHelper.Page /@Filters.PageHelper.PageCount &nbsp;&nbsp;</span>
-                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasNext)"
-                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasNext)"
-                   href="@Filters.PageHelper.NextPageStr">
-                    下一頁
-                </a>
-            </div>
+            <nav >
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a disabled="@(Filters.Loading || !Filters.PageHelper.HasPrev)"
+                           class="btn btn-primary @IsDisabled(Filters.PageHelper.HasPrev)"
+                           href="@Filters.PageHelper.PrevPageStr">
+                            上一頁
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link"> &nbsp;&nbsp;總筆數:@Filters.PageHelper.TotalItemCount &nbsp;&nbsp;頁次: @Filters.PageHelper.Page  &nbsp;&nbsp;總頁數:@Filters.PageHelper.PageCount &nbsp;&nbsp;</a></li>
+                    <li class="page-item">
+                        <a disabled="@(Filters.Loading || !Filters.PageHelper.HasNext)"
+                           class="btn btn-primary @IsDisabled(Filters.PageHelper.HasNext)"
+                           href="@Filters.PageHelper.NextPageStr">
+                            下一頁
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
+
+
     </div>
 </GridWrapper>
 

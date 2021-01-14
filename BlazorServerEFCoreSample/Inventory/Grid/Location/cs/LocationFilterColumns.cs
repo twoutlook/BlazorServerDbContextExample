@@ -7,5 +7,8 @@
     {
         Cposition,
         Cpositioncode,
+        Cinvcode,
+        Cinvname,
+        Iqty
     }
 }
