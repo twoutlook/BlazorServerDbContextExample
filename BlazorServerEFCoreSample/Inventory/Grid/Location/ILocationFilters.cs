@@ -1,16 +1,14 @@
-﻿namespace Inventory.Grid.Part
+﻿namespace Inventory.Grid.Location
 {
     /// <summary>
     /// Interface for filtering.
     /// </summary>
-    //public interface ILocationFilters
-    public interface IPartFilters
-
+    public interface ILocationFilters
     {
         /// <summary>
         /// The <see cref="ContactFilterColumns"/> being filtered on.
         /// </summary>
-        PartFilterColumns FilterColumn { get; set; }
+        LocationFilterColumns FilterColumn { get; set; }
 
         /// <summary>
         /// Loading indicator.
@@ -36,7 +34,7 @@
         string FilterTextF7 { get; set; }
 
 
-        string FilterLastName { get; set; }
+        //string FilterLastName { get; set; }
 
 
         /// <summary>
@@ -57,6 +55,6 @@
         /// <summary>
         /// The <see cref="ContactFilterColumns"/> being sorted.
         /// </summary>
-        PartFilterColumns SortColumn { get; set; }
+        LocationFilterColumns SortColumn { get; set; }
     }
 }

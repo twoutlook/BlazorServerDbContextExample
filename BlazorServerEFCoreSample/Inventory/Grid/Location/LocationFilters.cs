@@ -1,10 +1,9 @@
-﻿namespace Inventory.Grid.Part
+﻿namespace Inventory.Grid.Location
 {
     /// <summary>
     /// State of grid filters.
     /// </summary>
-   // public class LocationFilters : ILocationFilters
-    public class PartFilters : IPartFilters
+    public class LocationFilters : ILocationFilters
     {
         private const int V = 10;
 
@@ -13,12 +12,12 @@
         /// </summary>
         public IPageHelper PageHelper { get; set; }
 
-        public PartFilters(IPageHelper pageHelper)
+        public LocationFilters(IPageHelper pageHelper)
         {
             PageHelper = pageHelper;
 
             PageHelper.PageSize = V;
-            PageHelper.BaseUrl = "/partV2/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
+            PageHelper.BaseUrl = "/location/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
 
         }
@@ -36,8 +35,8 @@
         /// <summary>
         /// Column to sort by.
         /// </summary>
-        public PartFilterColumns SortColumn { get; set; }
-            = PartFilterColumns.Cpartnumber;
+        public LocationFilterColumns SortColumn { get; set; }
+            = LocationFilterColumns.Cposition;
 
         /// <summary>
         /// True when sorting ascending, otherwise sort descending.
@@ -47,8 +46,8 @@
         /// <summary>
         /// Column filtered text is against.
         /// </summary>
-        public PartFilterColumns FilterColumn { get; set; }
-            = PartFilterColumns.Cpartnumber;
+        public LocationFilterColumns FilterColumn { get; set; }
+            = LocationFilterColumns.Cposition;
 
         /// <summary>
         /// Text to filter on.
@@ -61,6 +60,6 @@
         public string FilterTextF5 { get; set; }
         public string FilterTextF6 { get; set; }
         public string FilterTextF7 { get; set; }
-        public string FilterLastName { get; set ; }
+        //public string FilterLastName { get; set ; }
     }
 }

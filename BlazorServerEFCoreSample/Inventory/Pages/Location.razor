@@ -1,31 +1,24 @@
-﻿@page "/partV2"
-@page "/partV2/{Page:int}"
-
-
-
-
-
+﻿@page "/location"
+@page "/location/{Page:int}"
 @using Microsoft.EntityFrameworkCore
-
-
-@inject ILocationFilters Filters
-
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-@* ========================================================================== *@
-@*   NOTE by Mark, 2021-01-12, 這裡的Adapter仍有一個 DI 的 IContactFiltersV4   *@
-@* ========================================================================== *@
+@* ============================ *@
+@*   NOTE by Mark, 2021-01-14,  *@
+@*   Filters and Adapter        *@
+@* ============================ *@
+@inject ILocationFilters Filters
 @inject PartGridQueryAdapter QueryAdapter
 
 
 <h1>物料 ver2 doing...</h1>
 @*<ul>
 
-    @foreach (var part in partList)
-    {
-        <li>  @part.Cpartnumber  @part.Cpartname</li>
-    }
-</ul>*@
+        @foreach (var part in partList)
+        {
+            <li>  @part.Cpartnumber  @part.Cpartname</li>
+        }
+    </ul>*@
 
 
 
@@ -34,15 +27,15 @@
     <div class="container-fluid contacts-grid">
         @*<div class="row">
 
-            <div class="col-8"><TextFilterV4 /></div>
-        </div>*@
+                <div class="col-8"><TextFilterV4 /></div>
+            </div>*@
 
         <PartFieldFilter />
         <div class="row">&nbsp;@*如果改成TABLE,效果的差別在那裡?*@</div>
         <div class="row contact-header">
             @*    <div class="col-1">&nbsp; 這裡是 header</div>*@
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartnumber))">
+                 @onclick="@(                PartFilterColumns.Cpartnumber))">
                 <PartSortIndicator Column="@(PartFilterColumns.Cpartnumber)" />
                 &nbsp;物料編碼
             </div>
@@ -52,13 +45,13 @@
                 &nbsp;物料名稱
             </div>
             @*<div class="col-3"
-                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
-                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-                &nbsp;規格
-            </div>*@
+                     @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                    <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                    &nbsp;規格
+                </div>*@
             @*<div class="col-1">
-                刪改操作
-            </div>*@
+                    刪改操作
+                </div>*@
 
         </div>
         @if (Filters.Loading || Parts == null)
@@ -77,12 +70,12 @@
                 </div>
             </div>
         }
-   
+
         @if (Parts != null)
         {
             @foreach (var x in Parts)
             {
-               <PartRow  @key=x CurrentPart="@x"/>
+                <PartRow @key=x CurrentPart="@x" />
             }
 
 

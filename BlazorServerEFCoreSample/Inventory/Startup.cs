@@ -2,6 +2,8 @@ using Inventory.Areas.Identity;
 using Inventory.Data;
 using Inventory.Grid;
 using Inventory.Grid.Part;
+using Inventory.Grid.Location;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -59,6 +61,7 @@ namespace Inventory
 
             // filters
             services.AddScoped<IPartFilters, PartFilters>();
+            services.AddScoped<ILocationFilters, LocationFilters>();
 
 
 

@@ -17,8 +17,9 @@ namespace Inventory.Grid.Part
         /// <summary>
         /// Holds state of the grid.
         /// </summary>
+        //private readonly ILocationFilters _controls;
         private readonly IPartFilters _controls;
-        
+
 
         /// <summary>
         /// Expressions for sorting.
@@ -41,6 +42,7 @@ namespace Inventory.Grid.Part
         private readonly string FilterTextF1;
 
 
+     //   public PartGridQueryAdapter(ILocationFilters controls)
         public PartGridQueryAdapter(IPartFilters controls)
         {
             _controls = controls;

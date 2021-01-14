@@ -3,6 +3,7 @@
     /// <summary>
     /// Sort options.
     /// </summary>
+   // public enum LocationFilterColumns
     public enum PartFilterColumns
     {
         Cpartnumber,

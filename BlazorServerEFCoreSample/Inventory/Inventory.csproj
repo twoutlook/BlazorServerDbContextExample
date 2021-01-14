@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Grid\Contact\" />
-    <Folder Include="Grid\Location\" />
   </ItemGroup>
 
 </Project>
