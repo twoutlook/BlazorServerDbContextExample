@@ -63,12 +63,14 @@ namespace Inventory
             // filters
             services.AddScoped<IPartFilters, PartFilters>();
             services.AddScoped<ILocationFilters, LocationFilters>();
+            services.AddScoped<IAppFilters, AppFilters>();
 
 
 
             // query adapter (applies filter to contact request).
             services.AddScoped<PartGridQueryAdapter>();
             services.AddScoped<LocationGridQueryAdapter>();
+            services.AddScoped<LocationGridQueryAdapterV2>();
 
         }
 

@@ -1,0 +1,231 @@
+﻿@page "/locationV2"
+@page "/locationV2/{Page:int}"
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<TaiweiContext> DbFactory
+@inject NavigationManager Nav
+@* ============================ *@
+@*   NOTE by Mark, 2021-01-14,  *@
+@*   Filters and Adapter        *@
+@* ============================ *@
+@*@inject ILocationFilters Filters*@
+@inject LocationGridQueryAdapterV2 QueryAdapter
+
+
+<PageTitle Title="儲位查詢" />
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync">
+    <div class="container-fluid contacts-grid">
+
+        <LocationFieldFilter />
+
+        <div class="row contact-header" style="font-size:104%">
+
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(AppFilterColumns.Cpositioncode))">
+                <LocationSortIndicatorV2 Column="@(AppFilterColumns.Cpositioncode)" />
+                &nbsp;儲位編碼
+            </div>
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(AppFilterColumns.Cposition))">
+                <LocationSortIndicatorV2 Column="@(AppFilterColumns.Cposition)" />
+                &nbsp;儲位名稱
+            </div>
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(AppFilterColumns.Cinvcode))">
+                <LocationSortIndicatorV2 Column="@(AppFilterColumns.Cinvcode)" />
+                &nbsp;物料編碼
+            </div>
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(AppFilterColumns.Cinvname))">
+                <LocationSortIndicatorV2 Column="@(AppFilterColumns.Cinvname)" />
+                &nbsp;物料名稱
+            </div>
+            <div class="col-2">
+                &nbsp;數量
+            </div>
+
+
+
+            @*<div class="col-3"
+                     @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                    <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                    &nbsp;規格
+                </div>*@
+            @*<div class="col-1">
+                    刪改操作
+                </div>*@
+
+        </div>
+        @if (QueryAdapter.Filters.Loading || Parts == null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+        @if (Parts != null && Parts.Count == 0)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-warning">
+                    No records found.
+                </div>
+            </div>
+        }
+
+        @if (Parts != null)
+        {
+            @foreach (var x in Parts)
+            {
+                <LocationRow @key=x CurrentObj="@x" />
+            }
+
+
+        }
+
+
+        <LocationPagingV2 Filters="@QueryAdapter.Filters" />
+
+
+
+    </div>
+</GridWrapper>
+
+
+@code
+{
+    private string IsDisabled(bool condition) =>
+    !QueryAdapter.Filters.Loading && condition ? "" : "disabled";
+
+    /// <summary>
+    /// Keeps track of the last page loaded.
+    /// </summary>
+    private int _lastPage = -1;
+
+
+    // private IAppFilters Filters;
+
+    protected override void OnInitialized()
+    {
+        //return base.OnInitializedAsync();
+        //Filters = QueryAdapter._controls;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Ensure we're on the same, er, right page.
+        if (_lastPage < 1)
+        {
+            //Filters.PageHelper.
+            // Filters.PageHelper.BaseUrl
+            //            Nav.NavigateTo("/ContactsV4/1");
+            Nav.NavigateTo(QueryAdapter.Filters.PageHelper.BaseUrl + "1");
+
+            return;
+        }
+
+        // Normalize the page values.
+        if (QueryAdapter.Filters.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                //Nav.NavigateTo("/ContactsV4/1");
+                Nav.NavigateTo(QueryAdapter.Filters.PageHelper.BaseUrl + "1");
+                return;
+            }
+            if (Page > QueryAdapter.Filters.PageHelper.PageCount)
+            {
+                //  Nav.NavigateTo($"/ContactsV4/{Filters.PageHelper.PageCount}");
+                Nav.NavigateTo(QueryAdapter.Filters.PageHelper.BaseUrl + QueryAdapter.Filters.PageHelper.PageCount);
+                return;
+            }
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Make sure the page really chagned.
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+        await base.OnParametersSetAsync();
+    }
+
+
+    //https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-5.0
+    [Parameter]
+    public int Page
+    {
+        get => QueryAdapter._controls.PageHelper.Page;
+        set
+        {
+            QueryAdapter._controls.PageHelper.Page = value;
+        }
+    }
+
+    /// <summary>
+    /// A wrapper for grid-related activity (like delete).
+    /// </summary>
+    private GridWrapper Wrapper { get; set; }
+
+
+
+    private Task ToggleAsync(AppFilterColumns col)
+    {
+        if (QueryAdapter.Filters.SortColumn == col)
+        {
+            QueryAdapter.Filters.SortAscending = !QueryAdapter.Filters.SortAscending;
+        }
+        else
+        {
+            QueryAdapter.Filters.SortColumn = col;
+        }
+        return ReloadAsync();
+    }
+    private ICollection<StockCurrent> Parts { get; set; }
+
+    private async Task ReloadAsync()
+    {
+        if (QueryAdapter.Filters.Loading || Page < 1)
+        {
+            return;
+        }
+
+        QueryAdapter.Filters.Loading = true;
+
+        if (Wrapper != null)
+        {
+            Wrapper.DeleteRequestId = "";
+        }
+
+        Parts = null;
+
+        using var context = DbFactory.CreateDbContext();
+
+        // run the query to load the current page
+        //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
+
+        // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
+        Parts = await QueryAdapter.FetchAsyncV4(context.StockCurrent.AsQueryable());
+
+
+
+
+        // now we're done
+        QueryAdapter.Filters.Loading = false;
+    }
+
+
+
+    private List<BasePart> partList;
+
+    private int currentCount = 0;
+
+
+}
+
+
