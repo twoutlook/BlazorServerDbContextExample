@@ -21,6 +21,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[STOCK_CURRENT_ADJUST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_ADJUST_D]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[STOCK_CURRENT_SN]",
          "ObjectType": 0
       }

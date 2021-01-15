@@ -9,9 +9,9 @@ namespace Inventory.Data
 {
     public partial class TaiweiContext : DbContext
     {
-        //public TaiweiContext()
-        //{
-        //}
+        public TaiweiContext()
+        {
+        }
 
         public TaiweiContext(DbContextOptions<TaiweiContext> options)
             : base(options)
@@ -20,16 +20,18 @@ namespace Inventory.Data
 
         public virtual DbSet<BasePart> BasePart { get; set; }
         public virtual DbSet<StockCurrent> StockCurrent { get; set; }
+        public virtual DbSet<StockCurrentAdjust> StockCurrentAdjust { get; set; }
+        public virtual DbSet<StockCurrentAdjustD> StockCurrentAdjustD { get; set; }
         public virtual DbSet<StockCurrentSn> StockCurrentSn { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Data Source=MARK10\\SQLEXPRESS01;Initial Catalog=TaiWei;Integrated Security=True");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=MARK10\\SQLEXPRESS01;Initial Catalog=TaiWei;Integrated Security=True");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -380,6 +382,145 @@ namespace Inventory.Data
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("palletcode");
+            });
+
+            modelBuilder.Entity<StockCurrentAdjust>(entity =>
+            {
+                entity.ToTable("STOCK_CURRENT_ADJUST");
+
+                entity.HasIndex(e => e.Cticketcode, "UQ_STOCK_CURRENT_ADJUST")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Createowner)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("createowner");
+
+                entity.Property(e => e.Createtime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("createtime");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus");
+
+                entity.Property(e => e.Cticketcode)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cticketcode");
+
+                entity.Property(e => e.Lastupdatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastupdatetime");
+
+                entity.Property(e => e.Lastupdateuser)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("lastupdateuser");
+
+                entity.Property(e => e.Reason)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("reason");
+
+                entity.Property(e => e.Reviewtime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("reviewtime");
+
+                entity.Property(e => e.Reviewuser)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("reviewuser");
+            });
+
+            modelBuilder.Entity<StockCurrentAdjustD>(entity =>
+            {
+                entity.HasKey(e => e.Ids)
+                    .HasName("PK__STOCK_CU__DC501A7D01EE4A54");
+
+                entity.ToTable("STOCK_CURRENT_ADJUST_D");
+
+                entity.Property(e => e.Ids)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ids");
+
+                entity.Property(e => e.Cinvcode)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("cinvcode");
+
+                entity.Property(e => e.Cinvname)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("cinvname");
+
+                entity.Property(e => e.Cpositioncode)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("cpositioncode");
+
+                entity.Property(e => e.Cpositionname)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("cpositionname");
+
+                entity.Property(e => e.Createowner)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("createowner");
+
+                entity.Property(e => e.Createtime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("createtime");
+
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Lastupdatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastupdatetime");
+
+                entity.Property(e => e.Lastupdateuser)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("lastupdateuser");
+
+                entity.Property(e => e.Newqty)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("newqty");
+
+                entity.Property(e => e.Oriqty)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("oriqty");
+
+                entity.Property(e => e.Sncode)
+                    .IsRequired()
+                    .HasMaxLength(75)
+                    .IsUnicode(false)
+                    .HasColumnName("sncode");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithMany(p => p.StockCurrentAdjustD)
+                    .HasForeignKey(d => d.Id)
+                    .HasConstraintName("STOCK_CURRENT_ADJUST_D_FK");
             });
 
             modelBuilder.Entity<StockCurrentSn>(entity =>
