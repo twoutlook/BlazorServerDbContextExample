@@ -65,7 +65,8 @@ namespace Inventory
             services.AddScoped<IPartFilters, PartFilters>();
             services.AddScoped<ILocationFilters, LocationFilters>();
             services.AddScoped<IAdjustFilters, AdjustFilters>();
-                      //  'Inventory.Grid.Adjust.AdjustFilters' 
+            services.AddScoped<IParameterFilters, ParameterFilters>();
+            //  'Inventory.Grid.Adjust.AdjustFilters' 
             //   services.AddScoped<IAppFilters, AppFilters>();
 
 
