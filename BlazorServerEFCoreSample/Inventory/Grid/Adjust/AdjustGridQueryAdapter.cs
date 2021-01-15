@@ -70,7 +70,9 @@ namespace Inventory.Grid.Adjust
 
         public async Task<ICollection<StockCurrent>> FetchAsyncV4(IQueryable<StockCurrent> query)
         {
-            query = FilterAndQueryV4(query);
+            // NOTE by Mark, 2021-01-15, 
+            // 先使用這種簡明的 LINQ
+            //   query = FilterAndQueryV4(query);
 
             //https://www.youtube.com/watch?v=2BAueSEuMbY
 
