@@ -1,4 +1,5 @@
 ﻿using Inventory.Shared;
+using System;
 
 namespace Inventory.Grid.Adjust
 {
@@ -20,6 +21,10 @@ namespace Inventory.Grid.Adjust
         /// <summary>
         /// The text of the filter.
         /// </summary>
+
+        DateTime FilterDt1 { get; set; }
+        DateTime FilterDt2 { get; set; }
+
 
         string FilterText { get; set; }
 

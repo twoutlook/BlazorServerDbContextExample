@@ -1,4 +1,5 @@
 ﻿using Inventory.Shared;
+using System;
 
 namespace Inventory.Grid.Adjust
 {
@@ -59,6 +60,10 @@ namespace Inventory.Grid.Adjust
         /// </summary>
         public ApplicationFilterColumns FilterColumn { get; set; }
             = ApplicationFilterColumns.Cticketcode;
+
+
+        public DateTime FilterDt1 { get; set; }
+        public DateTime FilterDt2 { get; set; }
 
         /// <summary>
         /// Text to filter on.

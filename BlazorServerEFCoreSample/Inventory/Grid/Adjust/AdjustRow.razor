@@ -1,17 +1,24 @@
 ﻿@inject IAdjustFilters Filters
-
+@using System.Globalization
 @if (CurrentObj != null)
 {
 <div class="row contact-detail">
 
     <div class="col-2">@CurrentObj.Cticketcode</div>
-  @*  <div class="col-2">@CurrentObj.Cposition</div>*@
+    <div class="col-2">@CurrentObj.Createtime</div>
+    <div class="col-1">@CurrentObj.Createowner</div>
+    <div class="col-1">@CurrentObj.Reviewuser</div>
+    @*https://stackoverflow.com/questions/59523054/localizing-datetime-and-numbers-in-blazor*@
+    <div class="col-2">@CurrentObj.Reviewtime</div>
+    <div class="col-1">@CurrentObj.Cstatus</div>
+
+
 
     @if (!DeleteConfirmation)
     {
         @*<div class="col-2">@CurrentObj.Cinvcode</div>
-        <div class="col-2">@CurrentObj.Cinvname</div>
-        <div class="col-2">@CurrentObj.Iqty</div>*@
+            <div class="col-2">@CurrentObj.Cinvname</div>
+            <div class="col-2">@CurrentObj.Iqty</div>*@
 
 
 

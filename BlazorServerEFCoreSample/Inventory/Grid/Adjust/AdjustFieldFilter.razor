@@ -74,7 +74,7 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">儲位編碼</span>
+                <span class="input-group-text" id="basic-addon1">單據號</span>
             </div>
             <input type="text" class="form-control" autofocus @bind="FilterTextF1">
         </div>
@@ -82,7 +82,7 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">儲位名稱</span>
+                <span class="input-group-text" id="basic-addon1"> 狀態</span>
             </div>
             <input type="text" class="form-control" autofocus @bind="FilterTextF2">
         </div>
@@ -90,17 +90,17 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">物料編碼</span>
+                <span class="input-group-text" id="basic-addon1">調整日期(起)</span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="FilterTextF3">
+            <input type="date" format-value="yyyy-MM-dd" class="form-control" autofocus @bind="FilterDt1" >
         </div>
     </div>
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">物料名稱</span>
+                <span class="input-group-text" id="basic-addon1">調整日期(止)</span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="FilterTextF4">
+            <input type="date" class="form-control" autofocus @bind="FilterDt2">
         </div>
     </div>
 
@@ -121,6 +121,10 @@
     <span class="val"> @FilterTextF3Submit</span>
     <span class="val"> @FilterTextF4Submit</span>
 
+    <span class="val"> @FilterDt1Submit</span>
+    <span class="val"> @FilterDt2Submit</span>
+
+
     時間:<span class="val">@_dateString</span>
 
 
@@ -131,10 +135,19 @@
 
 
 @code {
+
+    //https://stackoverflow.com/questions/56748968/how-to-set-date-formats-and-culture-in-asp-net-core-razor-pages-2-2
+
+    string FilterDt1Submit;
+    string FilterDt2Submit;
+
+
     string FilterTextF1Submit;
     string FilterTextF2Submit;
     string FilterTextF3Submit;
     string FilterTextF4Submit;
+
+    DateTime FilterTextDt1Submit;
 
 
     DateTime SubmitTime;
@@ -153,6 +166,10 @@
         FilterTextF3Submit = FilterTextF3;
         FilterTextF4Submit = FilterTextF4;
 
+        FilterDt1Submit = FilterDt1.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+        FilterDt2Submit = FilterDt2.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+        //   FilterDt2Submit = FilterDt2;
+        //  FilterTextF2Submit = FilterTextF2;
 
 
         _dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
@@ -183,6 +200,17 @@
     /// </summary>
     protected override void OnInitialized()
     {
+        //var today = DateTime.Today;
+        //var lastmonth = new DateTime(today.Year, today.Month - 1, 1);
+
+        //FilterDt1 = DateTime.Now;
+        //FilterDt2 = DateTime.Now;
+
+        FilterDt1 = DateTime.Today.AddDays(-14);
+        FilterDt2 = DateTime.Today;
+
+
+
         // grab filter
         filterText = Filters.FilterText;
 
@@ -392,6 +420,16 @@
         set => Filters.FilterTextF2 = value.Trim();
     }
 
+    private DateTime FilterDt1
+    {
+        get => Filters.FilterDt1;
+        set => Filters.FilterDt1 = value;
+    }
+    private DateTime FilterDt2
+    {
+        get => Filters.FilterDt2;
+        set => Filters.FilterDt2 = value;
+    }
 
 
     /// <summary>

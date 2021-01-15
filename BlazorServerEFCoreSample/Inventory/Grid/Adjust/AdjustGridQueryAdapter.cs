@@ -80,7 +80,12 @@ namespace Inventory.Grid.Adjust
             {
                 query = query.Where(x => x.Cticketcode.Contains(_controls.FilterTextF1));
             }
-          
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
+            {
+                query = query.Where(x => x.Cstatus.Contains(_controls.FilterTextF2));
+            }
+
+
             // apply the expression
             var expression = _expressions[_controls.SortColumn];
           //  sb.Append($"Sort: '{_controls.SortColumn}' ");

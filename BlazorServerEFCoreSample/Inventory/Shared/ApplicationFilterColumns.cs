@@ -10,6 +10,13 @@
         Cinvcode,
         Cinvname,
         Iqty,
-        Cticketcode
+        Cticketcode,
+        Createtime,
+        Createowner,
+        Reviewuser,
+        Reviewtime,
+        Cstatus
+
+
     }
 }
