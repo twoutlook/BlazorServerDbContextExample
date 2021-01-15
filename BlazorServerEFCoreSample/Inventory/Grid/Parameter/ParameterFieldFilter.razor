@@ -74,7 +74,7 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">單據號</span>
+                <span class="input-group-text" id="basic-addon1">  Flag Type</span>
             </div>
             <input type="text" class="form-control" autofocus @bind="FilterTextF1">
         </div>
@@ -82,31 +82,40 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"> 狀態</span>
+                <span class="input-group-text" id="basic-addon1">   Flag Name</span>
             </div>
-        @*    <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
+            <input type="text" class="form-control" autofocus @bind="FilterTextF2">
             @*https://docs.microsoft.com/en-us/aspnet/core/blazor/forms-validation?view=aspnetcore-5.0*@
             @*<InputSelect @bind-Value="FilterTextF2">
-            <option value="">Select classification ...</option>
-            <option value="Exploration">Exploration</option>
-            <option value="Diplomacy">Diplomacy</option>
-            <option value="Defense">Defense</option>
-        </InputSelect>*@
+                    <option value="">Select classification ...</option>
+                    <option value="Exploration">Exploration</option>
+                    <option value="Diplomacy">Diplomacy</option>
+                    <option value="Defense">Defense</option>
+                </InputSelect>*@
 
-        <select name="cars" id="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select>
+            @*<select name="cars" id="cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </select>*@
         </div>
     </div>
+
     <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"> Memo</span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF3">
+        </div>
+    </div>
+    @*<div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">調整日期(起)</span>
             </div>
-            <input type="date" format-value="yyyy-MM-dd" class="form-control" autofocus @bind="FilterDt1" >
+            <input type="date" format-value="yyyy-MM-dd" class="form-control" autofocus @bind="FilterDt1">
         </div>
     </div>
     <div class="col-3 txt ">
@@ -116,7 +125,7 @@
             </div>
             <input type="date" class="form-control" autofocus @bind="FilterDt2">
         </div>
-    </div>
+    </div>*@
 
 </div>
 

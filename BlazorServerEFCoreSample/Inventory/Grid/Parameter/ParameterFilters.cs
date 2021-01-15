@@ -48,7 +48,7 @@ namespace Inventory.Grid
         /// Column to sort by.
         /// </summary>
         public ApplicationFilterColumns SortColumn { get; set; }
-            = ApplicationFilterColumns.Cticketcode;
+            = ApplicationFilterColumns.FlagId;
 
         /// <summary>
         /// True when sorting ascending, otherwise sort descending.
@@ -59,7 +59,7 @@ namespace Inventory.Grid
         /// Column filtered text is against.
         /// </summary>
         public ApplicationFilterColumns FilterColumn { get; set; }
-            = ApplicationFilterColumns.Cticketcode;
+            = ApplicationFilterColumns.FlagId;
 
 
         public DateTime FilterDt1 { get; set; }

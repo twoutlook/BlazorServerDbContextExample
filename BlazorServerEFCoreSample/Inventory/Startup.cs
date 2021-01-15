@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Inventory.Grid.Adjust;
+using Inventory.Grid.Parameter;
 
 namespace Inventory
 {
@@ -74,8 +75,9 @@ namespace Inventory
             // query adapter (applies filter to contact request).
             services.AddScoped<PartGridQueryAdapter>();
             services.AddScoped<LocationGridQueryAdapter>();
-//            services.AddScoped<LocationGridQueryAdapterV2>();
+            //            services.AddScoped<LocationGridQueryAdapterV2>();
             services.AddScoped<AdjustGridQueryAdapter>();
+            services.AddScoped<ParameterGridQueryAdapter>();
 
         }
 

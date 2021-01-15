@@ -15,8 +15,13 @@
         Createowner,
         Reviewuser,
         Reviewtime,
-        Cstatus
+        Cstatus,
 
-
+        FlagId,
+        FlagName,
+        FlagType,
+        Sortid,
+        Memo,
+        Id,
     }
 }

@@ -8,7 +8,7 @@
 @*   Filters and Adapter        *@
 @* ============================ *@
 @inject IParameterFilters Filters
-@inject AdjustGridQueryAdapter QueryAdapter
+@inject ParameterGridQueryAdapter QueryAdapter
 
 <PageTitle Title="系統參數查詢" />
 
@@ -20,35 +20,35 @@
       
         <div class="row contact-header" style="font-size:104%">
 
+            <div class="col-3"
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagType))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.FlagType)" />
+                &nbsp;Flag Type
+            </div>
+            <div class="col-1"
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagId))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />
+                &nbsp;Flag Id
+            </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cticketcode))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cticketcode)" />
-                &nbsp;flag_type
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagName))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />
+                &nbsp;Flag Name
             </div>
             <div class="col-1"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Createtime))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Createtime)" />
-                &nbsp;flag_id
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Sortid))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Sortid)" />
+                &nbsp;Sort Id
             </div>
-            <div class="col-1"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Createowner))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Createowner)" />
-                &nbsp;flag_name
-            </div>
-            <div class="col-1"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Reviewuser))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Reviewuser)" />
-                &nbsp;sortid
-            </div>
-            <div class="col-2">
-                &nbsp;meno
+            <div class="col-3">
+                &nbsp;Memo
             </div>
 
-            <div class="col-1"
+            @*<div class="col-1"
                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cstatus))">
                 <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cstatus)" />
                 &nbsp;ID
-            </div>
+            </div>*@
 
 
             @*<div class="col-3"
@@ -82,7 +82,7 @@
         {
             @foreach (var x in Parts)
             {
-                <AdjustRow @key=x CurrentObj="@x" />
+                <ParameterRow @key=x CurrentObj="@x" />
             }
 
 
@@ -181,7 +181,7 @@
         }
         return ReloadAsync();
     }
-    private ICollection<StockCurrentAdjust> Parts { get; set; }
+    private ICollection<SysParameter> Parts { get; set; }
 
     private async Task ReloadAsync()
     {
@@ -205,7 +205,7 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.StockCurrentAdjust.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());
 
 
 
