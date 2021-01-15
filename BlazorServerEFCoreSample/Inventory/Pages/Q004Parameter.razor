@@ -16,33 +16,35 @@
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <ParameterFieldFilter />
+        <Q004ParameterFieldFilter />
       
         <div class="row contact-header" style="font-size:104%">
 
             <div class="col-3"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagType))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.FlagType)" />
+                <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagType)" />
                 &nbsp;Flag Type
             </div>
             <div class="col-1"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagId))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />
+                <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />
                 &nbsp;Flag Id
             </div>
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagName))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />
+                <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />
                 &nbsp;Flag Name
             </div>
-            <div class="col-1"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Sortid))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Sortid)" />
+            <div class="col-1">
+                
                 &nbsp;Sort Id
             </div>
-            <div class="col-3">
-                &nbsp;Memo
-            </div>
+                <div class="col-3"
+                    @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Memo))">
+                    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Memo)" />
+
+                    &nbsp;Memo
+                </div>
 
             @*<div class="col-1"
                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cstatus))">
@@ -82,7 +84,7 @@
         {
             @foreach (var x in Parts)
             {
-                <ParameterRow @key=x CurrentObj="@x" />
+                <Q004ParameterRow @key=x CurrentObj="@x" />
             }
 
 

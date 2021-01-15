@@ -30,6 +30,8 @@ namespace Inventory.Grid.Parameter
             = new Dictionary<ApplicationFilterColumns, Expression<Func<SysParameter, string>>>
             {
                 { ApplicationFilterColumns.FlagType, c => c.FlagType },
+                { ApplicationFilterColumns.FlagName, c => c.FlagName },
+                { ApplicationFilterColumns.Memo, c => c.Memo },
                 { ApplicationFilterColumns.FlagId, c => c.FlagId },
                 //{ ApplicationFilterColumns.Cinvcode, c => c.Cinvcode },
                 //{ ApplicationFilterColumns.Cinvname, c => c.Cinvname },
