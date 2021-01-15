@@ -23,15 +23,7 @@ namespace Inventory.Data
         public virtual DbSet<StockCurrentAdjust> StockCurrentAdjust { get; set; }
         public virtual DbSet<StockCurrentAdjustD> StockCurrentAdjustD { get; set; }
         public virtual DbSet<StockCurrentSn> StockCurrentSn { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=MARK10\\SQLEXPRESS01;Initial Catalog=TaiWei;Integrated Security=True");
-            }
-        }
+        public virtual DbSet<SysParameter> SysParameter { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -630,6 +622,45 @@ namespace Inventory.Data
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("VENDORCODE");
+            });
+
+            modelBuilder.Entity<SysParameter>(entity =>
+            {
+                entity.ToTable("SYS_PARAMETER");
+
+                entity.HasIndex(e => e.Id, "IDX_ID")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.FlagId)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("flag_id");
+
+                entity.Property(e => e.FlagName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("flag_name");
+
+                entity.Property(e => e.FlagType)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("flag_type");
+
+                entity.Property(e => e.Memo)
+                    .HasMaxLength(256)
+                    .IsUnicode(false)
+                    .HasColumnName("memo");
+
+                entity.Property(e => e.Sortid)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("sortid");
             });
 
             modelBuilder.HasSequence("ASRS_cmdno_SEQ")

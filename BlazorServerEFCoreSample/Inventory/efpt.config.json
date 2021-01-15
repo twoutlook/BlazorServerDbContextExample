@@ -3,7 +3,7 @@
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
-   "IncludeConnectionString": true,
+   "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
    "OutputPath": "Data",
@@ -30,6 +30,10 @@
       },
       {
          "Name": "[dbo].[STOCK_CURRENT_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_PARAMETER]",
          "ObjectType": 0
       }
    ],
