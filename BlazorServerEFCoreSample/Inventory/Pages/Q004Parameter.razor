@@ -17,50 +17,51 @@
     <div class="container-fluid contacts-grid">
 
         <Q004ParameterFieldFilter />
-      
+
         <div class="row contact-header" style="font-size:104%">
 
             <div class="col-3"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagType))">
-                <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagType)" />
-                &nbsp;Flag Type
+                @*
+                    <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagType) SortColumn="@(ApplicationFilterColumns.FlagType)" />*@
+                @SortColsSymbol[0]   &nbsp;Flag Type
             </div>
             <div class="col-1"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagId))">
-                <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />
-                &nbsp;Flag Id
+             @*   <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />*@
+                @SortColsSymbol[1]    &nbsp;Flag Id
             </div>
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagName))">
-                <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />
-                &nbsp;Flag Name
+           @*     <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />*@
+                @SortColsSymbol[2]  &nbsp;Flag Name
             </div>
             <div class="col-1">
-                
+
                 &nbsp;Sort Id
             </div>
-                <div class="col-3"
-                    @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Memo))">
-                    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Memo)" />
-
-                    &nbsp;Memo
-                </div>
+            <div class="col-3"
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Memo))">
+            @*    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Memo)" />*@
+                @SortColsSymbol[3]
+                &nbsp;Memo
+            </div>
 
             @*<div class="col-1"
-                @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cstatus))">
-                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cstatus)" />
-                &nbsp;ID
-            </div>*@
+                    @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cstatus))">
+                    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cstatus)" />
+                    &nbsp;ID
+                </div>*@
 
 
             @*<div class="col-3"
-             @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
-            <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-            &nbsp;規格
-        </div>*@
+                     @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                    <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                    &nbsp;規格
+                </div>*@
             @*<div class="col-1">
-            刪改操作
-        </div>*@
+                    刪改操作
+                </div>*@
 
         </div>
         @if (Filters.Loading || Parts == null)
@@ -169,10 +170,24 @@
     /// </summary>
     private GridWrapper Wrapper { get; set; }
 
+    // NOTE by Mark, 2021-01-16
+    //int[] marks = new int[] { 99, 98, 92, 97, 95 };
+    ApplicationFilterColumns[] SortCols = new ApplicationFilterColumns[]
+    {
+        ApplicationFilterColumns.FlagType,
+        ApplicationFilterColumns.FlagId,
+        ApplicationFilterColumns.FlagName,
+        ApplicationFilterColumns.Memo,
+
+    };
+    string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
 
 
     private Task ToggleAsync(ApplicationFilterColumns col)
     {
+
+
+
         if (Filters.SortColumn == col)
         {
             Filters.SortAscending = !Filters.SortAscending;
@@ -181,6 +196,20 @@
         {
             Filters.SortColumn = col;
         }
+
+
+        // NOTE by Mark, 2021-01-16
+        for (int i = 0; i < SortColsSymbol.Count(); i++)
+        {
+            SortColsSymbol[i] = " ";
+
+            if (SortCols[i] == col)
+            {
+                SortColsSymbol[i] = Filters.SortAscending ? "🔼" : "🔽";
+            }
+        }
+
+
         return ReloadAsync();
     }
     private ICollection<SysParameter> Parts { get; set; }

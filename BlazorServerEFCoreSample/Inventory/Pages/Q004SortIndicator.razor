@@ -1,6 +1,6 @@
-﻿@*@inject IParameterFilters Filters*@
+﻿@inject IParameterFilters Filters
 
-@if (Column == SortColumn)
+@if (Column == Filters.SortColumn)
 {
     <span>@SortSymbol</span>
 }
@@ -15,14 +15,8 @@ else
     [Parameter]
     public ApplicationFilterColumns Column { get; set; }
 
-    [Parameter]
-    public ApplicationFilterColumns SortColumn { get; set; }
-
-    [Parameter]
-    public bool SortAscending { get; set; }
-
     /// <summary>
     /// The symbol to render.
     /// </summary>
-    private string SortSymbol => SortAscending ? "🔼" : "🔽";
+    private string SortSymbol => Filters.SortAscending ? "🔼" : "🔽";
 }
