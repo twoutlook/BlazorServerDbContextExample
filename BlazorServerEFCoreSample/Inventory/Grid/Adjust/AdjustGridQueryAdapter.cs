@@ -26,13 +26,13 @@ namespace Inventory.Grid.Adjust
         /// <summary>
         /// Expressions for sorting.
         /// </summary>
-        private readonly Dictionary<ApplicationFilterColumns, Expression<Func<StockCurrent, string>>> _expressions
-            = new Dictionary<ApplicationFilterColumns, Expression<Func<StockCurrent, string>>>
+        private readonly Dictionary<ApplicationFilterColumns, Expression<Func<StockCurrentAdjust, string>>> _expressions
+            = new Dictionary<ApplicationFilterColumns, Expression<Func<StockCurrentAdjust, string>>>
             {
-                { ApplicationFilterColumns.Cpositioncode, c => c.Cpositioncode },
-                { ApplicationFilterColumns.Cposition, c => c.Cposition },
-                { ApplicationFilterColumns.Cinvcode, c => c.Cinvcode },
-                { ApplicationFilterColumns.Cinvname, c => c.Cinvname },
+                { ApplicationFilterColumns.Cticketcode, c => c.Cticketcode },
+                //{ ApplicationFilterColumns.Cposition, c => c.Cposition },
+                //{ ApplicationFilterColumns.Cinvcode, c => c.Cinvcode },
+                //{ ApplicationFilterColumns.Cinvname, c => c.Cinvname },
                 //{ ApplicationFilterColumns.Iqty, c => c.Iqty },
 
             };
@@ -42,7 +42,7 @@ namespace Inventory.Grid.Adjust
         /// 
         /// https://stackoverflow.com/questions/14775658/how-to-use-func-with-iqueryable-that-returns-iorderedqueryable
         /// </summary>
-        private readonly Dictionary<ApplicationFilterColumns, Func<IQueryable<StockCurrent>, IQueryable<StockCurrent>>> _filterQueries;
+        private readonly Dictionary<ApplicationFilterColumns, Func<IQueryable<StockCurrentAdjust>, IQueryable<StockCurrentAdjust>>> _filterQueries;
 
         /// 
         private readonly string FilterTextF1;
@@ -55,20 +55,20 @@ namespace Inventory.Grid.Adjust
 
 
             // set up queries
-            _filterQueries = new Dictionary<ApplicationFilterColumns, Func<IQueryable<StockCurrent>, IQueryable<StockCurrent>>>
+            _filterQueries = new Dictionary<ApplicationFilterColumns, Func<IQueryable<StockCurrentAdjust>, IQueryable<StockCurrentAdjust>>>
             {
                 // NOTE by Mark, 2021-01-13, 按這機制有標準的篩選功能
                 // 要注意基本的 F1, F2
-                { ApplicationFilterColumns.Cpositioncode, cs => cs.Where(c => c.Cpositioncode.Contains(_controls.FilterTextF1)) },
-                { ApplicationFilterColumns.Cposition, cs => cs.Where(c => c.Cposition.Contains(_controls.FilterTextF2)) },
-                { ApplicationFilterColumns.Cinvcode, cs => cs.Where(c => c.Cinvcode.Contains(_controls.FilterTextF3)) },
-                { ApplicationFilterColumns.Cinvname, cs => cs.Where(c => c.Cinvname.Contains(_controls.FilterTextF4)) },
+                { ApplicationFilterColumns.Cticketcode, cs => cs.Where(c => c.Cticketcode.Contains(_controls.FilterTextF1)) },
+                //{ ApplicationFilterColumns.Cposition, cs => cs.Where(c => c.Cposition.Contains(_controls.FilterTextF2)) },
+                //{ ApplicationFilterColumns.Cinvcode, cs => cs.Where(c => c.Cinvcode.Contains(_controls.FilterTextF3)) },
+                //{ ApplicationFilterColumns.Cinvname, cs => cs.Where(c => c.Cinvname.Contains(_controls.FilterTextF4)) },
              };
         }
 
 
 
-        public async Task<ICollection<StockCurrent>> FetchAsyncV4(IQueryable<StockCurrent> query)
+        public async Task<ICollection<StockCurrentAdjust>> FetchAsyncV4(IQueryable<StockCurrentAdjust> query)
         {
             // NOTE by Mark, 2021-01-15, 
             // 先使用這種簡明的 LINQ
@@ -78,22 +78,9 @@ namespace Inventory.Grid.Adjust
 
             if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
             {
-                query = query.Where(x => x.Cpositioncode.Contains(_controls.FilterTextF1));
+                query = query.Where(x => x.Cticketcode.Contains(_controls.FilterTextF1));
             }
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
-            {
-                query = query.Where(x => x.Cposition.Contains(_controls.FilterTextF2));
-            }
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
-            {
-                query = query.Where(x => x.Cinvcode.Contains(_controls.FilterTextF3));
-            }
-
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF4))
-            {
-                query = query.Where(x => x.Cinvcode.Contains(_controls.FilterTextF4));
-            }
-
+          
             // apply the expression
             var expression = _expressions[_controls.SortColumn];
           //  sb.Append($"Sort: '{_controls.SortColumn}' ");
@@ -128,13 +115,13 @@ namespace Inventory.Grid.Adjust
 
 
 
-        public async Task CountAsync(IQueryable<StockCurrent> query)
+        public async Task CountAsync(IQueryable<StockCurrentAdjust> query)
         {
             _controls.PageHelper.TotalItemCount = await query.CountAsync();
         }
 
 
-        public IQueryable<StockCurrent> FetchPageQuery(IQueryable<StockCurrent> query)
+        public IQueryable<StockCurrentAdjust> FetchPageQuery(IQueryable<StockCurrentAdjust> query)
         {
             return query
                 .Skip(_controls.PageHelper.Skip)
@@ -154,7 +141,7 @@ namespace Inventory.Grid.Adjust
 
 
 
-        private IQueryable<StockCurrent> FilterAndQueryV4(IQueryable<StockCurrent> root)
+        private IQueryable<StockCurrentAdjust> FilterAndQueryV4(IQueryable<StockCurrentAdjust> root)
         {
             var sb = new System.Text.StringBuilder();
 

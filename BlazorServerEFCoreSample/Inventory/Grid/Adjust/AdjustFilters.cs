@@ -47,7 +47,7 @@ namespace Inventory.Grid.Adjust
         /// Column to sort by.
         /// </summary>
         public ApplicationFilterColumns SortColumn { get; set; }
-            = ApplicationFilterColumns.Cposition;
+            = ApplicationFilterColumns.Cticketcode;
 
         /// <summary>
         /// True when sorting ascending, otherwise sort descending.
@@ -58,7 +58,7 @@ namespace Inventory.Grid.Adjust
         /// Column filtered text is against.
         /// </summary>
         public ApplicationFilterColumns FilterColumn { get; set; }
-            = ApplicationFilterColumns.Cposition;
+            = ApplicationFilterColumns.Cticketcode;
 
         /// <summary>
         /// Text to filter on.

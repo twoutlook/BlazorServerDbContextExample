@@ -9,6 +9,7 @@
         Cpositioncode,
         Cinvcode,
         Cinvname,
-        Iqty
+        Iqty,
+        Cticketcode
     }
 }
