@@ -156,6 +156,12 @@
 
 
         _dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+        // NOTE by Mark, 2021-01-15
+        // 這是最核心的動作
+        // 直接調用外層的 FilterChanged
+        // 在這裡, 只要知道是 FilterChanged 即可
+        // 真正會觸發的是 FilterChanged="ReloadAsync"
         await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
 
 
