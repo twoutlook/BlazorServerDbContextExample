@@ -1,9 +1,9 @@
-﻿namespace Inventory.Grid.Location
+﻿namespace Inventory.Shared
 {
     /// <summary>
     /// Sort options.
     /// </summary>
-    public enum AppFilterColumns
+    public enum ApplicationFilterColumns
     {
         Cposition,
         Cpositioncode,

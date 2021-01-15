@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Inventory.Grid.Adjust;
 
 namespace Inventory
 {
@@ -63,14 +64,17 @@ namespace Inventory
             // filters
             services.AddScoped<IPartFilters, PartFilters>();
             services.AddScoped<ILocationFilters, LocationFilters>();
-         //   services.AddScoped<IAppFilters, AppFilters>();
+            services.AddScoped<IAdjustFilters, AdjustFilters>();
+                      //  'Inventory.Grid.Adjust.AdjustFilters' 
+            //   services.AddScoped<IAppFilters, AppFilters>();
 
 
 
             // query adapter (applies filter to contact request).
             services.AddScoped<PartGridQueryAdapter>();
             services.AddScoped<LocationGridQueryAdapter>();
-            services.AddScoped<LocationGridQueryAdapterV2>();
+//            services.AddScoped<LocationGridQueryAdapterV2>();
+            services.AddScoped<AdjustGridQueryAdapter>();
 
         }
 

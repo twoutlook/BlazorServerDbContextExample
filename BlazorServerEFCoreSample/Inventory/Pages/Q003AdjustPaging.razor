@@ -21,13 +21,13 @@
     </nav>
 
 </div>
+
+
 @code
 {
     [Parameter]
-    public IAppFilters Filters { get; set; }
+    public IAdjustFilters Filters { get; set; }
 
-        private string IsDisabled(bool condition) =>
-    !Filters.Loading && condition ? "" : "disabled";
+    private string IsDisabled(bool condition) =>
+!Filters.Loading && condition ? "" : "disabled";
 }
-
-

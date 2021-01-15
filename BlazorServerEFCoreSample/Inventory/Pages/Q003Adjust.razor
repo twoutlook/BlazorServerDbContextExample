@@ -7,8 +7,8 @@
 @*   NOTE by Mark, 2021-01-14,  *@
 @*   Filters and Adapter        *@
 @* ============================ *@
-@inject ILocationFilters Filters
-@inject LocationGridQueryAdapter QueryAdapter
+@inject IAdjustFilters Filters
+@inject AdjustGridQueryAdapter QueryAdapter
 
 <PageTitle Title="庫存調整查詢" />
 
@@ -21,23 +21,23 @@
         <div class="row contact-header"  style="font-size:104%">
      
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cpositioncode))">
-                <LocationSortIndicator Column="@(LocationFilterColumns.Cpositioncode)" />
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cpositioncode))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cpositioncode)" />
                 &nbsp;儲位編碼
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cposition))">
-                <LocationSortIndicator Column="@(LocationFilterColumns.Cposition)" />
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cposition))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cposition)" />
                 &nbsp;儲位名稱
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cinvcode))">
-                <LocationSortIndicator Column="@(LocationFilterColumns.Cinvcode)" />
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cinvcode))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cinvcode)" />
                 &nbsp;物料編碼
             </div>
             <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(LocationFilterColumns.Cinvname))">
-                <LocationSortIndicator Column="@(LocationFilterColumns.Cinvname)" />
+                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cinvname))">
+                <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cinvname)" />
                 &nbsp;物料名稱
             </div>
             <div class="col-2" >
@@ -84,7 +84,7 @@
         }
 
 
-        <PagePaging Filters="@Filters" />
+        <Q003AdjustPaging Filters="@Filters" />
 
 
 
@@ -164,7 +164,7 @@
 
 
 
-    private Task ToggleAsync(LocationFilterColumns col)
+    private Task ToggleAsync(ApplicationFilterColumns col)
     {
         if (Filters.SortColumn == col)
         {

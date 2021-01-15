@@ -1,14 +1,16 @@
-﻿namespace Inventory.Grid.Location
+﻿using Inventory.Shared;
+
+namespace Inventory.Grid.Adjust
 {
     /// <summary>
     /// Interface for filtering.
     /// </summary>
-    public interface IAppFilters
+    public interface IAdjustFilters
     {
         /// <summary>
-        /// The <see cref="AppFilterColumns"/> being filtered on.
+        /// The <see cref="ContactFilterColumns"/> being filtered on.
         /// </summary>
-        AppFilterColumns FilterColumn { get; set; }
+        ApplicationFilterColumns FilterColumn { get; set; }
 
         /// <summary>
         /// Loading indicator.
@@ -45,7 +47,7 @@
         /// <summary>
         /// Gets or sets a value indicating if the name is rendered first name first.
         /// </summary>
-        //bool ShowFirstNameFirst { get; set; }
+        bool ShowFirstNameFirst { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating if the sort is ascending or descending.
@@ -53,8 +55,8 @@
         bool SortAscending { get; set; }
 
         /// <summary>
-        /// The <see cref="AppFilterColumns"/> being sorted.
+        /// The <see cref="ContactFilterColumns"/> being sorted.
         /// </summary>
-        AppFilterColumns SortColumn { get; set; }
+        ApplicationFilterColumns SortColumn { get; set; }
     }
 }

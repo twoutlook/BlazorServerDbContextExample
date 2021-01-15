@@ -1,9 +1,12 @@
-﻿namespace Inventory.Grid.Location
+﻿using Inventory.Shared;
+
+namespace Inventory.Grid.Adjust
 {
     /// <summary>
     /// State of grid filters.
     /// </summary>
-    public class AppFilters : IAppFilters
+                               
+    public class AdjustFilters : IAdjustFilters
     {
         //  private const int V = 10;
 
@@ -13,7 +16,7 @@
         public IPageHelper PageHelper { get; set; }
 
         //public LocationFilters(IPageHelper pageHelper)
-        public AppFilters(string baseUrl)
+        public AdjustFilters()
 
         {
 
@@ -25,8 +28,7 @@
             PageHelper = new PageHelper();
 
             PageHelper.PageSize = 10;
-            //PageHelper.BaseUrl = "/location/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
-            PageHelper.BaseUrl = baseUrl; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
+            PageHelper.BaseUrl = "/adjust/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
 
         }
@@ -44,8 +46,8 @@
         /// <summary>
         /// Column to sort by.
         /// </summary>
-        public AppFilterColumns SortColumn { get; set; }
-            = AppFilterColumns.Cposition;
+        public ApplicationFilterColumns SortColumn { get; set; }
+            = ApplicationFilterColumns.Cposition;
 
         /// <summary>
         /// True when sorting ascending, otherwise sort descending.
@@ -55,8 +57,8 @@
         /// <summary>
         /// Column filtered text is against.
         /// </summary>
-        public AppFilterColumns FilterColumn { get; set; }
-            = AppFilterColumns.Cposition;
+        public ApplicationFilterColumns FilterColumn { get; set; }
+            = ApplicationFilterColumns.Cposition;
 
         /// <summary>
         /// Text to filter on.
