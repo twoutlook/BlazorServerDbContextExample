@@ -1,6 +1,6 @@
-﻿@inject IAppFilters Filters
+﻿@*@inject IAppFilters Filters*@
 
-@if (Column == Filters.SortColumn)
+@if (Column == SortColumn)
 {
     <span>@SortSymbol</span>
 }
@@ -13,10 +13,18 @@ else
     /// Sets which <see cref="AppFilterColumns"/> this indicator is for.
     /// </summary>
     [Parameter]
-    public AppFilterColumns Column { get; set; }
+    //public AppFilterColumns Column { get; set; }
+    public string Column { get; set; }
+
+
+    [Parameter]
+    public string SortColumn { get; set; }
+
+    [Parameter]
+    public bool SortAscending { get; set; }
 
     /// <summary>
     /// The symbol to render.
     /// </summary>
-    private string SortSymbol => Filters.SortAscending ? "🔼" : "🔽";
+    private string SortSymbol => SortAscending ? "🔼" : "🔽";
 }

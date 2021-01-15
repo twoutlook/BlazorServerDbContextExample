@@ -55,7 +55,7 @@ namespace Inventory.Grid.Location
         public LocationGridQueryAdapterV2()
         {
             //_controls = controls;
-            _controls = new AppFilters();
+            _controls = new AppFilters("/locationV2/");
             Filters = _controls;
 
             // set up queries
@@ -70,11 +70,72 @@ namespace Inventory.Grid.Location
              };
         }
 
+        public async Task<ICollection<StockCurrent>> FetchAsyncV4b(string F1,IQueryable<StockCurrent> query)
+        {
+            //  query = FilterAndQueryV4(query);
+
+            //https://www.youtube.com/watch?v=2BAueSEuMbY
+
+            if (!string.IsNullOrWhiteSpace(F1))
+            {
+                query = query.Where(x => x.Cpositioncode.Contains(F1));
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
+            {
+                query = query.Where(x => x.Cpositioncode.Contains(_controls.FilterTextF1));
+            }
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
+            {
+                query = query.Where(x => x.Cposition.Contains(_controls.FilterTextF2));
+            }
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
+            {
+                query = query.Where(x => x.Cinvcode.Contains(_controls.FilterTextF3));
+            }
+
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF4))
+            {
+                query = query.Where(x => x.Cinvcode.Contains(_controls.FilterTextF4));
+            }
+
+            // apply the expression
+            var expression = _expressions[_controls.SortColumn];
+            //  sb.Append($"Sort: '{_controls.SortColumn}' ");
+
+
+
+
+            var sortDir = _controls.SortAscending ? "ASC" : "DESC";
+            //sb.Append(sortDir);
+            //sb.Append("目前輸入的值是:" + _controls.FilterText);
+
+            //Debug.WriteLine(sb.ToString());
+            //Debug.WriteLine("...by Mark, what is filter? " + _controls.FilterText);
+
+            // return the unfiltered query for total count, and the filtered for fetching
+            //return _controls.SortAscending ? root.OrderBy(expression)
+            //: root.OrderByDescending(expression);
+
+            query = _controls.SortAscending ? query.OrderBy(expression)
+                : query.OrderByDescending(expression);
+
+
+
+
+            await CountAsync(query);
+            var collection = await FetchPageQuery(query)
+                .ToListAsync();
+            _controls.PageHelper.PageItems = collection.Count;
+            return collection;
+        }
+
 
 
         public async Task<ICollection<StockCurrent>> FetchAsyncV4(IQueryable<StockCurrent> query)
         {
-            query = FilterAndQueryV4(query);
+          //  query = FilterAndQueryV4(query);
 
             //https://www.youtube.com/watch?v=2BAueSEuMbY
 

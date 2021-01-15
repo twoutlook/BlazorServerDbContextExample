@@ -63,7 +63,7 @@ namespace Inventory
             // filters
             services.AddScoped<IPartFilters, PartFilters>();
             services.AddScoped<ILocationFilters, LocationFilters>();
-            services.AddScoped<IAppFilters, AppFilters>();
+         //   services.AddScoped<IAppFilters, AppFilters>();
 
 
 

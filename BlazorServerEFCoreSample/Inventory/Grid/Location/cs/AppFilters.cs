@@ -13,7 +13,7 @@
         public IPageHelper PageHelper { get; set; }
 
         //public LocationFilters(IPageHelper pageHelper)
-        public AppFilters()
+        public AppFilters(string baseUrl)
 
         {
 
@@ -25,7 +25,8 @@
             PageHelper = new PageHelper();
 
             PageHelper.PageSize = 10;
-            PageHelper.BaseUrl = "/location/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
+            //PageHelper.BaseUrl = "/location/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
+            PageHelper.BaseUrl = baseUrl; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
 
         }

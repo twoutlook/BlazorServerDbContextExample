@@ -1,8 +1,6 @@
 ﻿@using System.Timers
 @inject IJSRuntime JSRuntime
-
-@*@inject IAppFilters Filters*@
-
+@inject ILocationFilters Filters
 @implements IDisposable
 
 @using System.Globalization
@@ -133,10 +131,6 @@
 
 
 @code {
-   
-    [Parameter]
-    public IAppFilters Filters;
-
     string FilterTextF1Submit;
     string FilterTextF2Submit;
     string FilterTextF3Submit;
