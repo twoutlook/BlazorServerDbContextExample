@@ -37,9 +37,11 @@
 
         @if (Parts != null)
         {
-            <AutoTableCompV2 Items="Items"
+            <AutoTableCompV2 Filters="@Filters"
+                             Items="Items"
                            ColumsToExcludeCSV="id" 
-                           FieldMapper="fieldMappers"  
+                           FieldMapper="fieldMappers" 
+                            
                              />
 
 
@@ -47,7 +49,7 @@
         }
 
 
-        @*<Q000BasePaging Filters="@Filters" />*@
+        <Q000BasePaging Filters="@Filters" />
 
 
 

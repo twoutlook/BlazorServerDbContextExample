@@ -2,68 +2,86 @@
 @using System.Reflection
 
 
-
-@if (memberInfo != null && memberInfo.Length > 0)
-{
-    <table class="@($"table {this.CssClass}")">
-        <thead>
-            <tr>
-                @foreach (var x in FieldMapper)
-                {
-                    <td> @x.Name</td>
-                }
-
-            </tr>
-            @if (IsShowField)
-            {
+<div style="margin-left: -16px">
+    @if (memberInfo != null && memberInfo.Length > 0)
+    {
+        <table class="gridtable">
+            <thead>
                 <tr>
+                    <th></th>
                     @foreach (var x in FieldMapper)
                     {
-                        <td> @x.Id</td>
+                        <th> @x.Name</th>
                     }
 
                 </tr>
-
-            }
-            @*<tr>
-            @for ( int i=0; i< memberInfo.Count(); i++)
-            {
-
-                @if (memberInfo[i].MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(memberInfo[i].Name, StringComparison.OrdinalIgnoreCase))
+                @if (IsShowField)
                 {
-            <th>@memberInfo[i].Name</th>
-                }
-            }
-        </tr>*@
-        </thead>
-        <tbody>
+                    <tr>
+                        @foreach (var x in FieldMapper)
+                        {
+                            <td> @x.Id</td>
+                        }
 
-            @foreach (var item in this.Items)
-            {
-            <tr>
-                @foreach (var x in FieldMapper)
+                    </tr>
+
+                }
+                @*<tr>
+                        @for ( int i=0; i< memberInfo.Count(); i++)
+                        {
+
+                            @if (memberInfo[i].MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(memberInfo[i].Name, StringComparison.OrdinalIgnoreCase))
+                            {
+                        <th>@memberInfo[i].Name</th>
+                            }
+                        }
+                    </tr>*@
+            </thead>
+            <tbody>
+
+                @foreach (var item in this.Items)
                 {
-                <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
+                    RecNum = RecNum + 1;
+                    <tr>
+                        <th>@RecNum</th>
+
+                        @foreach (var x in FieldMapper)
+                        {
+                            <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
+                        }
+
+
+                    </tr>
                 }
 
 
-            </tr>
-            }
-            
-            
-   
+
 
             </tbody>
-    </table>
-}
-
+        </table>
+    }
+</div>
 
 @code { //https://www.youtube.com/watch?v=jsWVIV5ykQM
+
+
+
+    [Parameter]
+    public IBaseFilters Filters { get; set; }
+
+    int RecNum;
+ 
+
+   // public int StartReccordNumber { get; set; }
 
     MemberInfo[] memberInfo;
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+
+        RecNum =  Filters.PageHelper.PageSize * (Filters.PageHelper.Page - 1);
+
+
         if (Items != null && Items.Count > 0)
         {
             Type typeofItem = this.Items[0].GetType();
@@ -106,5 +124,9 @@
 
     [Parameter]
     public string CssClass { get; set; }
+
+
+
+
 
 }

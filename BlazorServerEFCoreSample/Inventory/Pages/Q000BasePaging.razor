@@ -28,6 +28,14 @@
     [Parameter]
     public IBaseFilters Filters { get; set; }
 
+    int StartRecNum ;
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        StartRecNum =1+ Filters.PageHelper.PageSize*(Filters.PageHelper.PageCount - 1);
+    }
+
+
     private string IsDisabled(bool condition) =>
 !Filters.Loading && condition ? "" : "disabled";
 }
