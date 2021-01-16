@@ -2,56 +2,58 @@
 @using System.Reflection
 
 
-@foreach (var x in FieldMapper)
-{
-<div>@x.Id @x.Name @x.Index</div>
-}
-
-
-
-
-
 
 @if (memberInfo != null && memberInfo.Length > 0)
 {
     <table class="@($"table {this.CssClass}")">
         <thead>
             <tr>
-                @foreach (var member in memberInfo)
+                @foreach (var x in FieldMapper)
                 {
-                    @if (member.MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(member.Name, StringComparison.OrdinalIgnoreCase))
-                    {
-                        <th>@member.Name</th>
-                    }
+                    <td> @x.Name</td>
                 }
-            </tr>
-            @*<tr>
-                    @for ( int i=0; i< memberInfo.Count(); i++)
-                    {
 
-                        @if (memberInfo[i].MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(memberInfo[i].Name, StringComparison.OrdinalIgnoreCase))
-                        {
-                    <th>@memberInfo[i].Name</th>
-                        }
+            </tr>
+            @if (IsShowField)
+            {
+                <tr>
+                    @foreach (var x in FieldMapper)
+                    {
+                        <td> @x.Id</td>
                     }
-                </tr>*@
+
+                </tr>
+
+            }
+            @*<tr>
+            @for ( int i=0; i< memberInfo.Count(); i++)
+            {
+
+                @if (memberInfo[i].MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(memberInfo[i].Name, StringComparison.OrdinalIgnoreCase))
+                {
+            <th>@memberInfo[i].Name</th>
+                }
+            }
+        </tr>*@
         </thead>
         <tbody>
 
             @foreach (var item in this.Items)
             {
-                <tr>
-                    @foreach (var member in memberInfo)
-                    {
-                        @if (member.MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(member.Name, StringComparison.OrdinalIgnoreCase))
-                        {
-                            <td>@item.GetType().GetProperty(member.Name).GetValue(item)</td>
-                        }
-                    }
-                </tr>
-            }
+            <tr>
+                @foreach (var x in FieldMapper)
+                {
+                <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
+                }
 
-        </tbody>
+
+            </tr>
+            }
+            
+            
+   
+
+            </tbody>
     </table>
 }
 
@@ -71,9 +73,26 @@
 
         foreach (var x in FieldMapper)
         {
-            x.Index = 999;
+            for (int i = 0; i < memberInfo.Count(); i++)
+            {
+
+                if (memberInfo[i].MemberType == MemberTypes.Property )
+                {
+                    if ( memberInfo[i].Name == x.Id)
+                    {
+                        x.Index = i;
+                    }
+
+
+                }
+            }
+            //  x.Index = 999;
         }
     }
+
+    [Parameter]
+    public bool IsShowField { get; set; } = false;
+
 
     [Parameter]
     public List<TItem> Items { get; set; }

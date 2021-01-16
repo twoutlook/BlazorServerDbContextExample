@@ -18,52 +18,6 @@
 
         <Q004ParameterFieldFilter />
 
-        <div class="row contact-header" style="font-size:104%">
-
-            <div class="col-3"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagType))">
-                @*
-                    <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagType) SortColumn="@(ApplicationFilterColumns.FlagType)" />*@
-                @SortColsSymbol[0]   &nbsp;Flag Type
-            </div>
-            <div class="col-1"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagId))">
-                @*   <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />*@
-                @SortColsSymbol[1]    &nbsp;Flag Id
-            </div>
-            <div class="col-2"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagName))">
-                @*     <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />*@
-                @SortColsSymbol[2]  &nbsp;Flag Name
-            </div>
-            <div class="col-1">
-
-                &nbsp;Sort Id
-            </div>
-            <div class="col-3"
-                 @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Memo))">
-                @*    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Memo)" />*@
-                @SortColsSymbol[3]
-                &nbsp;Memo
-            </div>
-
-            @*<div class="col-1"
-                    @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Cstatus))">
-                    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Cstatus)" />
-                    &nbsp;ID
-                </div>*@
-
-
-            @*<div class="col-3"
-                     @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
-                    <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
-                    &nbsp;規格
-                </div>*@
-            @*<div class="col-1">
-                    刪改操作
-                </div>*@
-
-        </div>
         @if (Filters.Loading || Parts == null)
         {
             <div class="row">
@@ -88,11 +42,6 @@
                            FieldMapper="fieldMappers"  
                              />
 
-            @foreach (var x in Parts)
-            {
-                @*<Q004ParameterRow @key=x CurrentObj="@x" />*@
-                <div>   @x.Cticketcode </div>
-            }
 
 
         }
