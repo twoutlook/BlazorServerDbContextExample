@@ -14,7 +14,7 @@ namespace Inventory.Grid.Parameter
     /// Creates the right expressions to filter and sort.
     /// </summary>
     //public class PartGridQueryAdapter
-    public class Q005InBillGridQueryAdapter
+    public class Q005InbillGridQueryAdapter
     {
         /// <summary>
         /// Holds state of the grid.
@@ -26,13 +26,13 @@ namespace Inventory.Grid.Parameter
         /// <summary>
         /// Expressions for sorting.
         /// </summary>
-        private readonly Dictionary<ApplicationFilterColumns, Expression<Func<SysParameter, string>>> _expressions
-            = new Dictionary<ApplicationFilterColumns, Expression<Func<SysParameter, string>>>
+        private readonly Dictionary<ApplicationFilterColumns, Expression<Func<Inbill, string>>> _expressions
+            = new Dictionary<ApplicationFilterColumns, Expression<Func<Inbill, string>>>
             {
-                { ApplicationFilterColumns.FlagType, c => c.FlagType },
-                { ApplicationFilterColumns.FlagName, c => c.FlagName },
-                { ApplicationFilterColumns.Memo, c => c.Memo },
-                { ApplicationFilterColumns.FlagId, c => c.FlagId },
+                { ApplicationFilterColumns.Cticketcode, c => c.Cticketcode },
+                //{ ApplicationFilterColumns.FlagName, c => c.FlagName },
+                //{ ApplicationFilterColumns.Memo, c => c.Memo },
+                //{ ApplicationFilterColumns.FlagId, c => c.FlagId },
                 //{ ApplicationFilterColumns.Cinvcode, c => c.Cinvcode },
                 //{ ApplicationFilterColumns.Cinvname, c => c.Cinvname },
                 //{ ApplicationFilterColumns.Iqty, c => c.Iqty },
@@ -44,24 +44,26 @@ namespace Inventory.Grid.Parameter
         /// 
         /// https://stackoverflow.com/questions/14775658/how-to-use-func-with-iqueryable-that-returns-iorderedqueryable
         /// </summary>
-        private readonly Dictionary<ApplicationFilterColumns, Func<IQueryable<SysParameter>, IQueryable<SysParameter>>> _filterQueries;
+        private readonly Dictionary<ApplicationFilterColumns, Func<IQueryable<Inbill>, IQueryable<Inbill>>> _filterQueries;
 
         /// 
         private readonly string FilterTextF1;
 
 
         //   public PartGridQueryAdapter(ILocationFilters controls)
-        public Q005InBillGridQueryAdapter(IBaseFilters controls)
+        public Q005InbillGridQueryAdapter(IBaseFilters controls)
         {
             _controls = controls;
+            _controls.PageHelper.BaseUrl = "/inbill/";
 
-
+            _controls.FilterColumn = ApplicationFilterColumns.Cticketcode;
+            _controls.SortColumn = ApplicationFilterColumns.Cticketcode;
             // set up queries
-            _filterQueries = new Dictionary<ApplicationFilterColumns, Func<IQueryable<SysParameter>, IQueryable<SysParameter>>>
+            _filterQueries = new Dictionary<ApplicationFilterColumns, Func<IQueryable<Inbill>, IQueryable<Inbill>>>
             {
                 // NOTE by Mark, 2021-01-13, 按這機制有標準的篩選功能
                 // 要注意基本的 F1, F2
-                { ApplicationFilterColumns.FlagType, cs => cs.Where(c => c.FlagType.Contains(_controls.FilterTextF1)) },
+                { ApplicationFilterColumns.FlagType, cs => cs.Where(c => c.Cticketcode.Contains(_controls.FilterTextF1)) },
                 //{ ApplicationFilterColumns.Cposition, cs => cs.Where(c => c.Cposition.Contains(_controls.FilterTextF2)) },
                 //{ ApplicationFilterColumns.Cinvcode, cs => cs.Where(c => c.Cinvcode.Contains(_controls.FilterTextF3)) },
                 //{ ApplicationFilterColumns.Cinvname, cs => cs.Where(c => c.Cinvname.Contains(_controls.FilterTextF4)) },
@@ -70,7 +72,7 @@ namespace Inventory.Grid.Parameter
 
 
 
-        public async Task<ICollection<SysParameter>> FetchAsyncV4(IQueryable<SysParameter> query)
+        public async Task<ICollection<Inbill>> FetchAsyncV4(IQueryable<Inbill> query)
         {
             // NOTE by Mark, 2021-01-15, 
             // 先使用這種簡明的 LINQ
@@ -80,19 +82,24 @@ namespace Inventory.Grid.Parameter
 
             if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
             {
-                query = query.Where(x => x.FlagType.Contains(_controls.FilterTextF1));
+                query = query.Where(x => x.Cticketcode.Contains(_controls.FilterTextF1));
             }
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
-            {
-                query = query.Where(x => x.FlagName.Contains(_controls.FilterTextF2));
-            }
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
-            {
-                query = query.Where(x => x.Memo.Contains(_controls.FilterTextF3));
-            }
+            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
+            //{
+            //    query = query.Where(x => x.FlagName.Contains(_controls.FilterTextF2));
+            //}
+            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
+            //{
+            //    query = query.Where(x => x.Memo.Contains(_controls.FilterTextF3));
+            //}
 
 
             // apply the expression
+
+            // QUICK FIX ONLY
+
+         
+
             var expression = _expressions[_controls.SortColumn];
           //  sb.Append($"Sort: '{_controls.SortColumn}' ");
 
@@ -126,13 +133,13 @@ namespace Inventory.Grid.Parameter
 
 
 
-        public async Task CountAsync(IQueryable<SysParameter> query)
+        public async Task CountAsync(IQueryable<Inbill> query)
         {
             _controls.PageHelper.TotalItemCount = await query.CountAsync();
         }
 
 
-        public IQueryable<SysParameter> FetchPageQuery(IQueryable<SysParameter> query)
+        public IQueryable<Inbill> FetchPageQuery(IQueryable<Inbill> query)
         {
             return query
                 .Skip(_controls.PageHelper.Skip)
@@ -152,7 +159,7 @@ namespace Inventory.Grid.Parameter
 
 
 
-        private IQueryable<SysParameter> FilterAndQueryV4(IQueryable<SysParameter> root)
+        private IQueryable<Inbill> FilterAndQueryV4(IQueryable<Inbill> root)
         {
             var sb = new System.Text.StringBuilder();
 

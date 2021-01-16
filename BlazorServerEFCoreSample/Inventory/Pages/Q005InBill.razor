@@ -8,7 +8,7 @@
 @*   Filters and Adapter        *@
 @* ============================ *@
 @inject IBaseFilters Filters
-@inject ParameterGridQueryAdapter QueryAdapter
+@inject Q005InbillGridQueryAdapter QueryAdapter
 
 <PageTitle Title="入庫單查詢" />
 
@@ -83,16 +83,20 @@
 
         @if (Parts != null)
         {
+            <AutoTableComp Items="Items" 
+                           ColumsToExcludeCSV="id"/>
+
             @foreach (var x in Parts)
             {
-                <Q004ParameterRow @key=x CurrentObj="@x" />
+                @*<Q004ParameterRow @key=x CurrentObj="@x" />*@
+    <div>   @x.Cticketcode </div> 
             }
 
 
         }
 
 
-        <Q000BasePaging Filters="Filters" />
+        @*<Q000BasePaging Filters="@Filters" />*@
 
 
 
@@ -115,9 +119,6 @@
         // Ensure we're on the same, er, right page.
         if (_lastPage < 1)
         {
-            //Filters.PageHelper.
-            // Filters.PageHelper.BaseUrl
-            //            Nav.NavigateTo("/ContactsV4/1");
             Nav.NavigateTo(Filters.PageHelper.BaseUrl + "1");
 
             return;
@@ -128,13 +129,11 @@
         {
             if (Page < 1)
             {
-                //Nav.NavigateTo("/ContactsV4/1");
                 Nav.NavigateTo(Filters.PageHelper.BaseUrl + "1");
                 return;
             }
             if (Page > Filters.PageHelper.PageCount)
             {
-                //  Nav.NavigateTo($"/ContactsV4/{Filters.PageHelper.PageCount}");
                 Nav.NavigateTo(Filters.PageHelper.BaseUrl + Filters.PageHelper.PageCount);
                 return;
             }
@@ -212,7 +211,9 @@
 
         return ReloadAsync();
     }
-    private ICollection<SysParameter> Parts { get; set; }
+    private ICollection<Inbill> Parts { get; set; }
+    private List<Inbill> Items { get; set; }
+
 
     private async Task ReloadAsync()
     {
@@ -236,7 +237,10 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.Inbill.AsQueryable());
+
+        //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
+        Items = Parts.ToList();
 
 
 
@@ -247,25 +251,13 @@
 
 
 
-    private List<BasePart> partList;
-
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        //using var context = new TaiweiContext();
-        using var context = DbFactory.CreateDbContext();
-
-
-        partList = context.BasePart.OrderBy(o => o.Cpartnumber).Take(10).ToList();
-    }
 
     protected override void OnInitialized()
     {
         //base.OnInitialized();
 
 
-        IncrementCount();
+        //  IncrementCount();
     }
 }
 

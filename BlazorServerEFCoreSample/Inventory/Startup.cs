@@ -67,6 +67,7 @@ namespace Inventory
             services.AddScoped<ILocationFilters, LocationFilters>();
             services.AddScoped<IAdjustFilters, AdjustFilters>();
             services.AddScoped<IParameterFilters, ParameterFilters>();
+            services.AddScoped<IBaseFilters, BaseFilters>();
             //  'Inventory.Grid.Adjust.AdjustFilters' 
             //   services.AddScoped<IAppFilters, AppFilters>();
 
@@ -78,6 +79,7 @@ namespace Inventory
             //            services.AddScoped<LocationGridQueryAdapterV2>();
             services.AddScoped<AdjustGridQueryAdapter>();
             services.AddScoped<ParameterGridQueryAdapter>();
+            services.AddScoped<Q005InbillGridQueryAdapter>();
 
         }
 
