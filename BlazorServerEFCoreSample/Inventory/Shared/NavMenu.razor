@@ -13,8 +13,13 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="note" >
+            <NavLink class="nav-link" href="note">
                 <span class="oi oi-home" aria-hidden="true"></span> 開發筆記
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="ref">
+                <span class="oi oi-home" aria-hidden="true"></span> 參考
             </NavLink>
         </li>
 
@@ -26,45 +31,51 @@
             @if (expandSubMenuX[1])
             {
 
-                <ul>
-                    @*<li>
+        <ul>
+            @*<li>
 
-                        <NavLink class="nav-link" href="partV1">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 基本10筆
-                        </NavLink>
-                    </li>*@
-                    <li>
+            <NavLink class="nav-link" href="partV1">
+                <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 基本10筆
+            </NavLink>
+        </li>*@
+            <li>
 
-                        <NavLink class="nav-link" href="part/1">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span>物料查詢
-                        </NavLink>
-                    </li>
-                    <li>
+                <NavLink class="nav-link" href="part/1">
+                    <span class="oi oi-magnifying-glass" aria-hidden="true"></span>物料查詢
+                </NavLink>
+            </li>
+            <li>
 
-                        <NavLink class="nav-link" href="location">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 儲位查詢
-                        </NavLink>
-                    </li>
-                    <li>
+                <NavLink class="nav-link" href="location">
+                    <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 儲位查詢
+                </NavLink>
+            </li>
+            <li>
 
-                        <NavLink class="nav-link" href="adjust">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 庫存調整查詢
-                        </NavLink>
-                    </li>
-                    <li>
+                <NavLink class="nav-link" href="adjust">
+                    <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 庫存調整查詢
+                </NavLink>
+            </li>
+            <li>
 
-                        <NavLink class="nav-link" href="parameter">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 系統參數查詢
-                        </NavLink>
-                    </li>
-                    <li>
+                <NavLink class="nav-link" href="parameter">
+                    <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 系統參數查詢
+                </NavLink>
+            </li>
+            <li>
 
-                        <NavLink class="nav-link" href="inbill">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 入庫單查詢
-                        </NavLink>
-                    </li>
+                <NavLink class="nav-link" href="inbill/1">
+                    <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 入庫單查詢
+                </NavLink>
+            </li>
+            <li>
 
-                </ul>
+                <NavLink class="nav-link" href="outbill/1">
+                    <span class="oi oi-magnifying-glass" aria-hidden="true"></span> 出庫單查詢
+                </NavLink>
+            </li>
+
+        </ul>
 
             }
         </li>

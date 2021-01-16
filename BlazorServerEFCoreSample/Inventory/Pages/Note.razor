@@ -28,6 +28,92 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --- by Mark陳炳陵, 2021-01-16
 </blockquote>
 <hr />
+
+<PageTitle Title="出庫單 2021-01-17 06:10" />
+<ul>
+    <li>
+        使用 Q005Inbill.razor 複製後成生 Q006Outbill.razor
+        <ul>
+            <li>Routing</li>
+            <li>Page Title</li>
+            <li>NavMenu</li>
+            <li>working as 入庫單</li>
+        </ul>
+    </li>
+
+    <li>
+        使用 Q005InbillGridQueryAdapter 複製後成生 Q006OutbillGridQueryAdapter
+        <ul>
+            <li>Change class name, NOT TO USE RENAME, better copy/paste and edit new line, then del old</li>
+            <li>
+                edit constructor name,
+                and
+                <ul>
+                    <li>  change _controls.PageHelper.BaseUrl</li>
+
+                    <li>set FilterColumn and SortColumn</li>
+                    <li>TODO _filterQueries</li>
+                    <li>TODO _expressions</li>
+                </ul>
+            </li>
+            <li>
+                Q006Outbill.razor  &commat;inject Q006OutbillGridQueryAdapter QueryAdapter
+                <ul>
+                    <li>System.InvalidOperationException: Cannot provide a value for property 'QueryAdapter' on type 'Inventory.Pages.Q006Outbill'. There is no registered service of type 'Inventory.Grid.Parameter.Q006OutbillGridQueryAdapter'.</li>
+                </ul>
+            </li>
+            <li> Startup.cs =>    services.AddScoped&lt;Q006OutbillGridQueryAdapter>();</li>
+            <li>working as 入庫單</li>
+        </ul>
+
+    </li>
+    <li>
+        duplicate Q005InbillFieldFilter => Q006OutbillFieldFilter
+        <ul>
+            <li>TODO...</li>
+
+
+        </ul>
+    </li>
+    <li>
+        replace entity type Inbill with Outbill
+        <ul>
+            <li>Q006Outbill.razor</li>
+            <li>Q006OutbillGridQueryAdapter.cs</li>
+            <li>
+                fieldMappers
+                <ul>
+
+                    <li>
+                        // fieldMappers.Add(new FieldMapper { Id = "Casnid", Name = "入庫通知單ID", Index = -1 });<br>
+                        fieldMappers.Add(new FieldMapper { Id = "Coutasnid", Name = "出庫通知單ID", Index = -1 });
+                    </li>
+                    <li> Id = "Cticketcode", Name = "出庫單"</li>
+                </ul>
+
+            </li>
+            <li>BUG 入庫單和出庫單的切換,有時會卡到?
+                <ul>
+                    <li>直接頁面OK</li>
+                    <li>查詢後出問題</li>
+
+                </ul>
+            </li>
+
+            <li>BUG FIXED
+                <ul>
+                    <li>Inject IBaseFilter 是問題的根源</li>
+                    <li>Q006...Adapter 應該自己獨特的 BaseFilter </li>
+                    <li>TODO Q005...Adapter 也應該自己獨特的 BaseFilter </li>
+
+                </ul>
+            </li>
+        </ul>
+    </li>
+
+
+</ul>
+<hr />
 <PageTitle Title="入庫單 2021-01-16 13:00" />
 <ul>
     <li>
@@ -47,11 +133,12 @@
             <li>&lt;Q004ParameterFieldFilter /></li>
             <li>&lt;Q004ParameterRow &commat;key=x CurrentObj="&commat;x" /></li>
             <li>&lt;Q004ParameterPaging Filters="Filters" /></li>
-            <li> &commat;code
-            <ul>
-                <li>    private ICollection&lt;SysParameter> Parts { get; set; }</li>
-                <li> Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());</li>
-            </ul>
+            <li>
+                &commat;code
+                <ul>
+                    <li>    private ICollection&lt;SysParameter> Parts { get; set; }</li>
+                    <li> Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());</li>
+                </ul>
             </li>
 
         </ul>
@@ -59,11 +146,14 @@
     <li>https://stackoverflow.com/questions/8515365/are-there-other-whitespace-codes-like-nbsp-for-half-spaces-em-spaces-en-space</li>
     <li>*** when copy IParameterFilters paste and rename it IBaseFilters , it affects all IParameterFilters </li>
 
-    <li>able to show AutoTable
+    <li>
+        able to show AutoTable
         <ul>
             <li>Cticketcode	Cstatus	Casnid</li>
-            <li>入庫單 狀態 入庫通知單ID
-             Cstatus	Casnid</li>
+            <li>
+                入庫單 狀態 入庫通知單ID
+                Cstatus	Casnid
+            </li>
 
         </ul>
     </li>

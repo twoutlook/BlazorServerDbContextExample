@@ -1,0 +1,42 @@
+﻿@page "/ref"
+<PageTitle Title="REF 參考" />
+<style>
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+    }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+
+        blockquote p {
+            display: inline;
+        }
+</style>
+<blockquote class="blockquote">
+    <span style="font-size:125%">  使用程式語言就像學英文一樣,總是要把語法再復習幾次。</span>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --- by Mark陳炳陵, 2021-01-17
+</blockquote>
+<hr />
+<PageTitle Title="官網參考優先" />
+<ul>
+    <li>
+        <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-5.0"> Create and use ASP.NET Core Razor components</a>
+        <ul>
+            <li>Partial class suppor: C# code is placed in a code-behind file defined as a partial class,</li>
+            <li>...</li>
+         
+        </ul>
+    </li>
+
+</ul>
