@@ -27,6 +27,7 @@ namespace Inventory.Data
         public virtual DbSet<StockCurrentAdjust> StockCurrentAdjust { get; set; }
         public virtual DbSet<StockCurrentAdjustD> StockCurrentAdjustD { get; set; }
         public virtual DbSet<StockCurrentSn> StockCurrentSn { get; set; }
+        public virtual DbSet<SysConfig> SysConfig { get; set; }
         public virtual DbSet<SysParameter> SysParameter { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1269,6 +1270,81 @@ namespace Inventory.Data
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("VENDORCODE");
+            });
+
+            modelBuilder.Entity<SysConfig>(entity =>
+            {
+                entity.ToTable("SYS_CONFIG");
+
+                entity.HasIndex(e => e.Id, "SYS_C0017098")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Code, "uk_SYS_CONFIG_code")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.Code)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("code");
+
+                entity.Property(e => e.ConfigDesc)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("config_desc");
+
+                entity.Property(e => e.ConfigValue)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("config_value");
+
+                entity.Property(e => e.Createowner)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("createowner")
+                    .HasDefaultValueSql("('admin')");
+
+                entity.Property(e => e.Createtime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("createtime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Lastupdateowner)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("lastupdateowner")
+                    .HasDefaultValueSql("('admin')");
+
+                entity.Property(e => e.Lastupdatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastupdatetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Memo)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("memo");
+
+                entity.Property(e => e.Status)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("status")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Type)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("type");
+
+                entity.Property(e => e.TypeMemo)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("type_memo");
             });
 
             modelBuilder.Entity<SysParameter>(entity =>

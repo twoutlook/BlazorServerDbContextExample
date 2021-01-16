@@ -49,6 +49,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[SYS_CONFIG]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[SYS_PARAMETER]",
          "ObjectType": 0
       }
