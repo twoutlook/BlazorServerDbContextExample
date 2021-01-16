@@ -30,7 +30,7 @@ namespace Inventory.Grid.Parameter
             = new Dictionary<ApplicationFilterColumns, Expression<Func<Inbill, string>>>
             {
                 { ApplicationFilterColumns.Cticketcode, c => c.Cticketcode },
-                //{ ApplicationFilterColumns.FlagName, c => c.FlagName },
+                { ApplicationFilterColumns.Cstatus, c => c.Cstatus },
                 //{ ApplicationFilterColumns.Memo, c => c.Memo },
                 //{ ApplicationFilterColumns.FlagId, c => c.FlagId },
                 //{ ApplicationFilterColumns.Cinvcode, c => c.Cinvcode },
@@ -84,10 +84,10 @@ namespace Inventory.Grid.Parameter
             {
                 query = query.Where(x => x.Cticketcode.Contains(_controls.FilterTextF1));
             }
-            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
-            //{
-            //    query = query.Where(x => x.FlagName.Contains(_controls.FilterTextF2));
-            //}
+            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
+            {
+                query = query.Where(x => x.Cstatus.Contains(_controls.FilterTextF2));
+            }
             //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
             //{
             //    query = query.Where(x => x.Memo.Contains(_controls.FilterTextF3));
@@ -98,7 +98,7 @@ namespace Inventory.Grid.Parameter
 
             // QUICK FIX ONLY
 
-         
+
 
             var expression = _expressions[_controls.SortColumn];
           //  sb.Append($"Sort: '{_controls.SortColumn}' ");
