@@ -1,5 +1,32 @@
 ﻿@page "/"
 <PageTitle Title="HOME 主頁" />
+<style>
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+    }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+
+        blockquote p {
+            display: inline;
+        }
+</style>
+<blockquote class="blockquote">
+    <span style="font-size:125%">   2021年春節前後的主軸就是建立這個 Codebase</span>
+    <br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --- by Mark陳炳陵
+</blockquote>
 <hr />
 <PageTitle Title="MAIN PURPOSE" />
 <ul>
@@ -8,8 +35,10 @@
     <li>整個系統優化以疊代更新進行。考量現已在客戶現場正式的系統, 數據庫部份先保持不動。</li>
     <li>類以項目如需求有明顯變動部份,優先部份調整數據庫。</li>
 
-    <li>現有權限平台在.NET5 的環境已不適用。簡易型可以直接使用內建的Role Authorization，必要時可以升級使用 Identity Server 4
-    。</li>
+    <li>
+        現有權限平台在.NET5 的環境已不適用。簡易型可以直接使用內建的Role Authorization，必要時可以升級使用 Identity Server 4
+        。
+    </li>
 
     <li>將標準的部份先固化出來, 針對不同頁的需求,制定SOP。</li>
     <li>上述固化部份, 應做成單獨 Library 並打包成 NuGet Package。</li>
@@ -26,6 +55,9 @@
     <li>以庫存調整單的狀態為例, 其顯示中文是在數據庫的SYS_PARAMETER, 多語時使用額外處理。</li>
     <li>以庫存調整單的狀態為例, 用來做查詢時, 下拉元件可以單獨給值, 但是如果有新增狀態在當筆狀態欄位或是SYS_PARAMETER時, 需要額外處理。</li>
     <li>以庫存調整單的製單人員和審核人員, 其顯示名需要透過人員主檔取得。如果測試或正式環境有不在人員主檔的帳號, 需要額外處理。</li>
+    <li>以庫存調整單的製單人員和審核人員為例, 其顯示名需要透過人員主檔取得, 先以建VIEW V2為前綴再使用 EF Core 建 Entity class 方式處理。</li>
+    <li>上述另一種做法是用LINQ 實施 JOIN。</li>
+
     <li>以庫存調整單的狀態為例, 以EF Core的做法是有單獨的查表, 可以充份應用 Navigation 功能。目前整個查表統一放在SYS_PARAMETER, 各有利弊。 </li>
     <li>以庫存調整單的狀態為例,如果要使用 EF Core的 Navigation 功能。是否可以將查表部份直接以代碼實現,不進數據庫取值? 這是為了保持數據庫完整,也實驗這部份混用的可行性。</li>
 
