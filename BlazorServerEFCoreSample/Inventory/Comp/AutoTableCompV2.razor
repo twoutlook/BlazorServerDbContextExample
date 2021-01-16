@@ -1,0 +1,91 @@
+﻿@typeparam TItem
+@using System.Reflection
+
+
+@foreach (var x in FieldMapper)
+{
+<div>@x.Id @x.Name @x.Index</div>
+}
+
+
+
+
+
+
+@if (memberInfo != null && memberInfo.Length > 0)
+{
+    <table class="@($"table {this.CssClass}")">
+        <thead>
+            <tr>
+                @foreach (var member in memberInfo)
+                {
+                    @if (member.MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(member.Name, StringComparison.OrdinalIgnoreCase))
+                    {
+                        <th>@member.Name</th>
+                    }
+                }
+            </tr>
+            @*<tr>
+                    @for ( int i=0; i< memberInfo.Count(); i++)
+                    {
+
+                        @if (memberInfo[i].MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(memberInfo[i].Name, StringComparison.OrdinalIgnoreCase))
+                        {
+                    <th>@memberInfo[i].Name</th>
+                        }
+                    }
+                </tr>*@
+        </thead>
+        <tbody>
+
+            @foreach (var item in this.Items)
+            {
+                <tr>
+                    @foreach (var member in memberInfo)
+                    {
+                        @if (member.MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(member.Name, StringComparison.OrdinalIgnoreCase))
+                        {
+                            <td>@item.GetType().GetProperty(member.Name).GetValue(item)</td>
+                        }
+                    }
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+
+
+@code { //https://www.youtube.com/watch?v=jsWVIV5ykQM
+
+    MemberInfo[] memberInfo;
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (Items != null && Items.Count > 0)
+        {
+            Type typeofItem = this.Items[0].GetType();
+            memberInfo = typeofItem.GetMembers();
+        }
+
+
+        foreach (var x in FieldMapper)
+        {
+            x.Index = 999;
+        }
+    }
+
+    [Parameter]
+    public List<TItem> Items { get; set; }
+
+    [Parameter]
+    public List<FieldMapper> FieldMapper { get; set; }
+
+
+    [Parameter]
+    public string ColumsToExcludeCSV { get; set; }
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+}

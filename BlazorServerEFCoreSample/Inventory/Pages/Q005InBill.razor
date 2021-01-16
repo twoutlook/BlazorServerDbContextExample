@@ -28,12 +28,12 @@
             </div>
             <div class="col-1"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagId))">
-             @*   <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />*@
+                @*   <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagId)" />*@
                 @SortColsSymbol[1]    &nbsp;Flag Id
             </div>
             <div class="col-2"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.FlagName))">
-           @*     <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />*@
+                @*     <Q004ParameterSortIndicator Column="@(ApplicationFilterColumns.FlagName)" />*@
                 @SortColsSymbol[2]  &nbsp;Flag Name
             </div>
             <div class="col-1">
@@ -42,7 +42,7 @@
             </div>
             <div class="col-3"
                  @onclick="@(async ()=>await ToggleAsync(ApplicationFilterColumns.Memo))">
-            @*    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Memo)" />*@
+                @*    <AdjustSortIndicator Column="@(ApplicationFilterColumns.Memo)" />*@
                 @SortColsSymbol[3]
                 &nbsp;Memo
             </div>
@@ -83,13 +83,15 @@
 
         @if (Parts != null)
         {
-            <AutoTableComp Items="Items" 
-                           ColumsToExcludeCSV="id"/>
+            <AutoTableCompV2 Items="Items"
+                           ColumsToExcludeCSV="id" 
+                           FieldMapper="fieldMappers"  
+                             />
 
             @foreach (var x in Parts)
             {
                 @*<Q004ParameterRow @key=x CurrentObj="@x" />*@
-    <div>   @x.Cticketcode </div> 
+                <div>   @x.Cticketcode </div>
             }
 
 
@@ -113,6 +115,32 @@
     /// Keeps track of the last page loaded.
     /// </summary>
     private int _lastPage = -1;
+
+
+    List<FieldMapper> fieldMappers;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        //Cticketcode Cstatus Casnid </ li >
+
+        fieldMappers = new List<FieldMapper>();
+        //    < li > 入庫單 狀態 入庫通知單ID
+        fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "入庫單", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Cstatus", Name = "狀態", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Casnid", Name = "入庫通知單ID", Index = -1 });
+
+
+
+
+        //openWith.Add("c", "notepad.exe");
+        //openWith.Add("bmp", "paint.exe");
+        //openWith.Add("dib", "paint.exe");
+        //openWith.Add("rtf", "wordpad.exe");
+    }
+
+
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -178,7 +206,7 @@
         ApplicationFilterColumns.FlagName,
         ApplicationFilterColumns.Memo,
 
-    };
+        };
     string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
 
 
