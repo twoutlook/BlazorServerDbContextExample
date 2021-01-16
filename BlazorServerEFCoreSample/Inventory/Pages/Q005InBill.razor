@@ -7,7 +7,7 @@
 @*   NOTE by Mark, 2021-01-14,  *@
 @*   Filters and Adapter        *@
 @* ============================ *@
-@inject IParameterFilters Filters
+@inject IBaseFilters Filters
 @inject ParameterGridQueryAdapter QueryAdapter
 
 <PageTitle Title="入庫單查詢" />
@@ -92,7 +92,7 @@
         }
 
 
-        <Q004ParameterPaging Filters="@Filters" />
+        <Q000BasePaging Filters="Filters" />
 
 
 

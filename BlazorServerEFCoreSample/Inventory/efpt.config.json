@@ -17,6 +17,22 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[INBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_D]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[STOCK_CURRENT]",
          "ObjectType": 0
       },

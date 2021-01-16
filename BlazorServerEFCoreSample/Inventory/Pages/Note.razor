@@ -1,0 +1,61 @@
+﻿@page "/note"
+<PageTitle Title="NOTE 開發筆記" />
+<style>
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+    }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+
+        blockquote p {
+            display: inline;
+        }
+</style>
+<blockquote class="blockquote">
+    <span style="font-size:125%">  單獨或是特例容易做, 泛型是才是抽象化的真功夫。</span>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --- by Mark陳炳陵, 2021-01-16
+</blockquote>
+<hr />
+<PageTitle Title="入庫單 2021-01-16 13:00" />
+<ul>
+    <li>
+        使用 Q004Parameter.razor 複製後成生 Q005InBill.razor
+        <ul>
+            <li>Menu 加上link /inbill</li>
+            <li>換上 Page Title</li>
+            <li>會跑到 /parameter/1</li>
+            <li>直接 /inbll/1 可以正確顯示頁面</li>
+        </ul>
+    </li>
+    <li>
+        Q005InBill.razor
+        <ul>
+            <li> &commat;inject IParameterFilters Filters</li>
+            <li> &commat;inject ParameterGridQueryAdapter QueryAdapter</li>
+            <li>&lt;Q004ParameterFieldFilter /></li>
+            <li>&lt;Q004ParameterRow &commat;key=x CurrentObj="&commat;x" /></li>
+            <li>&lt;Q004ParameterPaging Filters="Filters" /></li>
+            <li> &commat;code
+            <ul>
+                <li>    private ICollection&lt;SysParameter> Parts { get; set; }</li>
+                <li> Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());</li>
+            </ul>
+            </li>
+
+        </ul>
+    </li>
+    <li>https://stackoverflow.com/questions/8515365/are-there-other-whitespace-codes-like-nbsp-for-half-spaces-em-spaces-en-space</li>
+    <li>*** when copy IParameterFilters paste and rename it IBaseFilters , it affects all IParameterFilters </li>
+</ul>
