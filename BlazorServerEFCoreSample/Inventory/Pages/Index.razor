@@ -25,14 +25,17 @@
     <li>查詢欄位是日期時, 起止日期用兩週前至今天。如果不使用該日期, 需要額外處理。 </li>
     <li>以庫存調整單的狀態為例, 其顯示中文是在數據庫的SYS_PARAMETER, 多語時使用額外處理。</li>
     <li>以庫存調整單的狀態為例, 用來做查詢時, 下拉元件可以單獨給值, 但是如果有新增狀態在當筆狀態欄位或是SYS_PARAMETER時, 需要額外處理。</li>
-    <li>以庫存調整單的狀態為例, 製單人員和審核人員, 其顯示名需要透過人員主檔取得。如果測試或正式環境有不在人員主檔的帳號, 需要額外處理。</li>
+    <li>以庫存調整單的製單人員和審核人員, 其顯示名需要透過人員主檔取得。如果測試或正式環境有不在人員主檔的帳號, 需要額外處理。</li>
+    <li>以庫存調整單的狀態為例, 以EF Core的做法是有單獨的查表, 可以充份應用 Navigation 功能。目前整個查表統一放在SYS_PARAMETER, 各有利弊。 </li>
+    <li>以庫存調整單的狀態為例,如果要使用 EF Core的 Navigation 功能。是否可以將查表部份直接以代碼實現,不進數據庫取值? 這是為了保持數據庫完整,也實驗這部份混用的可行性。</li>
 
 </ul>
 
 <PageTitle Title="TODO" />
 <ul>
-    <li>Filter 或 GridQueryAdapter, 其中之一應該成為 generic 。</li>
     <li>頁面的razor file, 應該命名如 Q004Parameter.razor。其使用的標準附件也應該有前綴Q004Parameter。</li>
+    <li>Filter 或 GridQueryAdapter, 其中之一應該成為 generic 。</li>
+    <li>Paging.razor 也應該可以成為泛型。</li>
 
 
 </ul>
