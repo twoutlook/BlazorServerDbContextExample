@@ -3,19 +3,23 @@
 @using Microsoft.EntityFrameworkCore
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
+@* ============================ *@
+@*   NOTE by Mark, 2021-01-17,  *@
+@*   Adapter to new filters      *@
+@* ============================ *@
 
-@inject Q008OutbillDGridQueryAdapter QueryAdapter
+@inject Q007SysConfigGridQueryAdapter QueryAdapter
 
-<PageTitle Title="出庫單明細" />
+<PageTitle Title="出貨單明細" />
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <Q006OutbillFieldFilter Filters="@QueryAdapter.f" />
+        <Q007SysConfigFieldFilter  Filters="@QueryAdapter.f" />
 
         @if (QueryAdapter.f.Loading || Parts == null)
-        8
+        {
             <div class="row">
                 <div class="col-12 alert alert-info">
                     Loading...
@@ -35,10 +39,8 @@
         {
             <AutoTableCompV2 Filters="@QueryAdapter.f"
                              Items="Items"
-                           ColumsToExcludeCSV="id" 
-                           FieldMapper="fieldMappers" 
-                            
-                             />
+                             ColumsToExcludeCSV="id"
+                             FieldMapper="fieldMappers" />
 
 
 
@@ -77,10 +79,11 @@
 
         fieldMappers = new List<FieldMapper>();
         //    < li > 入庫單 狀態 入庫通知單ID
-        fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "出庫單", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Cstatus", Name = "狀態", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Code", Name = "Code", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "ConfigDesc", Name = "ConfigDesc", Index = -1 });
         //        fieldMappers.Add(new FieldMapper { Id = "Casnid", Name = "入庫通知單ID", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Coutasnid", Name = "出庫通知單ID", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "ConfigValue", Name = "ConfigValue", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Memo", Name = "Memo", Index = -1 });
 
 
 
@@ -152,12 +155,12 @@
     //int[] marks = new int[] { 99, 98, 92, 97, 95 };
     ApplicationFilterColumns[] SortCols = new ApplicationFilterColumns[]
     {
-        ApplicationFilterColumns.FlagType,
-        ApplicationFilterColumns.FlagId,
-        ApplicationFilterColumns.FlagName,
+        ApplicationFilterColumns.Code ,
+        ApplicationFilterColumns.ConfigDesc ,
+        ApplicationFilterColumns.ConfigValue ,
         ApplicationFilterColumns.Memo,
 
-        };
+            };
     string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
 
 
@@ -190,8 +193,8 @@
 
         return ReloadAsync();
     }
-    private ICollection<Outbill> Parts { get; set; }
-    private List<Outbill> Items { get; set; }
+    private ICollection<SysConfig> Parts { get; set; }
+    private List<SysConfig> Items { get; set; }
 
 
     private async Task ReloadAsync()
@@ -216,7 +219,7 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.Outbill.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.SysConfig.AsQueryable());
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         Items = Parts.ToList();

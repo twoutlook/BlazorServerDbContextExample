@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Grid\Contact\**" />
+    <Content Remove="Grid\Contact\**" />
+    <EmbeddedResource Remove="Grid\Contact\**" />
+    <None Remove="Grid\Contact\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.1" />
@@ -15,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Comp\Controls\" />
-    <Folder Include="Grid\Contact\" />
     <Folder Include="NewFolder\" />
   </ItemGroup>
 
