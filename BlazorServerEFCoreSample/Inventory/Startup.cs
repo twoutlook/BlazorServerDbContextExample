@@ -81,6 +81,7 @@ namespace Inventory
             services.AddScoped<ParameterGridQueryAdapter>();
             services.AddScoped<Q005InbillGridQueryAdapter>();
             services.AddScoped<Q006OutbillGridQueryAdapter>();
+            services.AddScoped<Q007SysConfigGridQueryAdapter>();
 
         }
 

@@ -23,5 +23,8 @@
         Sortid,
         Memo,
         Id,
+        Code,
+        ConfigDesc,
+        ConfigValue
     }
 }
