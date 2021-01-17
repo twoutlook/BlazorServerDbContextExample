@@ -94,19 +94,23 @@
 
         foreach (var x in FieldMapper)
         {
-            for (int i = 0; i < memberInfo.Count(); i++)
+            if (memberInfo != null) // NOTE by Mark, 沒有記錄時, 會報錯
             {
-
-                if (memberInfo[i].MemberType == MemberTypes.Property)
+                for (int i = 0; i < memberInfo.Count(); i++)
                 {
-                    if (memberInfo[i].Name == x.Id)
+
+                    if (memberInfo[i].MemberType == MemberTypes.Property)
                     {
-                        x.Index = i;
+                        if (memberInfo[i].Name == x.Id)
+                        {
+                            x.Index = i;
+                        }
+
+
                     }
-
-
                 }
             }
+
             //  x.Index = 999;
         }
     }
