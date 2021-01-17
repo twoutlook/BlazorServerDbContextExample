@@ -1,6 +1,6 @@
 ﻿@using System.Timers
 @inject IJSRuntime JSRuntime
-@inject IBaseFilters Filters
+
 @implements IDisposable
 
 @using System.Globalization
@@ -170,6 +170,11 @@
 
 @code {
 
+
+
+    [Parameter]
+    public IBaseFilters Filters { get; set; }
+
     //https://stackoverflow.com/questions/56748968/how-to-set-date-formats-and-culture-in-asp-net-core-razor-pages-2-2
 
     string IsAsc12;
@@ -202,21 +207,21 @@
     Dictionary<string, string> sortNameDict = new Dictionary<string, string>();
     Dictionary<string, string> isAsc12Dict = new Dictionary<string, string>();
 
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-        sortDict.Add("Cticketcode", ApplicationFilterColumns.Cticketcode);
-        sortDict.Add("Cstatus", ApplicationFilterColumns.Cstatus);
+    //protected override void OnParametersSet()
+    //{
+    //    base.OnParametersSet();
+    //    sortDict.Add("Cticketcode", ApplicationFilterColumns.Cticketcode);
+    //    sortDict.Add("Cstatus", ApplicationFilterColumns.Cstatus);
 
-        sortNameDict.Add("Cticketcode", "出庫單");
-        sortNameDict.Add("Cstatus", "狀態");
+    //    sortNameDict.Add("Cticketcode", "出庫單");
+    //    sortNameDict.Add("Cstatus", "狀態");
 
-        isAsc12Dict.Add("1", "正向");
-        isAsc12Dict.Add("2", "反向");
+    //    isAsc12Dict.Add("1", "正向");
+    //    isAsc12Dict.Add("2", "反向");
 
 
 
-    }
+    //}
 
     private async void UpdateHeading(MouseEventArgs e)
     {
@@ -290,6 +295,17 @@
     /// </summary>
     protected override void OnInitialized()
     {
+
+        base.OnParametersSet();
+        sortDict.Add("Cticketcode", ApplicationFilterColumns.Cticketcode);
+        sortDict.Add("Cstatus", ApplicationFilterColumns.Cstatus);
+
+        sortNameDict.Add("Cticketcode", "出庫單");
+        sortNameDict.Add("Cstatus", "狀態");
+
+        isAsc12Dict.Add("1", "正向");
+        isAsc12Dict.Add("2", "反向");
+
         //var today = DateTime.Today;
         //var lastmonth = new DateTime(today.Year, today.Month - 1, 1);
 

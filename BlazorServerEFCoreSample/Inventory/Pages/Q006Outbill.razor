@@ -16,7 +16,7 @@
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <Q006OutbillFieldFilter />
+        <Q006OutbillFieldFilter Filters="@QueryAdapter.f" />
 
         @if (QueryAdapter.f.Loading || Parts == null)
         {
