@@ -82,6 +82,7 @@ namespace Inventory
             services.AddScoped<Q005InbillGridQueryAdapter>();
             services.AddScoped<Q006OutbillGridQueryAdapter>();
             services.AddScoped<Q007SysConfigGridQueryAdapter>();
+            services.AddScoped<Q008OutbillDGridQueryAdapter>();
 
         }
 
