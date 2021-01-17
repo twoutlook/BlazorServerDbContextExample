@@ -4,19 +4,19 @@
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
 @* ============================ *@
-@*   NOTE by Mark, 2021-01-14,  *@
-@*   Filters and Adapter        *@
+@*   NOTE by Mark, 2021-01-17,  *@
+@*   Adapter to new filters      *@
 @* ============================ *@
-@*@inject IBaseFilters Filters*@
+
 @inject Q007SysConfigGridQueryAdapter QueryAdapter
 
-<PageTitle Title="出庫單查詢" />
+<PageTitle Title="系統配置查詢" />
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <Q007SysConfigFieldFilter />
+        <Q007SysConfigFieldFilter  Filters="@QueryAdapter.f" />
 
         @if (QueryAdapter.f.Loading || Parts == null)
         {
@@ -39,10 +39,8 @@
         {
             <AutoTableCompV2 Filters="@QueryAdapter.f"
                              Items="Items"
-                           ColumsToExcludeCSV="id" 
-                           FieldMapper="fieldMappers" 
-                            
-                             />
+                             ColumsToExcludeCSV="id"
+                             FieldMapper="fieldMappers" />
 
 
 
@@ -162,7 +160,7 @@
         ApplicationFilterColumns.ConfigValue ,
         ApplicationFilterColumns.Memo,
 
-        };
+            };
     string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
 
 
