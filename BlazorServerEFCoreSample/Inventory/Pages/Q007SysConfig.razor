@@ -15,9 +15,7 @@
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
-
-        <Q007SysConfigFieldFilter  Filters="@QueryAdapter.f" />
-
+        <Q007SysConfigFieldFilter Filters="@QueryAdapter.f" />
         @if (QueryAdapter.f.Loading || Parts == null)
         {
             <div class="row">
@@ -26,25 +24,15 @@
                 </div>
             </div>
         }
-   
-
-        @if (Parts != null)
-        {
+        @if (Parts != null) // NOTE by Mark, 2021-01-17, 
+        {                   //      無返回記錄時由 AutoTableCompV2B 處理 
             <AutoTableCompV2B Filters="@QueryAdapter.f"
-                             Items="Items"
-                             ColumsToExcludeCSV="id"
-                             FieldMapper="fieldMappers" />
-
-
-
+                              Items="Items"
+                              ColumsToExcludeCSV="id"
+                              FieldMapper="fieldMappers" />
         }
-
-
         <Q000BasePaging Filters="@QueryAdapter.f" />
-
-
-
-    </div>
+   </div>
 </GridWrapper>
 
 
@@ -153,7 +141,7 @@
         ApplicationFilterColumns.ConfigValue ,
         ApplicationFilterColumns.Memo,
 
-            };
+                    };
     string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
 
 

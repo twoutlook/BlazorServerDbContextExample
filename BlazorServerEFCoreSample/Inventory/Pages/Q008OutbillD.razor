@@ -23,7 +23,6 @@
     <div class="container-fluid contacts-grid">
 
         @*<Q008OutbillDFieldFilter  Filters="@QueryAdapter.f" />*@
-
         @if (QueryAdapter.f.Loading || Parts == null)
         {
             <div class="row">
@@ -32,42 +31,13 @@
                 </div>
             </div>
         }
-
-        @if (QueryAdapter.f.PageHelper.TotalItemCount == 0)
-        {
-            <div class="row">
-                <div class="col-12 alert alert-info">
-                    沒有任何結果返回!
-                </div>
-            </div>
+        @if (Parts != null) // NOTE by Mark, 2021-01-17,
+        {                   //      無返回記錄時由 AutoTableCompV2B 處理
+            <AutoTableCompV2B Filters="@QueryAdapter.f"
+                              Items="Items"
+                              ColumsToExcludeCSV="id"
+                              FieldMapper="fieldMappers" />
         }
-        else
-        {
-
-            @if (Parts != null && Parts.Count == 0)
-            {
-                <div class="row">
-                    <div class="col-12 alert alert-warning">
-                        No records found.
-                    </div>
-                </div>
-            }
-
-            @if (Parts != null)
-            {
-                <AutoTableCompV3 Filters="@QueryAdapter.f"
-                                 Items="Items"
-                                 ColumsToExcludeCSV="id"
-                                 FieldMapper="fieldMappers" />
-
-
-
-            }
-        }
-
-
-
-
         <Q000BasePaging Filters="@QueryAdapter.f" />
 
 
