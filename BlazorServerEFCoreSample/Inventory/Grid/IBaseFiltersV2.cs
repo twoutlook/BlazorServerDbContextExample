@@ -59,6 +59,7 @@ namespace Inventory.Grid
         /// Gets or sets a value indicating if the sort is ascending or descending.
         /// </summary>
         bool SortAscending { get; set; }
+        string SortStr { get; set; }
 
         /// <summary>
         /// The <see cref="ContactFilterColumns"/> being sorted.

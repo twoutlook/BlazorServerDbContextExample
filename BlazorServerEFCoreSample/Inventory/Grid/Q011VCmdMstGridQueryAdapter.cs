@@ -86,7 +86,41 @@ namespace Inventory.Grid
 
         }
 
+        //class Mark<T>
+        //{
+        //    public T GetExpress(T query,string str,bool isAscending)
+        //    {
+        //        switch (str)
+        //        {
+        //            case "WmsTskId":
+        //                query = isAscending ? query.OrderBy(x => x.WmsTskId)
+        //               : query.OrderByDescending(c => c.WmsTskId);
+        //                break;
+        //        }
 
+        //    }
+        //}
+
+
+
+        // TODO , USING CODE GENERATION TO MAKE SUCH FUNCTION FOR EACH PAGE
+        public IQueryable<VCmdMst> GetSortQuery(IQueryable<VCmdMst> query, string sortStr)
+        {
+
+            string[] words = sortStr.Split('_');
+
+
+            switch (words[0])
+            {
+                case "WmsTskId":
+                    query = words[1] == "1" ? query.OrderBy(x => x.WmsTskId)
+                   : query.OrderByDescending(c => c.WmsTskId);
+                    return query;
+                default:
+                    return query;
+            }
+
+        }
 
         public async Task<ICollection<VCmdMst>> FetchAsyncV4(IQueryable<VCmdMst> query)
         {
@@ -122,54 +156,68 @@ namespace Inventory.Grid
             //at Inventory.Grid.Q011VCmdMstGridQueryAdapter.FetchAsyncV4(IQueryable`1 query) in 
             //  var expression = _expressions[_controls.SortColumn];
 
+            //string[] words = f.SortStr.Split('_');
+            //_controls.SortAscending = words[1] == "1" ? true : false;
 
+            
+            //switch (words[0])
+            //{
+            //    case "WmsTskId":
+            //        query = words[1] == "1" ? query.OrderBy(x => x.WmsTskId)
+            //       : query.OrderByDescending(c => c.WmsTskId);
+            //        break;
+            //}
 
-            var sortDir = _controls.SortAscending ? "ASC" : "DESC";
-            f.ErrMsg = "";
-            if (f.SortType == AppSortType.TYPE_STR)
-            {
-                var expression = _expressions[ApplicationFilterColumns.CmdSno];
-               
-                if (_expressions.ContainsKey(_controls.SortColumn))
-                {
-                    expression = _expressions[_controls.SortColumn];
-                }
-                else
-                {
-                    // the key doesn't exist.
-                    // NOTE by Mark, 2021-01-18, how to feedback to page for developer
-                    // to fix this wrong sorting?
-                    f.ErrMsg = " *** 開發人員請注意見 *** 使用的排序欄位, 還沒有在排序的 dictionary (string) 裡定義!";
-                }
+            query = GetSortQuery(query, f.SortStr);
 
 
 
+            //var sortDir = _controls.SortAscending ? "ASC" : "DESC";
+            //f.ErrMsg = "";
+            //if (f.SortType == AppSortType.TYPE_STR)
+            //{
+            //    var expression = _expressions[ApplicationFilterColumns.CmdSno];
 
-                query = _controls.SortAscending ? query.OrderBy(expression)
-                    : query.OrderByDescending(expression);
-
-            }
-
-            if (f.SortType == AppSortType.TYPE_INT)
-            {
-                var expressionInt = _expressionsInt[ApplicationFilterColumns.WmsTskId];
-             //   f.ErrMsg = "";
-                if (_expressionsInt.ContainsKey(_controls.SortColumn))
-                {
-                    expressionInt = _expressionsInt[_controls.SortColumn];
-                }
-                else
-                {
-                    // the key doesn't exist.
-                    // NOTE by Mark, 2021-01-18, how to feedback to page for developer
-                    // to fix this wrong sorting?
-                    f.ErrMsg = " *** 開發人員請注意見 *** 使用的排序欄位, 還沒有在排序的 dictionary (int) 裡定義!";
-                }
+            //    if (_expressions.ContainsKey(_controls.SortColumn))
+            //    {
+            //        expression = _expressions[_controls.SortColumn];
+            //    }
+            //    else
+            //    {
+            //        // the key doesn't exist.
+            //        // NOTE by Mark, 2021-01-18, how to feedback to page for developer
+            //        // to fix this wrong sorting?
+            //        f.ErrMsg = " *** 開發人員請注意見 *** 使用的排序欄位, 還沒有在排序的 dictionary (string) 裡定義!";
+            //    }
 
 
-                query = _controls.SortAscending ? query.OrderBy(expressionInt)
-                    : query.OrderByDescending(expressionInt);
-            }
+
+
+            //    query = _controls.SortAscending ? query.OrderBy(expression)
+            //        : query.OrderByDescending(expression);
+
+            //}
+
+            //if (f.SortType == AppSortType.TYPE_INT)
+            //{
+            //    var expressionInt = _expressionsInt[ApplicationFilterColumns.WmsTskId];
+            // //   f.ErrMsg = "";
+            //    if (_expressionsInt.ContainsKey(_controls.SortColumn))
+            //    {
+            //        expressionInt = _expressionsInt[_controls.SortColumn];
+            //    }
+            //    else
+            //    {
+            //        // the key doesn't exist.
+            //        // NOTE by Mark, 2021-01-18, how to feedback to page for developer
+            //        // to fix this wrong sorting?
+            //        f.ErrMsg = " *** 開發人員請注意見 *** 使用的排序欄位, 還沒有在排序的 dictionary (int) 裡定義!";
+            //    }
+
+
+            //    query = _controls.SortAscending ? query.OrderBy(expressionInt)
+            //        : query.OrderByDescending(expressionInt);
+            //}
 
 
 

@@ -1,7 +1,7 @@
 ﻿@using System.Timers
 @inject IJSRuntime JSRuntime
 
-@implements IDisposable
+@*@implements IDisposable*@
 
 @using System.Globalization
 <style>
@@ -111,11 +111,12 @@
             @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
 
 
-            <select name="cars" id="cars" @bind="SortCol">
-                <option value="WmsTskId" selected="selected">WmsTskId</option>
-           @*     <option value="ConfigDesc">ConfigDesc </option>*@
+        <select name="cars" id="cars" @bind="SelectedColumn">
+            <option value="WmsTskId_1" >WmsTskId🔼</option>
+            <option value="WmsTskId_2" >WmsTskId🔽</option>
+            @*     <option value="ConfigDesc">ConfigDesc </option>*@
 
-            </select>
+        </select>
         </div>
     </div>
 
@@ -158,7 +159,7 @@
 
     時間:<span class="val">@_dateString</span>
 
-    <span style="background-color:pink">@Filters.ErrMsg</span>
+    <span style="background-color:pink">---@SelectedColumn--- @Filters.ErrMsg</span>
 </div>
 
 
@@ -172,6 +173,7 @@
     string IsAsc12;
 
     string SortCol;
+    int SortIntCol;
 
 
     string IsAsc12Submit;
@@ -223,7 +225,6 @@
 
 
 
-        StateHasChanged();
 
 
         //        SortCol = "Cticketcode";
@@ -267,6 +268,10 @@
         //   FilterDt2Submit = FilterDt2;
         //  FilterTextF2Submit = FilterTextF2;
 
+
+
+
+        StateHasChanged();
 
         _dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
@@ -325,40 +330,31 @@
         filterText = Filters.FilterText;
 
         // grab column to filter on
-        selectedColumn = (int)(Filters.FilterColumn);
+        SelectedColumn = "WmsTskId_1";
 
         base.OnInitialized();
     }
 
 
 
-    private int selectedColumn;
+    //  private string selectedColumn;
 
     /// <summary>
     /// Column to filter on.
     /// </summary>
-    private int SelectedColumn
+    private string SelectedColumn
     {
-        get => selectedColumn;
+        get => Filters.SortStr;
         set
         {
-            if (value != selectedColumn)
+            if (value != Filters.SortStr)
             {
-                selectedColumn = value;
-                Filters.FilterColumn = (ApplicationFilterColumns)selectedColumn;
-                FilterText = string.Empty;
+                Filters.SortStr = value;
+
             }
         }
     }
 
-    //private string F1;
-    //private string F2;
-    //private string F3;
-    //private string F4;
-    //private string F5;
-    //private string F6;
-    //private string F7;
-    //private string F8;
 
 
 
@@ -369,103 +365,13 @@
     private string filterText;
 
 
-    private string filterPhone;
-
-    // NOTE by Mark, 2021-01-12
-    private string filterLastName;
-    private string FilterLastName
-    {
-        get => filterLastName;
-        set
-        {
-            if (value != filterLastName)
-            {
-                filterLastName = value;
-                // more text means restart the debounce timer
-                if (timer != null)
-                {
-                    timer.Dispose();
-                }
-                timer = new Timer(DebounceMs);
-                timer.Elapsed += NotifyTimerElapsed;
-                timer.Enabled = true;
-            }
-        }
-    }
-
-    //private string FilterPhone
-    //{
-    //    get => filterPhone;
-    //    set
-    //    {
-    //        if (value != filterPhone)
-    //        {
-    //            filterPhone = value;
-    //            CheckPhoneChanged();
-    //            // more text means restart the debounce timer
-    //            //if (timer != null)
-    //            //{
-    //            //    timer.Dispose();
-    //            //}
-    //            //timer = new Timer(DebounceMs);
-    //            //timer.Elapsed += NotifyTimerElapsed;
-    //            //timer.Enabled = true;
-    //        }
-    //    }
-    //}
 
 
 
-    /// <summary>
-    /// Text to filter on.
-    /// </summary>
-    private string FilterText
-    {
-        get => filterText;
-        set
-        {
-            if (value != filterText)
-            {
-                filterText = value;
-                // more text means restart the debounce timer
-                if (timer != null)
-                {
-                    timer.Dispose();
-                }
-                timer = new Timer(DebounceMs);
-                timer.Elapsed += NotifyTimerElapsed;
-                timer.Enabled = true;
-            }
-        }
-    }
 
 
 
-    //private string FilterTextF1
-    //{
-    //    get => F1;
-    //    set
-    //    {
-    //        if (value != F1)
-    //        {
-    //            F1 = value.Trim();
-    //            Filters.FilterTextF1 = F1;
-    //        }
-    //    }
-    //}
 
-    //private string FilterTextF2
-    //{
-    //    get => F2;
-    //    set
-    //    {
-    //        if (value != F2)
-    //        {
-    //            F2 = value.Trim();
-    //            Filters.FilterTextF2 = F2;
-    //        }
-    //    }
-    //}
 
     private string FilterTextF3
     {
@@ -517,47 +423,6 @@
     }
 
 
-    /// <summary>
-    /// Fired after debounce time.
-    /// </summary>
-    /// <param name="sender">Timer.</param>
-    /// <param name="e">Event args.</param>
-    private async void NotifyTimerElapsed(object sender, ElapsedEventArgs e)
-    {
-        timer.Dispose();
-        timer = null;
-        if (Filters.FilterText != filterText)
-        {
-            // notify the controls
-            Filters.FilterText = filterText.Trim();
-            //    Filters.FilterLastName = filterLastName.Trim();
 
 
-            await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
-        }
-        //if (Filters.FilterLastName != filterLastName)
-        //{
-        //    // notify the controls
-        //    Filters.FilterLastName = filterLastName.Trim();
-        //    //    Filters.FilterLastName = filterLastName.Trim();
-
-
-        //    await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
-        //}
-
-
-    }
-
-    /// <summary>
-    /// Disposable pattern - override to dispose any ticking timers.
-    /// </summary>
-    /// <param name="disposing"><c>True</c> when disposing.</param>
-    public void Dispose()
-    {
-        if (timer != null)
-        {
-            timer.Dispose();
-            timer = null;
-        }
-    }
 }
