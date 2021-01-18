@@ -9,9 +9,7 @@ namespace Inventory.Data
 {
     public partial class TaiweiContext : DbContext
     {
-        //public TaiweiContext()
-        //{
-        //}
+ 
 
         public TaiweiContext(DbContextOptions<TaiweiContext> options)
             : base(options)
@@ -29,6 +27,8 @@ namespace Inventory.Data
         public virtual DbSet<StockCurrentSn> StockCurrentSn { get; set; }
         public virtual DbSet<SysConfig> SysConfig { get; set; }
         public virtual DbSet<SysParameter> SysParameter { get; set; }
+        public virtual DbSet<V2OutbillD> V2OutbillD { get; set; }
+        public virtual DbSet<V2StockCurrentAdjust> V2StockCurrentAdjust { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1384,6 +1384,250 @@ namespace Inventory.Data
                 entity.Property(e => e.Sortid)
                     .HasColumnType("decimal(18, 0)")
                     .HasColumnName("sortid");
+            });
+
+            modelBuilder.Entity<V2OutbillD>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V2_OUTBILL_D");
+
+                entity.Property(e => e.AllocateDIds)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("allocate_d_ids");
+
+                entity.Property(e => e.Allotype)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("allotype");
+
+                entity.Property(e => e.AsnDIds)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("asn_d_ids");
+
+                entity.Property(e => e.AsrsNum)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("asrs_num");
+
+                entity.Property(e => e.AsrsStatus)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("asrs_status");
+
+                entity.Property(e => e.Callocateid)
+                    .HasMaxLength(50)
+                    .HasColumnName("callocateid");
+
+                entity.Property(e => e.Cdefine1)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cdefine1");
+
+                entity.Property(e => e.Cdefine2)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cdefine2");
+
+                entity.Property(e => e.Cerpcodeline)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cerpcodeline");
+
+                entity.Property(e => e.Cinvbarcode)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("cinvbarcode");
+
+                entity.Property(e => e.Cinvcode)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cinvcode");
+
+                entity.Property(e => e.Cinvname)
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("cinvname");
+
+                entity.Property(e => e.Cmemo)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("cmemo");
+
+                entity.Property(e => e.Cnewpositioncode)
+                    .HasMaxLength(100)
+                    .HasColumnName("cnewpositioncode");
+
+                entity.Property(e => e.Coutpersoncode)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("coutpersoncode");
+
+                entity.Property(e => e.Cposition)
+                    .HasMaxLength(100)
+                    .HasColumnName("cposition");
+
+                entity.Property(e => e.Cpositioncode)
+                    .HasMaxLength(100)
+                    .HasColumnName("cpositioncode");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus");
+
+                entity.Property(e => e.Cstoppositioncode)
+                    .HasMaxLength(100)
+                    .HasColumnName("cstoppositioncode");
+
+                entity.Property(e => e.Cticketcode)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("cticketcode");
+
+                entity.Property(e => e.Ddefine3)
+                    .HasColumnType("datetime")
+                    .HasColumnName("ddefine3");
+
+                entity.Property(e => e.Ddefine4)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ddefine4");
+
+                entity.Property(e => e.Doutdate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("doutdate");
+
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Idefine5)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("idefine5");
+
+                entity.Property(e => e.Ids)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ids");
+
+                entity.Property(e => e.Ioutasnline)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("ioutasnline");
+
+                entity.Property(e => e.Iquantity)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("iquantity");
+
+                entity.Property(e => e.Isgoback)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("isgoback");
+
+                entity.Property(e => e.LineQty)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("line_qty");
+
+                entity.Property(e => e.Lineid).HasColumnName("lineid");
+
+                entity.Property(e => e.Outasndlineid).HasColumnName("outasndlineid");
+
+                entity.Property(e => e.PalletCode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("pallet_code");
+
+                entity.Property(e => e.PartBond)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("part_bond");
+
+                entity.Property(e => e.Sourcecode)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("sourcecode");
+
+                entity.Property(e => e.Wire)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("wire");
+
+                entity.Property(e => e.Wmstskid)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("wmstskid");
+
+                entity.Property(e => e.Wo)
+                    .HasMaxLength(100)
+                    .HasColumnName("wo");
+            });
+
+            modelBuilder.Entity<V2StockCurrentAdjust>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V2_STOCK_CURRENT_ADJUST");
+
+                entity.Property(e => e.Createowner)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("createowner");
+
+                entity.Property(e => e.Createtime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("createtime");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus");
+
+                entity.Property(e => e.Cticketcode)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cticketcode");
+
+                entity.Property(e => e.FlagName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("flag_name");
+
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Lastupdatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastupdatetime");
+
+                entity.Property(e => e.Lastupdateuser)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("lastupdateuser");
+
+                entity.Property(e => e.Reason)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("reason");
+
+                entity.Property(e => e.Reviewtime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("reviewtime");
+
+                entity.Property(e => e.Reviewuser)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("reviewuser");
             });
 
             modelBuilder.HasSequence("ASRS_cmdno_SEQ")

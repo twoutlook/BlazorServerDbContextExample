@@ -1,7 +1,8 @@
-﻿@page "/outbilld"
+﻿@page "/v2outbilld"
+
 @*@page "/outbilld/{OutbillId}"*@
 
-@page "/outbilld/{Page:int}"
+@page "/v2outbilld/{Page:int}"
 @using Microsoft.AspNetCore.WebUtilities
 @inject NavigationManager NavMgr
 
@@ -13,10 +14,15 @@
 @*   Adapter to new filters      *@
 @* ============================ *@
 
-@inject Q008OutbillDGridQueryAdapter QueryAdapter
+@inject Q009V2OutbillDGridQueryAdapter QueryAdapter
 
-<PageTitle Title="出貨單明細 " />
-<h1>出貨單: @num </h1>
+<PageTitle Title="出庫單明細 " />
+
+<table class="gridtable">
+    <tr><th>出貨單</th><td>@num</td></tr>
+</table>
+
+<hr />
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
@@ -31,6 +37,7 @@
                 </div>
             </div>
         }
+        
         @if (Parts != null) // NOTE by Mark, 2021-01-17,
         {                   //      無返回記錄時由 AutoTableCompV2B 處理
             <AutoTableCompV2B Filters="@QueryAdapter.f"
@@ -38,7 +45,13 @@
                               ColumsToExcludeCSV="id"
                               FieldMapper="fieldMappers" />
         }
-        <Q000BasePaging Filters="@QueryAdapter.f" />
+        
+        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
+        @if (@QueryAdapter.f.PageHelper.PageCount > 1)
+        {
+            <Q000BasePaging Filters="@QueryAdapter.f" />
+
+        }
 
 
 
@@ -170,8 +183,8 @@
 
         return ReloadAsync();
     }
-    private ICollection<OutbillD> Parts { get; set; }
-    private List<OutbillD> Items { get; set; }
+    private ICollection<V2OutbillD> Parts { get; set; }
+    private List<V2OutbillD> Items { get; set; }
 
 
     private async Task ReloadAsync()
@@ -196,7 +209,7 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.OutbillD.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.V2OutbillD.AsQueryable());
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         Items = Parts.ToList();
@@ -229,11 +242,11 @@
 
         fieldMappers = new List<FieldMapper>();
         //    < li > 入庫單 狀態 入庫通知單ID
-        fieldMappers.Add(new FieldMapper { Id = "Id", Name = "Id", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Cinvcode", Name = "Cinvcode", Index = -1 });
+        //fieldMappers.Add(new FieldMapper { Id = "Id", Name = "Id", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Cinvcode", Name = "料號", Index = -1 });
         //        fieldMappers.Add(new FieldMapper { Id = "Casnid", Name = "入庫通知單ID", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Cinvname", Name = "Cinvname", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Iquantity", Name = "Iquantity", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Cinvname", Name = "品名", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Iquantity", Name = "數量", Index = -1 });
 
         //  GetQueryStringValues();
 

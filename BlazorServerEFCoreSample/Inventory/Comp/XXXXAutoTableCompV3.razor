@@ -1,10 +1,5 @@
 ﻿@typeparam TItem
 @using System.Reflection
-@*----------------------------*@
-@*NOTE by Mark, 2021-01-18*@
-@*指定 nav*@
-@*出庫單明細*@
-@*----------------------------*@
 
 <div style="margin-left: -16px">
 
@@ -48,18 +43,16 @@
                 @foreach (var item in this.Items)
                 {
                     RecNum = RecNum + 1;
-                <tr>
-                    <th>@RecNum</th>
+                    <tr>
+                        <th>@RecNum</th>
 
-                    @foreach (var x in FieldMapper)
-                    {
-                        <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
-                    }
-                
+                        @foreach (var x in FieldMapper)
+                        {
+                            <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
+                        }
 
-                    <td><a href="/v2outbilld/1?num=@item.GetType().GetProperty(@FieldMapper[0].Id).GetValue(item)">go</a></td>
 
-                </tr>
+                    </tr>
                 }
 
 
@@ -68,14 +61,7 @@
             </tbody>
         </table>
     }
-    else
-    {
-        <div class="row">
-            <div class="col-12 alert alert-warning">
-                ( 查詢結果, 沒有任何記錄 )
-            </div>
-        </div>
-    }
+
 
 </div>
 
@@ -108,7 +94,7 @@
 
         foreach (var x in FieldMapper)
         {
-            if (memberInfo != null) // NOTE by Mark, 2021-01-17, quick fix
+            if (memberInfo != null) // NOTE by Mark, 沒有記錄時, 會報錯
             {
                 for (int i = 0; i < memberInfo.Count(); i++)
                 {
@@ -123,8 +109,8 @@
 
                     }
                 }
-
             }
+
             //  x.Index = 999;
         }
     }

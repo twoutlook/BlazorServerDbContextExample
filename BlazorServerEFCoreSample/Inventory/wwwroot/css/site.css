@@ -55,7 +55,8 @@ a, .btn-link {
 
 table.gridtable {
     font-family: verdana, arial, sans-serif;
-    font-size: 102%;
+    /*font-size: 102%;*/
+    font-size: 92%;
     /*color:#333333;*/
     color: black;
     border-width: 1px;

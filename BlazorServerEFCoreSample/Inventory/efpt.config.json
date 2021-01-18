@@ -55,6 +55,14 @@
       {
          "Name": "[dbo].[SYS_PARAMETER]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[V2_OUTBILL_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_STOCK_CURRENT_ADJUST]",
+         "ObjectType": 3
       }
    ],
    "UseBoolPropertiesWithoutDefaultSql": false,
