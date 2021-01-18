@@ -26,6 +26,8 @@
         Code,
         ConfigDesc,
         ConfigValue,
-        Caccountid
+        Caccountid,
+        WmsTskId, // not string, cannot use for sorting
+        CmdSno
     }
 }
