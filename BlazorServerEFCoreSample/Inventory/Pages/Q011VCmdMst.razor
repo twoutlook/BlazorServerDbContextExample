@@ -72,10 +72,25 @@
 @code
 {
 
+    [Parameter]
+    public int Page
+    {
+        get => QueryAdapter.f.PageHelper.Page;
+        set
+        {
+            QueryAdapter.f.PageHelper.Page = value;
+        }
+    }
+
+    /// <summary>
+    /// A wrapper for grid-related activity 
+    /// </summary>
+    private GridWrapper Wrapper { get; set; }
+    private ICollection<VCmdMst> Parts { get; set; }
+    private List<VCmdMst> Items { get; set; }
 
 
-    private string IsDisabled(bool condition) =>
-    !QueryAdapter.f.Loading && condition ? "" : "disabled";
+    private string IsDisabled(bool condition) =>!QueryAdapter.f.Loading && condition ? "" : "disabled";
 
     /// <summary>
     /// Keeps track of the last page loaded.
@@ -84,9 +99,6 @@
 
 
     List<FieldMapper> fieldMappers;
-
-
-
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -127,77 +139,6 @@
     }
 
 
-    [Parameter]
-    public string OutbillId
-    {
-        get;
-        set;
-    }
-    //40DAD891-A646-458F-A6B2-C7F6D49162FC
-
-    //https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-5.0
-    [Parameter]
-    public int Page
-    {
-        get => QueryAdapter.f.PageHelper.Page;
-        set
-        {
-            QueryAdapter.f.PageHelper.Page = value;
-        }
-    }
-
-    /// <summary>
-    /// A wrapper for grid-related activity (like delete).
-    /// </summary>
-    private GridWrapper Wrapper { get; set; }
-
-    // NOTE by Mark, 2021-01-16
-    //int[] marks = new int[] { 99, 98, 92, 97, 95 };
-    ApplicationFilterColumns[] SortCols = new ApplicationFilterColumns[]
-    {
-        ApplicationFilterColumns.WmsTskId ,
-        //ApplicationFilterColumns.ConfigDesc ,
-        //ApplicationFilterColumns.ConfigValue ,
-        //ApplicationFilterColumns.Memo,
-
-                                                };
-    //string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
-    string[] SortColsSymbol = new string[] { " " };
-
-
-    private Task XXXToggleAsync(ApplicationFilterColumns col)
-    {
-
-
-
-        if (QueryAdapter.f.SortColumn == col)
-        {
-            QueryAdapter.f.SortAscending = !QueryAdapter.f.SortAscending;
-        }
-        else
-        {
-            QueryAdapter.f.SortColumn = col;
-        }
-
-
-        // NOTE by Mark, 2021-01-16
-        for (int i = 0; i < SortColsSymbol.Count(); i++)
-        {
-            SortColsSymbol[i] = " ";
-
-            if (SortCols[i] == col)
-            {
-                SortColsSymbol[i] = QueryAdapter.f.SortAscending ? "🔼" : "🔽";
-            }
-        }
-
-
-        return ReloadAsync();
-    }
-    private ICollection<VCmdMst> Parts { get; set; }
-    private List<VCmdMst> Items { get; set; }
-
-
     private async Task ReloadAsync()
     {
         if (QueryAdapter.f.Loading || Page < 1)
@@ -207,37 +148,22 @@
 
         QueryAdapter.f.Loading = true;
 
-        if (Wrapper != null)
-        {
-            Wrapper.DeleteRequestId = "";
-        }
-
+        // Consider to refactor it as Objs
         Parts = null;
 
         using var context = DbFactory.CreateDbContext();
 
-        // run the query to load the current page
-        //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
-
-        // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
+        // NOTE by Mark, 2021-01-19, V4 just fine
         Parts = await QueryAdapter.FetchAsyncV4(context.VCmdMst.AsQueryable());
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         Items = Parts.ToList();
-
-
-
 
         // now we're done
         QueryAdapter.f.Loading = false;
     }
 
 
-    //void GetQueryStringValues()
-    //{
-    //    NavManager.TryGetQueryString<int>("initialCount", out currentCount);
-    //}
-    private string num = "000000"; // NOTE by Mark,2021-01-18, document number
 
 
     protected override async Task OnInitializedAsync()
@@ -248,25 +174,7 @@
 
     protected override void OnInitialized()
     {
-
-
-
-        //fieldMappers = new List<FieldMapper>();
-        //fieldMappers.Add(new FieldMapper { Id = "WmsTskId", Name = "WmsTskId", Index = -1 });
-        //fieldMappers.Add(new FieldMapper { Id = "CmdSno", Name = "CmdSno", Index = -1 });
-        ////命令編號 箱號/ 棧板號  線別 站點  原始儲位 目的儲位    單據號 命令類型    
-        ////    備註 命令狀態    TaskNO 接收時間    開始時間 完成時間    返回狀態 資訊
-        //fieldMappers.Add(new FieldMapper { Id = "StnNo", Name = "站點", Index = -1 });
-
-        //fieldMappers.Add(new FieldMapper { Id = "Loc", Name = "原始儲位", Index = -1 });
-        //fieldMappers.Add(new FieldMapper { Id = "NewLoc", Name = "目的儲位", Index = -1 });
-        //fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "單據號", Index = -1 });
-        //fieldMappers.Add(new FieldMapper { Id = "Remark", Name = "備註", Index = -1 });
-
-
         fieldMappers = GetFieldMapper.Q001VCmdMst();
-
-     //   QueryAdapter.f.SortType = AppSortType.TYPE_INT;
     }
 }
 
