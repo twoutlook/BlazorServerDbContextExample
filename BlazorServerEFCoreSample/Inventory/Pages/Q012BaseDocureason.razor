@@ -1,8 +1,8 @@
 ﻿@*@layout MainLayoutV2*@
-@page "/vcmdmst"
+@page "/BaseDocureason"
 @*@page "/outbilld/{OutbillId}"*@
 
-@page "/vcmdmst/{Page:int}"
+@page "/BaseDocureason/{Page:int}"
 @using Microsoft.AspNetCore.WebUtilities
 @inject NavigationManager NavMgr
 
@@ -14,9 +14,9 @@
 @*   Adapter to new filters      *@
 @* ============================ *@
 
-@inject Q011VCmdMstGridQueryAdapter QueryAdapter
+@inject Q012BaseDocureasonGridQueryAdapter QueryAdapter
 
-<PageTitle Title="WCS命令查詢 " />
+<PageTitle Title="理由碼設置 " />
 
 @*<table class="gridtable">
         <tr><th>出庫單</th><td>@num</td></tr>
@@ -64,8 +64,8 @@
 
 
 
-    private string IsDisabled(bool condition) =>
-    !QueryAdapter.f.Loading && condition ? "" : "disabled";
+        private string IsDisabled(bool condition) =>
+        !QueryAdapter.f.Loading && condition ? "" : "disabled";
 
     /// <summary>
     /// Keeps track of the last page loaded.
@@ -183,8 +183,8 @@
 
         return ReloadAsync();
     }
-    private ICollection<VCmdMst> Parts { get; set; }
-    private List<VCmdMst> Items { get; set; }
+    private ICollection<BaseDocureason> Parts { get; set; }
+    private List<BaseDocureason> Items { get; set; }
 
 
     private async Task ReloadAsync()
@@ -209,7 +209,7 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.VCmdMst.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.BaseDocureason.AsQueryable());
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         Items = Parts.ToList();
@@ -241,17 +241,33 @@
 
 
         fieldMappers = new List<FieldMapper>();
-        fieldMappers.Add(new FieldMapper { Id = "WmsTskId", Name = "WmsTskId", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "CmdSno", Name = "CmdSno", Index = -1 });
-        //命令編號 箱號/ 棧板號  線別 站點  原始儲位 目的儲位    單據號 命令類型    
-        //    備註 命令狀態    TaskNO 接收時間    開始時間 完成時間    返回狀態 資訊
-        fieldMappers.Add(new FieldMapper { Id = "StnNo", Name = "站點", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Actionscope", Name = "作用域", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Reasoncode", Name = "理由碼編號", Index = -1 });
+        //作用域 理由碼編號   理由碼說明 狀態  創建人 制單日期
 
-        fieldMappers.Add(new FieldMapper { Id = "Loc", Name = "原始儲位", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "NewLoc", Name = "目的儲位", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "單據號", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Remark", Name = "備註", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Reasoncontent", Name = "理由碼說明", Index = -1 });
 
+        fieldMappers.Add(new FieldMapper { Id = "States", Name = "狀態", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Ccreateownercode", Name = "創建人", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Dcreatetime", Name = "制單日期", Index = -1 });
+
+
+        //List<Tuple<string, string>> flagList = new List<Tuple<string, string>>();
+        //flagList.Add(new Tuple<string, string>("T", "InOutType"));//类型分类
+        //flagList.Add(new Tuple<string, string>("IsMatchSo", "TrueOrFalse"));//是否匹配单据
+        //flagList.Add(new Tuple<string, string>("IsMatchVendor", "TrueOrFalse"));//是否匹配供应商
+        //flagList.Add(new Tuple<string, string>("ENABLE", "UsedOrCanceled"));//类别
+
+        //var srcdata = GetGridSourceDataByList(data, flagList)
+        // List<Tuple<string, List<V_SYS_PARAMETER>>> parameterList = new List<Tuple<string, List<V_SYS_PARAMETER>>>();
+
+        //public IQueryable<V_INOutType> GetQueryList()
+        //{
+        //    IGenericRepository<V_INOutType> conn = new GenericRepository<V_INOutType>(db);
+        //    var caseList = from p in conn.Get()
+        //                   orderby p.CREATEDATE ascending
+        //                   where 1 == 1
+        //                   select p;
 
     }
 }

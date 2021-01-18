@@ -13,6 +13,10 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[BASE_DOCUREASON]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[BASE_OPERATOR]",
          "ObjectType": 0
       },
@@ -62,6 +66,10 @@
       },
       {
          "Name": "[dbo].[V_CMD_MST]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INOutType]",
          "ObjectType": 3
       },
       {

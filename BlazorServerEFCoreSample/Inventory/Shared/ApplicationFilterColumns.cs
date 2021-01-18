@@ -28,6 +28,8 @@
         ConfigValue,
         Caccountid,
         WmsTskId, // not string, cannot use for sorting
-        CmdSno
+        CmdSno,
+        Reasoncode,
+        Typename
     }
 }

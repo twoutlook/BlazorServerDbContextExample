@@ -1,8 +1,8 @@
 ﻿@*@layout MainLayoutV2*@
-@page "/vcmdmst"
+@page "/VInoutType"
 @*@page "/outbilld/{OutbillId}"*@
 
-@page "/vcmdmst/{Page:int}"
+@page "/VInoutType/{Page:int}"
 @using Microsoft.AspNetCore.WebUtilities
 @inject NavigationManager NavMgr
 
@@ -14,9 +14,9 @@
 @*   Adapter to new filters      *@
 @* ============================ *@
 
-@inject Q011VCmdMstGridQueryAdapter QueryAdapter
+@inject Q013VInoutTypeGridQueryAdapter QueryAdapter
 
-<PageTitle Title="WCS命令查詢 " />
+<PageTitle Title="入出庫狀態設置 " />
 
 @*<table class="gridtable">
         <tr><th>出庫單</th><td>@num</td></tr>
@@ -183,8 +183,8 @@
 
         return ReloadAsync();
     }
-    private ICollection<VCmdMst> Parts { get; set; }
-    private List<VCmdMst> Items { get; set; }
+    private ICollection<VInoutType> Parts { get; set; }
+    private List<VInoutType> Items { get; set; }
 
 
     private async Task ReloadAsync()
@@ -209,7 +209,7 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.VCmdMst.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.VInoutType.AsQueryable());
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         Items = Parts.ToList();
@@ -241,16 +241,26 @@
 
 
         fieldMappers = new List<FieldMapper>();
-        fieldMappers.Add(new FieldMapper { Id = "WmsTskId", Name = "WmsTskId", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "CmdSno", Name = "CmdSno", Index = -1 });
-        //命令編號 箱號/ 棧板號  線別 站點  原始儲位 目的儲位    單據號 命令類型    
-        //    備註 命令狀態    TaskNO 接收時間    開始時間 完成時間    返回狀態 資訊
-        fieldMappers.Add(new FieldMapper { Id = "StnNo", Name = "站點", Index = -1 });
+        //fieldMappers.Add(new FieldMapper { Id = "Typeid", Name = "Typeid", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Cerpcode", Name = "類型編碼", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Typename", Name = "類型名稱", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "TransactionActionId", Name = "TransactionActionId", Index = -1 });
+        //類型	類型編碼	類型名稱	是否匹配單據	是否匹配供應商	狀態	創建人	制單日期	作廢人員	作廢日期
 
-        fieldMappers.Add(new FieldMapper { Id = "Loc", Name = "原始儲位", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "NewLoc", Name = "目的儲位", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "單據號", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Remark", Name = "備註", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "TransactionSourceTypeId", Name = "TransactionSourceTypeId", Index = -1 });
+
+        fieldMappers.Add(new FieldMapper { Id = "Attribute1", Name = "Attribute1", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "TypeClass", Name = "TypeClass", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "IsZf", Name = "IsZf", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "DisableDate", Name = "DisableDate", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Enable", Name = "Enable", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Enableuser", Name = "Enableuser", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Enabledate", Name = "Enabledate", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Createuser", Name = "Createuser", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Createdate", Name = "Createdate", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "IsMatchSo", Name = "是否匹配單據", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "IsMatchVendor", Name = "是否匹配供應商", Index = -1 });
+
 
 
     }

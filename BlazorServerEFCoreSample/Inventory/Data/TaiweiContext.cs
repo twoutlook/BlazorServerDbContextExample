@@ -18,6 +18,7 @@ namespace Inventory.Data
         {
         }
 
+        public virtual DbSet<BaseDocureason> BaseDocureason { get; set; }
         public virtual DbSet<BaseOperator> BaseOperator { get; set; }
         public virtual DbSet<BasePart> BasePart { get; set; }
         public virtual DbSet<Inbill> Inbill { get; set; }
@@ -33,10 +34,72 @@ namespace Inventory.Data
         public virtual DbSet<V2OutbillD> V2OutbillD { get; set; }
         public virtual DbSet<V2StockCurrentAdjust> V2StockCurrentAdjust { get; set; }
         public virtual DbSet<VCmdMst> VCmdMst { get; set; }
+        public virtual DbSet<VInoutType> VInoutType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Chinese_PRC_CI_AS");
+
+            modelBuilder.Entity<BaseDocureason>(entity =>
+            {
+                entity.ToTable("BASE_DOCUREASON");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Actionscope)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("actionscope")
+                    .HasComment("作用域 1：入库  2：出库");
+
+                entity.Property(e => e.Ccreateownercode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ccreateownercode")
+                    .HasComment("创建人");
+
+                entity.Property(e => e.Dcreatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dcreatetime")
+                    .HasComment("创建时间");
+
+                entity.Property(e => e.Isfromerp)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("isfromerp");
+
+                entity.Property(e => e.Lastupdateowner)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("lastupdateowner")
+                    .HasComment("最后更新人");
+
+                entity.Property(e => e.Lastupdatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastupdatetime")
+                    .HasComment("最后更新时间");
+
+                entity.Property(e => e.Reasoncode)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("reasoncode")
+                    .HasComment("理由码编号");
+
+                entity.Property(e => e.Reasoncontent)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("reasoncontent")
+                    .HasComment("理由码说明");
+
+                entity.Property(e => e.States)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("states")
+                    .HasComment("状态码 Y:可用 N：不可用");
+            });
 
             modelBuilder.Entity<BaseOperator>(entity =>
             {
@@ -1818,6 +1881,93 @@ namespace Inventory.Data
                 entity.Property(e => e.TrnDate)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VInoutType>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V_INOutType");
+
+                entity.Property(e => e.Attribute1)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("ATTRIBUTE1");
+
+                entity.Property(e => e.Cerpcode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("CERPCODE");
+
+                entity.Property(e => e.Createdate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("CREATEDATE");
+
+                entity.Property(e => e.Createuser)
+                    .HasMaxLength(100)
+                    .HasColumnName("CREATEUSER");
+
+                entity.Property(e => e.DisableDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("DISABLE_DATE");
+
+                entity.Property(e => e.Enable)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ENABLE");
+
+                entity.Property(e => e.Enabledate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("ENABLEDATE");
+
+                entity.Property(e => e.Enableuser)
+                    .HasMaxLength(100)
+                    .HasColumnName("ENABLEUSER");
+
+                entity.Property(e => e.IsMatchSo)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsMatchVendor)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsZf)
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .HasColumnName("IS_ZF");
+
+                entity.Property(e => e.T)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TransactionActionId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("TRANSACTION_ACTION_ID");
+
+                entity.Property(e => e.TransactionSourceTypeId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("TRANSACTION_SOURCE_TYPE_ID");
+
+                entity.Property(e => e.TypeClass)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("TYPE_CLASS");
+
+                entity.Property(e => e.Typeid)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("TYPEID");
+
+                entity.Property(e => e.Typename)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("TYPENAME");
             });
 
             modelBuilder.HasSequence("ASRS_cmdno_SEQ")
