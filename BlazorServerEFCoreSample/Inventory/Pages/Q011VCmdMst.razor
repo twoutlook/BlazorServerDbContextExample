@@ -13,6 +13,7 @@
 @*   NOTE by Mark, 2021-01-17,  *@
 @*   Adapter to new filters      *@
 @* ============================ *@
+@using Inventory.Comp
 
 @inject Q011VCmdMstGridQueryAdapter QueryAdapter
 
@@ -28,7 +29,10 @@
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        @*<Q008OutbillDFieldFilter  Filters="@QueryAdapter.f" />*@
+        <Q011VCmdMstFieldFilter Filters="@QueryAdapter.f" />
+
+    
+
         @if (QueryAdapter.f.Loading || Parts == null)
         {
             <div class="row">
@@ -38,18 +42,23 @@
             </div>
         }
 
-        @if (Parts != null) // NOTE by Mark, 2021-01-17,
-        {                   //      無返回記錄時由 AutoTableCompV2B 處理
-            <AutoTableCompV2B Filters="@QueryAdapter.f"
-                              Items="Items"
-                              ColumsToExcludeCSV="id"
-                              FieldMapper="fieldMappers" />
+
+        @if (Parts != null)
+        {
+            // NOTE by Mark, 2021-01-17,
+            //      無返回記錄時由 AutoTableCompV2B 處理
+            //AutoTableCompWhFilterV2
+            <AutoTableCompWhFilterV2 Filters="@QueryAdapter.f"
+                                     IsShowField ="true"
+                                     Items="Items"
+                                     ColumsToExcludeCSV="id"
+                                     FieldMapper="fieldMappers" />
         }
 
         @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
         @if (@QueryAdapter.f.PageHelper.PageCount > 1)
         {
-            <Q000BasePaging Filters="@QueryAdapter.f" />
+            <Q000BasePagingV2 Filters="@QueryAdapter.f" />
 
         }
 
@@ -145,16 +154,17 @@
     //int[] marks = new int[] { 99, 98, 92, 97, 95 };
     ApplicationFilterColumns[] SortCols = new ApplicationFilterColumns[]
     {
-        ApplicationFilterColumns.Code ,
-        ApplicationFilterColumns.ConfigDesc ,
-        ApplicationFilterColumns.ConfigValue ,
-        ApplicationFilterColumns.Memo,
+        ApplicationFilterColumns.WmsTskId ,
+        //ApplicationFilterColumns.ConfigDesc ,
+        //ApplicationFilterColumns.ConfigValue ,
+        //ApplicationFilterColumns.Memo,
 
                                                 };
-    string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
+    //string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
+    string[] SortColsSymbol = new string[] { " " };
 
 
-    private Task ToggleAsync(ApplicationFilterColumns col)
+    private Task XXXToggleAsync(ApplicationFilterColumns col)
     {
 
 
@@ -253,6 +263,7 @@
         fieldMappers.Add(new FieldMapper { Id = "Remark", Name = "備註", Index = -1 });
 
 
+        QueryAdapter.f.SortType = AppSortType.TYPE_INT;
     }
 }
 

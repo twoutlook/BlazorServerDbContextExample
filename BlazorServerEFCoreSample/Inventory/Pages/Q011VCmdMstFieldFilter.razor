@@ -1,0 +1,563 @@
+﻿@using System.Timers
+@inject IJSRuntime JSRuntime
+
+@implements IDisposable
+
+@using System.Globalization
+<style>
+    .grid-container {
+        display: inline-grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        background-color: #2196F3;
+        padding: 10px;
+    }
+
+    .grid-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    /*https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout*/
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        /*grid-template-columns: 200px 200px 200px;*/
+    }
+
+    .wrapper2 {
+        display: grid;
+        grid-template-columns: 1fr,400px;
+        /*grid-template-columns: 200px 200px 200px;*/
+    }
+
+    .lbl {
+        border-radius: 4px;
+        /*margin-left: 8px;*/
+        text-align: right;
+        background-color: lightgray;
+        /*margin-right:4px;*/
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .btngrid {
+        margin-left: 8px;
+        /*text-align: left;*/
+        /*background-color: lightgray;*/
+        /*margin-right:4px;*/
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .txt {
+        /*border-radius: 5px;*/
+        margin-left: -16px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    /*https://stackoverflow.com/questions/56545830/how-can-i-make-an-input-element-respect-the-dimensions-of-a-grid-container*/
+    input {
+        min-width: 0;
+    }
+
+    .val {
+        background-color: antiquewhite
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">  原始儲位 </span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF1">
+        </div>
+    </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">   單據號 </span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF2">
+
+        </div>
+    </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">   備註 </span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="FilterTextF3">
+
+        </div>
+    </div>
+
+
+
+</div>
+<div class="row"  style="margin-top: -12px;">
+
+    <div class="col-3  txt">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">   排序</span>
+            </div>
+            @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
+
+
+            <select name="cars" id="cars" @bind="SortCol">
+                <option value="WmsTskId" selected="selected">WmsTskId</option>
+           @*     <option value="ConfigDesc">ConfigDesc </option>*@
+
+            </select>
+        </div>
+    </div>
+
+    <div class="col-3  txt">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">   方向</span>
+            </div>
+            @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
+
+
+            <select name="cars" id="cars" @bind="IsAsc12">
+                <option value="1" selected="selected">正向ABC</option>
+                <option value="2">反向CBA</option>
+
+            </select>
+        </div>
+    </div>
+
+</div>
+
+<div style="margin-top: -12px;
+        margin-bottom: 4px;
+        margin-left: -16px">
+    <button class="btn btn-primary " @onclick="UpdateHeading">
+        查詢
+    </button>
+
+    參數:
+
+    <span class="val"> @FilterTextF1Submit</span>
+    <span class="val"> @FilterTextF2Submit</span>
+    <span class="val"> @FilterTextF3Submit</span>
+
+
+    排序:
+
+    <span class="val"> @SortColSubmit</span>
+    <span class="val"> @IsAsc12Submit</span>
+
+    時間:<span class="val">@_dateString</span>
+
+    <span style="background-color:pink">@Filters.ErrMsg</span>
+</div>
+
+
+
+
+
+@code {
+
+    //https://stackoverflow.com/questions/56748968/how-to-set-date-formats-and-culture-in-asp-net-core-razor-pages-2-2
+
+    string IsAsc12;
+
+    string SortCol;
+
+
+    string IsAsc12Submit;
+    string SortColSubmit;
+
+
+
+    string FilterDt1Submit;
+    string FilterDt2Submit;
+
+
+    string FilterTextF1Submit;
+    string FilterTextF2Submit;
+    string FilterTextF3Submit;
+    string FilterTextF4Submit;
+
+    DateTime FilterTextDt1Submit;
+
+
+    DateTime SubmitTime;
+    private string _dateString;
+
+
+    Dictionary<string, ApplicationFilterColumns> sortDict = new Dictionary<string, ApplicationFilterColumns>();
+    Dictionary<string, string> sortNameDict = new Dictionary<string, string>();
+    Dictionary<string, string> isAsc12Dict = new Dictionary<string, string>();
+
+
+
+    //protected override void OnParametersSet()
+    //{
+    //    base.OnParametersSet();
+
+    //    sortDict.Add("Code", ApplicationFilterColumns.Code);
+    //    sortDict.Add("ConfigDesc", ApplicationFilterColumns.ConfigDesc);
+
+    //    sortNameDict.Add("Code", "Code");
+    //    sortNameDict.Add("ConfigDesc", "ConfigDesc");
+
+    //    isAsc12Dict.Add("1", "正向");
+    //    isAsc12Dict.Add("2", "反向");
+
+
+
+    //}
+
+    private async void UpdateHeading(MouseEventArgs e)
+    {
+
+
+
+        StateHasChanged();
+
+
+        //        SortCol = "Cticketcode";
+        if (SortCol == null)
+        {
+            SortCol = "WmsTskId"; //NOTE by Mark, 2021-01-17, 為何 selected 無效?
+        }
+        if (IsAsc12 == null)
+        {
+            IsAsc12 = "2"; // 這裡習慣反序, 最後發生的在最上面
+        }
+
+        Filters.SortColumn = sortDict[SortCol];
+
+        // FOR DEBUG ONLY
+        Filters.SortAscending = IsAsc12 == "1" ? true : false;
+
+
+        // TODO ,QUICK FIX ONLY
+        // ONLY FOR WmsTskId
+        // AS  int
+        // NEED TO PROVIDE OTHER OPTIONS
+        Filters.SortType = AppSortType.TYPE_INT;
+
+
+
+
+
+        SortColSubmit = sortNameDict[SortCol];
+        IsAsc12Submit = isAsc12Dict[IsAsc12];
+
+
+
+        FilterTextF1Submit = FilterTextF1;
+        FilterTextF2Submit = FilterTextF2;
+        FilterTextF3Submit = FilterTextF3;
+        FilterTextF4Submit = FilterTextF4;
+
+        FilterDt1Submit = FilterDt1.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+        FilterDt2Submit = FilterDt2.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+        //   FilterDt2Submit = FilterDt2;
+        //  FilterTextF2Submit = FilterTextF2;
+
+
+        _dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+        await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
+
+
+    }
+
+
+    /// <summary>
+    /// Get a reference to the global <see cref="GridWrapper"/>.
+    /// </summary>
+    [CascadingParameter]
+    public GridWrapper Wrapper { get; set; }
+
+    /// <summary>
+    /// Wait period in (ms) after the user stops typing.
+    /// </summary>
+    const int DebounceMs = 300;
+
+    /// <summary>
+    /// Timer for debounce.
+    /// </summary>
+    Timer timer;
+
+
+    [Parameter]
+    public IBaseFiltersV2 Filters { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
+    /// <summary>
+    /// When ready.
+    /// </summary>
+    protected override void OnInitialized()
+    {
+
+        sortDict.Add("WmsTskId", ApplicationFilterColumns.WmsTskId);
+        //  sortDict.Add("ConfigDesc", ApplicationFilterColumns.ConfigDesc);
+
+        sortNameDict.Add("WmsTskId", "WmsTskId");
+        //    sortNameDict.Add("ConfigDesc", "ConfigDesc");
+
+        // 這個可以做成  單例  ***
+        isAsc12Dict.Add("1", "正向");
+        isAsc12Dict.Add("2", "反向");
+
+        //var today = DateTime.Today;
+        //var lastmonth = new DateTime(today.Year, today.Month - 1, 1);
+
+        //FilterDt1 = DateTime.Now;
+        //FilterDt2 = DateTime.Now;
+
+        FilterDt1 = DateTime.Today.AddDays(-14);
+        FilterDt2 = DateTime.Today;
+
+
+
+        // grab filter
+        filterText = Filters.FilterText;
+
+        // grab column to filter on
+        selectedColumn = (int)(Filters.FilterColumn);
+
+        base.OnInitialized();
+    }
+
+
+
+    private int selectedColumn;
+
+    /// <summary>
+    /// Column to filter on.
+    /// </summary>
+    private int SelectedColumn
+    {
+        get => selectedColumn;
+        set
+        {
+            if (value != selectedColumn)
+            {
+                selectedColumn = value;
+                Filters.FilterColumn = (ApplicationFilterColumns)selectedColumn;
+                FilterText = string.Empty;
+            }
+        }
+    }
+
+    //private string F1;
+    //private string F2;
+    //private string F3;
+    //private string F4;
+    //private string F5;
+    //private string F6;
+    //private string F7;
+    //private string F8;
+
+
+
+
+
+
+
+    private string filterText;
+
+
+    private string filterPhone;
+
+    // NOTE by Mark, 2021-01-12
+    private string filterLastName;
+    private string FilterLastName
+    {
+        get => filterLastName;
+        set
+        {
+            if (value != filterLastName)
+            {
+                filterLastName = value;
+                // more text means restart the debounce timer
+                if (timer != null)
+                {
+                    timer.Dispose();
+                }
+                timer = new Timer(DebounceMs);
+                timer.Elapsed += NotifyTimerElapsed;
+                timer.Enabled = true;
+            }
+        }
+    }
+
+    //private string FilterPhone
+    //{
+    //    get => filterPhone;
+    //    set
+    //    {
+    //        if (value != filterPhone)
+    //        {
+    //            filterPhone = value;
+    //            CheckPhoneChanged();
+    //            // more text means restart the debounce timer
+    //            //if (timer != null)
+    //            //{
+    //            //    timer.Dispose();
+    //            //}
+    //            //timer = new Timer(DebounceMs);
+    //            //timer.Elapsed += NotifyTimerElapsed;
+    //            //timer.Enabled = true;
+    //        }
+    //    }
+    //}
+
+
+
+    /// <summary>
+    /// Text to filter on.
+    /// </summary>
+    private string FilterText
+    {
+        get => filterText;
+        set
+        {
+            if (value != filterText)
+            {
+                filterText = value;
+                // more text means restart the debounce timer
+                if (timer != null)
+                {
+                    timer.Dispose();
+                }
+                timer = new Timer(DebounceMs);
+                timer.Elapsed += NotifyTimerElapsed;
+                timer.Enabled = true;
+            }
+        }
+    }
+
+
+
+    //private string FilterTextF1
+    //{
+    //    get => F1;
+    //    set
+    //    {
+    //        if (value != F1)
+    //        {
+    //            F1 = value.Trim();
+    //            Filters.FilterTextF1 = F1;
+    //        }
+    //    }
+    //}
+
+    //private string FilterTextF2
+    //{
+    //    get => F2;
+    //    set
+    //    {
+    //        if (value != F2)
+    //        {
+    //            F2 = value.Trim();
+    //            Filters.FilterTextF2 = F2;
+    //        }
+    //    }
+    //}
+
+    private string FilterTextF3
+    {
+        get => Filters.FilterTextF3;
+        set => Filters.FilterTextF3 = value.Trim();
+    }
+
+    private string FilterTextF4
+    {
+        get => Filters.FilterTextF4;
+        set => Filters.FilterTextF4 = value.Trim();
+    }
+    private string FilterTextF5
+    {
+        get => Filters.FilterTextF5;
+        set => Filters.FilterTextF5 = value.Trim();
+    }
+    private string FilterTextF6
+    {
+        get => Filters.FilterTextF6;
+        set => Filters.FilterTextF6 = value.Trim();
+    }
+    private string FilterTextF7
+    {
+        get => Filters.FilterTextF7;
+        set => Filters.FilterTextF7 = value.Trim();
+    }
+
+    private string FilterTextF1
+    {
+        get => Filters.FilterTextF1;
+        set => Filters.FilterTextF1 = value.Trim();
+    }
+    private string FilterTextF2
+    {
+        get => Filters.FilterTextF2;
+        set => Filters.FilterTextF2 = value.Trim();
+    }
+
+    private DateTime FilterDt1
+    {
+        get => Filters.FilterDt1;
+        set => Filters.FilterDt1 = value;
+    }
+    private DateTime FilterDt2
+    {
+        get => Filters.FilterDt2;
+        set => Filters.FilterDt2 = value;
+    }
+
+
+    /// <summary>
+    /// Fired after debounce time.
+    /// </summary>
+    /// <param name="sender">Timer.</param>
+    /// <param name="e">Event args.</param>
+    private async void NotifyTimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        timer.Dispose();
+        timer = null;
+        if (Filters.FilterText != filterText)
+        {
+            // notify the controls
+            Filters.FilterText = filterText.Trim();
+            //    Filters.FilterLastName = filterLastName.Trim();
+
+
+            await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
+        }
+        //if (Filters.FilterLastName != filterLastName)
+        //{
+        //    // notify the controls
+        //    Filters.FilterLastName = filterLastName.Trim();
+        //    //    Filters.FilterLastName = filterLastName.Trim();
+
+
+        //    await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
+        //}
+
+
+    }
+
+    /// <summary>
+    /// Disposable pattern - override to dispose any ticking timers.
+    /// </summary>
+    /// <param name="disposing"><c>True</c> when disposing.</param>
+    public void Dispose()
+    {
+        if (timer != null)
+        {
+            timer.Dispose();
+            timer = null;
+        }
+    }
+}
