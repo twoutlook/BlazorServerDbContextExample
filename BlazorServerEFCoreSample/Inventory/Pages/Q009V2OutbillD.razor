@@ -1,5 +1,5 @@
-﻿@page "/v2outbilld"
-
+﻿@*@layout MainLayoutV2*@
+@page "/v2outbilld"
 @*@page "/outbilld/{OutbillId}"*@
 
 @page "/v2outbilld/{Page:int}"
@@ -37,7 +37,7 @@
                 </div>
             </div>
         }
-        
+
         @if (Parts != null) // NOTE by Mark, 2021-01-17,
         {                   //      無返回記錄時由 AutoTableCompV2B 處理
             <AutoTableCompV2B Filters="@QueryAdapter.f"
@@ -45,7 +45,7 @@
                               ColumsToExcludeCSV="id"
                               FieldMapper="fieldMappers" />
         }
-        
+
         @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
         @if (@QueryAdapter.f.PageHelper.PageCount > 1)
         {
@@ -150,7 +150,7 @@
         ApplicationFilterColumns.ConfigValue ,
         ApplicationFilterColumns.Memo,
 
-                                        };
+                                            };
     string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
 
 

@@ -1,22 +1,23 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar" >
+    <div class="sidebar">
         <NavMenu />
     </div>
 
     <div class="main">
+
+
         @*<div class="top-row px-4 auth">
             <LoginDisplay />
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>*@
 
-        <div class="content px-4">
+        <div class="container-fluid content px-4">
             @Body
-            <span style="margin-top:-16px;font-size: 80%; color:darkgray">
-            頁面載入 @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-                </span>
+     
         </div>
     
+   
     </div>
 </div>

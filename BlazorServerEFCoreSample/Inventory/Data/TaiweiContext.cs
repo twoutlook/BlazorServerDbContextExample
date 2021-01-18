@@ -9,13 +9,16 @@ namespace Inventory.Data
 {
     public partial class TaiweiContext : DbContext
     {
- 
+        //public TaiweiContext()
+        //{
+        //}
 
         public TaiweiContext(DbContextOptions<TaiweiContext> options)
             : base(options)
         {
         }
 
+        public virtual DbSet<BaseOperator> BaseOperator { get; set; }
         public virtual DbSet<BasePart> BasePart { get; set; }
         public virtual DbSet<Inbill> Inbill { get; set; }
         public virtual DbSet<InbillD> InbillD { get; set; }
@@ -33,6 +36,115 @@ namespace Inventory.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Chinese_PRC_CI_AS");
+
+            modelBuilder.Entity<BaseOperator>(entity =>
+            {
+                entity.ToTable("BASE_OPERATOR");
+
+                entity.HasIndex(e => e.Caccountid, "BASE_OPERATOR_INDEX_");
+
+                entity.HasIndex(e => e.Id, "SYS_C0014378")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Caccountid)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("caccountid");
+
+                entity.Property(e => e.Calias)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("calias");
+
+                entity.Property(e => e.Ccreateowner)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("ccreateowner");
+
+                entity.Property(e => e.Cdefine1)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cdefine1");
+
+                entity.Property(e => e.Cdefine2)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cdefine2");
+
+                entity.Property(e => e.Cdepartment)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cdepartment");
+
+                entity.Property(e => e.Cduty)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cduty");
+
+                entity.Property(e => e.Cerpcode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cerpcode");
+
+                entity.Property(e => e.Cmemo)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cmemo");
+
+                entity.Property(e => e.Coperatorname)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("coperatorname");
+
+                entity.Property(e => e.Cphone)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cphone");
+
+                entity.Property(e => e.Cshift)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cshift");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Dcreatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dcreatetime");
+
+                entity.Property(e => e.Ddefine3)
+                    .HasColumnType("datetime")
+                    .HasColumnName("ddefine3");
+
+                entity.Property(e => e.Ddefine4)
+                    .HasColumnType("datetime")
+                    .HasColumnName("ddefine4");
+
+                entity.Property(e => e.Idefine5)
+                    .HasColumnType("decimal(18, 2)")
+                    .HasColumnName("idefine5");
+
+                entity.Property(e => e.Lastupdateowner)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("lastupdateowner");
+
+                entity.Property(e => e.Lastupdatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastupdatetime");
+            });
 
             modelBuilder.Entity<BasePart>(entity =>
             {

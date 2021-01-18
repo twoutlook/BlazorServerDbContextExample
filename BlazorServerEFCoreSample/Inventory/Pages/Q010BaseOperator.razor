@@ -1,23 +1,34 @@
-﻿@page "/outbill"
-@page "/outbill/{Page:int}"
+﻿@*@layout MainLayoutV2*@
+@page "/BaseOperator"
+@*@page "/outbilld/{OutbillId}"*@
+
+@page "/BaseOperator/{Page:int}"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavMgr
+
 @using Microsoft.EntityFrameworkCore
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
 @* ============================ *@
-@*   NOTE by Mark, 2021-01-18,  *@
-@*   Adapter has filter        *@
+@*   NOTE by Mark, 2021-01-17,  *@
+@*   Adapter to new filters      *@
 @* ============================ *@
 
-@inject Q006OutbillGridQueryAdapter QueryAdapter
+@inject Q010BaseOperatorGridQueryAdapter QueryAdapter
 
-<PageTitle Title="出庫單查詢" />
+<PageTitle Title="操作人員 " />
+
+@*<table class="gridtable">
+    <tr><th>出庫單</th><td>@num</td></tr>
+</table>
+
+<hr />*@
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <Q006OutbillFieldFilter Filters="@QueryAdapter.f" />
-
+        @*<Q008OutbillDFieldFilter  Filters="@QueryAdapter.f" />*@
         @if (QueryAdapter.f.Loading || Parts == null)
         {
             <div class="row">
@@ -26,23 +37,22 @@
                 </div>
             </div>
         }
+
         @if (Parts != null) // NOTE by Mark, 2021-01-17,
         {                   //      無返回記錄時由 AutoTableCompV2B 處理
-            <AutoTableCompV3 Filters="@QueryAdapter.f"
-                             Items="Items"
-                             ColumsToExcludeCSV="id"
-                             FieldMapper="fieldMappers" />
+            <AutoTableCompV2B Filters="@QueryAdapter.f"
+                              Items="Items"
+                              ColumsToExcludeCSV="id"
+                              FieldMapper="fieldMappers" />
         }
 
+        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
+        @if (@QueryAdapter.f.PageHelper.PageCount > 1)
+        {
+            <Q000BasePaging Filters="@QueryAdapter.f" />
 
+        }
 
-        <Q000BasePaging Filters="@QueryAdapter.f" />
-        <div>
-
-            <span style="margin-left:-16px;font-size: 80%; color:darkgray">
-                頁面載入 @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
-            </span>
-        </div>
 
 
     </div>
@@ -65,21 +75,6 @@
 
     List<FieldMapper> fieldMappers;
 
-    //protected override void OnParametersSet()
-    //{
-    //    base.OnParametersSet();
-
-    //    //Cticketcode Cstatus Casnid </ li >
-
-    //    fieldMappers = new List<FieldMapper>();
-    //    //    < li > 入庫單 狀態 入庫通知單ID
-    //    fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "出庫單", Index = -1 });
-    //    fieldMappers.Add(new FieldMapper { Id = "Cstatus", Name = "狀態", Index = -1 });
-    //    //        fieldMappers.Add(new FieldMapper { Id = "Casnid", Name = "入庫通知單ID", Index = -1 });
-    //    fieldMappers.Add(new FieldMapper { Id = "Coutasnid", Name = "出庫通知單ID", Index = -1 });
-
-
-    //}
 
 
 
@@ -90,10 +85,6 @@
         {
             Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + "1");
 
-            //  var query = new Dictionary<string, string> { { "page", ""+1 } };
-            //  Nav.NavigateTo(QueryHelpers.AddQueryString(Nav.Uri, query));
-            ////  Page = 1;
-            //  QueryAdapter.f.PageHelper.Page = 1;
             return;
         }
 
@@ -107,7 +98,6 @@
             }
             if (Page > QueryAdapter.f.PageHelper.PageCount)
             {
-                //   Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + QueryAdapter.f.PageHelper.PageCount);
                 Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + QueryAdapter.f.PageHelper.PageCount);
                 return;
             }
@@ -126,6 +116,14 @@
         await base.OnParametersSetAsync();
     }
 
+
+    [Parameter]
+    public string OutbillId
+    {
+        get;
+        set;
+    }
+    //40DAD891-A646-458F-A6B2-C7F6D49162FC
 
     //https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-5.0
     [Parameter]
@@ -147,12 +145,12 @@
     //int[] marks = new int[] { 99, 98, 92, 97, 95 };
     ApplicationFilterColumns[] SortCols = new ApplicationFilterColumns[]
     {
-        ApplicationFilterColumns.FlagType,
-        ApplicationFilterColumns.FlagId,
-        ApplicationFilterColumns.FlagName,
+        ApplicationFilterColumns.Code ,
+        ApplicationFilterColumns.ConfigDesc ,
+        ApplicationFilterColumns.ConfigValue ,
         ApplicationFilterColumns.Memo,
 
-        };
+                                            };
     string[] SortColsSymbol = new string[] { " ", " ", " ", " " };
 
 
@@ -185,8 +183,8 @@
 
         return ReloadAsync();
     }
-    private ICollection<Outbill> Parts { get; set; }
-    private List<Outbill> Items { get; set; }
+    private ICollection<BaseOperator> Parts { get; set; }
+    private List<BaseOperator> Items { get; set; }
 
 
     private async Task ReloadAsync()
@@ -211,7 +209,7 @@
         //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
 
         // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
-        Parts = await QueryAdapter.FetchAsyncV4(context.Outbill.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV4(context.BaseOperator.AsQueryable());
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         Items = Parts.ToList();
@@ -224,20 +222,43 @@
     }
 
 
+    //void GetQueryStringValues()
+    //{
+    //    NavManager.TryGetQueryString<int>("initialCount", out currentCount);
+    //}
+    private string num = "000000"; // NOTE by Mark,2021-01-18, document number
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadAsync();
+    }
 
 
     protected override void OnInitialized()
     {
 
+
+
         fieldMappers = new List<FieldMapper>();
-        fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "出庫單", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Coutasnid", Name = "出庫通知單ID", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Otype", Name = "出庫類型", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Ccreateownercode", Name = "制單人ID", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Dcreatetime", Name = "制單日期", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Dcreatetime", Name = "出庫日期", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Debittime", Name = "扣帳時間", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Cstatus", Name = "狀態", Index = -1 });
+        //    < li > 入庫單 狀態 入庫通知單ID
+        //fieldMappers.Add(new FieldMapper { Id = "Id", Name = "Id", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Caccountid", Name = "Caccountid", Index = -1 });
+        //        fieldMappers.Add(new FieldMapper { Id = "Casnid", Name = "入庫通知單ID", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Coperatorname", Name = "Coperatorname", Index = -1 });
+        //     fieldMappers.Add(new FieldMapper { Id = "Iquantity", Name = "數量", Index = -1 });
+
+        //  GetQueryStringValues();
+
+        //var qry = new Uri(NavMgr.Uri).Query;
+
+        //if (QueryHelpers.ParseQuery(qry).TryGetValue("num", out var value))
+        //{
+        //    num = value;
+        //}
+
+        //QueryAdapter.f.FilterTextF1 = num;
+
 
     }
 }
