@@ -61,6 +61,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[V_CMD_MST]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[V2_OUTBILL_D]",
          "ObjectType": 3
       },

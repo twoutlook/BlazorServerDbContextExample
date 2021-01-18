@@ -32,6 +32,7 @@ namespace Inventory.Data
         public virtual DbSet<SysParameter> SysParameter { get; set; }
         public virtual DbSet<V2OutbillD> V2OutbillD { get; set; }
         public virtual DbSet<V2StockCurrentAdjust> V2StockCurrentAdjust { get; set; }
+        public virtual DbSet<VCmdMst> VCmdMst { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1740,6 +1741,83 @@ namespace Inventory.Data
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("reviewuser");
+            });
+
+            modelBuilder.Entity<VCmdMst>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V_CMD_MST");
+
+                entity.Property(e => e.ActTime)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CmdMode)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(e => e.CmdSno)
+                    .IsRequired()
+                    .HasMaxLength(5);
+
+                entity.Property(e => e.CmdSts)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(e => e.Cticketcode)
+                    .HasMaxLength(500)
+                    .IsUnicode(false)
+                    .HasColumnName("CTICKETCODE");
+
+                entity.Property(e => e.EndTime)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LineId).HasMaxLength(20);
+
+                entity.Property(e => e.Loc)
+                    .HasMaxLength(11)
+                    .HasColumnName("LOC");
+
+                entity.Property(e => e.Msg)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("MSG");
+
+                entity.Property(e => e.NewLoc)
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Packageno)
+                    .HasMaxLength(100)
+                    .HasColumnName("PACKAGENO");
+
+                entity.Property(e => e.Prt)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .HasColumnName("PRT");
+
+                entity.Property(e => e.Remark)
+                    .HasMaxLength(800)
+                    .HasColumnName("REMARK");
+
+                entity.Property(e => e.Result)
+                    .HasMaxLength(2000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StnNo)
+                    .IsRequired()
+                    .HasMaxLength(4);
+
+                entity.Property(e => e.TaskNo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("TaskNO");
+
+                entity.Property(e => e.TrnDate)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
             });
 
             modelBuilder.HasSequence("ASRS_cmdno_SEQ")
