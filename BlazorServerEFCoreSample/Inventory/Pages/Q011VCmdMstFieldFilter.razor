@@ -112,29 +112,15 @@
 
 
         <select name="cars" id="cars" @bind="SelectedColumn">
-            <option value="WmsTskId_1" >WmsTskId🔼</option>
-            <option value="WmsTskId_2" >WmsTskId🔽</option>
+            <option value="WmsTskId_1" >WmsTskId 🔼</option>
+            <option value="WmsTskId_2" >WmsTskId 🔽</option>
             @*     <option value="ConfigDesc">ConfigDesc </option>*@
 
         </select>
         </div>
     </div>
 
-    <div class="col-3  txt">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">   方向</span>
-            </div>
-            @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
 
-
-            <select name="cars" id="cars" @bind="IsAsc12">
-                <option value="1" selected="selected">正向ABC</option>
-                <option value="2">反向CBA</option>
-
-            </select>
-        </div>
-    </div>
 
 </div>
 
@@ -154,12 +140,11 @@
 
     排序:
 
-    <span class="val"> @SortColSubmit</span>
-    <span class="val"> @IsAsc12Submit</span>
-
+    <span class="val"> @SelectedColumn</span>
+ 
     時間:<span class="val">@_dateString</span>
 
-    <span style="background-color:pink">---@SelectedColumn--- @Filters.ErrMsg</span>
+    <span style="background-color:pink">@Filters.ErrMsg</span>
 </div>
 
 

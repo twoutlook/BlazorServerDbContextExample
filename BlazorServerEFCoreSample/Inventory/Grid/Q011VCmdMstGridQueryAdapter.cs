@@ -1,4 +1,5 @@
 ﻿using Inventory.Data;
+using Inventory.Package1;
 using Inventory.Shared;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -104,48 +105,68 @@ namespace Inventory.Grid
 
 
         // TODO , USING CODE GENERATION TO MAKE SUCH FUNCTION FOR EACH PAGE
-        public IQueryable<VCmdMst> GetSortQuery(IQueryable<VCmdMst> query, string sortStr)
-        {
+        //public IQueryable<VCmdMst> VCmdMst (IQueryable<VCmdMst> query, string sortStr)
+        //{
 
-            string[] words = sortStr.Split('_');
+        //    string[] words = sortStr.Split('_');
 
 
-            switch (words[0])
-            {
-                case "WmsTskId":
-                    query = words[1] == "1" ? query.OrderBy(x => x.WmsTskId)
-                   : query.OrderByDescending(c => c.WmsTskId);
-                    return query;
-                default:
-                    return query;
-            }
+        //    switch (words[0])
+        //    {
+        //        case "WmsTskId":
+        //            query = words[1] == "1" ? query.OrderBy(x => x.WmsTskId)
+        //           : query.OrderByDescending(c => c.WmsTskId);
+        //            return query;
+        //        default:
+        //            return query;
+        //    }
 
-        }
+        //}
+
+
+
+        //public static IQueryable<VCmdMst> GetFilterContains(IQueryable<VCmdMst> query, string col,string f1)
+        //{
+        //    if (!string.IsNullOrWhiteSpace(f1) && col =="Loc")
+        //    {
+        //        return query.Where(x => x.Loc.Contains(f1));
+
+        //    }
+            
+
+        //    return query;
+        //}
+
+
 
         public async Task<ICollection<VCmdMst>> FetchAsyncV4(IQueryable<VCmdMst> query)
         {
+            // 相等的範例    
+            //query = query.Where(x => x.Caccountid == _controls.FilterTextF1);
+
+            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
+            //{
+            //    query = query.Where(x => x.Loc.Contains(_controls.FilterTextF1));
+
+            //}
+
+            //            query = GetFilterContains(query, "Loc", _controls.FilterTextF1);
+            query = GetFilterContains.VCmdMst(query, "Loc", _controls.FilterTextF1);
+            query = GetFilterContains.VCmdMst(query, "Cticketcode", _controls.FilterTextF2);
+            query = GetFilterContains.VCmdMst(query, "Remark", _controls.FilterTextF3);
 
 
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
-            {
-                //query = query.Where(x => x.Caccountid == _controls.FilterTextF1);
-                query = query.Where(x => x.Loc.Contains(_controls.FilterTextF1));
+            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
+            //{
+            //    query = query.Where(x => x.Cticketcode.Contains(_controls.FilterTextF2));
 
-            }
+            //}
 
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
-            {
-                //query = query.Where(x => x.Caccountid == _controls.FilterTextF1);
-                query = query.Where(x => x.Cticketcode.Contains(_controls.FilterTextF2));
+            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
+            //{
+            //    query = query.Where(x => x.Remark.Contains(_controls.FilterTextF3));
 
-            }
-
-            if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
-            {
-                //query = query.Where(x => x.Caccountid == _controls.FilterTextF1);
-                query = query.Where(x => x.Remark.Contains(_controls.FilterTextF3));
-
-            }
+            //}
 
 
 
@@ -168,7 +189,7 @@ namespace Inventory.Grid
             //        break;
             //}
 
-            query = GetSortQuery(query, f.SortStr);
+            query = GetSortQuery.VCmdMst(query, f.SortStr);
 
 
 

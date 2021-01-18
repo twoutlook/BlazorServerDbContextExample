@@ -15,6 +15,7 @@
 @* ============================ *@
 @using Inventory.Comp
 
+
 @inject Q011VCmdMstGridQueryAdapter QueryAdapter
 
 <PageTitle Title="WCS命令查詢 " />
@@ -58,7 +59,7 @@
         @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
         @if (@QueryAdapter.f.PageHelper.PageCount > 1)
         {
-            <Q000BasePagingV2 Filters="@QueryAdapter.f" />
+            <Q000BasePagingWhFilterV2 Filters="@QueryAdapter.f" />
 
         }
 
@@ -250,20 +251,22 @@
 
 
 
-        fieldMappers = new List<FieldMapper>();
-        fieldMappers.Add(new FieldMapper { Id = "WmsTskId", Name = "WmsTskId", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "CmdSno", Name = "CmdSno", Index = -1 });
-        //命令編號 箱號/ 棧板號  線別 站點  原始儲位 目的儲位    單據號 命令類型    
-        //    備註 命令狀態    TaskNO 接收時間    開始時間 完成時間    返回狀態 資訊
-        fieldMappers.Add(new FieldMapper { Id = "StnNo", Name = "站點", Index = -1 });
+        //fieldMappers = new List<FieldMapper>();
+        //fieldMappers.Add(new FieldMapper { Id = "WmsTskId", Name = "WmsTskId", Index = -1 });
+        //fieldMappers.Add(new FieldMapper { Id = "CmdSno", Name = "CmdSno", Index = -1 });
+        ////命令編號 箱號/ 棧板號  線別 站點  原始儲位 目的儲位    單據號 命令類型    
+        ////    備註 命令狀態    TaskNO 接收時間    開始時間 完成時間    返回狀態 資訊
+        //fieldMappers.Add(new FieldMapper { Id = "StnNo", Name = "站點", Index = -1 });
 
-        fieldMappers.Add(new FieldMapper { Id = "Loc", Name = "原始儲位", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "NewLoc", Name = "目的儲位", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "單據號", Index = -1 });
-        fieldMappers.Add(new FieldMapper { Id = "Remark", Name = "備註", Index = -1 });
+        //fieldMappers.Add(new FieldMapper { Id = "Loc", Name = "原始儲位", Index = -1 });
+        //fieldMappers.Add(new FieldMapper { Id = "NewLoc", Name = "目的儲位", Index = -1 });
+        //fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "單據號", Index = -1 });
+        //fieldMappers.Add(new FieldMapper { Id = "Remark", Name = "備註", Index = -1 });
 
 
-        QueryAdapter.f.SortType = AppSortType.TYPE_INT;
+        fieldMappers = GetFieldMapper.Q001VCmdMst();
+
+     //   QueryAdapter.f.SortType = AppSortType.TYPE_INT;
     }
 }
 
