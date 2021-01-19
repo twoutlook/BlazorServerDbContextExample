@@ -14,6 +14,11 @@ namespace Inventory.Package1
 
         public static List<FieldMapper> Q001VCmdMst()
         {
+
+            var showFields = new List<ShowField>();
+            showFields.Add(new ShowField("WmsTskId", "WmsTskId", 1,0));
+
+
             var fieldMappers = new List<FieldMapper>();
             fieldMappers.Add(new FieldMapper { Id = "WmsTskId", Name = "WmsTskId", Index = -1 });
             fieldMappers.Add(new FieldMapper { Id = "CmdSno", Name = "CmdSno", Index = -1 });
