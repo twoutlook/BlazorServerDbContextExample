@@ -29,29 +29,29 @@ namespace Inventory.Grid
         /// <summary>
         /// Expressions for sorting.
         /// </summary>
-        private readonly Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, string>>> _expressions
-            = new Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, string>>>
-            {
-                //{ ApplicationFilterColumns.Cticketcode, c => c.Cticketcode },
-                //{ ApplicationFilterColumns.Cstatus, c => c.Cstatus },
-                ////{ ApplicationFilterColumns.Memo, c => c.Memo },
-                //{ ApplicationFilterColumns.FlagId, c => c.FlagId },
-                { ApplicationFilterColumns.CmdSno, c => c.CmdSno },
+        //private readonly Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, string>>> _expressions
+        //    = new Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, string>>>
+        //    {
+        //        //{ ApplicationFilterColumns.Cticketcode, c => c.Cticketcode },
+        //        //{ ApplicationFilterColumns.Cstatus, c => c.Cstatus },
+        //        ////{ ApplicationFilterColumns.Memo, c => c.Memo },
+        //        //{ ApplicationFilterColumns.FlagId, c => c.FlagId },
+        //        { ApplicationFilterColumns.CmdSno, c => c.CmdSno },
              
 
-                //{ ApplicationFilterColumns.Cinvname, c => c.Cinvname },
-                //{ ApplicationFilterColumns.Iqty, c => c.Iqty },
+        //        //{ ApplicationFilterColumns.Cinvname, c => c.Cinvname },
+        //        //{ ApplicationFilterColumns.Iqty, c => c.Iqty },
 
-            };
+        //    };
 
-        private readonly Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, int>>> _expressionsInt
-            = new Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, int>>>
-            {
+        //private readonly Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, int>>> _expressionsInt
+        //    = new Dictionary<ApplicationFilterColumns, Expression<Func<VCmdMst, int>>>
+        //    {
              
-                { ApplicationFilterColumns.WmsTskId, c => c.WmsTskId },
+        //        { ApplicationFilterColumns.WmsTskId, c => c.WmsTskId },
 
         
-            };
+        //    };
 
 
 

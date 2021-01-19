@@ -73,6 +73,32 @@
 
 </div>
 
+<div style="
+        margin-bottom: 4px;
+        margin-left: -16px">
+
+
+    參數:
+
+    @foreach (var x in Filters.FilterContains)
+    {
+        if (x != null)
+        {
+            <span class="val"> @x</span>
+        }
+    }
+
+
+    排序:
+
+    <span class="val"> @Filters.SortStr</span>
+
+    時間:<span class="val">@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)</span>
+
+    <span style="background-color:pink">@Filters.ErrMsg</span>
+</div>
+
+
 @code { //https://www.youtube.com/watch?v=jsWVIV5ykQM
 
 
