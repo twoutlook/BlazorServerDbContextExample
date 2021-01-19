@@ -74,26 +74,27 @@
 </div>
 
 <div style="
+    color:darkgrey;
         margin-bottom: 4px;
         margin-left: -16px">
 
 
-    參數:
+    【參數】
 
     @foreach (var x in Filters.FilterContains)
     {
         if (x != null)
         {
-            <span class="val"> @x</span>
+            <span><span class="val">@x</span>&nbsp;</span>
         }
     }
 
 
-    排序:
+    【排序】
 
     <span class="val"> @Filters.SortStr</span>
 
-    時間:<span class="val">@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)</span>
+    【時間】<span class="val">@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)</span>
 
     <span style="background-color:pink">@Filters.ErrMsg</span>
 </div>

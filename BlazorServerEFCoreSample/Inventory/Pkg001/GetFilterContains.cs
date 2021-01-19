@@ -25,14 +25,18 @@ namespace Inventory.Package1
 
         public static IQueryable<VCmdMst> VCmdMst(IQueryable<VCmdMst> query, IBaseFiltersV2 f)
         {
-            for (int i = 0; i < f.FilterContainsCol.Length; i++)
-            {
-                if (f.FilterContainsCol[i] != null)//表示有值
-                {
-                    query= _VCmdMst(query, f.FilterContainsCol[i], f.FilterContains[i]);
+            //for (int i = 0; i < f.FilterContainsCol.Length; i++)
+            //{
+            //    if (f.FilterContainsCol[i] != null)//表示有值
+            //    {
+            //        query = _VCmdMst(query, f.FilterContainsCol[i], f.FilterContains[i]);
 
-                }
-            }
+            //    }
+            //}
+            for (int i = 0; i < f.FilterContainsCol.Length; i++)
+                if (f.FilterContainsCol[i] != null)//表示有值
+                    query = _VCmdMst(query, f.FilterContainsCol[i], f.FilterContains[i]);
+
             return query;
         }
     }

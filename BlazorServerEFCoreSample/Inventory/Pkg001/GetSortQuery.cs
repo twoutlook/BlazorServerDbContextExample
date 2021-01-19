@@ -24,6 +24,30 @@ namespace Inventory.Package1
                     if (str[1] == "1") return query.OrderBy(x => x.WmsTskId);
                     if (str[1] == "2") return query.OrderByDescending(x => x.WmsTskId);
                     return query;
+                case "CmdSno":
+                    if (str[1] == "1") return query.OrderBy(x => x.CmdSno);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.CmdSno);
+                    return query;
+                case "StnNo":
+                    if (str[1] == "1") return query.OrderBy(x => x.StnNo);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.StnNo);
+                    return query;
+                case "Loc":
+                    if (str[1] == "1") return query.OrderBy(x => x.Loc);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.Loc);
+                    return query;
+                case "NewLoc":
+                    if (str[1] == "1") return query.OrderBy(x => x.NewLoc);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.NewLoc);
+                    return query;
+                case "Cticketcode":
+                    if (str[1] == "1") return query.OrderBy(x => x.Cticketcode);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.Cticketcode);
+                    return query;
+                case "Remark":
+                    if (str[1] == "1") return query.OrderBy(x => x.Remark);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.Remark);
+                    return query;
                 default:
                     return query;
             }

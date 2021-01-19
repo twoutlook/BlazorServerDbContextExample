@@ -32,7 +32,7 @@
 
         <Q011VCmdMstFieldFilter Filters="@QueryAdapter.f" />
 
-    
+
 
         @if (QueryAdapter.f.Loading || Parts == null)
         {
@@ -50,7 +50,7 @@
             //      無返回記錄時由 AutoTableCompV2B 處理
             //AutoTableCompWhFilterV2
             <AutoTableCompWhFilterV2 Filters="@QueryAdapter.f"
-                                     IsShowField ="false"
+                                     IsShowField="false"
                                      Items="Items"
                                      ColumsToExcludeCSV="id"
                                      FieldMapper="fieldMappers" />
@@ -62,8 +62,7 @@
             <Q000BasePagingWhFilterV2 Filters="@QueryAdapter.f" />
 
         }
-
-
+ 
 
     </div>
 </GridWrapper>
