@@ -10,14 +10,14 @@ namespace Inventory.Package1
         public static IQueryable<VCmdMst> VCmdMst(IQueryable<VCmdMst> query, string sortStr)
         {
 
-            string[] words = sortStr.Split('_');
+            string[] str = sortStr.Split('_');
 
 
-            switch (words[0])
+            switch (str[0])
             {
                 case "WmsTskId":
-                    query = words[1] == "1" ? query.OrderBy(x => x.WmsTskId)
-                   : query.OrderByDescending(c => c.WmsTskId);
+                    if (str[1] == "1") return query.OrderBy(x => x.WmsTskId);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.WmsTskId);
                     return query;
                 default:
                     return query;

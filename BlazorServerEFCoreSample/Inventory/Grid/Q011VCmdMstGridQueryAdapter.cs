@@ -141,132 +141,30 @@ namespace Inventory.Grid
 
         public async Task<ICollection<VCmdMst>> FetchAsyncV4(IQueryable<VCmdMst> query)
         {
-            // 相等的範例    
-            //query = query.Where(x => x.Caccountid == _controls.FilterTextF1);
-
-            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF1))
-            //{
-            //    query = query.Where(x => x.Loc.Contains(_controls.FilterTextF1));
-
-            //}
-
-            //            query = GetFilterContains(query, "Loc", _controls.FilterTextF1);
+            // 處理 篩選 WHERE
             query = GetFilterContains.VCmdMst(query, "Loc", _controls.FilterTextF1);
             query = GetFilterContains.VCmdMst(query, "Cticketcode", _controls.FilterTextF2);
             query = GetFilterContains.VCmdMst(query, "Remark", _controls.FilterTextF3);
 
-
-            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF2))
-            //{
-            //    query = query.Where(x => x.Cticketcode.Contains(_controls.FilterTextF2));
-
-            //}
-
-            //if (!string.IsNullOrWhiteSpace(_controls.FilterTextF3))
-            //{
-            //    query = query.Where(x => x.Remark.Contains(_controls.FilterTextF3));
-
-            //}
-
-
-
-            // NOTE by Mark, 2021-01-18, 必需要有指定的預設排序欄位
-            // 如果沒有, 會報錯, 是不是可能 智能指定一個?
-            // System.Collections.Generic.KeyNotFoundException: The given key 'Code' was not present in the dictionary.
-            //         at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
-            //at Inventory.Grid.Q011VCmdMstGridQueryAdapter.FetchAsyncV4(IQueryable`1 query) in 
-            //  var expression = _expressions[_controls.SortColumn];
-
-            //string[] words = f.SortStr.Split('_');
-            //_controls.SortAscending = words[1] == "1" ? true : false;
-
-            
-            //switch (words[0])
-            //{
-            //    case "WmsTskId":
-            //        query = words[1] == "1" ? query.OrderBy(x => x.WmsTskId)
-            //       : query.OrderByDescending(c => c.WmsTskId);
-            //        break;
-            //}
-
+            // 處理 排序 Order By
             query = GetSortQuery.VCmdMst(query, f.SortStr);
 
-
-
-            //var sortDir = _controls.SortAscending ? "ASC" : "DESC";
-            //f.ErrMsg = "";
-            //if (f.SortType == AppSortType.TYPE_STR)
-            //{
-            //    var expression = _expressions[ApplicationFilterColumns.CmdSno];
-
-            //    if (_expressions.ContainsKey(_controls.SortColumn))
-            //    {
-            //        expression = _expressions[_controls.SortColumn];
-            //    }
-            //    else
-            //    {
-            //        // the key doesn't exist.
-            //        // NOTE by Mark, 2021-01-18, how to feedback to page for developer
-            //        // to fix this wrong sorting?
-            //        f.ErrMsg = " *** 開發人員請注意見 *** 使用的排序欄位, 還沒有在排序的 dictionary (string) 裡定義!";
-            //    }
-
-
-
-
-            //    query = _controls.SortAscending ? query.OrderBy(expression)
-            //        : query.OrderByDescending(expression);
-
-            //}
-
-            //if (f.SortType == AppSortType.TYPE_INT)
-            //{
-            //    var expressionInt = _expressionsInt[ApplicationFilterColumns.WmsTskId];
-            // //   f.ErrMsg = "";
-            //    if (_expressionsInt.ContainsKey(_controls.SortColumn))
-            //    {
-            //        expressionInt = _expressionsInt[_controls.SortColumn];
-            //    }
-            //    else
-            //    {
-            //        // the key doesn't exist.
-            //        // NOTE by Mark, 2021-01-18, how to feedback to page for developer
-            //        // to fix this wrong sorting?
-            //        f.ErrMsg = " *** 開發人員請注意見 *** 使用的排序欄位, 還沒有在排序的 dictionary (int) 裡定義!";
-            //    }
-
-
-            //    query = _controls.SortAscending ? query.OrderBy(expressionInt)
-            //        : query.OrderByDescending(expressionInt);
-            //}
-
-
-
-
-
-
-
-
-
-
-
-
-            await CountAsync(query);
-            var collection = await FetchPageQuery(query)
-                .ToListAsync();
-            _controls.PageHelper.PageItems = collection.Count;
-            return collection;
+            // 處理 分頁
+            await CountAsync(query);//更新總筆數
+            var collection = await FetchPageQuery(query).ToListAsync();//獲得分頁的內容
+            _controls.PageHelper.PageItems = collection.Count;//更新返回的筆數
+            return collection;//返回分頁的內容
         }
 
 
 
-
+        //更新總筆數
         public async Task CountAsync(IQueryable<VCmdMst> query)
         {
             _controls.PageHelper.TotalItemCount = await query.CountAsync();
         }
 
-
+        //獲得分頁的內容
         public IQueryable<VCmdMst> FetchPageQuery(IQueryable<VCmdMst> query)
         {
             return query
