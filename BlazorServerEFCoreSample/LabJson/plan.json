@@ -1,0 +1,30 @@
+[
+  {
+    "razorpage": "Q011VCmdMst",
+    "entitytype": "VCmdMst",
+    "filtercontains": [
+      "Loc",
+      "Cticketcode",
+      "Remark"
+    ],
+    "sortorder": [
+      "Remark_1",
+      "WmsTskId_2"
+    ]
+  },
+  {
+    "razorpage": "Q011VCmdMstV2",
+    "entitytype": "VCmdMst",
+    "filtercontains": [
+      "Loc",
+      "Cticketcode",
+      "Remark"
+    ],
+    "sortorder": [
+      "Remark_1",
+      "WmsTskId_2"
+    ]
+  }
+
+
+]

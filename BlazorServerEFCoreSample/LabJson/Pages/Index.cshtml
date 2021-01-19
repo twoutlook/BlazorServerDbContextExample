@@ -4,21 +4,29 @@
     ViewData["Title"] = "Home page";
 }
 
-<ul>
 
-    @foreach (var x in Model.items)
-    {
-        <li>
-            @x.Entity
+@foreach (var plan in Model.Plans)
+{
+    <h2> @plan.Razorpage</h2>
+    <h3> @plan.Entitytype</h3>
+    <h3> Filter Contains</h3>
 
-            <ul>
-                @foreach (var x2 in x.Sortstr)
-                {
-                    <li>@x2</li>
-                }
-            </ul>
-        </li>
-        <hr />
-    }
+    <ul>
+        @foreach (var f in plan.Filtercontains)
+        {
+            <li>@f</li>
+        }
+    </ul>
+    <h3> Sort OrderBy</h3>
+
+    <ul>
+        @foreach (var f in plan.Sortorder)
+        {
+            <li>@f</li>
+        }
+    </ul>
+
+    <hr />
+}
 
 

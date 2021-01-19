@@ -141,14 +141,18 @@ namespace Inventory.Grid
 
         public async Task<ICollection<VCmdMst>> FetchAsyncV4(IQueryable<VCmdMst> query)
         {
+            // *** 準備自動生成 ***
             // 處理 篩選 WHERE
             query = GetFilterContains.VCmdMst(query, "Loc", _controls.FilterTextF1);
             query = GetFilterContains.VCmdMst(query, "Cticketcode", _controls.FilterTextF2);
             query = GetFilterContains.VCmdMst(query, "Remark", _controls.FilterTextF3);
 
+            // *** 準備自動生成 ***
+            // *** 準備接受兩個甚至三個排序 ***
             // 處理 排序 Order By
             query = GetSortQuery.VCmdMst(query, f.SortStr);
 
+            // 這部分是固定的
             // 處理 分頁
             await CountAsync(query);//更新總筆數
             var collection = await FetchPageQuery(query).ToListAsync();//獲得分頁的內容
