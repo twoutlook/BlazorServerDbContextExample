@@ -143,9 +143,21 @@ namespace Inventory.Grid
         {
             // *** 準備自動生成 ***
             // 處理 篩選 WHERE
-            query = GetFilterContains.VCmdMst(query, "Loc", _controls.FilterTextF1);
-            query = GetFilterContains.VCmdMst(query, "Cticketcode", _controls.FilterTextF2);
-            query = GetFilterContains.VCmdMst(query, "Remark", _controls.FilterTextF3);
+            //query = GetFilterContains.VCmdMst(query, "Loc", _controls.FilterTextF1);
+            //query = GetFilterContains.VCmdMst(query, "Cticketcode", _controls.FilterTextF2);
+            //query = GetFilterContains.VCmdMst(query, "Remark", _controls.FilterTextF3);
+
+            for (int i = 0; i < f.FilterContainsCol.Length; i++)
+            {
+                if (f.FilterContainsCol[i] != null)//表示有值
+                {
+                    query = GetFilterContains.VCmdMst(query, f.FilterContainsCol[i], f.FilterContains[i]);
+
+                }
+            }
+
+
+
 
             // *** 準備自動生成 ***
             // *** 準備接受兩個甚至三個排序 ***

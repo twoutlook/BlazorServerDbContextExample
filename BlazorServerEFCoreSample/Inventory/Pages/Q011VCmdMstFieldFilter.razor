@@ -76,7 +76,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">  原始儲位 </span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="FilterTextF1">
+            <input type="text" class="form-control" autofocus @bind="FilterC0">
         </div>
     </div>
     <div class="col-3 txt ">
@@ -132,9 +132,9 @@
 
     參數:
 
-    <span class="val"> @FilterTextF1Submit</span>
-    <span class="val"> @FilterTextF2Submit</span>
-    <span class="val"> @FilterTextF3Submit</span>
+    <span class="val"> @FilterC0Submit</span>
+    <span class="val"> @FilterC1Submit</span>
+    <span class="val"> @FilterC2Submit</span>
 
 
     排序:
@@ -169,10 +169,10 @@
     string FilterDt2Submit;
 
 
-    string FilterTextF1Submit;
-    string FilterTextF2Submit;
-    string FilterTextF3Submit;
-    string FilterTextF4Submit;
+    string FilterC0Submit; // C means Contains
+    string FilterC1Submit;
+    string FilterC2Submit;
+    //string FilterTextF4Submit;
 
     DateTime FilterTextDt1Submit;
 
@@ -242,10 +242,13 @@
 
 
 
-        FilterTextF1Submit = FilterTextF1;
-        FilterTextF2Submit = FilterTextF2;
-        FilterTextF3Submit = FilterTextF3;
-        FilterTextF4Submit = FilterTextF4;
+        FilterC0Submit = FilterC0;
+        FilterC1Submit = FilterC1;
+        FilterC2Submit = FilterC2;
+
+        //FilterTextF2Submit = FilterTextF2;
+        //FilterTextF3Submit = FilterTextF3;
+        //FilterTextF4Submit = FilterTextF4;
 
         FilterDt1Submit = FilterDt1.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
         FilterDt2Submit = FilterDt2.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -309,9 +312,16 @@
         FilterDt2 = DateTime.Today;
 
 
+        //
+        Filters.FilterContainsCol[0] = "Loc";
+        Filters.FilterContainsCol[1] = "Cticketcode";
+        Filters.FilterContainsCol[2] = "Remark";
+
+
+
 
         // grab filter
-        filterText = Filters.FilterText;
+            filterText = Filters.FilterText;
 
         // grab column to filter on
         SelectedColumn = "WmsTskId_1";
@@ -384,11 +394,35 @@
         set => Filters.FilterTextF7 = value.Trim();
     }
 
-    private string FilterTextF1
+    //private string FilterTextF1
+    //{
+    //    get => Filters.FilterTextF1;
+    //    set => Filters.FilterTextF1 = value.Trim();
+    //}
+    private string FilterC0
+
     {
-        get => Filters.FilterTextF1;
-        set => Filters.FilterTextF1 = value.Trim();
+        get => Filters.FilterContains[0];
+        set => Filters.FilterContains[0] = value.Trim();
     }
+
+    private string FilterC1
+
+    {
+        get => Filters.FilterContains[1];
+        set => Filters.FilterContains[1] = value.Trim();
+    }
+
+    private string FilterC2
+
+    {
+        get => Filters.FilterContains[2];
+        set => Filters.FilterContains[2] = value.Trim();
+    }
+
+
+
+
     private string FilterTextF2
     {
         get => Filters.FilterTextF2;

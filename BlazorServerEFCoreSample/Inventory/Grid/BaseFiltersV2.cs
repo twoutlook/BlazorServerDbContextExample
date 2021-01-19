@@ -33,6 +33,9 @@ namespace Inventory.Grid
             PageHelper.PageSize = 10;
             PageHelper.BaseUrl = "/base/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
+            // NOTE by Mark, 2021-01-19, 基本功, 先設十組
+            FilterContains = new string[10];
+            FilterContainsCol = new string[10];
 
         }
 
@@ -68,6 +71,9 @@ namespace Inventory.Grid
         /// </summary>
         public string SortStr { get; set; }
         public string FilterText { get; set; }
+        public string[] FilterContains { get; set; }
+        public string[] FilterContainsCol { get; set; }
+
         public string FilterTextF1 { get; set; }
         public string FilterTextF2 { get; set; }
         public string FilterTextF3 { get; set; }
