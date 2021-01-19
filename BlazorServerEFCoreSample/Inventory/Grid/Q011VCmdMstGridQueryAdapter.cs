@@ -147,15 +147,16 @@ namespace Inventory.Grid
             //query = GetFilterContains.VCmdMst(query, "Cticketcode", _controls.FilterTextF2);
             //query = GetFilterContains.VCmdMst(query, "Remark", _controls.FilterTextF3);
 
-            for (int i = 0; i < f.FilterContainsCol.Length; i++)
-            {
-                if (f.FilterContainsCol[i] != null)//表示有值
-                {
-                    query = GetFilterContains.VCmdMst(query, f.FilterContainsCol[i], f.FilterContains[i]);
+            //for (int i = 0; i < f.FilterContainsCol.Length; i++)
+            //{
+            //    if (f.FilterContainsCol[i] != null)//表示有值
+            //    {
+            //        query = GetFilterContains.VCmdMst(query, f.FilterContainsCol[i], f.FilterContains[i]);
 
-                }
-            }
+            //    }
+            //}
 
+            query = GetFilterContains.VCmdMst(query, f);
 
 
 

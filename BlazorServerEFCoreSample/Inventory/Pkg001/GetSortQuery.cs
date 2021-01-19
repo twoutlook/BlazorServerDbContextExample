@@ -10,6 +10,11 @@ namespace Inventory.Package1
         public static IQueryable<VCmdMst> VCmdMst(IQueryable<VCmdMst> query, string sortStr)
         {
 
+            if (sortStr == null) // QUICK FIX: 不知道為何使用  browser fresh, sortStr becomes null
+            {
+                sortStr = "WmsTskId_1";
+            }
+
             string[] str = sortStr.Split('_');
 
 
