@@ -1,0 +1,18 @@
+[
+  {
+    "entity": "VCmdMst",
+    "sortstr": [
+      "Remark_1",
+      "WmsTskId"
+    ]
+  },
+  {
+    "entity": "VCmdMstV2",
+    "sortstr": [
+      "Remark_1",
+      "WmsTskId"
+    ]
+  }
+
+
+]

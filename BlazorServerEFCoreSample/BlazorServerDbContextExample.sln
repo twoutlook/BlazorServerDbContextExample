@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory", "Inventory\Inve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab", "Lab\Lab.csproj", "{3014F036-C681-494A-9BAD-DA7B14C8E575}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabJson", "LabJson\LabJson.csproj", "{F7045683-AAB9-48D6-9CD7-3B69E751D187}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3014F036-C681-494A-9BAD-DA7B14C8E575}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3014F036-C681-494A-9BAD-DA7B14C8E575}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3014F036-C681-494A-9BAD-DA7B14C8E575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7045683-AAB9-48D6-9CD7-3B69E751D187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7045683-AAB9-48D6-9CD7-3B69E751D187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7045683-AAB9-48D6-9CD7-3B69E751D187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7045683-AAB9-48D6-9CD7-3B69E751D187}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
