@@ -73,17 +73,17 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">  原始儲位 </span>
+                <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsCol[0] </span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="FilterC0">
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[0]">
         </div>
     </div>
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">   單據號 </span>
+                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsCol[1] </span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="FilterC1">
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[1]">
 
         </div>
     </div>
@@ -333,10 +333,7 @@
         FilterDt2 = DateTime.Today;
 
 
-        //
-        Filters.FilterContainsCol[0] = "Loc";
-        Filters.FilterContainsCol[1] = "Cticketcode";
-        Filters.FilterContainsCol[2] = "Remark";
+
 
 
 
@@ -357,6 +354,24 @@
             fieldMappersSorting.Add(new FieldMapper(x.Id + "_2", x.Name + "  🔽"));
         }
         SelectedColumn = "Cticketcode_1";
+
+
+        //foreach (var (item, index) in collection.WithIndex())
+        //{
+        //    Debug.WriteLine($"{index}: {item}");
+        //}
+
+        int k = 0;
+        foreach (var x in FieldMappers)
+        {
+            Filters.FilterContainsCol[k]=x.Id ;
+            k++;
+        }
+        //
+        //Filters.FilterContainsCol[0] = "Loc";
+        //Filters.FilterContainsCol[1] = "Cticketcode";
+        //Filters.FilterContainsCol[2] = "Remark";
+
 
     }
 
@@ -436,6 +451,10 @@
     //    get => Filters.FilterTextF1;
     //    set => Filters.FilterTextF1 = value.Trim();
     //}
+
+
+
+
     private string FilterC0
 
     {

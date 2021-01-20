@@ -64,9 +64,29 @@ namespace Inventory.Grid
 
         }
 
+        string getContains (string col , string val)
+        {
+           return String.Format (" and {0}.Contains(\"{1}\")",col,val);
+        }
         public async Task<ICollection<V2Outbill>> FetchAsyncV5(TaiweiContext context)
         {
-            string strWhere = " Cticketcode ";
+            //   .Where("MyColumn.Contains(@0)", myArray)
+            //string v1 = "001";
+            //string strWhere = String.Format(@" Cticketcode.Contains(@0),v1 ";
+
+            string strWhere = " 1==1 ";
+            
+            
+            for ( int i = 0; i < 3; i++)
+            {
+                if (f.FilterContains[i] != null)
+                {
+                    strWhere += getContains(f.FilterContainsCol[i], f.FilterContains[i]);
+                }
+            }
+           
+
+
 
 
             if (f.SortStr == null) // QUICK FIX: 不知道為何使用  browser fresh, sortStr becomes null
@@ -81,7 +101,9 @@ namespace Inventory.Grid
             string strOrderBy = str[0];
             if (str[1] == "2") strOrderBy += " desc";
 
-            var collection = await context.V2Outbill.OrderBy(strOrderBy).ToListAsync();
+
+            //调整
+            var collection = await context.V2Outbill.Where(strWhere).OrderBy(strOrderBy).ToListAsync();
 
             return collection;
 
