@@ -30,11 +30,8 @@
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        @*<Q014StockCurrentSearch Filters="@QueryAdapter.f" 
-                             FieldMappers ="@fieldMappers"
-                           
-                             
-                             />*@
+        <Q015V2StockCurrentSearch Filters="@QueryAdapter.f"
+                                  FieldMappers="@fieldMappers" />
 
 
 
@@ -66,7 +63,7 @@
             <Inventory.Shared.Q000BasePagingWhFilterV2_ItemCnt Filters="@QueryAdapter.f" />
 
         }
- 
+
 
     </div>
 </GridWrapper>
@@ -86,14 +83,14 @@
     }
 
     /// <summary>
-    /// A wrapper for grid-related activity 
+    /// A wrapper for grid-related activity
     /// </summary>
     private GridWrapper Wrapper { get; set; }
     private ICollection<StockCurrent> Parts { get; set; }
     private List<StockCurrent> Items { get; set; }
 
 
-    private string IsDisabled(bool condition) =>!QueryAdapter.f.Loading && condition ? "" : "disabled";
+    private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
 
     /// <summary>
     /// Keeps track of the last page loaded.
@@ -160,7 +157,7 @@
 
 
         // NOTE by Mark, 2021-01-19, V4 just fine
-     //   Parts = await QueryAdapter.FetchAsyncV4(context.StockCurrent.AsQueryable());
+        //   Parts = await QueryAdapter.FetchAsyncV4(context.StockCurrent.AsQueryable());
 
         Parts = await QueryAdapter.FetchAsyncV5(context);
 
