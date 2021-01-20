@@ -31,6 +31,7 @@ namespace Inventory.Data
         public virtual DbSet<StockCurrentSn> StockCurrentSn { get; set; }
         public virtual DbSet<SysConfig> SysConfig { get; set; }
         public virtual DbSet<SysParameter> SysParameter { get; set; }
+        public virtual DbSet<V2Outbill> V2Outbill { get; set; }
         public virtual DbSet<V2OutbillD> V2OutbillD { get; set; }
         public virtual DbSet<V2StockCurrentAdjust> V2StockCurrentAdjust { get; set; }
         public virtual DbSet<VCmdMst> VCmdMst { get; set; }
@@ -1560,6 +1561,54 @@ namespace Inventory.Data
                 entity.Property(e => e.Sortid)
                     .HasColumnType("decimal(18, 0)")
                     .HasColumnName("sortid");
+            });
+
+            modelBuilder.Entity<V2Outbill>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V2_OUTBILL");
+
+                entity.Property(e => e.Ccreateownername)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("ccreateownername");
+
+                entity.Property(e => e.Coutasn)
+                    .HasMaxLength(20)
+                    .HasColumnName("coutasn");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus");
+
+                entity.Property(e => e.Cstatusname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatusname");
+
+                entity.Property(e => e.Cticketcode)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("cticketcode");
+
+                entity.Property(e => e.Debittime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("debittime");
+
+                entity.Property(e => e.Dindate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dindate");
+
+                entity.Property(e => e.Outtype)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("outtype");
             });
 
             modelBuilder.Entity<V2OutbillD>(entity =>

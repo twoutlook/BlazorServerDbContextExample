@@ -73,6 +73,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[V2_OUTBILL]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[V2_OUTBILL_D]",
          "ObjectType": 3
       },
