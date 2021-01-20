@@ -1,0 +1,71 @@
+﻿
+@page "/Tool"
+
+
+<PageTitle Title="開發工具 " />
+
+<h3>生成每頁[篩選][排序][顯示欄位]的JSON</h3>
+<pre>
+@JsonStr
+</pre>
+<table class="gridtable">
+
+    @foreach (var x in Q011VCmdMst)
+    {
+        <tr>
+            <th>@x.Seq</th>
+            <td>@x.Id</td>
+            <td>@x.Name</td>
+            <td>@x.SortSeq</td>
+            <td>@x.FilterSeq</td>
+            <td>@x.Index</td>
+
+
+
+        </tr>
+
+    }
+
+</table>
+
+
+@code
+{
+
+    public List<ShowField> Q011VCmdMst;
+    public string JsonStr;
+
+
+    protected override void OnInitialized()
+    {
+
+        Q011VCmdMst = GetShowField.Q011VCmdMst();
+
+        //https://stackoverflow.com/questions/6201529/how-do-i-turn-a-c-sharp-object-into-a-json-string-in-net
+        // Serializing to Json String:
+
+        //var obj = new Lad
+        //{
+        //    firstName = "Markoff",
+        //    lastName = "Chaney",
+        //    dateOfBirth = new MyDate
+        //    {
+        //        year = 1901,
+        //        month = 4,
+        //        day = 30
+        //    }
+        //};
+
+        //var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+        //Deserializing to Object:
+
+        //var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Lad>(jsonString);
+        var obj = new PageShowField("Q011VCmdMst", "CmdMst", Q011VCmdMst);
+
+
+        JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+
+    }
+}
+
+

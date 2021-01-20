@@ -1,0 +1,36 @@
+﻿
+@page "/ToolV2"
+<PageTitle Title="開發工具 " />
+<h3>生成每頁[篩選][排序][顯示欄位]的JSON</h3>
+
+<Q999ToolTable ObjList="Q011VCmdMst" />
+
+
+
+
+
+
+
+
+@code
+{
+
+    public List<List<ShowField>> MainList;
+    public List<ShowField> Q011VCmdMst;
+    public List<ShowField> Q011VCmdMstV2;
+
+    protected override void OnInitialized()
+    {
+
+        Q011VCmdMst = GetShowField.Q011VCmdMst();
+        Q011VCmdMstV2 = GetShowField.Q011VCmdMstV2();
+
+
+        MainList = new(); // 這是新版的簡約語法
+        MainList.Add(Q011VCmdMst);
+        MainList.Add(Q011VCmdMstV2);
+
+    }
+}
+
+
