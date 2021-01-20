@@ -4,6 +4,9 @@
 
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.EntityFrameworkCore.DynamicLinq
+
+@using System.Linq.Dynamic.Core
+
 @inject IDbContextFactory<TaiweiContext> DbFactory
 
 <PageTitle Title="Test Dynamic LINQ" />
@@ -49,6 +52,11 @@
 
         using var db = DbFactory.CreateDbContext();
         //        Items = db.VCmdMst.Where(v1).ToList();
+
+        var qry = db.VCmdMst;
+        //qry = qry.OrderBy("WmsTskId");
+        Items = db.VCmdMst.OrderBy("WmsTskId").Where(v2).Where(v3).ToList();
+
         Items = db.VCmdMst.Where(v2).Where(v3).ToList();
 
 

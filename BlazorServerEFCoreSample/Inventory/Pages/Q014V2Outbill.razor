@@ -157,11 +157,19 @@
 
         using var context = DbFactory.CreateDbContext();
 
+
+
         // NOTE by Mark, 2021-01-19, V4 just fine
-        Parts = await QueryAdapter.FetchAsyncV4(context.V2Outbill.AsQueryable());
+     //   Parts = await QueryAdapter.FetchAsyncV4(context.V2Outbill.AsQueryable());
+
+        Parts = await QueryAdapter.FetchAsyncV5(context);
+
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         Items = Parts.ToList();
+
+
+
 
         // now we're done
         QueryAdapter.f.Loading = false;
@@ -179,7 +187,7 @@
     protected override void OnInitialized()
     {
         fieldMappers = GetFieldMapper.Q001V2Outbill();
-    
+
 
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Linq.Dynamic.Core;
+using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -17,8 +17,8 @@ namespace Inventory.Grid
     // public class Q008OutbillDGridQueryAdapter
     // public class Q009V2OutbillGridQueryAdapter
     // public class Q010V2OutbillGridQueryAdapter
-    //  public class Q011V2OutbillGridQueryAdapter
-    public class Q014V2OutbillAdapter
+  //  public class Q011V2OutbillGridQueryAdapter
+    public class Q014V2OutbillAdapterDL // DL: Dynamic LINQ
     {
         /// <summary>
         /// Holds state of the grid.
@@ -28,21 +28,21 @@ namespace Inventory.Grid
         public IBaseFiltersV2 f;
 
 
-
+     
 
 
 
         /// 
         private readonly string FilterTextF1;
 
-
+        
         // NOTE by Mark, 2021-01-18
-        private ApplicationFilterColumns DEFAULT_SORT_COL = ApplicationFilterColumns.CmdSno;
-
-
+        private ApplicationFilterColumns DEFAULT_SORT_COL =  ApplicationFilterColumns.CmdSno;
+        
+       
         //   public PartGridQueryAdapter(ILocationFilters controls)
         //public Q006OutbillGridQueryAdapter(IBaseFilters controls)
-        public Q014V2OutbillAdapter()
+        public Q014V2OutbillAdapterDL()
         {
             //    _controls = controls;
             _controls = new BaseFiltersV2(); // 
@@ -51,11 +51,11 @@ namespace Inventory.Grid
 
             //_controls.FilterColumn = ApplicationFilterColumns.CmdSno;
             //_controls.SortColumn = ApplicationFilterColumns.CmdSno;
-            //  _controls.FilterColumn = DEFAULT_SORT_COL;
+          //  _controls.FilterColumn = DEFAULT_SORT_COL;
             //      _controls.SortColumn = DEFAULT_SORT_COL; // NOTE by Mark, 因為 string or int , 不能混用
 
             // make it as default, for most of the cases
-            //            f.SortType = AppSortType.TYPE_STR;
+//            f.SortType = AppSortType.TYPE_STR;
             f.SortType = AppSortType.TYPE_STR;   // default as WmsTskId
 
             _controls.DefaultColumn = ApplicationFilterColumns.Cticketcode;
@@ -64,36 +64,21 @@ namespace Inventory.Grid
 
         }
 
-        public async Task<ICollection<V2Outbill>> FetchAsyncV5(TaiweiContext context)
-        {
-            string strWhere = " Cticketcode ";
 
 
-            if (f.SortStr == null) // QUICK FIX: 不知道為何使用  browser fresh, sortStr becomes null
-            {
-                f.SortStr = "Cticketcode_1";
-            }
-
-            string[] str = f.SortStr.Split('_');
-            //string desc = str[1] == "2" ? " desc" : "";
-
-
-            string strOrderBy = str[0];
-            if (str[1] == "2") strOrderBy += " desc";
-
-            var collection = await context.V2Outbill.OrderBy(strOrderBy).ToListAsync();
-
-            return collection;
-
-        }
         public async Task<ICollection<V2Outbill>> FetchAsyncV4(IQueryable<V2Outbill> query)
         {
             // 處理 篩選 WHERE
-
+      
             query = GetFilterContains.V2Outbill(query, f);
 
             // 處理 排序 Order By
             query = GetSortQuery.V2Outbill(query, f.SortStr);
+
+
+           // using var context = DbFactory.CreateDbContext();
+
+
 
             // 這部分是固定的
             // 處理 分頁
