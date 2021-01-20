@@ -116,8 +116,6 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">   排序</span>
             </div>
-            @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
-
 
             <select name="cars" id="cars" @bind="SelectedColumn">
                 @*<option value="WmsTskId_1">WmsTskId 🔼</option>
@@ -138,12 +136,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">   每頁筆數</span>
             </div>
-            @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
-
 
             <select name="cars" id="cars" @bind="@BindPageSize">
-                @*<option value="WmsTskId_1">WmsTskId 🔼</option>
-                    <option value="WmsTskId_2">WmsTskId 🔽</option>*@
 
                 @for (int i = 1; i <= 100; i++)
                 {
@@ -167,31 +161,6 @@
 
     </div>
 </div>
-@*<div style="margin-top: -12px;
-            margin-bottom: 4px;
-            margin-left: -16px">
-        <button class="btn btn-primary " @onclick="UpdateHeading">
-            查詢
-        </button>
-
-        參數:
-
-        <span class="val"> @FilterC0Submit</span>
-        <span class="val"> @FilterC1Submit</span>
-        <span class="val"> @FilterC2Submit</span>
-
-
-        排序:
-
-        <span class="val"> @SelectedColumn</span>
-
-        時間:<span class="val">@_dateString</span>
-
-        <span style="background-color:pink">@Filters.ErrMsg</span>
-    </div>*@
-
-
-
 
 
 @code {
