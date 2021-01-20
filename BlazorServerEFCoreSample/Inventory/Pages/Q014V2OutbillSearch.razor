@@ -141,11 +141,11 @@
             @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
 
 
-            <select name="cars" id="cars" @bind="@Filters.PageHelper.PageSize">
+            <select name="cars" id="cars" @bind="@BindPageSize">
                 @*<option value="WmsTskId_1">WmsTskId 🔼</option>
                     <option value="WmsTskId_2">WmsTskId 🔽</option>*@
 
-                @for (int i =1;i<=100;i++)
+                @for (int i = 1; i <= 100; i++)
                 {
                     <option value=@i>@i </option>
                 }
@@ -229,7 +229,21 @@
     Dictionary<string, string> sortNameDict = new Dictionary<string, string>();
     Dictionary<string, string> isAsc12Dict = new Dictionary<string, string>();
 
+    //https://stackoverflow.com/questions/49947790/blazor-onchange-event-with-select-dropdown
 
+    public int currentPageSize { get; set; }
+    void OnChangeSorting(ChangeEventArgs e)
+    {
+        Filters.PageHelper.PageSize = int.Parse(e.Value.ToString());
+        currentPageSize = Filters.PageHelper.PageSize;
+        //     Console.WriteLine("It is definitely: " + selectedString);
+    }
+
+    public int BindPageSize
+    {
+        get => Filters.PageHelper.PageSize;
+        set => Filters.PageHelper.PageSize = value;
+    }
 
     //protected override void OnParametersSet()
     //{
@@ -414,7 +428,7 @@
     /// <summary>
     /// Column to filter on.
     /// </summary>
-    /// 
+    ///
 
     private string SelectedAsc;
 
