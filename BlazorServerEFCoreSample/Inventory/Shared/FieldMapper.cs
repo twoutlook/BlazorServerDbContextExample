@@ -8,6 +8,13 @@ namespace Inventory.Shared
 {
     public partial class FieldMapper
     {
+        public FieldMapper() { }
+        public FieldMapper(string id, string name)
+        {
+            Id = id;
+            Name = name;
+            Index = -1;
+        }
         public string Id { get; set; }
         public string Name { get; set; }
 

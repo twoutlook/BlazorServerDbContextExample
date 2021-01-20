@@ -30,7 +30,11 @@
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <Q011V2OutbillFieldFilter Filters="@QueryAdapter.f" />
+        <Q014V2OutbillSearch Filters="@QueryAdapter.f" 
+                             FieldMappers ="@fieldMappers"
+                           
+                             
+                             />
 
 
 
@@ -98,6 +102,7 @@
 
 
     List<FieldMapper> fieldMappers;
+
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -174,6 +179,8 @@
     protected override void OnInitialized()
     {
         fieldMappers = GetFieldMapper.Q001V2Outbill();
+    
+
     }
 }
 
