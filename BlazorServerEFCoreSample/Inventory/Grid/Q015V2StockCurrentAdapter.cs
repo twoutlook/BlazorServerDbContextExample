@@ -63,7 +63,7 @@ namespace Inventory.Grid
             _controls.DefaultColumn = ApplicationFilterColumns.Cticketcode;
             _controls.SortColumn = ApplicationFilterColumns.Cticketcode;
 
-
+       //     _controls.SortStr= "Cpositioncode_1";
         }
 
         string getContains(string col, string val)

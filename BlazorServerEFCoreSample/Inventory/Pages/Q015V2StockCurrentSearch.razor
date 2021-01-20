@@ -117,7 +117,7 @@
                 <span class="input-group-text" id="basic-addon1">   排序</span>
             </div>
 
-            <select name="cars" id="cars" @bind="SelectedColumn">
+            <select name="cars" id="cars" @bind="Filters.SortStr">
                 @*<option value="WmsTskId_1">WmsTskId 🔼</option>
                     <option value="WmsTskId_2">WmsTskId 🔽</option>*@
 
@@ -165,38 +165,6 @@
 
 @code {
 
-    //https://stackoverflow.com/questions/56748968/how-to-set-date-formats-and-culture-in-asp-net-core-razor-pages-2-2
-
-    //string IsAsc12;
-
-    //string SortCol;
-    //int SortIntCol;
-
-
-    //string IsAsc12Submit;
-    //string SortColSubmit;
-
-
-
-    //string FilterDt1Submit;
-    //string FilterDt2Submit;
-
-
-    //string FilterC0Submit; // C means Contains
-    //string FilterC1Submit;
-    //string FilterC2Submit;
-    ////string FilterTextF4Submit;
-
-    //DateTime FilterTextDt1Submit;
-
-
-    //DateTime SubmitTime;
-    //private string _dateString;
-
-
-    //Dictionary<string, ApplicationFilterColumns> sortDict = new Dictionary<string, ApplicationFilterColumns>();
-    //Dictionary<string, string> sortNameDict = new Dictionary<string, string>();
-    //Dictionary<string, string> isAsc12Dict = new Dictionary<string, string>();
 
     //https://stackoverflow.com/questions/49947790/blazor-onchange-event-with-select-dropdown
 
@@ -214,22 +182,7 @@
         set => Filters.PageHelper.PageSize = value;
     }
 
-    //protected override void OnParametersSet()
-    //{
-    //    base.OnParametersSet();
 
-    //    sortDict.Add("Code", ApplicationFilterColumns.Code);
-    //    sortDict.Add("ConfigDesc", ApplicationFilterColumns.ConfigDesc);
-
-    //    sortNameDict.Add("Code", "Code");
-    //    sortNameDict.Add("ConfigDesc", "ConfigDesc");
-
-    //    isAsc12Dict.Add("1", "正向");
-    //    isAsc12Dict.Add("2", "反向");
-
-
-
-    //}
 
     private async void UpdateHeading(MouseEventArgs e)
     {
@@ -326,37 +279,8 @@
     protected override void OnInitialized()
     {
 
-        //sortDict.Add("WmsTskId", ApplicationFilterColumns.WmsTskId);
-        ////  sortDict.Add("ConfigDesc", ApplicationFilterColumns.ConfigDesc);
-
-        //sortNameDict.Add("WmsTskId", "WmsTskId");
-        ////    sortNameDict.Add("ConfigDesc", "ConfigDesc");
-
-        //// 這個可以做成  單例  ***
-        //isAsc12Dict.Add("1", "正向");
-        //isAsc12Dict.Add("2", "反向");
-
-        //var today = DateTime.Today;
-        //var lastmonth = new DateTime(today.Year, today.Month - 1, 1);
-
-        //FilterDt1 = DateTime.Now;
-        //FilterDt2 = DateTime.Now;
-
-        //FilterDt1 = DateTime.Today.AddDays(-14);
-        //FilterDt2 = DateTime.Today;
 
 
-
-
-
-
-
-        // grab filter
-        filterText = Filters.FilterText;
-
-        // grab column to filter on
-
-        //base.OnInitialized();
 
 
         fieldMappersSorting = new();
@@ -366,13 +290,11 @@
             fieldMappersSorting.Add(new FieldMapper(x.Id + "_1", x.Name + "  🔼"));
             fieldMappersSorting.Add(new FieldMapper(x.Id + "_2", x.Name + "  🔽"));
         }
-        SelectedColumn = "Cpositioncode_1";
+
+        // TODO, DO IT AS PARAMETER
+        //   SelectedColumn = "Cpositioncode_1";
 
 
-        //foreach (var (item, index) in collection.WithIndex())
-        //{
-        //    Debug.WriteLine($"{index}: {item}");
-        //}
 
         int k = 0;
         foreach (var x in FieldMappers)
@@ -382,39 +304,26 @@
 
             k++;
         }
-        //
-        //Filters.FilterContainsCol[0] = "Loc";
-        //Filters.FilterContainsCol[1] = "Cticketcode";
-        //Filters.FilterContainsCol[2] = "Remark";
 
 
     }
 
 
 
-    //  private string selectedColumn;
-
-    /// <summary>
-    /// Column to filter on.
-    /// </summary>
-    ///
-
-    private string SelectedAsc;
 
 
+    //private string SelectedColumn
+    //{
+    //    get => Filters.SortStr;
+    //    set
+    //    {
+    //        if (value != Filters.SortStr)
+    //        {
+    //            Filters.SortStr = value;
 
-    private string SelectedColumn
-    {
-        get => Filters.SortStr;
-        set
-        {
-            if (value != Filters.SortStr)
-            {
-                Filters.SortStr = value;
-
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
 
 
