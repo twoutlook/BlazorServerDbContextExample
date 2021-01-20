@@ -35,6 +35,7 @@ namespace Inventory.Grid
 
         string[] FilterContains { get; set; }
         string[] FilterContainsCol { get; set; }
+        string[] FilterContainsColName { get; set; }
 
         string FilterTextF1 { get; set; }
 

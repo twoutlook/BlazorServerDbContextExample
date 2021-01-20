@@ -77,7 +77,7 @@ namespace Inventory.Grid
             string strWhere = " 1==1 ";
             
             
-            for ( int i = 0; i < 3; i++)
+            for ( int i = 0; i < 9; i++)
             {
                 if (f.FilterContains[i] != null)
                 {

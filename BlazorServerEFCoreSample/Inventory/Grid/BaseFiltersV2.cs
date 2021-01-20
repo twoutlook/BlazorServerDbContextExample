@@ -36,6 +36,7 @@ namespace Inventory.Grid
             // NOTE by Mark, 2021-01-19, 基本功, 先設十組
             FilterContains = new string[10];
             FilterContainsCol = new string[10];
+            FilterContainsColName = new string[10];
 
         }
 
@@ -73,6 +74,7 @@ namespace Inventory.Grid
         public string FilterText { get; set; }
         public string[] FilterContains { get; set; }
         public string[] FilterContainsCol { get; set; }
+        public string[] FilterContainsColName { get; set; }
 
         public string FilterTextF1 { get; set; }
         public string FilterTextF2 { get; set; }
