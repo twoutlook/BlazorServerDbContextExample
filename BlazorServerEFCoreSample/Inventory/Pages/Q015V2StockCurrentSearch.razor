@@ -137,7 +137,7 @@
                 <span class="input-group-text" id="basic-addon1">   每頁筆數</span>
             </div>
 
-            <select name="cars" id="cars" @bind="@BindPageSize">
+            <select name="cars" id="cars" @bind="@Filters.PageHelper.PageSize">
 
                 @for (int i = 1; i <= 100; i++)
                 {
@@ -312,113 +312,11 @@
 
 
 
-    //private string SelectedColumn
-    //{
-    //    get => Filters.SortStr;
-    //    set
-    //    {
-    //        if (value != Filters.SortStr)
-    //        {
-    //            Filters.SortStr = value;
-
-    //        }
-    //    }
-    //}
 
 
 
 
 
-
-
-
-    private string filterText;
-
-
-
-
-
-
-
-
-
-
-    private string FilterTextF3
-    {
-        get => Filters.FilterTextF3;
-        set => Filters.FilterTextF3 = value.Trim();
-    }
-
-    private string FilterTextF4
-    {
-        get => Filters.FilterTextF4;
-        set => Filters.FilterTextF4 = value.Trim();
-    }
-    private string FilterTextF5
-    {
-        get => Filters.FilterTextF5;
-        set => Filters.FilterTextF5 = value.Trim();
-    }
-    private string FilterTextF6
-    {
-        get => Filters.FilterTextF6;
-        set => Filters.FilterTextF6 = value.Trim();
-    }
-    private string FilterTextF7
-    {
-        get => Filters.FilterTextF7;
-        set => Filters.FilterTextF7 = value.Trim();
-    }
-
-    //private string FilterTextF1
-    //{
-    //    get => Filters.FilterTextF1;
-    //    set => Filters.FilterTextF1 = value.Trim();
-    //}
-
-
-
-
-    private string FilterC0
-
-    {
-        get => Filters.FilterContains[0];
-        set => Filters.FilterContains[0] = value.Trim();
-    }
-
-    private string FilterC1
-
-    {
-        get => Filters.FilterContains[1];
-        set => Filters.FilterContains[1] = value.Trim();
-    }
-
-    private string FilterC2
-
-    {
-        get => Filters.FilterContains[2];
-        set => Filters.FilterContains[2] = value.Trim();
-    }
-
-
-
-
-    private string FilterTextF2
-    {
-        get => Filters.FilterTextF2;
-        set => Filters.FilterTextF2 = value.Trim();
-    }
-
-    private DateTime FilterDt1
-    {
-        get => Filters.FilterDt1;
-        set => Filters.FilterDt1 = value;
-    }
-    private DateTime FilterDt2
-    {
-        get => Filters.FilterDt2;
-        set => Filters.FilterDt2 = value;
-    }
 
 
 
