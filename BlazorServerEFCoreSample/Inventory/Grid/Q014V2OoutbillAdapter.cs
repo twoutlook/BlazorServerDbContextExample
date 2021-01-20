@@ -108,8 +108,15 @@ namespace Inventory.Grid
 
 
             //调整
-            var collection = await context.V2Outbill.Where(strWhere).OrderBy(strOrderBy).ToListAsync();
+            var qry = context.V2Outbill.Where(strWhere).OrderBy(strOrderBy);
+            await CountAsync(qry);//更新總筆數
+            //var collection = await context.V2Outbill.Where(strWhere).OrderBy(strOrderBy).ToListAsync();
+            
+            //var collection = await qry.ToListAsync();
+            var collection = await FetchPageQuery(qry).ToListAsync();//獲得分頁的內容
 
+
+            _controls.PageHelper.PageItems = collection.Count;//更新返回的筆數
             return collection;
 
         }
@@ -131,6 +138,7 @@ namespace Inventory.Grid
         }
 
 
+     
 
         //更新總筆數
         public async Task CountAsync(IQueryable<V2Outbill> query)
