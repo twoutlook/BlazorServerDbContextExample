@@ -167,36 +167,36 @@
 
     //https://stackoverflow.com/questions/56748968/how-to-set-date-formats-and-culture-in-asp-net-core-razor-pages-2-2
 
-    string IsAsc12;
+    //string IsAsc12;
 
-    string SortCol;
-    int SortIntCol;
-
-
-    string IsAsc12Submit;
-    string SortColSubmit;
+    //string SortCol;
+    //int SortIntCol;
 
 
-
-    string FilterDt1Submit;
-    string FilterDt2Submit;
-
-
-    string FilterC0Submit; // C means Contains
-    string FilterC1Submit;
-    string FilterC2Submit;
-    //string FilterTextF4Submit;
-
-    DateTime FilterTextDt1Submit;
+    //string IsAsc12Submit;
+    //string SortColSubmit;
 
 
-    DateTime SubmitTime;
-    private string _dateString;
+
+    //string FilterDt1Submit;
+    //string FilterDt2Submit;
 
 
-    Dictionary<string, ApplicationFilterColumns> sortDict = new Dictionary<string, ApplicationFilterColumns>();
-    Dictionary<string, string> sortNameDict = new Dictionary<string, string>();
-    Dictionary<string, string> isAsc12Dict = new Dictionary<string, string>();
+    //string FilterC0Submit; // C means Contains
+    //string FilterC1Submit;
+    //string FilterC2Submit;
+    ////string FilterTextF4Submit;
+
+    //DateTime FilterTextDt1Submit;
+
+
+    //DateTime SubmitTime;
+    //private string _dateString;
+
+
+    //Dictionary<string, ApplicationFilterColumns> sortDict = new Dictionary<string, ApplicationFilterColumns>();
+    //Dictionary<string, string> sortNameDict = new Dictionary<string, string>();
+    //Dictionary<string, string> isAsc12Dict = new Dictionary<string, string>();
 
     //https://stackoverflow.com/questions/49947790/blazor-onchange-event-with-select-dropdown
 
@@ -239,19 +239,19 @@
 
 
         //        SortCol = "Cticketcode";
-        if (SortCol == null)
-        {
-            SortCol = "WmsTskId"; //NOTE by Mark, 2021-01-17, 為何 selected 無效?
-        }
-        if (IsAsc12 == null)
-        {
-            IsAsc12 = "2"; // 這裡習慣反序, 最後發生的在最上面
-        }
+        //if (SortCol == null)
+        //{
+        //    SortCol = "WmsTskId"; //NOTE by Mark, 2021-01-17, 為何 selected 無效?
+        //}
+        //if (IsAsc12 == null)
+        //{
+        //    IsAsc12 = "2"; // 這裡習慣反序, 最後發生的在最上面
+        //}
 
-        Filters.SortColumn = sortDict[SortCol];
+        //Filters.SortColumn = sortDict[SortCol];
 
-        // FOR DEBUG ONLY
-        Filters.SortAscending = IsAsc12 == "1" ? true : false;
+        //// FOR DEBUG ONLY
+        //Filters.SortAscending = IsAsc12 == "1" ? true : false;
 
 
         // TODO ,QUICK FIX ONLY
@@ -264,21 +264,21 @@
 
 
 
-        SortColSubmit = sortNameDict[SortCol];
-        IsAsc12Submit = isAsc12Dict[IsAsc12];
+        //SortColSubmit = sortNameDict[SortCol];
+        //IsAsc12Submit = isAsc12Dict[IsAsc12];
 
 
 
-        FilterC0Submit = FilterC0;
-        FilterC1Submit = FilterC1;
-        FilterC2Submit = FilterC2;
+        //FilterC0Submit = FilterC0;
+        //FilterC1Submit = FilterC1;
+        //FilterC2Submit = FilterC2;
 
-        //FilterTextF2Submit = FilterTextF2;
-        //FilterTextF3Submit = FilterTextF3;
-        //FilterTextF4Submit = FilterTextF4;
+        ////FilterTextF2Submit = FilterTextF2;
+        ////FilterTextF3Submit = FilterTextF3;
+        ////FilterTextF4Submit = FilterTextF4;
 
-        FilterDt1Submit = FilterDt1.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-        FilterDt2Submit = FilterDt2.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+        //FilterDt1Submit = FilterDt1.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+        //FilterDt2Submit = FilterDt2.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
         //   FilterDt2Submit = FilterDt2;
         //  FilterTextF2Submit = FilterTextF2;
 
@@ -287,7 +287,7 @@
 
         StateHasChanged();
 
-        _dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+        //_dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
 
 
@@ -326,15 +326,15 @@
     protected override void OnInitialized()
     {
 
-        sortDict.Add("WmsTskId", ApplicationFilterColumns.WmsTskId);
-        //  sortDict.Add("ConfigDesc", ApplicationFilterColumns.ConfigDesc);
+        //sortDict.Add("WmsTskId", ApplicationFilterColumns.WmsTskId);
+        ////  sortDict.Add("ConfigDesc", ApplicationFilterColumns.ConfigDesc);
 
-        sortNameDict.Add("WmsTskId", "WmsTskId");
-        //    sortNameDict.Add("ConfigDesc", "ConfigDesc");
+        //sortNameDict.Add("WmsTskId", "WmsTskId");
+        ////    sortNameDict.Add("ConfigDesc", "ConfigDesc");
 
-        // 這個可以做成  單例  ***
-        isAsc12Dict.Add("1", "正向");
-        isAsc12Dict.Add("2", "反向");
+        //// 這個可以做成  單例  ***
+        //isAsc12Dict.Add("1", "正向");
+        //isAsc12Dict.Add("2", "反向");
 
         //var today = DateTime.Today;
         //var lastmonth = new DateTime(today.Year, today.Month - 1, 1);
@@ -342,8 +342,8 @@
         //FilterDt1 = DateTime.Now;
         //FilterDt2 = DateTime.Now;
 
-        FilterDt1 = DateTime.Today.AddDays(-14);
-        FilterDt2 = DateTime.Today;
+        //FilterDt1 = DateTime.Today.AddDays(-14);
+        //FilterDt2 = DateTime.Today;
 
 
 
