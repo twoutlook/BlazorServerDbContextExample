@@ -132,7 +132,11 @@ namespace Inventory.Grid
             // 這部分是固定的
             // 處理 分頁
             await CountAsync(query);//更新總筆數
+            
             var collection = await FetchPageQuery(query).ToListAsync();//獲得分頁的內容
+
+
+
             _controls.PageHelper.PageItems = collection.Count;//更新返回的筆數
             return collection;//返回分頁的內容
         }

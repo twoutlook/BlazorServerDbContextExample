@@ -129,11 +129,32 @@
                 }
 
             </select>
-          
+
 
         </div>
     </div>
+    <div class="col-3  txt">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">   每頁筆數</span>
+            </div>
+            @*   <input type="text" class="form-control" autofocus @bind="FilterTextF2">*@
 
+
+            <select name="cars" id="cars" @bind="@Filters.PageHelper.PageSize">
+                @*<option value="WmsTskId_1">WmsTskId 🔼</option>
+                    <option value="WmsTskId_2">WmsTskId 🔽</option>*@
+
+                @for (int i =1;i<=100;i++)
+                {
+                    <option value=@i>@i </option>
+                }
+
+            </select>
+
+
+        </div>
+    </div>
 
     <div class="col-3  txt">
         <div class="input-group mb-3">
