@@ -81,7 +81,12 @@ namespace Inventory.Grid
             {
                 if (f.FilterContains[i] != null)
                 {
-                    strWhere += getContains(f.FilterContainsCol[i], f.FilterContains[i]);
+                    // NOTE by Mark, 2021-01-20
+                    // 在前端, 可以和 control 挷定
+                    // 那就在這裡處理空白
+                    f.FilterContains[i] = f.FilterContains[i].Trim();
+                    if (f.FilterContains[i] != "")
+                        strWhere += getContains(f.FilterContainsCol[i], f.FilterContains[i]);
                 }
             }
            
