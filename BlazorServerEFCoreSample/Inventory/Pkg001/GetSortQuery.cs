@@ -53,5 +53,28 @@ namespace Inventory.Package1
             }
 
         }
+        public static IQueryable<V2Outbill> V2Outbill(IQueryable<V2Outbill> query, string sortStr)
+        {
+
+            if (sortStr == null) // QUICK FIX: 不知道為何使用  browser fresh, sortStr becomes null
+            {
+                sortStr = "Cticketcode_1";
+            }
+
+            string[] str = sortStr.Split('_');
+
+
+            switch (str[0])
+            {
+                case "Cticketcode":
+                    if (str[1] == "1") return query.OrderBy(x => x.Cticketcode);
+                    if (str[1] == "2") return query.OrderByDescending(x => x.Cticketcode);
+                    return query;
+                default:
+                    return query;
+            }
+
+        }
+
     }
 }
