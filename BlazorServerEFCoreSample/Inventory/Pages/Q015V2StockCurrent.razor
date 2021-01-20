@@ -30,11 +30,11 @@
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <Q014V2OutbillSearch Filters="@QueryAdapter.f" 
+        @*<Q014StockCurrentSearch Filters="@QueryAdapter.f" 
                              FieldMappers ="@fieldMappers"
                            
                              
-                             />
+                             />*@
 
 
 
@@ -89,8 +89,8 @@
     /// A wrapper for grid-related activity 
     /// </summary>
     private GridWrapper Wrapper { get; set; }
-    private ICollection<V2Outbill> Parts { get; set; }
-    private List<V2Outbill> Items { get; set; }
+    private ICollection<StockCurrent> Parts { get; set; }
+    private List<StockCurrent> Items { get; set; }
 
 
     private string IsDisabled(bool condition) =>!QueryAdapter.f.Loading && condition ? "" : "disabled";
@@ -160,7 +160,7 @@
 
 
         // NOTE by Mark, 2021-01-19, V4 just fine
-     //   Parts = await QueryAdapter.FetchAsyncV4(context.V2Outbill.AsQueryable());
+     //   Parts = await QueryAdapter.FetchAsyncV4(context.StockCurrent.AsQueryable());
 
         Parts = await QueryAdapter.FetchAsyncV5(context);
 
@@ -186,7 +186,7 @@
 
     protected override void OnInitialized()
     {
-        fieldMappers = GetFieldMapper.Q001V2Outbill();
+        fieldMappers = GetFieldMapper.Q001StockCurrent();
 
 
     }

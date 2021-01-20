@@ -15,10 +15,10 @@ namespace Inventory.Grid
 
     //   public class Q006OutbillGridQueryAdapter
     // public class Q008OutbillDGridQueryAdapter
-    // public class Q009V2OutbillGridQueryAdapter
-    // public class Q010V2OutbillGridQueryAdapter
-    //  public class Q011V2OutbillGridQueryAdapter
-    // public class Q014V2OutbillAdapter
+    // public class Q009StockCurrentGridQueryAdapter
+    // public class Q010StockCurrentGridQueryAdapter
+    //  public class Q011StockCurrentGridQueryAdapter
+    // public class Q014StockCurrentAdapter
     public class Q015V2StockCurrentAdapter
 
     {
@@ -70,7 +70,7 @@ namespace Inventory.Grid
         {
             return String.Format(" and {0}.Contains(\"{1}\")", col, val);
         }
-        public async Task<ICollection<V2Outbill>> FetchAsyncV5(TaiweiContext context)
+        public async Task<ICollection<StockCurrent>> FetchAsyncV5(TaiweiContext context)
         {
             //   .Where("MyColumn.Contains(@0)", myArray)
             //string v1 = "001";
@@ -98,7 +98,7 @@ namespace Inventory.Grid
 
             if (f.SortStr == null) // QUICK FIX: 不知道為何使用  browser fresh, sortStr becomes null
             {
-                f.SortStr = "Cticketcode_1";
+                f.SortStr = "Cpositioncode_1";
             }
 
             string[] str = f.SortStr.Split('_');
@@ -110,9 +110,9 @@ namespace Inventory.Grid
 
 
             //调整
-            var qry = context.V2Outbill.Where(strWhere).OrderBy(strOrderBy);
+            var qry = context.StockCurrent.Where(strWhere).OrderBy(strOrderBy);
             await CountAsync(qry);//更新總筆數
-                                  //var collection = await context.V2Outbill.Where(strWhere).OrderBy(strOrderBy).ToListAsync();
+                                  //var collection = await context.StockCurrent.Where(strWhere).OrderBy(strOrderBy).ToListAsync();
 
             //var collection = await qry.ToListAsync();
             var collection = await FetchPageQuery(qry).ToListAsync();//獲得分頁的內容
@@ -122,38 +122,18 @@ namespace Inventory.Grid
             return collection;
 
         }
-        public async Task<ICollection<V2Outbill>> FetchAsyncV4(IQueryable<V2Outbill> query)
-        {
-            // 處理 篩選 WHERE
-
-            query = GetFilterContains.V2Outbill(query, f);
-
-            // 處理 排序 Order By
-            query = GetSortQuery.V2Outbill(query, f.SortStr);
-
-            // 這部分是固定的
-            // 處理 分頁
-            await CountAsync(query);//更新總筆數
-
-            var collection = await FetchPageQuery(query).ToListAsync();//獲得分頁的內容
-
-
-
-            _controls.PageHelper.PageItems = collection.Count;//更新返回的筆數
-            return collection;//返回分頁的內容
-        }
 
 
 
 
         //更新總筆數
-        public async Task CountAsync(IQueryable<V2Outbill> query)
+        public async Task CountAsync(IQueryable<StockCurrent> query)
         {
             _controls.PageHelper.TotalItemCount = await query.CountAsync();
         }
 
         //獲得分頁的內容
-        public IQueryable<V2Outbill> FetchPageQuery(IQueryable<V2Outbill> query)
+        public IQueryable<StockCurrent> FetchPageQuery(IQueryable<StockCurrent> query)
         {
             return query
                 .Skip(_controls.PageHelper.Skip)

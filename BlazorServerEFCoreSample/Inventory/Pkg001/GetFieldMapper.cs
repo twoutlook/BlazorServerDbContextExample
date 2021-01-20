@@ -42,5 +42,18 @@ namespace Inventory.Package1
             return fieldMappers;
         }
 
+        public static List<FieldMapper> Q001StockCurrent()
+        {
+            var fieldMappers = new List<FieldMapper>();
+            fieldMappers.Add(new FieldMapper { Id = "Cpositioncode", Name = "儲位編碼", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Cposition", Name = "儲位名稱", Index = -1 });
+            //單據號	出庫通知單單號	出庫類型	制單人	制單日期	出庫日期	扣帳時間	狀態	編
+            fieldMappers.Add(new FieldMapper { Id = "Cinvcode", Name = "物料編碼", Index = -1 });
+
+            fieldMappers.Add(new FieldMapper { Id = "Cinvname", Name = "物料名稱", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Iqty", Name = "數量", Index = -1 });
+            return fieldMappers;
+        }
+
     }
 }
