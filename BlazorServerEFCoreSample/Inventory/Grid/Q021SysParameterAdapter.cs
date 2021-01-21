@@ -24,7 +24,7 @@ namespace Inventory.Grid
         public Q021SysParameterAdapter()
         {
             f = new BaseFiltersV2(); // 
-            f.PageHelper.BaseUrl = "/Q021SysParameterAdapter/";
+            f.PageHelper.BaseUrl = "/Q021SysParameter/";
             defaultSortStr = "FlagId_1";   // *** 這裡要改 i.e. FlagId_1
 
         }
