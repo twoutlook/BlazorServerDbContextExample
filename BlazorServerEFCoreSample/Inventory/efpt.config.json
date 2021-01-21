@@ -69,6 +69,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[V_INASN]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[V_INOutType]",
          "ObjectType": 3
       },

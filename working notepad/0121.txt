@@ -1,4 +1,7 @@
 
+FrmINASNList
+
+
 庫存調整查詢
 
 V2StockCurrentAdjust

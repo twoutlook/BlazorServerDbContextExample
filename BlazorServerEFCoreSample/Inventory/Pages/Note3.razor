@@ -1,0 +1,64 @@
+﻿@page "/note3"
+<PageTitle Title="頁面開發流程" />
+<style>
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+    }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+
+        blockquote p {
+            display: inline;
+        }
+</style>
+<blockquote class="blockquote">
+    <span style="font-size:125%">  單獨或是特例容易做, 泛型是才是抽象化的真功夫。</span>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --- by Mark陳炳陵, 2021-01-16
+</blockquote>
+<hr />
+
+<table class="gridtable">
+
+    <tr><th>1</th><td>DB Table/View</td><td>V_INASN </td><td>查看原項目的頁面的Gird所使用的 Table/View</td></tr>
+    <tr><th>2</th><td>Entity Class</td><td>VInasn.cs</td><td>使用EF Core Tool 選擇生成。注意Context 的 constructor 由於使用 factory 需要註釋掉無參的。</td></tr>
+    <tr><th>3</th><td>Page Razor File</td><td>
+    Q017VInasn.razor
+    <br />&commat;page "/Q017VInasn"
+    <br />&commat;page "/Q017VInasn/{Page:int}"
+    <br />NavMenu.razor
+    <br /> public static List&nblt;FieldMapper> Q017VInasn()
+    <br />    private ICollection&nblt;V2StockCurrentAdjust>
+    Parts { get; set; }
+    private List&nblt;V2StockCurrentAdjust> Items { get; set; }
+
+</td><td>使用自建的模板 Q016V2StockCurrentAdjust.razor copy/paste</td></tr>
+    <tr><th>4</th><td>
+    Adapter
+    <br /> QueryAdapter = new Q000Adapter("/Q017VInasn/", "Cticketcode_1");
+
+</td><td>QxxxEntity.razor</td><td>new 一個Adapter, 目前要設定幾個初值. TODO 自動化</td></tr>
+    <tr><th>5</th><td>Search Component</td><td>QxxxEntity.razor</td><td>準備組件:四個查詢欄位,一組排序下拉,一組頁面筆數, 一個查詢btn</td></tr>
+    <tr><th>6</th><td>Grid Table</td><td>QxxxEntity.razor</td><td>
+    準備組件
+    <br />
+    AutoTableCompWhFilterV2.razor:line 51
+    <br />
+    CStatusname(x)
+    <br />
+    Statusname(V)
+</td></tr>
+    <tr><th>7</th><td>Pagination</td><td>QxxxEntity.razor</td><td>準備組件</td></tr>
+
+</table>

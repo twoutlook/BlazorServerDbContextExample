@@ -35,6 +35,7 @@ namespace Inventory.Data
         public virtual DbSet<V2OutbillD> V2OutbillD { get; set; }
         public virtual DbSet<V2StockCurrentAdjust> V2StockCurrentAdjust { get; set; }
         public virtual DbSet<VCmdMst> VCmdMst { get; set; }
+        public virtual DbSet<VInasn> VInasn { get; set; }
         public virtual DbSet<VInoutType> VInoutType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1935,6 +1936,113 @@ namespace Inventory.Data
                 entity.Property(e => e.TrnDate)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VInasn>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V_INASN");
+
+                entity.Property(e => e.Cauditpersoncode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cauditpersoncode");
+
+                entity.Property(e => e.Ccreateownercode)
+                    .HasMaxLength(100)
+                    .HasColumnName("ccreateownercode");
+
+                entity.Property(e => e.Cerpcode)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("cerpcode");
+
+                entity.Property(e => e.Cpo)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("cpo");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus");
+
+                entity.Property(e => e.Cticketcode)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cticketcode");
+
+                entity.Property(e => e.Dauditdate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dauditdate");
+
+                entity.Property(e => e.Dcreatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dcreatetime");
+
+                entity.Property(e => e.Ddefine3)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("ddefine3");
+
+                entity.Property(e => e.Ddefine4)
+                    .HasMaxLength(50)
+                    .HasColumnName("ddefine4");
+
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.InasnIaId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasColumnName("inasn_ia_id");
+
+                entity.Property(e => e.Isspecialwipreturn)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .HasColumnName("isspecialwipreturn");
+
+                entity.Property(e => e.Itype)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasColumnName("itype");
+
+                entity.Property(e => e.Oby).HasColumnName("oby");
+
+                entity.Property(e => e.Reasoncode)
+                    .HasMaxLength(30)
+                    .HasColumnName("reasoncode");
+
+                entity.Property(e => e.Reasoncontent)
+                    .HasMaxLength(100)
+                    .HasColumnName("reasoncontent");
+
+                entity.Property(e => e.Statusname)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("statusname");
+
+                entity.Property(e => e.Typename)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("typename");
+
+                entity.Property(e => e.Worktype)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("WORKTYPE");
+
+                entity.Property(e => e.WorktypeName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("worktypeName");
             });
 
             modelBuilder.Entity<VInoutType>(entity =>

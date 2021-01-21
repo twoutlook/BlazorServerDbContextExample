@@ -67,6 +67,19 @@ namespace Inventory.Package1
             fieldMappers.Add(new FieldMapper { Id = "Cstatusname", Name = "狀態", Index = -1 });
             return fieldMappers;
         }
+        public static List<FieldMapper> Q017VInasn()
+        {
+            var fieldMappers = new List<FieldMapper>();
+            fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "入庫通知單", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Typename", Name = "入庫類型", Index = -1 });
+            //單據號	入庫類型	入庫理由碼	制單人	制單日期	狀態
+            fieldMappers.Add(new FieldMapper { Id = "Reasoncontent", Name = "入庫理由碼", Index = -1 });
+
+            fieldMappers.Add(new FieldMapper { Id = "Ccreateownercode", Name = "制單人", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Dcreatetime", Name = "製單日期", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Statusname", Name = "狀態", Index = -1 });
+            return fieldMappers;
+        }
 
     }
 }

@@ -1,8 +1,8 @@
 ﻿@*@layout MainLayoutV2*@
-@page "/Q016V2StockCurrentAdjust"
+@page "/Q017VInasn"
 @*@page "/outbilld/{OutbillId}"*@
 
-@page "/Q016V2StockCurrentAdjust/{Page:int}"
+@page "/Q017VInasn/{Page:int}"
 @using Microsoft.AspNetCore.WebUtilities
 @inject NavigationManager NavMgr
 @using System.Linq.Dynamic.Core;
@@ -16,7 +16,6 @@
 @using Inventory.Comp
 
 
-@*@inject Q015V2V2StockCurrentAdjustAdapter QueryAdapter*@
 
 <PageTitle Title="庫存調整查詢" />
 
@@ -58,12 +57,10 @@
                                      FieldMapper="fieldMappers" />
         }
 
-        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
-        @if (@QueryAdapter.f.PageHelper.PageCount > 1)
-        {
-            <Inventory.Shared.Q000BasePagingWhFilterV2_ItemCnt Filters="@QueryAdapter.f" />
 
-        }
+        <Inventory.Shared.Q000BasePagingWhFilterV2_ItemCnt Filters="@QueryAdapter.f" />
+
+
 
 
     </div>
@@ -94,8 +91,8 @@
 
     // 這裡說明 ICollection 和 List 的差異
     //https://stackoverflow.com/questions/7655845/icollectiont-vs-listt-in-entity-framework
-    private ICollection<V2StockCurrentAdjust> Parts { get; set; }
-    private List<V2StockCurrentAdjust> Items { get; set; }
+    private ICollection<VInasn> Parts { get; set; }
+    private List<VInasn> Items { get; set; }
 
 
     private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
@@ -149,7 +146,7 @@
     }
 
 
-    public async Task<ICollection<V2StockCurrentAdjust>> FetchAsyncV6(TaiweiContext context)
+    public async Task<ICollection<VInasn>> FetchAsyncV6(TaiweiContext context)
     {
         //   .Where("MyColumn.Contains(@0)", myArray)
         //string v1 = "001";
@@ -187,7 +184,7 @@
 
         // *** NEED TO CHANGE HERE
         //调整
-        var qry = context.V2StockCurrentAdjust.Where(strWhere).OrderBy(strOrderBy);
+        var qry = context.VInasn.Where(strWhere).OrderBy(strOrderBy);
 
 
         //   await CountAsync(qry);//更新總筆數
@@ -228,10 +225,6 @@
 
 
 
-        // NOTE by Mark, 2021-01-19, V4 just fine
-        //   Parts = await QueryAdapter.FetchAsyncV4(context.V2StockCurrentAdjust.AsQueryable());
-
-        //Parts = await QueryAdapter.FetchAsyncV5(context);
 
         Parts = await FetchAsyncV6(context);
         // Parts 只是延用最先實施的料號頁面, 到這裡從數據庫取數據只限分頁的結果.
@@ -257,20 +250,18 @@
 
     protected override void OnInitialized()
     {
-        //f.PageHelper.BaseUrl = "/Q015V2V2StockCurrentAdjust/";
-        //defaultSortStr = "Cpositioncode_1";
-        QueryAdapter = new Q000Adapter("/Q016V2StockCurrentAdjust/", "Cticketcode_1");
-        fieldMappers = GetFieldMapper.Q016V2StockCurrentAdjust();
+
+        QueryAdapter = new Q000Adapter("/Q017VInasn/", "Cticketcode_1");
+        fieldMappers = GetFieldMapper.Q017VInasn();
 
 
-
-
+        //     0      1         2       3      4      5
+        //   單據號 入庫類型 入庫理由碼 制單人 制單日期 狀態
         FMapper = new();
-        FMapper.Add(0); //庫存調整單
-        FMapper.Add(1); //理由
-        FMapper.Add(2); //製單人
-                        //    FMapper.Add(3); //製單日期
-        FMapper.Add(4); //狀態
+        FMapper.Add(0);
+        FMapper.Add(1);
+        FMapper.Add(2);
+        FMapper.Add(5); //狀態
 
     }
 }
