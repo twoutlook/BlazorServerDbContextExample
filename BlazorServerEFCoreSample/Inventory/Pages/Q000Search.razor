@@ -73,9 +73,9 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsColName[0] </span>
+                <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsColName[@F0] </span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[0]">
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F0]">
         </div>
     </div>
     <div class="col-3 txt ">
@@ -90,9 +90,9 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[2] </span>
+                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F2] </span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[2]">
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F2]">
 
         </div>
     </div>
@@ -100,9 +100,9 @@
     <div class="col-3 txt ">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[4] </span>
+                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F3] </span>
             </div>
-            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[4]">
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F3]">
 
         </div>
     </div>
@@ -169,12 +169,19 @@
     [Parameter]
     public List<FieldMapper> FieldMappers { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
 
+    [Parameter]
+    public List<int> FMapper { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
 
     // === (2) 本地定義的變量 ===
 
     List<FieldMapper> fieldMappersSorting; // 按照顯示欄位自動生成正序反序的下接列表
 
-    private int F1 { get => 1; }
+    private int F0 { get => FMapper[0]; }
+    private int F1 { get => FMapper[1]; }
+    private int F2 { get => FMapper[2]; }
+    private int F3 { get => FMapper[3]; }
+
+
 
     // === (3) 所有 protected override ===
     /// <summary>

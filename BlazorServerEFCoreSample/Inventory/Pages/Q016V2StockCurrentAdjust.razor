@@ -31,7 +31,8 @@
     <div class="container-fluid contacts-grid">
 
         <Q000Search Filters="@QueryAdapter.f"
-                                  FieldMappers="@fieldMappers" />
+                                  FieldMappers="@fieldMappers" 
+                    FMapper="@FMapper"/>
 
 
 
@@ -105,7 +106,7 @@ private int _lastPage = -1;
 
 List<FieldMapper> fieldMappers;
 
-
+List<int> FMapper;
 protected override void OnAfterRender(bool firstRender)
 {
     // Ensure we're on the same, er, right page.
@@ -261,6 +262,15 @@ protected override void OnInitialized()
     QueryAdapter = new Q000Adapter("/Q016V2StockCurrentAdjust/", "Cticketcode_1");
     fieldMappers = GetFieldMapper.Q016V2StockCurrentAdjust();
 
+
+
+
+    FMapper = new();
+    FMapper.Add(0); //庫存調整單
+    FMapper.Add(1); //理由
+    FMapper.Add(2); //製單人
+//    FMapper.Add(3); //製單日期
+    FMapper.Add(4); //狀態
 
 }
 }
