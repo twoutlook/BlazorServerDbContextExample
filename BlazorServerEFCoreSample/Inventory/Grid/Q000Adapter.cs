@@ -34,7 +34,10 @@ namespace Inventory.Grid
         }
 
 
-
+        public string GetContains(string col, string val)
+        {
+            return String.Format(" and {0}.Contains(\"{1}\")", col, val);
+        }
 
     }
 

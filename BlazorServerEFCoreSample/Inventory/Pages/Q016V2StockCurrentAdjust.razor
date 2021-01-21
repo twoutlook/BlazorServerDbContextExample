@@ -144,10 +144,7 @@ protected async override Task OnParametersSetAsync()
     }
     await base.OnParametersSetAsync();
 }
-string GetContains(string col, string val)
-{
-    return String.Format(" and {0}.Contains(\"{1}\")", col, val);
-}
+
 
 public async Task<ICollection<V2StockCurrentAdjust>> FetchAsyncV6(TaiweiContext context)
 {
@@ -166,7 +163,7 @@ public async Task<ICollection<V2StockCurrentAdjust>> FetchAsyncV6(TaiweiContext 
             // 那就在這裡處理空白
             QueryAdapter.f.FilterContains[i] = QueryAdapter.f.FilterContains[i].Trim();
             if (QueryAdapter.f.FilterContains[i] != "")
-                strWhere += GetContains(QueryAdapter.f.FilterContainsCol[i], QueryAdapter.f.FilterContains[i]);
+                strWhere += QueryAdapter.GetContains(QueryAdapter.f.FilterContainsCol[i], QueryAdapter.f.FilterContains[i]);
         }
     }
 
