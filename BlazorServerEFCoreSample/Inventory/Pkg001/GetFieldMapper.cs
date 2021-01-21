@@ -120,6 +120,20 @@ namespace Inventory.Package1
             return fieldMappers;
         }
 
-        
+
+        public static List<FieldMapper> Q017SysParameter()
+        {
+            var fieldMappers = new List<FieldMapper>();
+            fieldMappers.Add(new FieldMapper { Id = "FlagId", Name = "FlagId", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "FlagName", Name = "FlagName", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "FlagType", Name = "FlagType", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Sortid", Name = "Sortid", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Memo", Name = "Memo", Index = -1 });
+
+            return fieldMappers;
+        }
+
+
+
     }
 }
