@@ -1,0 +1,37 @@
+
+庫存調整查詢
+
+V2StockCurrentAdjust
+
+Q016V2StockCurrentAdjust
+Q016V2StockCurrentAdjustSearch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q015V2StockCurrent
+Q015V2StockCurrentSearch
+
+Q015V2StockCurrentAdapter
+
+Cpositioncode 儲位編碼
+Cposition 儲位名稱
+Cinvcode 物料編碼
+Cinvname 物料名稱
+數量
+   
+
+StockCurrent
+Cticketcode
+blazor.server.js:19 [2021-01-20T23:01:19.041Z] Error: No property or field 'Cticketcode' exists in type 'StockCurrent' 

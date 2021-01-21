@@ -55,5 +55,18 @@ namespace Inventory.Package1
             return fieldMappers;
         }
 
+        public static List<FieldMapper> Q016V2StockCurrentAdjust()
+        {
+            var fieldMappers = new List<FieldMapper>();
+            fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "庫存調整單", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Reason", Name = "理由", Index = -1 });
+            //單據號	出庫通知單單號	出庫類型	制單人	制單日期	出庫日期	扣帳時間	狀態	編
+            fieldMappers.Add(new FieldMapper { Id = "Createownername", Name = "製單人", Index = -1 });
+
+            fieldMappers.Add(new FieldMapper { Id = "Createtime", Name = "製單日期", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Cstatusname", Name = "狀態", Index = -1 });
+            return fieldMappers;
+        }
+
     }
 }

@@ -13,11 +13,12 @@ namespace Inventory.Data
         public string Reason { get; set; }
         public string Cstatus { get; set; }
         public string Createowner { get; set; }
+        public string Createownername { get; set; }
         public DateTime Createtime { get; set; }
         public string Reviewuser { get; set; }
         public DateTime? Reviewtime { get; set; }
         public string Lastupdateuser { get; set; }
         public DateTime? Lastupdatetime { get; set; }
-        public string FlagName { get; set; }
+        public string Cstatusname { get; set; }
     }
 }

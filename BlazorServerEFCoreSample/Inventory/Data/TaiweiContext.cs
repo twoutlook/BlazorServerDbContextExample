@@ -1802,6 +1802,11 @@ namespace Inventory.Data
                     .IsUnicode(false)
                     .HasColumnName("createowner");
 
+                entity.Property(e => e.Createownername)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("createownername");
+
                 entity.Property(e => e.Createtime)
                     .HasColumnType("datetime")
                     .HasColumnName("createtime");
@@ -1812,17 +1817,17 @@ namespace Inventory.Data
                     .IsUnicode(false)
                     .HasColumnName("cstatus");
 
+                entity.Property(e => e.Cstatusname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatusname");
+
                 entity.Property(e => e.Cticketcode)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("cticketcode");
-
-                entity.Property(e => e.FlagName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("flag_name");
 
                 entity.Property(e => e.Id)
                     .IsRequired()
