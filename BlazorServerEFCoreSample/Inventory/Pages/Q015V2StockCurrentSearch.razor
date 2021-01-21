@@ -116,19 +116,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">   排序</span>
             </div>
-
             <select name="cars" id="cars" @bind="Filters.SortStr">
-                @*<option value="WmsTskId_1">WmsTskId 🔼</option>
-                    <option value="WmsTskId_2">WmsTskId 🔽</option>*@
-
                 @foreach (var x in fieldMappersSorting)
                 {
                     <option value="@x.Id">@x.Name </option>
                 }
 
             </select>
-
-
         </div>
     </div>
     <div class="col-3  txt">
@@ -136,24 +130,19 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">   每頁筆數</span>
             </div>
-
             <select name="cars" id="cars" @bind="@Filters.PageHelper.PageSize">
-
                 @for (int i = 1; i <= 100; i++)
                 {
                     <option value=@i>@i </option>
                 }
-
             </select>
-
-
         </div>
     </div>
 
     <div class="col-3  txt">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <button class="btn btn-primary " @onclick="UpdateHeading">
+                <button class="btn btn-primary " @onclick="SearchOnclick">
                     查詢
                 </button>
             </div>
@@ -165,104 +154,14 @@
 
 @code {
 
-
-    //https://stackoverflow.com/questions/49947790/blazor-onchange-event-with-select-dropdown
-
-    public int currentPageSize { get; set; }
-    void OnChangeSorting(ChangeEventArgs e)
-    {
-        Filters.PageHelper.PageSize = int.Parse(e.Value.ToString());
-        currentPageSize = Filters.PageHelper.PageSize;
-        //     Console.WriteLine("It is definitely: " + selectedString);
-    }
-
-    public int BindPageSize
-    {
-        get => Filters.PageHelper.PageSize;
-        set => Filters.PageHelper.PageSize = value;
-    }
-
-
-
-    private async void UpdateHeading(MouseEventArgs e)
-    {
-
-
-
-
-
-        //        SortCol = "Cticketcode";
-        //if (SortCol == null)
-        //{
-        //    SortCol = "WmsTskId"; //NOTE by Mark, 2021-01-17, 為何 selected 無效?
-        //}
-        //if (IsAsc12 == null)
-        //{
-        //    IsAsc12 = "2"; // 這裡習慣反序, 最後發生的在最上面
-        //}
-
-        //Filters.SortColumn = sortDict[SortCol];
-
-        //// FOR DEBUG ONLY
-        //Filters.SortAscending = IsAsc12 == "1" ? true : false;
-
-
-        // TODO ,QUICK FIX ONLY
-        // ONLY FOR WmsTskId
-        // AS  int
-        // NEED TO PROVIDE OTHER OPTIONS
-        Filters.SortType = AppSortType.TYPE_INT;
-
-
-
-
-
-        //SortColSubmit = sortNameDict[SortCol];
-        //IsAsc12Submit = isAsc12Dict[IsAsc12];
-
-
-
-        //FilterC0Submit = FilterC0;
-        //FilterC1Submit = FilterC1;
-        //FilterC2Submit = FilterC2;
-
-        ////FilterTextF2Submit = FilterTextF2;
-        ////FilterTextF3Submit = FilterTextF3;
-        ////FilterTextF4Submit = FilterTextF4;
-
-        //FilterDt1Submit = FilterDt1.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-        //FilterDt2Submit = FilterDt2.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-        //   FilterDt2Submit = FilterDt2;
-        //  FilterTextF2Submit = FilterTextF2;
-
-
-
-
-        StateHasChanged();
-
-        //_dateString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-        await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
-
-
-    }
-
+    // NOTE by Mark, 20201-01-21
+    // === (1) 傳入的參數, 所有帶有 Parameter ===
 
     /// <summary>
     /// Get a reference to the global <see cref="GridWrapper"/>.
     /// </summary>
     [CascadingParameter]
     public GridWrapper Wrapper { get; set; }
-
-    /// <summary>
-    /// Wait period in (ms) after the user stops typing.
-    /// </summary>
-    const int DebounceMs = 300;
-
-    /// <summary>
-    /// Timer for debounce.
-    /// </summary>
-    Timer timer;
-
 
     [Parameter]
     public IBaseFiltersV2 Filters { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
@@ -271,18 +170,16 @@
     public List<FieldMapper> FieldMappers { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
 
 
+    // === (2) 本地定義的變量 ===
 
-    List<FieldMapper> fieldMappersSorting;
+    List<FieldMapper> fieldMappersSorting; // 按照顯示欄位自動生成正序反序的下接列表
+
+    // === (3) 所有 protected override ===
     /// <summary>
     /// When ready.
     /// </summary>
     protected override void OnInitialized()
     {
-
-
-
-
-
         fieldMappersSorting = new();
 
         foreach (var x in FieldMappers)
@@ -290,11 +187,6 @@
             fieldMappersSorting.Add(new FieldMapper(x.Id + "_1", x.Name + "  🔼"));
             fieldMappersSorting.Add(new FieldMapper(x.Id + "_2", x.Name + "  🔽"));
         }
-
-        // TODO, DO IT AS PARAMETER
-        //   SelectedColumn = "Cpositioncode_1";
-
-
 
         int k = 0;
         foreach (var x in FieldMappers)
@@ -304,21 +196,15 @@
 
             k++;
         }
-
-
     }
 
 
+    // === (4) 自定義的 ===
 
+    private async void SearchOnclick(MouseEventArgs e)
+    {
+        //StateHasChanged();
 
-
-
-
-
-
-
-
-
-
-
+        await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
+    }
 }
