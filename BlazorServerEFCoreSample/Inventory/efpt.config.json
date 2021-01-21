@@ -77,6 +77,14 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[V_OUTASNList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTASN]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[V2_OUTBILL]",
          "ObjectType": 3
       },

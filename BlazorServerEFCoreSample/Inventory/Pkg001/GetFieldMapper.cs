@@ -80,6 +80,46 @@ namespace Inventory.Package1
             fieldMappers.Add(new FieldMapper { Id = "Statusname", Name = "狀態", Index = -1 });
             return fieldMappers;
         }
+        public static List<FieldMapper> Q018VOutasnlist()
+        {
+            var fieldMappers = new List<FieldMapper>();
+            fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "出庫通知單", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Typename", Name = "出庫類型", Index = -1 });
+            //單據號	出庫類型	制單人	制單日期	狀態
+            //  fieldMappers.Add(new FieldMapper { Id = "Reasoncontent", Name = "入庫理由碼", Index = -1 });
 
+            fieldMappers.Add(new FieldMapper { Id = "Ccreateownercode", Name = "制單人", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Dcreatetime", Name = "製單日期", Index = -1 });
+
+            // NOTE by Mark, 2021-01-21, WHY??? 這兩個都對不上?
+            // 是不是 view VOutasnlist 有問題???
+            fieldMappers.Add(new FieldMapper { Id = "Cstatusname", Name = "狀態", Index = -1 });
+            //fieldMappers.Add(new FieldMapper { Id = "FlagName", Name = "狀態", Index = -1 });
+
+
+            return fieldMappers;
+        }
+
+        public static List<FieldMapper> Q019V2Outasn()
+        {
+            var fieldMappers = new List<FieldMapper>();
+            fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "出庫通知單", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Typename", Name = "出庫類型", Index = -1 });
+            //單據號	出庫類型	制單人	制單日期	狀態
+            //  fieldMappers.Add(new FieldMapper { Id = "Reasoncontent", Name = "入庫理由碼", Index = -1 });
+
+            fieldMappers.Add(new FieldMapper { Id = "Ccreateownername", Name = "制單人", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Dcreatetime", Name = "製單日期", Index = -1 });
+
+            // NOTE by Mark, 2021-01-21, WHY??? 這兩個都對不上?
+            // 是不是 view VOutasnlist 有問題???
+            fieldMappers.Add(new FieldMapper { Id = "Cstatusname", Name = "狀態", Index = -1 });
+            //fieldMappers.Add(new FieldMapper { Id = "FlagName", Name = "狀態", Index = -1 });
+
+
+            return fieldMappers;
+        }
+
+        
     }
 }

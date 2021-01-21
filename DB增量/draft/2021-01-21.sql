@@ -1,4 +1,4 @@
-select * from V_INASN
+--
 
 
 /****** Script for SelectTopNRows command from SSMS  ******/
@@ -7,12 +7,12 @@ T1.cticketcode,
 T1.itype,
 T3.TYPENAME,
 T1.reasoncode,
-T1.reasoncontent,
 T1.ccreateownercode,
-* FROM INASN T1
-INNER JOIN INASN_D T2
-ON T1.id = T2.id
---WHERE T1.cticketcode >='Inasn201228'
+T4.
+* FROM OUTASN T1
+
 
 INNER JOIN V_INOutType T3
 ON T1.itype = T3.CERPCODE
+LEFT JOIN BASE_OPERATOR T4
+ON T1.ccreateownercode=T4.caccountid

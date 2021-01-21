@@ -31,12 +31,14 @@ namespace Inventory.Data
         public virtual DbSet<StockCurrentSn> StockCurrentSn { get; set; }
         public virtual DbSet<SysConfig> SysConfig { get; set; }
         public virtual DbSet<SysParameter> SysParameter { get; set; }
+        public virtual DbSet<V2Outasn> V2Outasn { get; set; }
         public virtual DbSet<V2Outbill> V2Outbill { get; set; }
         public virtual DbSet<V2OutbillD> V2OutbillD { get; set; }
         public virtual DbSet<V2StockCurrentAdjust> V2StockCurrentAdjust { get; set; }
         public virtual DbSet<VCmdMst> VCmdMst { get; set; }
         public virtual DbSet<VInasn> VInasn { get; set; }
         public virtual DbSet<VInoutType> VInoutType { get; set; }
+        public virtual DbSet<VOutasnlist> VOutasnlist { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1564,6 +1566,58 @@ namespace Inventory.Data
                     .HasColumnName("sortid");
             });
 
+            modelBuilder.Entity<V2Outasn>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V2_OUTASN");
+
+                entity.Property(e => e.Ccreateownercode)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ccreateownercode");
+
+                entity.Property(e => e.Ccreateownername)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("ccreateownername");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus");
+
+                entity.Property(e => e.Cstatusname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatusname");
+
+                entity.Property(e => e.Cticketcode)
+                    .HasMaxLength(20)
+                    .HasColumnName("cticketcode");
+
+                entity.Property(e => e.Dcreatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dcreatetime");
+
+                entity.Property(e => e.Itype)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("itype");
+
+                entity.Property(e => e.Reasoncode)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("reasoncode");
+
+                entity.Property(e => e.Typename)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("TYPENAME");
+            });
+
             modelBuilder.Entity<V2Outbill>(entity =>
             {
                 entity.HasNoKey();
@@ -2130,6 +2184,121 @@ namespace Inventory.Data
                     .HasMaxLength(200)
                     .IsUnicode(false)
                     .HasColumnName("TYPENAME");
+            });
+
+            modelBuilder.Entity<VOutasnlist>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V_OUTASNList");
+
+                entity.Property(e => e.Cauditpersoncode)
+                    .HasMaxLength(50)
+                    .HasColumnName("cauditpersoncode");
+
+                entity.Property(e => e.Ccreateownercode)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("ccreateownercode");
+
+                entity.Property(e => e.Cdefine2)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cdefine2");
+
+                entity.Property(e => e.Cerpcode)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("cerpcode");
+
+                entity.Property(e => e.Cso)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("cso");
+
+                entity.Property(e => e.Cstatus)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatus");
+
+                entity.Property(e => e.Cstatusname)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("cstatusname");
+
+                entity.Property(e => e.Cticketcode)
+                    .HasMaxLength(20)
+                    .HasColumnName("cticketcode");
+
+                entity.Property(e => e.Dauditdate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dauditdate");
+
+                entity.Property(e => e.Dcreatetime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("dcreatetime");
+
+                entity.Property(e => e.FlagName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("flag_name");
+
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.IsCj).HasColumnName("is_cj");
+
+                entity.Property(e => e.IsMerge)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("is_merge");
+
+                entity.Property(e => e.IsMergename)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("is_mergename");
+
+                entity.Property(e => e.Itype)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("itype");
+
+                entity.Property(e => e.Shifts)
+                    .HasMaxLength(20)
+                    .HasColumnName("SHIFTS");
+
+                entity.Property(e => e.Smttype)
+                    .HasMaxLength(9)
+                    .IsUnicode(false)
+                    .HasColumnName("smttype");
+
+                entity.Property(e => e.Smttypeint)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("smttypeint");
+
+                entity.Property(e => e.SpecialOut)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("special_out");
+
+                entity.Property(e => e.StartDates)
+                    .HasColumnType("datetime")
+                    .HasColumnName("START_DATES");
+
+                entity.Property(e => e.Typename)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("typename");
+
+                entity.Property(e => e.Worktype)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("worktype");
             });
 
             modelBuilder.HasSequence("ASRS_cmdno_SEQ")

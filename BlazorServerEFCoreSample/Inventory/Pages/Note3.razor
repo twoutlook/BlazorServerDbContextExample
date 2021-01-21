@@ -29,6 +29,189 @@
 </blockquote>
 <hr />
 
+<PageTitle Title="出庫通知單"></PageTitle>
+<table class="gridtable">
+
+    <tr><th>1</th><td>
+    DB Table/View
+   
+
+
+</td><td>
+    FrmOUTASNList
+    <br />GridBind
+    <br />V_OUTASNList
+</td><td>查看原項目的頁面的Gird所使用的 Table/View</td></tr>
+    <tr><th>2</th><td>Entity Class</td><td>VOutasnlist.cs</td><td>使用EF Core Tool 選擇生成。注意Context 的 constructor 由於使用 factory 需要註釋掉無參的。</td></tr>
+    <tr>
+        <th>3</th>
+        <td>Page Razor File</td>
+        <td>
+            Q018VOutasnlist.razor
+            <br />&commat;page "/Q018VOutasnlist"
+            <br />&commat;page "/Q018VOutasnlist/{Page:int}"
+            <br />replace Q017VInasn with Q018VOutasnlist
+            <hr />
+
+            QueryAdapter = new Q000Adapter("/Q018VOutasnlist/", "Cticketcode_1");
+            <br /> same Cticketcode_1
+            <hr />
+            fieldMappers = GetFieldMapper.Q018VOutasnlist();
+            <br /> 單據號	出庫類型	制單人	制單日期	狀態
+            <hr />
+            FMapper 0 1 2 4
+            <hr />
+
+
+
+
+            <br />NavMenu.razor
+         
+        </td>
+        <td>使用自建的模板 Q016V2StockCurrentAdjust.razor copy/paste</td>
+    </tr>
+    <tr>
+        <th>4</th>
+        <td>
+            Adapter
+          
+
+        </td>
+        <td>QxxxEntity.razor</td>
+        <td>new 一個Adapter, 目前要設定幾個初值. TODO 自動化</td>
+    </tr>
+    <tr><th>5</th><td>Search Component</td><td>QxxxEntity.razor</td><td>準備組件:四個查詢欄位,一組排序下拉,一組頁面筆數, 一個查詢btn</td></tr>
+    <tr>
+        <th>6</th>
+        <td>Grid Table</td>
+        <td>WHY Cstatusname **** 對不上???</td>
+        <td>
+            準備組件
+            <br />
+            AutoTableCompWhFilterV2.razor:line 51
+            <br />
+            CStatusname(x)
+            <br />
+            Statusname(V)
+        </td>
+    </tr>
+    <tr><th>7</th><td>Pagination</td><td>QxxxEntity.razor</td><td>準備組件</td></tr>
+
+</table>
+
+
+<h1>這樣的VIEW不易維護</h1>
+<pre>
+
+USE [TaiWei]
+GO
+
+EXEC sys.sp_dropextendedproperty &commat;name=N'MS_DiagramPaneCount' , &commat;level0type=N'SCHEMA',&commat;level0name=N'dbo', &commat;level1type=N'VIEW',&commat;level1name=N'V_OUTASNList'
+GO
+
+EXEC sys.sp_dropextendedproperty &commat;name=N'MS_DiagramPane2' , &commat;level0type=N'SCHEMA',&commat;level0name=N'dbo', &commat;level1type=N'VIEW',&commat;level1name=N'V_OUTASNList'
+GO
+
+EXEC sys.sp_dropextendedproperty &commat;name=N'MS_DiagramPane1' , &commat;level0type=N'SCHEMA',&commat;level0name=N'dbo', &commat;level1type=N'VIEW',&commat;level1name=N'V_OUTASNList'
+GO
+
+/****** Object:  View [dbo].[V_OUTASNList]    Script Date: 2021/1/21 17:19:44 ******/
+DROP VIEW [dbo].[V_OUTASNList]
+GO
+
+/****** Object:  View [dbo].[V_OUTASNList]    Script Date: 2021/1/21 17:19:44 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE VIEW [dbo].[V_OUTASNList]
+
+AS
+
+SELECT a.* FROM (SELECT   A.id,isnull(bo.coperatorname,A.ccreateownercode) as ccreateownercode, A.dcreatetime, A.cauditpersoncode, A.dauditdate, A.cticketcode, A.cerpcode, A.cstatus, 
+
+                p.flag_name, A.itype, ot.typename, A.cdefine2, ISNULL(A.is_merge,0) is_merge, ISNULL(INFO.start_date, 
+
+                CASE WHEN A.is_merge = '1' THEN
+
+                    (SELECT   ini.start_date
+
+                     FROM      dbo.IN_MO_INFO ini
+
+                     WHERE   ini.wo =
+
+                                         (SELECT   TOP 1 o.cerpcode
+
+                                          FROM      dbo.OUTASN o
+
+                                          WHERE   o.merge_id = a.merge_id AND o.is_merge = '0')) ELSE NULL END) AS START_DATES, 
+
+                ISNULL(INFO.shift, CASE WHEN A.is_merge = '1' THEN
+
+                    (SELECT   ini.shift
+
+                     FROM      dbo.IN_MO_INFO ini
+
+                     WHERE   ini.wo =
+
+                                         (SELECT   TOP 1 o.cerpcode
+
+                                          FROM      dbo.OUTASN o
+
+                                          WHERE   o.merge_id = a.merge_id AND o.is_merge = '0')) ELSE '' END) AS SHIFTS, 
+
+                CASE WHEN A.is_merge = '1' THEN 'Y' ELSE 'N' END AS is_mergename, CASE WHEN A.idefine5 IS NULL 
+
+                THEN 0 WHEN A.idefine5 = 0 THEN 0 WHEN A.idefine5 = 1 THEN 1 END AS IsSpecialWipIssue, 
+
+                CASE WHEN A.special_out = '1' THEN '是' ELSE '否' END AS special_out, CASE WHEN A.out_vendor = '0' AND 
+
+                A.is_smt = 1 AND A.site = 'A' THEN '厂内SMT-A' WHEN A.out_vendor = '0' AND A.is_smt = 1 AND 
+
+                A.site = 'B' THEN '厂内SMT-B' WHEN A.out_vendor = '0' AND A.is_smt = 0 AND A.site IS NULL 
+
+                THEN '厂内非SMT' WHEN A.out_vendor != '0' AND A.is_smt = 1 AND A.site IS NULL 
+
+                THEN '厂外SMT' WHEN A.out_vendor != '0' AND A.is_smt = 0 AND A.site IS NULL THEN '厂外非SMT' END AS smttype, 
+
+                dbo.Fun_GetCount_FromOutasnd(A.id) AS is_cj, 
+
+                CASE WHEN A.cstatus = '0' THEN '未处理' WHEN A.cstatus = '1' THEN '已指引' WHEN A.cstatus = '2' THEN '拣货中' WHEN
+
+                 A.cstatus = '3' THEN '已完成' WHEN A.cstatus = '4' THEN '已合并' WHEN A.cstatus = '5' THEN '已结案' WHEN A.cstatus
+
+                 = '6' THEN '已撤销' END AS cstatusname, CASE WHEN A.out_vendor = '0' AND A.is_smt = 1 AND 
+
+                A.site = 'A' THEN '0' WHEN A.out_vendor = '0' AND A.is_smt = 1 AND A.site = 'B' THEN '1' WHEN A.out_vendor = '0' AND 
+
+                A.is_smt = 0 AND A.site IS NULL THEN '2' WHEN A.out_vendor != '0' AND A.is_smt = 1 AND A.site IS NULL 
+
+                THEN '3' WHEN A.out_vendor != '0' AND A.is_smt = 0 AND A.site IS NULL THEN '4' END AS smttypeint, A.cso,A.worktype
+
+FROM      dbo.OUTASN AS A LEFT OUTER JOIN
+
+                dbo.IN_MO_INFO AS INFO ON A.cerpcode = INFO.wo LEFT OUTER JOIN
+
+                dbo.SYS_PARAMETER AS p ON A.cstatus = p.flag_id AND p.flag_type = 'OS' LEFT OUTER JOIN
+
+                dbo.OUTTYPE AS ot ON A.itype = ot.cerpcode
+				left join BASE_OPERATOR bo on A.ccreateownercode = bo.caccountid
+				) a
+
+
+</pre>
+
+
+
+<PageTitle Title="入庫通知單"></PageTitle>
+
+
+
 <table class="gridtable">
 
     <tr><th>1</th><td>DB Table/View</td><td>V_INASN </td><td>查看原項目的頁面的Gird所使用的 Table/View</td></tr>
