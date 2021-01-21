@@ -90,6 +90,7 @@ namespace Inventory
             services.AddScoped<Q013VInoutTypeGridQueryAdapter>();
             services.AddScoped<Q014V2OutbillAdapter>();
             services.AddScoped<Q015V2StockCurrentAdapter>();
+            services.AddScoped<Q021SysParameterAdapter>();
 
         }
 
