@@ -167,9 +167,10 @@
 
         // NOTE by Mark, 2021-01-19, V4 just fine
         //        Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());
-        Parts = await QueryAdapter.FetchAsyncV5(context);
+        Parts = await QueryAdapter.FetchAsyncV5(context);// *** ONLY GOOD FOR SysParameter
 
-        Objs = await QueryAdapter.FetchAsyncV999(context);
+          Objs = await QueryAdapter.FetchAsyncV999(context);
+      //  Objs = await QueryAdapter.FetchAsyncV998(context, "SysParameter");
 
         Items = new();
         foreach(SysParameter x in Objs)
@@ -179,7 +180,7 @@
 
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
-      //  Items = Parts.ToList();
+        //  Items = Parts.ToList();
 
         //    Items = Objs.ToList<SysParameter>();
 
