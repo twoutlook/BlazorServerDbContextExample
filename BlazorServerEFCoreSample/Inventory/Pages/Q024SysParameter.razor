@@ -15,7 +15,7 @@
 
         <CompSearch997 Filters="@QueryAdapter.f"
                        FieldMappers="@QueryAdapter.f.FieldMappers"
-                       FMapper="@FMapper" />
+                       FMapper="@QueryAdapter.f.FMapper" />
 
         @if (QueryAdapter.f.Loading || Items == null)
         {
@@ -66,9 +66,9 @@
     private ICollection<Object> Objs { get; set; }
     private List<SysParameter> Items { get; set; }
 
-  //  List<FieldMapper> QueryAdapter.f.FieldMappers;
+    //  List<FieldMapper> QueryAdapter.f.FieldMappers;
     // 自動化由顯示欄位自動選出預設, 可以 override
-    List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
+   // List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
 
 
     private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
@@ -165,21 +165,21 @@
         //   QueryAdapter.f.FieldMappers = GetFieldMapper.Q021SysParameter();
 
         // 是不是可以直接將 QueryAdapter.f.FieldMappers 和 FMapper 放到  Adapter 裡就好....
-      //  QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1"; //取第一個欄位
-        
+        //  QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1"; //取第一個欄位
+
         QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1"; //取第一個欄位
 
 
-
+        QueryAdapter.f.FMapper= new List<int> { 0,1,2,4 };
 
 
         //     0      1         2       3      4
         //  FlagId	FlagName  FlagType	Sortid	Memo
-        FMapper = new();
-        FMapper.Add(0);
-        FMapper.Add(1);
-        FMapper.Add(2);
-        FMapper.Add(4);
+        //FMapper = new();
+        //FMapper.Add(0);
+        //FMapper.Add(1);
+        //FMapper.Add(2);
+        //FMapper.Add(4);
     }
 }
 

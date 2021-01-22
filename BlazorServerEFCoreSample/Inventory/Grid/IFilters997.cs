@@ -40,6 +40,7 @@ namespace Inventory.Grid
         string[] FilterContainsColName { get; set; }
 
         List<FieldMapper> FieldMappers { get; set; }
+        List<int> FMapper { get; set; }
 
 
         /// <summary>

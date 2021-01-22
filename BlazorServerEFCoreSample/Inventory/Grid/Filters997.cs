@@ -85,6 +85,7 @@ namespace Inventory.Grid
 
         //public string FilterLastName { get; set ; }
         public List<FieldMapper> FieldMappers { get; set; }
+        public List<int> FMapper { get; set; }// for selected filter input
         public string WorkWith { get; set; }
         public string ErrMsg { get; set; }
         public ApplicationFilterColumns DefaultColumn { get; set; }
