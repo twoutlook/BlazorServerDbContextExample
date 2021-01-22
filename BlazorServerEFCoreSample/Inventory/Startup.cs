@@ -68,6 +68,7 @@ namespace Inventory
             services.AddScoped<IAdjustFilters, AdjustFilters>();
             services.AddScoped<IParameterFilters, ParameterFilters>();
             services.AddScoped<IBaseFilters, BaseFilters>();
+          //  services.AddScoped<IFilters997, Filters997>();
             //  'Inventory.Grid.Adjust.AdjustFilters' 
             //   services.AddScoped<IAppFilters, AppFilters>();
 
@@ -93,6 +94,7 @@ namespace Inventory
             services.AddScoped<Q021SysParameterAdapter>();
             services.AddScoped<Q999DynamicAdapter>();
             services.AddScoped<Q998DynamicAdapter>();
+            services.AddScoped<Q997DynamicAdapter>();
 
         }
 
