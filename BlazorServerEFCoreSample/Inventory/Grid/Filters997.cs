@@ -1,5 +1,7 @@
-﻿using Inventory.Shared;
+﻿using Inventory.Package1;
+using Inventory.Shared;
 using System;
+using System.Collections.Generic;
 
 namespace Inventory.Grid
 {
@@ -33,6 +35,8 @@ namespace Inventory.Grid
 
             PageHelper.PageSize = 10;
             PageHelper.BaseUrl = "/base/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
+
+            FieldMappers = GetFieldMapper.byEntityName("xxx");
 
             // NOTE by Mark, 2021-01-19, 基本功, 先設十組
             FilterContains = new string[10];
@@ -78,15 +82,9 @@ namespace Inventory.Grid
         public string[] FilterContainsCol { get; set; }
         public string[] FilterContainsColName { get; set; }
 
-        public string FilterTextF1 { get; set; }
-        public string FilterTextF2 { get; set; }
-        public string FilterTextF3 { get; set; }
-        public string FilterTextF4 { get; set; }
-        public string FilterTextF5 { get; set; }
-        public string FilterTextF6 { get; set; }
-        public string FilterTextF7 { get; set; }
-        //public string FilterLastName { get; set ; }
 
+        //public string FilterLastName { get; set ; }
+        public List<FieldMapper> FieldMappers { get; set; }
         public string WorkWith { get; set; }
         public string ErrMsg { get; set; }
         public ApplicationFilterColumns DefaultColumn { get; set; }

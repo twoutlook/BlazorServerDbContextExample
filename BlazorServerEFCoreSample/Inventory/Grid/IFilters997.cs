@@ -1,5 +1,6 @@
 ﻿using Inventory.Shared;
 using System;
+using System.Collections.Generic;
 
 namespace Inventory.Grid
 {
@@ -38,20 +39,7 @@ namespace Inventory.Grid
         string[] FilterContainsCol { get; set; }
         string[] FilterContainsColName { get; set; }
 
-        string FilterTextF1 { get; set; }
-
-
-        string FilterTextF2 { get; set; }
-        string FilterTextF3 { get; set; }
-        string FilterTextF4 { get; set; }
-
-
-        string FilterTextF5 { get; set; }
-        string FilterTextF6 { get; set; }
-        string FilterTextF7 { get; set; }
-
-
-        //string FilterLastName { get; set; }
+        List<FieldMapper> FieldMappers { get; set; }
 
 
         /// <summary>

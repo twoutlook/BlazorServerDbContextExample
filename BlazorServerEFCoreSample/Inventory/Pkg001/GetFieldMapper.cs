@@ -133,8 +133,12 @@ namespace Inventory.Package1
             return fieldMappers;
         }
 
-
-        public static List<FieldMapper> Q021SysParameter()
+        public static List<FieldMapper> byEntityName(string entity)
+        {
+            if (entity == "SysParameter") return Q021SysParameter();
+            return new List<FieldMapper>();
+        }
+            public static List<FieldMapper> Q021SysParameter()
         {
             var fieldMappers = new List<FieldMapper>();
             fieldMappers.Add(new FieldMapper { Id = "FlagId", Name = "FlagId", Index = -1 });
