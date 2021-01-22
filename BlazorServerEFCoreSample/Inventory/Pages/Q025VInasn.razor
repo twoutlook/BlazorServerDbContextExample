@@ -1,0 +1,177 @@
+﻿@page "/Q025VInasn"  
+@page "/Q025VInasn/{Page:int}" 
+@inject NavigationManager NavMgr
+@*@using Microsoft.EntityFrameworkCore*@
+@inject IDbContextFactory<TaiweiContext> DbFactory
+@inject NavigationManager Nav
+
+@inject Q997DynamicAdapter QueryAdapter
+
+<PageTitle Title="入庫通知單 using Q997DynamicAdapter" />
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync">
+    <div class="container-fluid contacts-grid">
+
+        <CompSearch997 Filters="@QueryAdapter.f" />
+
+        @if (QueryAdapter.f.Loading || Items == null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+
+        @if (Items != null)
+        {
+            <CompTable997 Filters="@QueryAdapter.f"
+                          IsShowField="false"
+                          Items="Items"
+                          ColumsToExcludeCSV="id" />
+            //FieldMapper="QueryAdapter.f.FieldMappers"
+        }
+
+        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
+        @if (@QueryAdapter.f.PageHelper.PageCount > 1)
+        {
+            <CompPaging997 Filters="@QueryAdapter.f" />
+
+        }
+    </div>
+</GridWrapper>
+
+
+@code
+{
+
+    [Parameter]
+    public int Page
+    {
+        get => QueryAdapter.f.PageHelper.Page;
+        set
+        {
+            QueryAdapter.f.PageHelper.Page = value;
+        }
+    }
+
+    /// <summary>
+    /// A wrapper for grid-related activity
+    /// </summary>
+    private GridWrapper Wrapper { get; set; }
+
+    private ICollection<Object> Objs { get; set; }
+
+    // === 要調整的地方 ===
+    private List<VInasn> Items { get; set; }
+
+    //  List<FieldMapper> QueryAdapter.f.FieldMappers;
+    // 自動化由顯示欄位自動選出預設, 可以 override
+    // List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
+
+
+    private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
+
+    /// <summary>
+    /// Keeps track of the last page loaded.
+    /// </summary>
+    private int _lastPage = -1;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Ensure we're on the same, er, right page.
+        if (_lastPage < 1)
+        {
+            Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + "1");
+            return;
+        }
+
+        // Normalize the page values.
+        if (QueryAdapter.f.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + "1");
+                return;
+            }
+            if (Page > QueryAdapter.f.PageHelper.PageCount)
+            {
+                Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + QueryAdapter.f.PageHelper.PageCount);
+                return;
+            }
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Make sure the page really chagned.
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+        await base.OnParametersSetAsync();
+    }
+
+    private async Task ReloadAsync()
+    {
+        if (QueryAdapter.f.Loading || Page < 1)
+        {
+            return;
+        }
+
+        QueryAdapter.f.Loading = true;
+
+        Objs = null;
+        Items = new();
+        using var context = DbFactory.CreateDbContext();
+
+
+        // === 要調整的地方 ===
+        Objs = await QueryAdapter.FetchAsyncV997(context, "VInasn");
+
+        // === 要調整的地方 ===
+        foreach (VInasn x in Objs)
+        {
+            Items.Add(x);
+        }
+
+        QueryAdapter.f.Loading = false;
+    }
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadAsync();
+    }
+
+
+    protected override void OnInitialized()
+    {
+
+        // === 要調整的地方 ===
+        QueryAdapter.f.PageHelper.BaseUrl = "/Q025VInasn/";
+
+        // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
+
+        QueryAdapter.f.FieldMappers = GetFieldMapper.Q017VInasn();
+
+
+        //默認取第一個欄位, 正向排序
+        QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
+
+
+        // 指定欄位會映對到篩選的 input text
+        // === 要調整的地方 ===
+        QueryAdapter.f.FMapper = new List<int> { 0, 1, 2, 4 };
+
+
+
+    }
+}
+
+
