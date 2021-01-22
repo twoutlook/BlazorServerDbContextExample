@@ -120,6 +120,10 @@ namespace Inventory.Grid
                     f.PageHelper.TotalItemCount = await context.VInasn.Where(strWhere).CountAsync();
                     collection = context.VInasn.Where(strWhere).OrderBy(strOrderBy).Skip(f.PageHelper.Skip).Take(f.PageHelper.PageSize).ToList<Object>();
                     break;
+                case "V2Outasn":
+                    f.PageHelper.TotalItemCount = await context.V2Outasn.Where(strWhere).CountAsync();
+                    collection = context.V2Outasn.Where(strWhere).OrderBy(strOrderBy).Skip(f.PageHelper.Skip).Take(f.PageHelper.PageSize).ToList<Object>();
+                    break;
                 default:
                     break;
 

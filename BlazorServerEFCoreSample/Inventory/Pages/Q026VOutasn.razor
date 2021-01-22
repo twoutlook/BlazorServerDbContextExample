@@ -1,6 +1,6 @@
 ﻿@* === 要調整的地方 ===*@
-@page "/Q025VInasn"
-@page "/Q025VInasn/{Page:int}"
+@page "/Q026V2Outasn"
+@page "/Q026V2Outasn/{Page:int}"
 
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
@@ -64,7 +64,7 @@
     private ICollection<Object> Objs { get; set; }
 
     // === 要調整的地方 ===
-    private List<VInasn> Items { get; set; }
+    private List<V2Outasn> Items { get; set; }
 
     //  List<FieldMapper> QueryAdapter.f.FieldMappers;
     // 自動化由顯示欄位自動選出預設, 可以 override
@@ -130,10 +130,10 @@
 
 
         // === 要調整的地方 ===
-        Objs = await QueryAdapter.FetchAsyncV997(context, "VInasn");
+        Objs = await QueryAdapter.FetchAsyncV997(context, "V2Outasn");
 
         // === 要調整的地方 ===
-        foreach (VInasn x in Objs)
+        foreach (V2Outasn x in Objs)
         {
             Items.Add(x);
         }
@@ -154,11 +154,11 @@
     {
 
         // === 要調整的地方 ===
-        QueryAdapter.f.PageHelper.BaseUrl = "/Q025VInasn/";
+        QueryAdapter.f.PageHelper.BaseUrl = "/Q026V2Outasn/";
 
         // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
 
-        QueryAdapter.f.FieldMappers = GetFieldMapper.Q017VInasn();
+        QueryAdapter.f.FieldMappers = GetFieldMapper.Q019V2Outasn();
 
 
         //默認取第一個欄位, 正向排序
