@@ -1,11 +1,11 @@
 ﻿@*@layout MainLayoutV2*@
-@page "/Q020SysParameter"
+@page "/Q022SysParameter"
 @*@page "/outbilld/{OutbillId}"*@
 
-@page "/Q020SysParameter/{Page:int}"
+@page "/Q022SysParameter/{Page:int}"
 @using Microsoft.AspNetCore.WebUtilities
 @inject NavigationManager NavMgr
-@using System.Linq.Dynamic.Core;
+
 @using Microsoft.EntityFrameworkCore
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
@@ -16,8 +16,9 @@
 @using Inventory.Comp
 
 
+@inject Q999DynamicAdapter QueryAdapter
 
-<PageTitle Title="庫存調整查詢" />
+<PageTitle Title="庫存查詢" />
 
 @*<table class="gridtable">
         <tr><th>出庫單</th><td>@num</td></tr>
@@ -57,10 +58,12 @@
                                      FieldMapper="fieldMappers" />
         }
 
+        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
+        @if (@QueryAdapter.f.PageHelper.PageCount > 1)
+        {
+            <Inventory.Shared.Q000BasePagingWhFilterV2_ItemCnt Filters="@QueryAdapter.f" />
 
-        <Inventory.Shared.Q000BasePagingWhFilterV2_ItemCnt Filters="@QueryAdapter.f" />
-
-
+        }
 
 
     </div>
@@ -76,23 +79,22 @@
         get => QueryAdapter.f.PageHelper.Page;
         set
         {
-            if (QueryAdapter != null)
-                QueryAdapter.f.PageHelper.Page = value;
+            QueryAdapter.f.PageHelper.Page = value;
         }
     }
-
-
-    private Q000Adapter QueryAdapter;
 
     /// <summary>
     /// A wrapper for grid-related activity
     /// </summary>
     private GridWrapper Wrapper { get; set; }
 
-    // 這裡說明 ICollection 和 List 的差異
-    //https://stackoverflow.com/questions/7655845/icollectiont-vs-listt-in-entity-framework
     private ICollection<SysParameter> Parts { get; set; }
+
+    private ICollection<Object> Objs { get; set; }
+
+
     private List<SysParameter> Items { get; set; }
+    List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
 
 
     private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
@@ -105,7 +107,6 @@
 
     List<FieldMapper> fieldMappers;
 
-    List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -146,69 +147,6 @@
     }
 
 
-    public async Task<ICollection<SysParameter>> FetchAsyncV6(TaiweiContext context)
-    {
-        //   .Where("MyColumn.Contains(@0)", myArray)
-        //string v1 = "001";
-        //string strWhere = String.Format(@" Cticketcode.Contains(@0),v1 ";
-
-        string strWhere = " 1==1 "; // 使用傳統的做法
-
-        for (int i = 0; i < 9; i++)
-        {
-            if (QueryAdapter.f.FilterContains[i] != null)
-            {
-                // NOTE by Mark, 2021-01-20
-                // 在前端, 可以和 control 挷定
-                // 那就在這裡處理空白
-                QueryAdapter.f.FilterContains[i] = QueryAdapter.f.FilterContains[i].Trim();
-                if (QueryAdapter.f.FilterContains[i] != "")
-                    strWhere += QueryAdapter.GetContains(QueryAdapter.f.FilterContainsCol[i], QueryAdapter.f.FilterContains[i]);
-            }
-        }
-
-        // NOTE by Mark, 2021-01-21
-        // 需要一個 default SortStr,
-        // 就像 PageHelper 要設 URL
-        if (QueryAdapter.f.SortStr == null)
-        {
-            //f.SortStr = "Cpositioncode_1";   // *** 這裡要改
-            QueryAdapter.f.SortStr = QueryAdapter.DefaultSortStr;
-
-        }
-        string[] str = QueryAdapter.f.SortStr.Split('_');
-
-        string strOrderBy = str[0];
-        if (str[1] == "2") strOrderBy += " desc";
-
-
-        // *** NEED TO CHANGE HERE
-        //调整
-        var qry = context.SysParameter.Where(strWhere).OrderBy(strOrderBy);
-
-
-        //   await CountAsync(qry);//更新總筆數
-        //var collection = await context.StockCurrent.Where(strWhere).OrderBy(strOrderBy).ToListAsync();
-
-
-        QueryAdapter.f.PageHelper.TotalItemCount = await qry.CountAsync();
-
-        //var collection = await qry.ToListAsync();
-        //   var collection = await FetchPageQuery(qry).ToListAsync();//獲得分頁的內容
-
-        var collection = await qry.Skip(QueryAdapter.f.PageHelper.Skip)
-            .Take(QueryAdapter.f.PageHelper.PageSize)
-            .AsNoTracking().ToListAsync();
-
-
-
-        QueryAdapter.f.PageHelper.PageItems = collection.Count;//更新返回的筆數
-        return collection;
-
-    }
-
-
-
     private async Task ReloadAsync()
     {
         if (QueryAdapter.f.Loading || Page < 1)
@@ -221,17 +159,29 @@
         // Consider to refactor it as Objs
         Parts = null;
 
+        Objs = null;
+
         using var context = DbFactory.CreateDbContext();
 
 
 
+        // NOTE by Mark, 2021-01-19, V4 just fine
+        //        Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV5(context);
 
-        Parts = await FetchAsyncV6(context);
-        // Parts 只是延用最先實施的料號頁面, 到這裡從數據庫取數據只限分頁的結果.
+        Objs = await QueryAdapter.FetchAsyncV999(context);
+
+        Items = new();
+        foreach(SysParameter x in Objs)
+        {
+            Items.Add(x);
+        }
+
 
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
-        Items = Parts.ToList();
+      //  Items = Parts.ToList();
 
+        //    Items = Objs.ToList<SysParameter>();
 
 
 
@@ -250,19 +200,17 @@
 
     protected override void OnInitialized()
     {
+        QueryAdapter.f.PageHelper.BaseUrl = "/Q022SysParameter/";
 
-        QueryAdapter = new Q000Adapter("/Q020SysParameter/", "FlagId_1");
-        fieldMappers = GetFieldMapper.Q017SysParameter();
+        fieldMappers = GetFieldMapper.Q021SysParameter();
 
-
-        //     0      1         2       3      4      5
-        //  FlagId	FlagNameFlagType	Sortid	Memo
+        //     0      1         2       3      4      
+        //  FlagId	FlagName  FlagType	Sortid	Memo
         FMapper = new();
         FMapper.Add(0);
         FMapper.Add(1);
         FMapper.Add(2);
         FMapper.Add(4);
-
     }
 }
 

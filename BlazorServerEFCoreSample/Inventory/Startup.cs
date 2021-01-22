@@ -91,6 +91,7 @@ namespace Inventory
             services.AddScoped<Q014V2OutbillAdapter>();
             services.AddScoped<Q015V2StockCurrentAdapter>();
             services.AddScoped<Q021SysParameterAdapter>();
+            services.AddScoped<Q999DynamicAdapter>();
 
         }
 
