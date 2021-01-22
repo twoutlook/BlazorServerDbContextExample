@@ -10,7 +10,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    @foreach (var x in FieldMapper)
+                    @foreach (var x in Filters.FieldMappers)
                     {
                         <th> @x.Name</th>
                     }
@@ -20,7 +20,7 @@
                 {
                     <tr>
                         <th>**</th>
-                        @foreach (var x in FieldMapper)
+                        @foreach (var x in Filters.FieldMappers)
                         {
                             <th> @x.Id</th>
                         }
@@ -47,7 +47,7 @@
                     <tr>
                         <th>@RecNum</th>
 
-                        @foreach (var x in FieldMapper)
+                        @foreach (var x in Filters.FieldMappers)
                         {
                             <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
                         }
@@ -127,7 +127,7 @@
         }
 
 
-        foreach (var x in FieldMapper)
+        foreach (var x in Filters.FieldMappers)
         {
             if (memberInfo != null) // NOTE by Mark, 2021-01-17, quick fix
             {
@@ -157,8 +157,8 @@
     [Parameter]
     public List<TItem> Items { get; set; }
 
-    [Parameter]
-    public List<FieldMapper> FieldMapper { get; set; }
+    //[Parameter]
+    //public List<FieldMapper> FieldMapper { get; set; }
 
 
     [Parameter]

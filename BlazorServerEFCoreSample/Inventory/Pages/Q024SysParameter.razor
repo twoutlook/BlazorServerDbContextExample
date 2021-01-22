@@ -13,9 +13,7 @@
              FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
-        <CompSearch997 Filters="@QueryAdapter.f"
-                       FieldMappers="@QueryAdapter.f.FieldMappers"
-                       FMapper="@QueryAdapter.f.FMapper" />
+        <CompSearch997 Filters="@QueryAdapter.f" />
 
         @if (QueryAdapter.f.Loading || Items == null)
         {
@@ -31,8 +29,8 @@
             <CompTable997 Filters="@QueryAdapter.f"
                           IsShowField="false"
                           Items="Items"
-                          ColumsToExcludeCSV="id"
-                          FieldMapper="QueryAdapter.f.FieldMappers" />
+                          ColumsToExcludeCSV="id"/>
+            //FieldMapper="QueryAdapter.f.FieldMappers" 
         }
 
         @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
@@ -68,7 +66,7 @@
 
     //  List<FieldMapper> QueryAdapter.f.FieldMappers;
     // 自動化由顯示欄位自動選出預設, 可以 override
-   // List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
+    // List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
 
 
     private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
@@ -130,7 +128,7 @@
 
         // 
         // NOTE by Mark, 2021-01-22
-        // *** 要調整的地方 (起) ***
+        // *** 要調整的地方 1 of 2 (起) ***
         //
 
         Objs = await QueryAdapter.FetchAsyncV997(context, "SysParameter");
@@ -138,7 +136,7 @@
         {
             Items.Add(x);
         }
-        // *** 要調整的地方 (止) ***
+        // *** 要調整的地方 1 of 2  (止) ***
 
         QueryAdapter.f.Loading = false;
     }
@@ -155,31 +153,23 @@
     protected override void OnInitialized()
     {
 
-        // *** 要調整的地方  ***
+        // *** 要調整的地方  2 of 2  ***
         QueryAdapter.f.PageHelper.BaseUrl = "/Q024SysParameter/";
 
-
+        // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
 
         QueryAdapter.f.FieldMappers= GetFieldMapper.Q021SysParameter();
 
-        //   QueryAdapter.f.FieldMappers = GetFieldMapper.Q021SysParameter();
 
-        // 是不是可以直接將 QueryAdapter.f.FieldMappers 和 FMapper 放到  Adapter 裡就好....
-        //  QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1"; //取第一個欄位
-
-        QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1"; //取第一個欄位
+        //默認取第一個欄位, 正向排序
+        QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
 
 
+        // 指定欄位會映對到篩選的 input text
         QueryAdapter.f.FMapper= new List<int> { 0,1,2,4 };
 
 
-        //     0      1         2       3      4
-        //  FlagId	FlagName  FlagType	Sortid	Memo
-        //FMapper = new();
-        //FMapper.Add(0);
-        //FMapper.Add(1);
-        //FMapper.Add(2);
-        //FMapper.Add(4);
+
     }
 }
 

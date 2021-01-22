@@ -182,20 +182,20 @@
     [Parameter]
     public IFilters997 Filters { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
 
-    [Parameter]
-    public List<FieldMapper> FieldMappers { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
+    //[Parameter]
+    //public List<FieldMapper> FieldMappers { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
 
-    [Parameter]
-    public List<int> FMapper { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
+    //[Parameter]
+    //public List<int> FMapper { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
 
     // === (2) 本地定義的變量 ===
 
     List<FieldMapper> fieldMappersSorting; // 按照顯示欄位自動生成正序反序的下接列表
 
-    private int F0 { get => FMapper[0]; }
-    private int F1 { get => FMapper[1]; }
-    private int F2 { get => FMapper[2]; }
-    private int F3 { get => FMapper[3]; }
+    private int F0 { get => Filters.FMapper [0]; }
+    private int F1 { get => Filters.FMapper[1]; }
+    private int F2 { get => Filters.FMapper[2]; }
+    private int F3 { get => Filters.FMapper[3]; }
 
 
 
@@ -207,14 +207,14 @@
     {
         fieldMappersSorting = new();
 
-        foreach (var x in FieldMappers)
+        foreach (var x in Filters.FieldMappers)
         {
             fieldMappersSorting.Add(new FieldMapper(x.Id + "_1", x.Name + "  🔼"));
             fieldMappersSorting.Add(new FieldMapper(x.Id + "_2", x.Name + "  🔽"));
         }
 
         int k = 0;
-        foreach (var x in FieldMappers)
+        foreach (var x in Filters.FieldMappers)
         {
             Filters.FilterContainsCol[k] = x.Id;
             Filters.FilterContainsColName[k] = x.Name;
