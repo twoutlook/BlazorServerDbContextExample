@@ -2,6 +2,37 @@
 @using System.Reflection
 
 <div style="margin-left: -16px">
+    @if (IsShowField && memberInfo != null && memberInfo.Length > 0)
+    {
+    <table class="gridtable">
+        <tr>
+            @foreach (var x in Cols)
+            {
+
+                <th>@x.Id</th>
+
+            }
+        </tr>
+        <tr>
+            @foreach (var x in Cols)
+            {
+
+                <th>@x.Name</th>
+
+            }
+        </tr>
+        <tr>
+            @foreach (var x in Cols)
+            {
+
+                <th>@x.Show</th>
+
+           }
+        </tr>
+
+    </table>
+        <hr />
+    }
 
 
     @if (memberInfo != null && memberInfo.Length > 0)
@@ -113,6 +144,8 @@
     // public int StartReccordNumber { get; set; }
 
     MemberInfo[] memberInfo;
+
+    List<IdNameShow> Cols;
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -124,6 +157,31 @@
         {
             Type typeofItem = this.Items[0].GetType();
             memberInfo = typeofItem.GetMembers();
+        }
+
+        Cols = new();
+
+        if (memberInfo != null)
+        {
+
+
+            int k = 0;
+            for (int i = 0; i < memberInfo.Count(); i++)
+            {
+                if (memberInfo[i].MemberType == MemberTypes.Property)
+                {
+                    //https://stackoverflow.com/questions/3949113/check-if-element-at-position-x-exists-in-the-list
+                    var show = "-";
+                    if (Filters.FieldMappers.ElementAtOrDefault(k) != null)
+                    {
+                        // logic
+                         show = Filters.FieldMappers[k].Name;
+                    }
+
+                    Cols.Add(new IdNameShow(k, memberInfo[i].Name,show));
+                    k++;
+                }
+            }
         }
 
         //
@@ -152,7 +210,7 @@
                 }
 
             }
-            //  x.Index = 999; // for debug 
+            //  x.Index = 999; // for debug
         }
     }
 

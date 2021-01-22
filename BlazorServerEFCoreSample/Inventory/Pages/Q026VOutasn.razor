@@ -9,7 +9,7 @@
 @using System;
 @using System.Reflection;
 @* === 要調整的地方 ===*@
-<PageTitle Title="入庫通知單 using Q997DynamicAdapter" />
+<PageTitle Title="出庫通知單" />
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
@@ -30,6 +30,7 @@
         {
             <CompTable997 Filters="@QueryAdapter.f"
                           Items="Items"
+                           IsShowField="IsShowField"
                           ColumsToExcludeCSV="id" />
             //FieldMapper="QueryAdapter.f.FieldMappers"
         }
@@ -70,7 +71,7 @@
     //  List<FieldMapper> QueryAdapter.f.FieldMappers;
     // 自動化由顯示欄位自動選出預設, 可以 override
     // List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
-
+    private bool IsShowField = true;
 
     private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
 
@@ -160,6 +161,7 @@
         // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
 
 
+
         Type type = typeof(V2Outasn);
         PropertyInfo[] properties = type.GetProperties();
         var auto = new List<FieldMapper>();
@@ -170,8 +172,38 @@
             auto.Add(new FieldMapper { Id = y, Name = y, Index = -1 });
         }
 
+
         //QueryAdapter.f.FieldMappers = GetFieldMapper.Q019V2Outasn();
         QueryAdapter.f.FieldMappers = auto;
+
+
+        var auto2 = new List<FieldMapper>();
+        List<int> plan2 = new List<int> { 3, 1, 2, };
+        foreach (var x in plan2)
+        {
+            string y = properties[x].Name;
+            auto2.Add(new FieldMapper { Id = y, Name = y, Index = -1 });
+        }
+        QueryAdapter.f.FieldMappers = auto2;
+
+        var auto3 = new List<FieldMapper>();
+        var plan3 = new List<IdName> {
+            new IdName(0,"出庫通知單"),
+            new IdName(2,"出庫類型"),
+            new IdName(7,"制單人"),
+            new IdName(8,"制單日期"),
+            new IdName(4,"狀態"),
+
+        };
+        foreach (var x in plan3)
+        {
+            string Id = properties[x.Id].Name;
+            auto3.Add(new FieldMapper { Id = Id, Name = x.Name, Index = -1 });
+        }
+        QueryAdapter.f.FieldMappers = auto3;
+        IsShowField = false;
+
+
 
 
         //默認取第一個欄位, 正向排序
