@@ -145,6 +145,18 @@ namespace Inventory.Package1
 
             return fieldMappers;
         }
+        public static List<FieldMapper> Q023SysConfig()
+        {
+            var fieldMappers = new List<FieldMapper>();
+            fieldMappers.Add(new FieldMapper { Id = "Type", Name = "Type", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Code", Name = "Code", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "ConfigDesc", Name = "ConfigDesc", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "ConfigValue", Name = "ConfigValue", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Memo", Name = "Memo", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "TypeMemo", Name = "TypeMemo", Index = -1 });
+            fieldMappers.Add(new FieldMapper { Id = "Status", Name = "Status", Index = -1 });
 
+            return fieldMappers;
+        }
     }
 }

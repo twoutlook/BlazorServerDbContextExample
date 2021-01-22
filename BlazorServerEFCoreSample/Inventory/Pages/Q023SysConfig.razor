@@ -1,8 +1,8 @@
 ﻿@*@layout MainLayoutV2*@
-@page "/Q022SysParameter"
+@page "/Q023SysConfig"
 @*@page "/outbilld/{OutbillId}"*@
 
-@page "/Q022SysParameter/{Page:int}"
+@page "/Q023SysConfig/{Page:int}"
 @using Microsoft.AspNetCore.WebUtilities
 @inject NavigationManager NavMgr
 
@@ -16,9 +16,9 @@
 @using Inventory.Comp
 
 
-@inject Q999DynamicAdapter QueryAdapter
+@inject Q998DynamicAdapter QueryAdapter
 
-<PageTitle Title="編碼查表" />
+<PageTitle Title="系統配置" />
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
@@ -30,7 +30,7 @@
 
 
 
-        @if (QueryAdapter.f.Loading || Parts == null)
+        @if (QueryAdapter.f.Loading || Items == null)
         {
             <div class="row">
                 <div class="col-12 alert alert-info">
@@ -40,7 +40,7 @@
         }
 
 
-        @if (Parts != null)
+        @if (Items != null)
         {
             // NOTE by Mark, 2021-01-17,
             //      無返回記錄時由 AutoTableCompV2B 處理
@@ -82,12 +82,12 @@
     /// </summary>
     private GridWrapper Wrapper { get; set; }
 
-    private ICollection<SysParameter> Parts { get; set; }
+    private ICollection<SysConfig> Parts { get; set; }
 
     private ICollection<Object> Objs { get; set; }
 
 
-    private List<SysParameter> Items { get; set; }
+    private List<SysConfig> Items { get; set; }
     List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
 
 
@@ -160,14 +160,14 @@
 
 
         // NOTE by Mark, 2021-01-19, V4 just fine
-        //        Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());
-        Parts = await QueryAdapter.FetchAsyncV5(context);// *** ONLY GOOD FOR SysParameter
+        //        Parts = await QueryAdapter.FetchAsyncV4(context.SysConfig.AsQueryable());
+        //   Parts = await QueryAdapter.FetchAsyncV5(context);// *** ONLY GOOD FOR SysConfig
 
-          Objs = await QueryAdapter.FetchAsyncV999(context);
-      //  Objs = await QueryAdapter.FetchAsyncV998(context, "SysParameter");
+        //Objs = await QueryAdapter.FetchAsyncV999(context);
+        Objs = await QueryAdapter.FetchAsyncV998(context, "SysConfig");
 
         Items = new();
-        foreach(SysParameter x in Objs)
+        foreach(SysConfig x in Objs)
         {
             Items.Add(x);
         }
@@ -176,7 +176,7 @@
         //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
         //  Items = Parts.ToList();
 
-        //    Items = Objs.ToList<SysParameter>();
+        //    Items = Objs.ToList<SysConfig>();
 
 
 
@@ -195,9 +195,11 @@
 
     protected override void OnInitialized()
     {
-        QueryAdapter.f.PageHelper.BaseUrl = "/Q022SysParameter/";
+        QueryAdapter.f.PageHelper.BaseUrl = "/Q023SysConfig/";
 
-        fieldMappers = GetFieldMapper.Q021SysParameter();
+        QueryAdapter.defaultSortStr= "Code"+"_1"; //_1 ascending, _2 decending
+
+        fieldMappers = GetFieldMapper.Q023SysConfig();
 
         //     0      1         2       3      4      
         //  FlagId	FlagName  FlagType	Sortid	Memo
