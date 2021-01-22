@@ -39,6 +39,7 @@ namespace Inventory.Grid
         string[] FilterContainsCol { get; set; }
         string[] FilterContainsColName { get; set; }
 
+        void MakeFieldMappers<T>();
         List<FieldMapper> FieldMappers { get; set; }
         List<int> FMapper { get; set; }
 

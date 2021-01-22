@@ -36,7 +36,7 @@ namespace Inventory.Grid
             PageHelper.PageSize = 10;
             PageHelper.BaseUrl = "/base/"; // NOTE by Mark, 解決了可以共同  PageHelper, 可以各自定 PageSize 和 BaseUrl
 
-            FieldMappers = GetFieldMapper.byEntityName("xxx");
+       //     FieldMappers = GetFieldMapper.byEntityName("xxx");
 
             // NOTE by Mark, 2021-01-19, 基本功, 先設十組
             FilterContains = new string[10];
@@ -84,6 +84,14 @@ namespace Inventory.Grid
 
 
         //public string FilterLastName { get; set ; }
+
+        public void MakeFieldMappers<T>( )
+        {
+            //https://stackoverflow.com/questions/10955579/passing-just-a-type-as-a-parameter-in-c-sharp
+            Console.WriteLine("...doing MakeFieldMappers with T");
+            Console.WriteLine(typeof(T));
+
+        }
         public List<FieldMapper> FieldMappers { get; set; }
         public List<int> FMapper { get; set; }// for selected filter input
         public string WorkWith { get; set; }

@@ -6,6 +6,8 @@
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
 @inject Q997DynamicAdapter QueryAdapter
+@using System;
+@using System.Reflection;
 @* === 要調整的地方 ===*@
 <PageTitle Title="入庫通知單 using Q997DynamicAdapter" />
 
@@ -27,7 +29,6 @@
         @if (Items != null)
         {
             <CompTable997 Filters="@QueryAdapter.f"
-                          IsShowField="false"
                           Items="Items"
                           ColumsToExcludeCSV="id" />
             //FieldMapper="QueryAdapter.f.FieldMappers"
@@ -158,7 +159,19 @@
 
         // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
 
-        QueryAdapter.f.FieldMappers = GetFieldMapper.Q019V2Outasn();
+
+        Type type = typeof(V2Outasn);
+        PropertyInfo[] properties = type.GetProperties();
+        var auto = new List<FieldMapper>();
+        foreach (PropertyInfo property in properties)
+        {
+            string y = property.Name;
+
+            auto.Add(new FieldMapper { Id = y, Name = y, Index = -1 });
+        }
+
+        //QueryAdapter.f.FieldMappers = GetFieldMapper.Q019V2Outasn();
+        QueryAdapter.f.FieldMappers = auto;
 
 
         //默認取第一個欄位, 正向排序

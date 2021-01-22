@@ -126,7 +126,13 @@
             memberInfo = typeofItem.GetMembers();
         }
 
-
+        //
+        // NOTE by Mark, 2021-01-22
+        // 這是核心的地方
+        // 根據給定要顯示的欄位及其顯示文字
+        // 先反查到在 Entity 其對應的 index
+        // 並先記下來
+        // 待會在顯示欄位時使用
         foreach (var x in Filters.FieldMappers)
         {
             if (memberInfo != null) // NOTE by Mark, 2021-01-17, quick fix
@@ -146,12 +152,12 @@
                 }
 
             }
-            //  x.Index = 999;
+            //  x.Index = 999; // for debug 
         }
     }
 
     [Parameter]
-    public bool IsShowField { get; set; } = false;
+    public bool IsShowField { get; set; } = true;
 
 
     [Parameter]
