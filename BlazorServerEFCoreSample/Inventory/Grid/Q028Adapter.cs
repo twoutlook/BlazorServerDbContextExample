@@ -13,20 +13,25 @@ namespace Inventory.Grid
     // NOTE by Mark, 2021-01-21, 
     // *** 不要直接改名, 要copy/paste改新增的,再刪掉或註釋掉舊的,以避免VS2019自動去改其它的引用
     // public class Q998DynamicAdapter
-    public class Q997DynamicAdapter
+    // public class Q997DynamicAdapter
+    //public class Q029Adapter
+    public class Q028Adapter
     {
         //https://www.youtube.com/watch?v=e9uQpd25yII
-        public IMemoryCache _cache { get; }
-
+    
         public IFilters997 f;
         public string defaultSortStr;
 
-        public Q997DynamicAdapter(IFilters997 filter)
+
+        //public Q028Adapter() { }
+
+
+        public Q028Adapter()
         {
             //https://docs.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-5.0#stateful-reconnection-after-prerendering
-         //   _cache = memoryCache;
-         //   f = new Filters997(); // 
-            f = filter;
+            //   _cache = memoryCache;
+               f = new Filters997(); // 
+          //  f = filter;
             f.PageHelper.BaseUrl = "/Base_TOCHANGE/";    // *** 這裡要改 
             defaultSortStr = "TOCHANGE_1";   // *** 這裡要改 
         }

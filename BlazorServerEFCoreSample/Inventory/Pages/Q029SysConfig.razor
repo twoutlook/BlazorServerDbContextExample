@@ -5,7 +5,7 @@
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-@inject Q997DynamicAdapter QueryAdapter
+@inject Q029Adapter QueryAdapter
 @using System;
 @using System.Reflection;
 @* === TODO　要調整的地方 ===*@
@@ -136,7 +136,9 @@
 
 
         // === TODO 要調整的地方 ===
+        QueryAdapter.defaultSortStr = "Type" + "_1";
         Objs = await QueryAdapter.FetchAsyncV997(context, "SysConfig");
+        //Objs = await QueryAdapter.FetchAsyncQ029SysConfig(context, "SysConfig");
 
         // === TODO 要調整的地方 ===
         foreach (SysConfig x in Objs)
@@ -152,7 +154,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await ReloadAsync();
+        //     await ReloadAsync();
     }
 
 
@@ -194,6 +196,7 @@
         var auto3 = new List<FieldMapper>();
         var plan3 = new List<IdName> {
           //  Type    Code    ConfigDesc  ConfigValue Memo    Createtime  Createowner Lastupdatetime  Lastupdateowner TypeMemo    Status
+        //    new IdName(0,"Id"),  // 如果沒有選這項的話, 會造成 容易第一次 render 誤拿上一次的 sort string???
             new IdName(1,"Type"),
             new IdName(2,"Code"),
             new IdName(3,"ConfigDesc"),
@@ -209,13 +212,14 @@
             auto3.Add(new FieldMapper { Id = Id, Name = x.Name, Index = -1 });
         }
         QueryAdapter.f.FieldMappers = auto3;
-        IsShowField = false;
+        //  IsShowField = false;
 
 
 
 
         //默認取第一個欄位, 正向排序
-        QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
+        // QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
+
 
 
         // 指定欄位會映對到篩選的 input text

@@ -2,7 +2,7 @@
 @using System.Reflection
 
 <div style="margin-left: -16px">
-    @if (IsShowField && memberInfo != null && memberInfo.Length > 0)
+    @if (Filters.IsDev && memberInfo != null && memberInfo.Length > 0)
     {
     <table class="gridtable">
         <tr>
@@ -13,6 +13,14 @@
 
             }
         </tr>
+        @*<tr>
+            @foreach (var x in Cols)
+            {
+
+                <th>@x.Show</th>
+
+            }
+        </tr>*@
         <tr>
             @foreach (var x in Cols)
             {
@@ -21,14 +29,7 @@
 
             }
         </tr>
-        <tr>
-            @foreach (var x in Cols)
-            {
 
-                <th>@x.Show</th>
-
-           }
-        </tr>
 
     </table>
         <hr />
@@ -47,7 +48,7 @@
                     }
 
                 </tr>
-                @if (IsShowField)
+                @if (Filters.IsDev)
                 {
                     <tr>
                         <th>**</th>
@@ -127,7 +128,7 @@
 
     【時間】<span class="val">@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)</span>
 
-    <span style="background-color:pink">@Filters.ErrMsg</span>
+    <span style="background-color:pink">@Filters.IsDev @Filters.ErrMsg</span>
 </div>
 
 
@@ -168,17 +169,18 @@
             int k = 0;
             for (int i = 0; i < memberInfo.Count(); i++)
             {
-                if (memberInfo[i].MemberType == MemberTypes.Property)
+                if (memberInfo[i].MemberType == MemberTypes.Property)//表示欄位
                 {
                     //https://stackoverflow.com/questions/3949113/check-if-element-at-position-x-exists-in-the-list
                     var show = "-";
-                    if (Filters.FieldMappers.ElementAtOrDefault(k) != null)
-                    {
-                        // logic
-                         show = Filters.FieldMappers[k].Name;
-                    }
+                    //if (Filters.FieldMappers.ElementAtOrDefault(k) != null)//表示之前要顯示的欄位已經有找到了, something is wrong here
+                    //{
+                    //    // logic
+                    //    show = Filters.FieldMappers[k].Name;
+                    //}
 
-                    Cols.Add(new IdNameShow(k, memberInfo[i].Name,show));
+                    // Cols.Add(new IdNameShow(k, memberInfo[i].Name, show));
+                    Cols.Add(new IdNameShow(k, memberInfo[i].Name, show));
                     k++;
                 }
             }

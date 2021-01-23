@@ -42,7 +42,7 @@ namespace Inventory.Grid
             FilterContains = new string[10];
             FilterContainsCol = new string[10];
             FilterContainsColName = new string[10];
-
+            IsDev = false;
         }
 
         /// <summary>
@@ -96,6 +96,7 @@ namespace Inventory.Grid
         public List<int> FMapper { get; set; }// for selected filter input
         public string WorkWith { get; set; }
         public string ErrMsg { get; set; }
+        public bool IsDev { get; set; } = true;
         public ApplicationFilterColumns DefaultColumn { get; set; }
         public AppSortType SortType { get; set; }
 

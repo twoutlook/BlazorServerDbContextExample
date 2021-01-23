@@ -17,12 +17,13 @@ namespace Inventory.Grid
 
         ApplicationFilterColumns DefaultColumn { get; set; }
         AppSortType SortType { get; set; }
-        string ErrMsg { get; set; } 
+        string ErrMsg { get; set; }
 
         /// <summary>
         /// Loading indicator.
         /// </summary>
         bool Loading { get; set; }
+        bool IsDev { get; set; }
 
         /// <summary>
         /// The text of the filter.

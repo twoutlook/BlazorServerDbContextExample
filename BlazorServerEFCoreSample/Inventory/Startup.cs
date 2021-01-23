@@ -37,6 +37,8 @@ namespace Inventory
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+          //  services.AddMemoryCache();
             //services.AddDbContext<TaiweiContext>(options =>
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("TaiweiConnection")));
@@ -68,7 +70,7 @@ namespace Inventory
             services.AddScoped<IAdjustFilters, AdjustFilters>();
             services.AddScoped<IParameterFilters, ParameterFilters>();
             services.AddScoped<IBaseFilters, BaseFilters>();
-          //  services.AddScoped<IFilters997, Filters997>();
+            services.AddScoped<IFilters997, Filters997>();
             //  'Inventory.Grid.Adjust.AdjustFilters' 
             //   services.AddScoped<IAppFilters, AppFilters>();
 
@@ -95,6 +97,9 @@ namespace Inventory
             services.AddScoped<Q999DynamicAdapter>();
             services.AddScoped<Q998DynamicAdapter>();
             services.AddScoped<Q997DynamicAdapter>();
+            services.AddScoped<Q029Adapter>();
+            services.AddScoped<Q028Adapter>();
+            services.AddScoped<Q030Adapter>();
 
         }
 

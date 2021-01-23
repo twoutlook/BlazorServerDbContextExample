@@ -5,11 +5,11 @@
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-@inject Q997DynamicAdapter QueryAdapter
+@inject Q028Adapter QueryAdapter
 @using System;
 @using System.Reflection;
 @* === 要調整的地方 ===*@
-<PageTitle Title="入庫通知單" />
+<PageTitle Title="編碼查表" />
 
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync">
@@ -132,6 +132,8 @@
 
 
         // === TODO 要調整的地方 ===
+        QueryAdapter.defaultSortStr = "FlagId" + "_1";
+
         Objs = await QueryAdapter.FetchAsyncV997(context, "SysParameter");
 
         // === TODO 要調整的地方 ===
@@ -148,7 +150,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await ReloadAsync();
+    //    await ReloadAsync();
     }
 
 
@@ -194,7 +196,7 @@
             new IdName(2,"Flag Type"),
             new IdName(3,"Sort Id"),
             new IdName(4,"Memo"),
-         
+
         };
         foreach (var x in plan3)
         {
@@ -208,7 +210,9 @@
 
 
         //默認取第一個欄位, 正向排序
-        QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
+        //QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
+        QueryAdapter.defaultSortStr = "FlagId" + "_1";
+
 
 
         // 指定欄位會映對到篩選的 input text

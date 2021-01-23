@@ -5,7 +5,7 @@
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-@inject Q997DynamicAdapter QueryAdapter
+@inject Q030Adapter QueryAdapter
 @using System;
 @using System.Reflection;
 @* === TODO　要調整的地方 ===*@
@@ -194,6 +194,7 @@
         var auto3 = new List<FieldMapper>();
         var plan3 = new List<IdName> {
           //  Type    Code    ConfigDesc  ConfigValue Memo    Createtime  Createowner Lastupdatetime  Lastupdateowner TypeMemo    Status
+            new IdName(0,"id"),
             new IdName(1,"作用域"),
             new IdName(3,"理由碼編號"),
             new IdName(4,"理由碼說明"),
