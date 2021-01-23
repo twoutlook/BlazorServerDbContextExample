@@ -2,36 +2,79 @@
 @using System.Reflection
 
 <div style="margin-left: -16px">
+
+
+
+
     @if (Filters.IsDev && memberInfo != null && memberInfo.Length > 0)
     {
-    <table class="gridtable">
-        <tr>
-            @foreach (var x in Cols)
+
+        <table class="gridtable">
+            <tr>
+                <th>**原始名稱</th>
+                <th>自定義顯示</th>
+            </tr>
+
+            @foreach (var x in Filters.FieldMappers)
             {
 
-                <th>@x.Id</th>
+                <tr>
+                    <th>@x.Id</th>
+                    <td>@x.Name</td>
+                </tr>
 
             }
-        </tr>
-        @*<tr>
-            @foreach (var x in Cols)
+
+
+
+
+        </table>
+
+        <hr />
+
+
+        <table class="gridtable">
+            <tr>
+                <td></td>
+                @foreach (var x in Cols)
+                {
+
+                    <td>@x.Id</td>
+
+                }
+            </tr>
+            @*<tr>
+                    @foreach (var x in Cols)
+                    {
+
+                        <th>@x.Show</th>
+
+                    }
+                </tr>*@
+            <tr>
+                <th>**</th>
+                @foreach (var x in Cols)
+                {
+
+                    <th>@x.Name</th>
+
+                }
+            </tr>
+            @foreach (var item in this.Items.Take(1))
             {
-
-                <th>@x.Show</th>
-
+                <tr>
+                    <th>1</th>
+                    @foreach (var member in memberInfo)
+                    {
+                        @if (member.MemberType == MemberTypes.Property)
+                        {
+                            <td>@item.GetType().GetProperty(member.Name).GetValue(item)</td>
+                        }
+                    }
+                </tr>
             }
-        </tr>*@
-        <tr>
-            @foreach (var x in Cols)
-            {
 
-                <th>@x.Name</th>
-
-            }
-        </tr>
-
-
-    </table>
+        </table>
         <hr />
     }
 
@@ -39,6 +82,7 @@
     @if (memberInfo != null && memberInfo.Length > 0)
     {
         <table class="gridtable">
+
             <thead>
                 <tr>
                     <th></th>
@@ -60,16 +104,7 @@
                     </tr>
 
                 }
-                @*<tr>
-                        @for ( int i=0; i< memberInfo.Count(); i++)
-                        {
 
-                            @if (memberInfo[i].MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(memberInfo[i].Name, StringComparison.OrdinalIgnoreCase))
-                            {
-                        <th>@memberInfo[i].Name</th>
-                            }
-                        }
-                    </tr>*@
             </thead>
             <tbody>
 
