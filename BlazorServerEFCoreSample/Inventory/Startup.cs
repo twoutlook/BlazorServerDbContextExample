@@ -21,6 +21,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Inventory.Grid.Adjust;
 using Inventory.Grid.Parameter;
+using DreamAITek.T001;
 
 namespace Inventory
 {
@@ -100,6 +101,16 @@ namespace Inventory
             services.AddScoped<Q029Adapter>();
             services.AddScoped<Q028Adapter>();
             services.AddScoped<Q030Adapter>();
+
+
+// ============ T001 A001
+            services.AddScoped<IFiltersA000, FiltersA000>();
+
+            services.AddScoped<A001Adapter>();
+            services.AddScoped<A002Adapter>();
+            services.AddScoped<A003Adapter>();
+            services.AddScoped<A004Adapter>();
+            services.AddScoped<A005Adapter>();
 
         }
 

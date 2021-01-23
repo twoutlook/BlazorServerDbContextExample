@@ -1,7 +1,32 @@
 ﻿@page "/"
+@using DataJuggler.Blazor.FileUpload
 
-<h1>Hello, world!</h1>
+<h3>File Upload Test</h3>
 
-Welcome to your new app.
+<div class="fileuploader">
+    <FileUpload CustomSuccessMessage="Your file uploaded successfully." OnChange="OnFileUploaded"></FileUpload>
+    @status
+</div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code
+{
+    // display the filename after upload
+    public string status;
+    public bool showUploadButton;
+
+    private void OnFileUploaded(UploadedFileInfo uploadedFileInfo)
+    {
+        // get the status
+        status = "The file " + uploadedFileInfo.FullName + " was uploaded.";
+
+        // showUploadButton is now false until the Reset button is clicked.
+        showUploadButton = false;
+
+        // other information about the file is available
+        DateTime lastModified = uploadedFileInfo.LastModified;
+        string nameAsItIsOnDisk = uploadedFileInfo.NameWithPartialGuid;
+        string partialGuid = uploadedFileInfo.PartialGuid;
+        long size = uploadedFileInfo.Size;
+        string type = uploadedFileInfo.Type;
+    }
+}
