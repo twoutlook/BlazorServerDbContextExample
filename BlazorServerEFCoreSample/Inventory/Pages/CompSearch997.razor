@@ -161,8 +161,11 @@
                 <button class="btn btn-primary " @onclick="SearchOnclick">
                     查詢
                 </button>
-              
-                &nbsp;<input type="checkbox" @bind="@Filters.IsDev" aria-label="Checkbox for following text input">Dev
+
+                &nbsp;<input type="checkbox" @bind="@Filters.IsDev" aria-label="Checkbox for following text input">開發用
+                @*<button class="btn btn-primary " @onclick="WriteOnclick">
+                    生成JSON
+                </button>*@
 
             </div>
         </div>
@@ -180,7 +183,7 @@
     /// Get a reference to the global <see cref="GridWrapper"/>.
     /// </summary>
     [CascadingParameter]
-    public GridWrapper Wrapper { get; set; }
+    public Wrapper997 Wrapper { get; set; }
 
     [Parameter]
     public IFilters997 Filters { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
@@ -234,5 +237,15 @@
         //StateHasChanged();
 
         await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
+    }
+
+    private async void WriteOnclick(MouseEventArgs e)
+    {
+        await InvokeAsync(() => Wrapper.ToWrite.InvokeAsync(this));
+       // Wrapper.wr
+      //  string json = JsonConvert.SerializeObject(Filters.FieldMappers.ToArray());
+
+        //write string to file
+      //  System.IO.File.WriteAllText(@"D:\ZZZ\" + PRE + ENT + ".json", json);
     }
 }

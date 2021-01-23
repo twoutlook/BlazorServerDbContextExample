@@ -8,11 +8,15 @@
 @inject Q030Adapter QueryAdapter
 @using System;
 @using System.Reflection;
+
+
+
 @* === TODO　要調整的地方 ===*@
 <PageTitle Title="理由碼設置" />
 
-<GridWrapper @ref="Wrapper"
-             FilterChanged="ReloadAsync">
+<Wrapper997 @ref="Wrapper"
+            FilterChanged="ReloadAsync"
+            ToWrite="WriteJson">
     <div class="container-fluid contacts-grid">
 
         <CompSearch997 Filters="@QueryAdapter.f" />
@@ -42,7 +46,7 @@
 
         }
     </div>
-</GridWrapper>
+</Wrapper997>
 
 
 @code
@@ -58,14 +62,14 @@
         }
     }
 
-    private string ROOT = "SysConfig";
-    private string PRE = "Q029";
 
 
     /// <summary>
     /// A wrapper for grid-related activity
     /// </summary>
-    private GridWrapper Wrapper { get; set; }
+    //private GridWrapper Wrapper { get; set; }
+    private Wrapper997 Wrapper { get; set; }
+
 
     private ICollection<Object> Objs { get; set; }
 
@@ -121,6 +125,13 @@
         await base.OnParametersSetAsync();
     }
 
+
+    private string PRE = "Q030";
+    private string ENT = "BaseDocureason";
+    private string PREENT = "Q030BaseDocureason";
+
+
+
     private async Task ReloadAsync()
     {
         if (QueryAdapter.f.Loading || Page < 1)
@@ -136,7 +147,13 @@
 
 
         // === TODO 要調整的地方 ===
-        Objs = await QueryAdapter.FetchAsyncV997(context, "BaseDocureason");
+        //   Objs = await QueryAdapter.FetchAsyncV997(context, "BaseDocureason");
+        Objs = await QueryAdapter.FetchAsyncV997(context, ENT);
+
+
+        //https://stackoverflow.com/questions/21533506/find-a-specified-generic-dbset-in-a-dbcontext-dynamically-when-i-have-an-entity
+        var type = context.Model.FindEntityType(ENT);
+
 
         // === TODO 要調整的地方 ===
         foreach (BaseDocureason x in Objs)
@@ -144,10 +161,18 @@
             Items.Add(x);
         }
 
+
+
         QueryAdapter.f.Loading = false;
     }
 
-
+    //private void UpdateItems<T>(ref List<T> Items, ICollection<Object> Objs)
+    //{
+    //    foreach (T x in Objs)
+    //    {
+    //        Items.Add(x);
+    //    }
+    //}
 
 
     protected override async Task OnInitializedAsync()
@@ -155,12 +180,61 @@
         await ReloadAsync();
     }
 
+    public void ReadJson()
+    {
+        try
+        {
+            var str = System.IO.File.ReadAllText(@"D:\ZZZ\ENT\" + PRE + ENT + ".json");
+            var array = JsonConvert.DeserializeObject<List<FieldMapper>>(str);
+
+            QueryAdapter.f.FieldMappers = new();
+
+            foreach (var item in array)
+            {
+                QueryAdapter.f.FieldMappers.Add(item);
+            }
+
+        }
+        catch
+        {
+            Type type = typeof(BaseDocureason);
+            PropertyInfo[] properties = type.GetProperties();
+
+            //  var auto = new List<FieldMapper>();
+            QueryAdapter.f.FieldMappers = new();
+            foreach (PropertyInfo property in properties.Take(5))
+            {
+                string y = property.Name;
+
+                QueryAdapter.f.FieldMappers.Add(new FieldMapper { Id = y, Name = y, Index = -1 });
+            }
+            WriteJson();
+        }
+
+
+
+
+    }
+
+    public void WriteJson()
+    {
+
+        // string json = JsonConvert.SerializeObject(_data.ToArray(), Formatting.Indented);
+
+//        string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray());
+        string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray(), Formatting.Indented);
+
+        //write string to file
+        System.IO.File.WriteAllText(@"D:\ZZZ\ENT\" + PRE + ENT + ".json", json);
+    }
+
 
     protected override void OnInitialized()
     {
 
         // === 要調整的地方 ===
-        QueryAdapter.f.PageHelper.BaseUrl = "/Q030BaseDocureason/";
+        //QueryAdapter.f.PageHelper.BaseUrl = "/Q030BaseDocureason/";
+        QueryAdapter.f.PageHelper.BaseUrl = "/" + PRE + ENT + "/";
 
         // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
 
@@ -208,9 +282,20 @@
             string Id = properties[x.Id].Name;
             auto3.Add(new FieldMapper { Id = Id, Name = x.Name, Index = -1 });
         }
-        QueryAdapter.f.FieldMappers = auto3;
-        IsShowField = false;
 
+        ReadJson();
+
+        //  QueryAdapter.f.FieldMappers = auto3;
+        // IsShowField = false;
+
+        //    string json = JsonConvert.SerializeObject(plan3.ToArray());
+
+        //write string to file
+        //   System.IO.File.WriteAllText(@"D:\ZZZ\"+PRE+ENT+".json", json);
+
+
+        //  System.IO.File.ReadAllText("wwwroot/data/Users.json");
+        //str strText=System.IO.File.ReadAllText("wwwroot/data/Users.json");
 
 
 
