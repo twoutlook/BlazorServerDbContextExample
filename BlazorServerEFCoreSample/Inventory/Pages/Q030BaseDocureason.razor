@@ -221,7 +221,7 @@
 
         // string json = JsonConvert.SerializeObject(_data.ToArray(), Formatting.Indented);
 
-//        string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray());
+        //        string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray());
         string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray(), Formatting.Indented);
 
         //write string to file
@@ -303,13 +303,45 @@
         QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
 
 
+
+
+        // NOTE by Mark, 2021-01-23
+        // 現在做自動生成,
+        // 按顯示的欄位,選 string
+        //
         // 指定欄位會映對到篩選的 input text
         // === 要調整的地方 ===
-        QueryAdapter.f.FMapper = new List<int> { 0, 1, 2, 4 };
+        //        QueryAdapter.f.FMapper = new List<int> { 0, 1, 2, 4 };
+        QueryAdapter.f.FMapper = new();
 
+
+        //Type type = typeof(BaseDocureason);
+        //PropertyInfo[] properties = type.GetProperties();
+        int k = 0;
+        foreach (var x in QueryAdapter.f.FieldMappers)
+        {
+            //  x.Name
+            foreach (var y in typeof(BaseDocureason).GetProperties())
+            {
+                if (y.Name == x.Id)
+                {
+                    if (y.PropertyType.Name.ToString() == "String")
+                    {
+                        //QueryAdapter.f.FMapper.Add(k);
+                        QueryAdapter.f.FMapper.Add(k);
+
+                    }
+
+                }
+
+            }
+            k++;
+        }
 
 
     }
+
 }
+
 
 

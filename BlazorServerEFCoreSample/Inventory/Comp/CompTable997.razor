@@ -114,11 +114,11 @@
                     <tr>
                         <th>@RecNum</th>
 
+
                         @foreach (var x in Filters.FieldMappers)
                         {
                             <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
                         }
-
 
                     </tr>
                 }
