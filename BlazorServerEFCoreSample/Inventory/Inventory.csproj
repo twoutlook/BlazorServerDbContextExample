@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="A000\Pages\" />
     <Folder Include="Comp\Controls\" />
     <Folder Include="NewFolder\" />
   </ItemGroup>

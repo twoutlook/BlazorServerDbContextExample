@@ -1,4 +1,4 @@
-﻿namespace DreamAITek.T001
+﻿namespace DreamAITek.T001.Adapter
 {
     /// <summary>
     /// To keep these consistent.

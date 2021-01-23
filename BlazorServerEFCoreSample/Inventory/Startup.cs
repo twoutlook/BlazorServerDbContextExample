@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using Inventory.Grid.Adjust;
 using Inventory.Grid.Parameter;
 using DreamAITek.T001;
+using DreamAITek.T001.Adapter;
 
 namespace Inventory
 {

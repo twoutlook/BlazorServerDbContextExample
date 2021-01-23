@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 
-namespace DreamAITek.T001
+namespace DreamAITek.T001.Adapter
 {
     // NOTE by Mark, 2021-01-21, 
     // *** 不要直接改名, 要copy/paste改新增的,再刪掉或註釋掉舊的,以避免VS2019自動去改其它的引用
@@ -164,6 +164,10 @@ namespace DreamAITek.T001
                 case "BaseDocureason":
                     f.PageHelper.TotalItemCount = await context.BaseDocureason.Where(strWhere).CountAsync();
                     collection = context.BaseDocureason.Where(strWhere).OrderBy(strOrderBy).Skip(f.PageHelper.Skip).Take(f.PageHelper.PageSize).ToList<Object>();
+                    break;
+                case "VCmdMst":
+                    f.PageHelper.TotalItemCount = await context.VCmdMst.Where(strWhere).CountAsync();
+                    collection = context.VCmdMst.Where(strWhere).OrderBy(strOrderBy).Skip(f.PageHelper.Skip).Take(f.PageHelper.PageSize).ToList<Object>();
                     break;
                 default:
                     break;

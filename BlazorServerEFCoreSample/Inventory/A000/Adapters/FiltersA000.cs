@@ -3,7 +3,7 @@ using Inventory.Shared;
 using System;
 using System.Collections.Generic;
 
-namespace DreamAITek.T001
+namespace DreamAITek.T001.Adapter
 {
     /// <summary>
     /// State of grid filters.

@@ -49,7 +49,18 @@
     <li>Models:EF Core 生成 Entity。指定Namespace DreamAITek.T001,獨立打包</li>
     <li>Data: T001Context</li>
     <li>Adapters:A001Adapter 至 A999Adapter, 包括共用元件Wrapper, Filter, PageHelper</li>
-    <li>Pages:A001 至 A999</li>
+    <li>A000/Pages:A001 至 A999<ul>
+    <li>由A001BaseDocureason 複製成A002BaseDocureason, 並在頁內 replace A001 with A002, working!  </li>
+
+    <li>replace BaseDocureason with VCmdMst, working!  </li>
+    <li>***FetchAsyncV997  </li>
+    <li>_Imports.razor
+        <ul>
+            <li>&commat;using DreamAITek.T001.Adapter</li>
+</ul>  </li>
+
+
+</ul></li>
     <li>Componets: SearchComp,TableComp,PagingComp</li>
     <li>NavMenu:</li>
     <li>

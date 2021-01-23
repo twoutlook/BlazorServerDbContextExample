@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DreamAITek.T001
+namespace DreamAITek.T001.Adapter
 {
     /// <summary>
     /// Interface for filtering.
