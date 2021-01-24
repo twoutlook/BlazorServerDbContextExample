@@ -98,8 +98,9 @@ namespace DreamAITek.T001.Adapter
         public string WorkWith { get; set; }
         public string ErrMsg { get; set; }
         public bool IsDev { get; set; } = true;
-   //     public ApplicationFilterColumns DefaultColumn { get; set; }
-     //   public AppSortType SortType { get; set; }
+        public int FILTER_FILED_CNT { get; set ; }
+        //     public ApplicationFilterColumns DefaultColumn { get; set; }
+        //   public AppSortType SortType { get; set; }
 
     }
 }

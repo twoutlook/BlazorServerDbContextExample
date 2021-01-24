@@ -73,37 +73,49 @@
 <div class="row">
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsColName[@F0] </span>
-            </div>
-            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F0]">
+            @if (Filters.FMapper[0] > 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsColName[@F0] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F0]">
+            }
         </div>
     </div>
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F1] </span>
+            @if (Filters.FMapper[1] > 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F1] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F1]">
+            }
             </div>
-            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F1]">
-
-        </div>
+            
     </div>
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F2] </span>
+            @if (Filters.FMapper[2] > 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F2] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F2]">
+            }
             </div>
-            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F2]">
-
-        </div>
     </div>
 
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F3] </span>
-            </div>
-            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F3]">
+            @if (Filters.FMapper[3] > 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F3] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F3]">
+
+            }
 
         </div>
     </div>

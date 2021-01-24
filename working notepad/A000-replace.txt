@@ -1,0 +1,3 @@
+A004 => A005
+V2Outasn=>V2Outbill
+出庫通知單=>出庫單

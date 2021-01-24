@@ -28,9 +28,8 @@ namespace DreamAITek.T001.Adapter
     //public class Q029Adapter
     public class A000Adapter
     {
-        //https://www.youtube.com/watch?v=e9uQpd25yII
-
-        public IFiltersA000 f;
+        private int MAX_ITEM_COL_CNT = 3;
+         public IFiltersA000 f;
         public string defaultSortStr;
 
 
@@ -38,23 +37,26 @@ namespace DreamAITek.T001.Adapter
 
         public void UpdateFMapper(Type type)
         {
-            f.FMapper = new();
+            f.FMapper = new () ;
 
 
             //Type type = typeof(VInasn);
             //PropertyInfo[] properties = type.GetProperties();
             int k = 0;
+            f.FILTER_FILED_CNT = 0;
             foreach (var x in f.FieldMappers)
             {
                 //  x.Name
-                foreach (var y in typeof(VInasn).GetProperties())
-                {
-                    if (y.Name == x.Id)
+                //foreach (var y in typeof(VInasn).GetProperties())
+                    foreach (var y in type.GetProperties())
+                    {
+                        if (y.Name == x.Id)
                     {
                         if (y.PropertyType.Name.ToString() == "String")
                         {
                             //QueryAdapter.f.FMapper.Add(k);
                             f.FMapper.Add(k);
+                            f.FILTER_FILED_CNT++;
 
                         }
 
@@ -64,11 +66,19 @@ namespace DreamAITek.T001.Adapter
                 k++;
             }
 
+            // Note by Mark, 2021-01-24, 這是處理可篩選的欄位不足4個的時候
+            // 另外在search componet 要禁制掉補 -1 的
+            // FIX WHEN FILTER_FILED_CNT<=4
+            for (int i= f.FILTER_FILED_CNT; i < 4; i++)
+            {
+                f.FMapper.Add(-1);
+            }
+
         }
 
         //https://stackoverflow.com/questions/21533506/find-a-specified-generic-dbset-in-a-dbcontext-dynamically-when-i-have-an-entity
         //var type = context.Model.FindEntityType(ENT);
-   
+
 
         public void ReadJson(Type type, string PRE, string ENT)
         {
@@ -93,7 +103,7 @@ namespace DreamAITek.T001.Adapter
 
                 //  var auto = new List<FieldMapper>();
                 f.FieldMappers = new();
-                foreach (PropertyInfo property in properties.Take(7))// DOING
+                foreach (PropertyInfo property in properties.Take(MAX_ITEM_COL_CNT))// DOING
                 {
                     string y = property.Name;
 
@@ -263,6 +273,10 @@ namespace DreamAITek.T001.Adapter
                 case "VCmdMst":
                     f.PageHelper.TotalItemCount = await context.VCmdMst.Where(strWhere).CountAsync();
                     collection = context.VCmdMst.Where(strWhere).OrderBy(strOrderBy).Skip(f.PageHelper.Skip).Take(f.PageHelper.PageSize).ToList<Object>();
+                    break;
+                case "V2Outbill":
+                    f.PageHelper.TotalItemCount = await context.V2Outbill.Where(strWhere).CountAsync();
+                    collection = context.V2Outbill.Where(strWhere).OrderBy(strOrderBy).Skip(f.PageHelper.Skip).Take(f.PageHelper.PageSize).ToList<Object>();
                     break;
                 default:
                     break;

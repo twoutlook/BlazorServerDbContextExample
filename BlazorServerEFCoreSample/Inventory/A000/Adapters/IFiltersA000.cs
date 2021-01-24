@@ -31,7 +31,7 @@ namespace DreamAITek.T001.Adapter
 
         DateTime FilterDt1 { get; set; }
         DateTime FilterDt2 { get; set; }
-
+        int FILTER_FILED_CNT { get; set; }
         string WorkWith { get; set; } // to enforce this new IBaseFilter
 
         string FilterText { get; set; }
