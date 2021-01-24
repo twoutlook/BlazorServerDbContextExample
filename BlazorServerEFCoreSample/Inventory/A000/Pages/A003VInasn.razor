@@ -75,7 +75,7 @@
     private ICollection<Object> Objs { get; set; }
 
     // === 要調整的地方 ===
-    private List<VCmdMst> Items { get; set; }
+    private List<VInasn> Items { get; set; }
 
     //  List<FieldMapper> QueryAdapter.f.FieldMappers;
     // 自動化由顯示欄位自動選出預設, 可以 override
@@ -128,8 +128,8 @@
 
     private string TITLE = "入庫通知單";
     private string PRE = "A003";
-    private string ENT = "VCmdMst";
-    //private string PREENT = "A003VCmdMst";
+    private string ENT = "VInasn";
+    //private string PREENT = "A003VInasn";
 
 
 
@@ -148,7 +148,7 @@
 
 
         // === TODO 要調整的地方 ===
-        //   Objs = await QueryAdapter.FetchAsyncV997(context, "VCmdMst");
+        //   Objs = await QueryAdapter.FetchAsyncV997(context, "VInasn");
         Objs = await QueryAdapter.FetchAsyncV997(context, ENT);
 
 
@@ -157,7 +157,7 @@
 
 
         // === TODO 要調整的地方 ===
-        foreach (VCmdMst x in Objs)
+        foreach (VInasn x in Objs)
         {
             Items.Add(x);
         }
@@ -187,34 +187,19 @@
     {
 
         // === 要調整的地方 ===
-        //QueryAdapter.f.PageHelper.BaseUrl = "/A003VCmdMst/";
         QueryAdapter.f.PageHelper.BaseUrl = "/A003/";
 
         // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
 
 
         // === 要調整的地方 ===
-        Type type = typeof(VCmdMst);
+        Type type = typeof(VInasn);
         PropertyInfo[] properties = type.GetProperties();
 
 
 
         //ReadJson();
         QueryAdapter.ReadJson(type,PRE, ENT);
-
-
-        //  QueryAdapter.f.FieldMappers = auto3;
-        // IsShowField = false;
-
-        //    string json = JsonConvert.SerializeObject(plan3.ToArray());
-
-        //write string to file
-        //   System.IO.File.WriteAllText(@"D:\ZZZ\"+PRE+ENT+".json", json);
-
-
-        //  System.IO.File.ReadAllText("wwwroot/data/Users.json");
-        //str strText=System.IO.File.ReadAllText("wwwroot/data/Users.json");
-
 
 
         //默認取第一個欄位, 正向排序
@@ -230,31 +215,35 @@
         // 指定欄位會映對到篩選的 input text
         // === 要調整的地方 ===
         //        QueryAdapter.f.FMapper = new List<int> { 0, 1, 2, 4 };
-        QueryAdapter.f.FMapper = new();
+
+        QueryAdapter.UpdateFMapper(type);
 
 
-        //Type type = typeof(VCmdMst);
-        //PropertyInfo[] properties = type.GetProperties();
-        int k = 0;
-        foreach (var x in QueryAdapter.f.FieldMappers)
-        {
-            //  x.Name
-            foreach (var y in typeof(VCmdMst).GetProperties())
-            {
-                if (y.Name == x.Id)
-                {
-                    if (y.PropertyType.Name.ToString() == "String")
-                    {
-                        //QueryAdapter.f.FMapper.Add(k);
-                        QueryAdapter.f.FMapper.Add(k);
+        //QueryAdapter.f.FMapper = new();
 
-                    }
 
-                }
+        ////Type type = typeof(VInasn);
+        ////PropertyInfo[] properties = type.GetProperties();
+        //int k = 0;
+        //foreach (var x in QueryAdapter.f.FieldMappers)
+        //{
+        //    //  x.Name
+        //    foreach (var y in typeof(VInasn).GetProperties())
+        //    {
+        //        if (y.Name == x.Id)
+        //        {
+        //            if (y.PropertyType.Name.ToString() == "String")
+        //            {
+        //                //QueryAdapter.f.FMapper.Add(k);
+        //                QueryAdapter.f.FMapper.Add(k);
 
-            }
-            k++;
-        }
+        //            }
+
+        //        }
+
+        //    }
+        //    k++;
+        //}
 
 
     }

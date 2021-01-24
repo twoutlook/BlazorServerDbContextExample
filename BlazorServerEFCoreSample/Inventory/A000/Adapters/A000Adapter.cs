@@ -29,6 +29,38 @@ namespace DreamAITek.T001.Adapter
 
         //public Q028Adapter() { }
 
+        public void UpdateFMapper(Type type)
+        {
+            f.FMapper = new();
+
+
+            //Type type = typeof(VInasn);
+            //PropertyInfo[] properties = type.GetProperties();
+            int k = 0;
+            foreach (var x in f.FieldMappers)
+            {
+                //  x.Name
+                foreach (var y in typeof(VInasn).GetProperties())
+                {
+                    if (y.Name == x.Id)
+                    {
+                        if (y.PropertyType.Name.ToString() == "String")
+                        {
+                            //QueryAdapter.f.FMapper.Add(k);
+                            f.FMapper.Add(k);
+
+                        }
+
+                    }
+
+                }
+                k++;
+            }
+
+        }
+
+
+
         public void ReadJson(Type type ,string PRE, string ENT)
         {
             try
