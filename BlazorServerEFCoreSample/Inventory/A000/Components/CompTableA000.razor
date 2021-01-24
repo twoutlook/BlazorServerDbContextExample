@@ -173,13 +173,15 @@
 
     [Parameter]
     public IFiltersA000 Filters { get; set; }
+    [Parameter]
+    public List<TItem> Items { get; set; }
 
     int RecNum;
 
 
     // public int StartReccordNumber { get; set; }
 
-    MemberInfo[] memberInfo;
+    MemberInfo[] memberInfo;  // reflection 中文應該是? 字面是反射, 應是反向查詢的意思
 
     List<IdNameShow> Cols;
     protected override void OnParametersSet()
@@ -251,22 +253,21 @@
         }
     }
 
-    [Parameter]
-    public bool IsShowField { get; set; } = true;
+    //[Parameter]
+    //public bool IsShowField { get; set; } = true;
 
 
-    [Parameter]
-    public List<TItem> Items { get; set; }
+
 
     //[Parameter]
     //public List<FieldMapper> FieldMapper { get; set; }
 
 
-    [Parameter]
-    public string ColumsToExcludeCSV { get; set; }
+    //[Parameter]
+    //public string ColumsToExcludeCSV { get; set; }
 
-    [Parameter]
-    public string CssClass { get; set; }
+    //[Parameter]
+    //public string CssClass { get; set; }
 
 
 

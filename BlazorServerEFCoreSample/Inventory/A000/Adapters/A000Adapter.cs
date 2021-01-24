@@ -12,6 +12,13 @@ using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Threading.Tasks;
 
+
+/***
+ * 
+ * 要注意 TaiweiContext
+ * 目前是在 Inventory.Data;
+ */
+
 namespace DreamAITek.T001.Adapter
 {
     // NOTE by Mark, 2021-01-21, 
@@ -22,7 +29,7 @@ namespace DreamAITek.T001.Adapter
     public class A000Adapter
     {
         //https://www.youtube.com/watch?v=e9uQpd25yII
-    
+
         public IFiltersA000 f;
         public string defaultSortStr;
 
@@ -59,9 +66,11 @@ namespace DreamAITek.T001.Adapter
 
         }
 
+        //https://stackoverflow.com/questions/21533506/find-a-specified-generic-dbset-in-a-dbcontext-dynamically-when-i-have-an-entity
+        //var type = context.Model.FindEntityType(ENT);
+   
 
-
-        public void ReadJson(Type type ,string PRE, string ENT)
+        public void ReadJson(Type type, string PRE, string ENT)
         {
             try
             {
@@ -79,7 +88,7 @@ namespace DreamAITek.T001.Adapter
             }
             catch
             {
-              //  Type type = typeof(VCmdMst);
+                //  Type type = typeof(VCmdMst);
                 PropertyInfo[] properties = type.GetProperties();
 
                 //  var auto = new List<FieldMapper>();
@@ -90,7 +99,7 @@ namespace DreamAITek.T001.Adapter
 
                     f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = y, Index = -1 });
                 }
-                WriteJson(PRE,ENT);
+                WriteJson(PRE, ENT);
             }
 
 
@@ -114,8 +123,8 @@ namespace DreamAITek.T001.Adapter
         {
             //https://docs.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-5.0#stateful-reconnection-after-prerendering
             //   _cache = memoryCache;
-               f = new FiltersA000(); // 
-          //  f = filter;
+            f = new FiltersA000(); // 
+                                   //  f = filter;
             f.PageHelper.BaseUrl = "/Base_TOCHANGE/";    // *** 這裡要改 
             defaultSortStr = "TOCHANGE_1";   // *** 這裡要改 
         }
@@ -205,6 +214,8 @@ namespace DreamAITek.T001.Adapter
 
         //    }
         //}
+
+
 
 
         public async Task<ICollection<Object>> FetchAsyncQ029SysConfig(TaiweiContext context, string entity)
