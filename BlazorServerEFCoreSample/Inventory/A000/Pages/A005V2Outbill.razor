@@ -1,26 +1,15 @@
-﻿@* === TODO　要調整的地方 ===*@
-@page "/A005"
+﻿@page "/A005"
 @page "/A005/{Page:int}"
-
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-
-
 @inject A005Adapter QueryAdapter
-
-
-
-
 
 <CompPageTitleA000 Title="@TITLE" />
 
-<WrapperA @ref="Wrapper"
-          FilterChanged="ReloadAsync">
+<WrapperA @ref="Wrapper" FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
-
         <CompSearchA000 Filters="@QueryAdapter.f" />
-
         @if (QueryAdapter.f.Loading || Items == null)
         {
             <div class="row">
@@ -32,23 +21,18 @@
 
         @if (Items != null)
         {
-            <CompTableA000 Filters="@QueryAdapter.f"
-                           Items="Items" />
+            <CompTableA000 Filters="@QueryAdapter.f" Items="Items" />
         }
 
-        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
         @if (@QueryAdapter.f.PageHelper.PageCount > 1)
         {
             <CompPagingA000 Filters="@QueryAdapter.f" />
-
         }
     </div>
 </WrapperA>
 
-
 @code
 {
-
     [Parameter]
     public int Page // 原範例,已更換變量 //頁面上的分頁
     {
@@ -157,9 +141,7 @@
 
         //4. 設置篩選欄位, *** 要處理可篩選欄位不足 4 個 的情況
         QueryAdapter.UpdateFMapper(type);
-
     }
-
 }
 
 
