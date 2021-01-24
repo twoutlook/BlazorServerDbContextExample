@@ -73,7 +73,7 @@
 <div class="row">
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            @if (Filters.FMapper[0] > 0)
+            @if (Filters.FMapper[0] >= 0)
             {
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsColName[@F0] </span>
@@ -84,7 +84,7 @@
     </div>
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            @if (Filters.FMapper[1] > 0)
+            @if (Filters.FMapper[1] >= 0)
             {
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F1] </span>
@@ -96,7 +96,7 @@
     </div>
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            @if (Filters.FMapper[2] > 0)
+            @if (Filters.FMapper[2] >= 0)
             {
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F2] </span>
@@ -108,7 +108,7 @@
 
     <div class="col-3 txt ">
         <div class="input-group mb-3">
-            @if (Filters.FMapper[3] > 0)
+            @if (Filters.FMapper[3] >= 0)
             {
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F3] </span>
@@ -122,7 +122,59 @@
 
 
 </div>
-<div class="row" style="margin-top: -12px;">
+<div class="row"  style="margin-top: -16px;">
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            @if (Filters.FMapper[4] >= 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsColName[@F4] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F4]">
+            }
+        </div>
+    </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            @if (Filters.FMapper[5] >= 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F5] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F5]">
+            }
+        </div>
+
+    </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            @if (Filters.FMapper[6] >= 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F6] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F6]">
+            }
+        </div>
+    </div>
+
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            @if (Filters.FMapper[7] >= 0)
+            {
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F7] </span>
+                </div>
+                <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F7]">
+
+            }
+
+        </div>
+    </div>
+
+
+</div>
+<div class="row" style="margin-top: -16px;">
 
     <div class="col-3  txt">
         <div class="input-group mb-3">
@@ -214,6 +266,10 @@
     private int F2 { get => Filters.FMapper[2]; }
     private int F3 { get => Filters.FMapper[3]; }//ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
 
+    private int F4 { get => Filters.FMapper[4]; }
+    private int F5 { get => Filters.FMapper[5]; }
+    private int F6 { get => Filters.FMapper[6]; }
+    private int F7 { get => Filters.FMapper[7]; }//ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
 
 
     // === (3) 所有 protected override ===

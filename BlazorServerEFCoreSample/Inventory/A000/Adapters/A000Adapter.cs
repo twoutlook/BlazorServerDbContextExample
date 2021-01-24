@@ -28,8 +28,11 @@ namespace DreamAITek.T001.Adapter
     //public class Q029Adapter
     public class A000Adapter
     {
-        private int MAX_ITEM_COL_CNT = 3;
-         public IFiltersA000 f;
+        private int MAX_ITEM_COL_CNT = 12;
+        private int FIX_FITER_CNT = 8;// 這是指在 search, 最上兩個ROW, 各有 4 個 text filter control
+
+
+        public IFiltersA000 f;
         public string defaultSortStr;
 
 
@@ -69,7 +72,7 @@ namespace DreamAITek.T001.Adapter
             // Note by Mark, 2021-01-24, 這是處理可篩選的欄位不足4個的時候
             // 另外在search componet 要禁制掉補 -1 的
             // FIX WHEN FILTER_FILED_CNT<=4
-            for (int i= f.FILTER_FILED_CNT; i < 4; i++)
+            for (int i= f.FILTER_FILED_CNT; i < FIX_FITER_CNT; i++)
             {
                 f.FMapper.Add(-1);
             }
