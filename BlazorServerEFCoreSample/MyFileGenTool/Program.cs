@@ -13,7 +13,8 @@ namespace MyFileGenTool
 
         static void MakeAdapter()
         {
-              string path = @"D:\ZZZ\Gen001\Adapters\A001Adapter.cs";
+            string basePath = @"D:\ZZZ\Gen001\Adapters\";
+            string path = basePath+"A001Adapter.cs";
 
             // This text is added only once to the file.
             if (!File.Exists(path))
@@ -21,16 +22,26 @@ namespace MyFileGenTool
                 Console.WriteLine(path +" 不存在");
                 return;
             }
-
+            string key1 = "A001";
+            string path2 = @"D:\ZZZ\Gen001\MyTest.txt";
             string str = File.ReadAllText(path);
+            string SEQ = "002";
+            string key1x = "A002";
+
             string fmt = "000";
-            for (int i = 1; i <= 99; i++)
+            string str2;
+            for (int i = 2; i <= 9; i++)
             {
-                Console.WriteLine(i.ToString(fmt));
+                //  Console.WriteLine(i.ToString(fmt));
+                SEQ = i.ToString(fmt);
+                key1x = "A" + SEQ;
+                path2 = basePath + key1x+ "Adapter.cs";
+                str2 = str.Replace(key1, key1x);
+                File.WriteAllText(path2, str2, Encoding.UTF8);
             }
 
 
-            Console.WriteLine(str);
+         //   Console.WriteLine(str);
         }
 
 
