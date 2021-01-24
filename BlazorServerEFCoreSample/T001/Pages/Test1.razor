@@ -1,0 +1,79 @@
+﻿@page "/Test1"
+
+@using System.Linq.Dynamic.Core
+
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.EntityFrameworkCore.DynamicLinq
+
+@using System.Linq.Dynamic.Core
+
+@inject IDbContextFactory<TaiweiContext> DbFactory
+
+<PageTitle Title="Test Dynamic LINQ" />
+
+<blockquote class="blockquote">
+    <span style="font-size:125%"> 測試 Dynamic LINQ 的心情: 動態的動態是什麼?</span>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --- by Mark陳炳陵 2021-01-20
+</blockquote>
+<hr />
+
+
+
+<AutoTableCompV2 Items="Items"
+                 Filters="Filters"
+                 ColumsToExcludeCSV="id"
+                 FieldMapper="fieldMappers" />
+
+
+<ul>
+    @foreach (var ent in Items)
+    {
+        <li> @ent.WmsTskId</li>
+
+    }
+</ul>
+@code
+{
+    public List<VCmdMst> entList;
+    //    private List<Inbill> Items { get; set; }
+    private List<VCmdMst> Items { get; set; }
+
+    IBaseFilters Filters { get; set; }
+
+    List<FieldMapper> fieldMappers;
+    protected override void OnInitialized()
+    {
+        Filters = new BaseFilters();
+
+        string v1 = " WmsTskId == 7634 ";
+        string v2 = " WmsTskId >= 7633 ";
+        string v3 = " WmsTskId <= 7634 ";
+
+        using var db = DbFactory.CreateDbContext();
+        //        Items = db.VCmdMst.Where(v1).ToList();
+
+        var qry = db.VCmdMst;
+        //qry = qry.OrderBy("WmsTskId");
+        Items = db.VCmdMst.OrderBy("WmsTskId").Where(v2).Where(v3).ToList();
+
+        Items = db.VCmdMst.Where(v2).Where(v3).ToList();
+
+
+        fieldMappers = new List<FieldMapper>();
+        //    < li > 入庫單 狀態 入庫通知單ID
+        fieldMappers.Add(new FieldMapper { Id = "WmsTskId", Name = "WmsTskId", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "CmdSno", Name = "CmdSno", Index = -1 });
+        //命令編號 箱號/ 棧板號  線別 站點  原始儲位 目的儲位    單據號 命令類型
+        //    備註 命令狀態    TaskNO 接收時間    開始時間 完成時間    返回狀態 資訊
+        fieldMappers.Add(new FieldMapper { Id = "StnNo", Name = "站點", Index = -1 });
+
+        fieldMappers.Add(new FieldMapper { Id = "Loc", Name = "原始儲位", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "NewLoc", Name = "目的儲位", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Cticketcode", Name = "單據號", Index = -1 });
+        fieldMappers.Add(new FieldMapper { Id = "Remark", Name = "備註", Index = -1 });
+
+    }
+
+}
+

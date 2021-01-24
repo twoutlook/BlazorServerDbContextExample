@@ -1,0 +1,42 @@
+﻿
+@page "/ToolV3"
+<PageTitle Title="開發工具 " />
+<p3>每頁[顯示欄位][篩選][排序]</p3>
+
+<hr />
+@foreach (var x in MainList.Select((value, index) => new { value, index }))
+{
+    <Q999ToolTableV3 Seq="@(1+@x.index)" Obj="@x.value" />
+
+}
+
+
+
+
+
+
+
+@code
+{
+
+    public List<PageShowField> MainList;
+    public List<ShowField> Q011VCmdMst;
+    public List<ShowField> Q011VCmdMstV2;
+
+    protected override void OnInitialized()
+    {
+
+        Q011VCmdMst = GetShowField.Q011VCmdMst();
+        Q011VCmdMstV2 = GetShowField.Q011VCmdMstV2();
+
+
+        MainList = new(); // 這是新版的簡約語法
+                          //MainList = new List<PageShowField>(); // 
+
+        MainList.Add(new PageShowField("Q011VCmdMst", "CmdMst", Q011VCmdMst));
+
+        MainList.Add(new PageShowField("Q011VCmdMstV2", "CmdMst", Q011VCmdMstV2));
+    }
+}
+
+

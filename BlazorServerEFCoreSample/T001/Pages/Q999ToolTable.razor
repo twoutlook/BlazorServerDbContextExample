@@ -1,0 +1,37 @@
+﻿
+<table class="gridtable">
+
+    @foreach (var x in ObjList)
+    {
+    <tr>
+        <th>@x.Seq</th>
+        <td>@x.Id</td>
+        <td>@x.Name</td>
+        <td>@x.SortSeq</td>
+        <td>@x.FilterSeq</td>
+        <td>@x.Index</td>
+
+
+
+    </tr>
+
+}
+
+</table>
+
+
+@code
+{
+    [Parameter]
+    public List<ShowField> ObjList { get; set; }
+
+    //protected override void OnInitialized()
+    //{
+
+    //    Q011VCmdMst = GetShowField.Q011VCmdMst();
+
+
+    //}
+}
+
+

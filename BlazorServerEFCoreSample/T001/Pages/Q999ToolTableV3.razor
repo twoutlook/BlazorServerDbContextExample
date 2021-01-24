@@ -1,0 +1,41 @@
+﻿
+
+
+<table class="gridtable">
+   @* <tr><th colspan="2">@Seq</th></tr>*@
+    <tr><th>序號</th><th>@Seq</th></tr>
+    <tr><th>頁面</th><td>@Obj.PageName</td></tr>
+    <tr><th>模型</th><td>@Obj.EntityName</td></tr>
+
+</table>
+<br />
+<table class="gridtable">
+    <tr><th></th><th>欄位</th><th>顯示</th><th>排序</th><th>
+        篩選</th></tr>
+    @foreach (var x in Obj.ShowField)
+    {
+        <tr>
+            <th>@x.Seq</th>
+            <td>@x.Id</td>
+            <td>@x.Name</td>
+            <td>@x.SortSeq</td>
+            <td>@x.FilterSeq</td>
+        
+
+
+        </tr>
+
+    }
+
+</table>
+<hr />
+
+@code
+{
+    [Parameter]
+    public int Seq { get; set; }
+    [Parameter]
+    public PageShowField Obj { get; set; }
+}
+
+

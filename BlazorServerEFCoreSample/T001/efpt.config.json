@@ -1,0 +1,109 @@
+﻿{
+   "ContextClassName": "TaiweiContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Data",
+   "ProjectRootNamespace": "Inventory",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[BASE_DOCUREASON]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_OPERATOR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_ADJUST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_ADJUST_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_CONFIG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_PARAMETER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[V_CMD_MST]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INASN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INOutType]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTASNList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTASN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTBILL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTBILL_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_STOCK_CURRENT_ADJUST]",
+         "ObjectType": 3
+      }
+   ],
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false
+}

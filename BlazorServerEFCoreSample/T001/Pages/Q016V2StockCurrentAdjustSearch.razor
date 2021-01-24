@@ -1,0 +1,212 @@
+﻿@using System.Timers
+@inject IJSRuntime JSRuntime
+@*@implements IDisposable*@
+
+@using System.Globalization
+<style>
+    .grid-container {
+        display: inline-grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        background-color: #2196F3;
+        padding: 10px;
+    }
+
+    .grid-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    /*https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout*/
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        /*grid-template-columns: 200px 200px 200px;*/
+    }
+
+    .wrapper2 {
+        display: grid;
+        grid-template-columns: 1fr,400px;
+        /*grid-template-columns: 200px 200px 200px;*/
+    }
+
+    .lbl {
+        border-radius: 4px;
+        /*margin-left: 8px;*/
+        text-align: right;
+        background-color: lightgray;
+        /*margin-right:4px;*/
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .btngrid {
+        margin-left: 8px;
+        /*text-align: left;*/
+        /*background-color: lightgray;*/
+        /*margin-right:4px;*/
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .txt {
+        /*border-radius: 5px;*/
+        margin-left: -16px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    /*https://stackoverflow.com/questions/56545830/how-can-i-make-an-input-element-respect-the-dimensions-of-a-grid-container*/
+    input {
+        min-width: 0;
+    }
+
+    .val {
+        background-color: antiquewhite
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">  @Filters.FilterContainsColName[0] </span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[0]">
+        </div>
+    </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[@F1] </span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[@F1]">
+
+        </div>
+    </div>
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[2] </span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[2]">
+
+        </div>
+    </div>
+
+    <div class="col-3 txt ">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">    @Filters.FilterContainsColName[4] </span>
+            </div>
+            <input type="text" class="form-control" autofocus @bind="@Filters.FilterContains[4]">
+
+        </div>
+    </div>
+
+
+</div>
+<div class="row" style="margin-top: -12px;">
+
+    <div class="col-3  txt">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">   排序</span>
+            </div>
+            <select name="cars" id="cars" @bind="Filters.SortStr">
+                @foreach (var x in fieldMappersSorting)
+                {
+                    <option value="@x.Id">@x.Name </option>
+                }
+
+            </select>
+        </div>
+    </div>
+    <div class="col-3  txt">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">   每頁筆數</span>
+            </div>
+            <select name="cars" id="cars" @bind="@Filters.PageHelper.PageSize">
+                @for (int i = 1; i <= 100; i++)
+                {
+                    <option value=@i>@i </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="col-3  txt">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button class="btn btn-primary " @onclick="SearchOnclick">
+                    查詢
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+
+    // NOTE by Mark, 20201-01-21
+    // === (1) 傳入的參數, 所有帶有 Parameter ===
+
+    /// <summary>
+    /// Get a reference to the global <see cref="GridWrapper"/>.
+    /// </summary>
+    [CascadingParameter]
+    public GridWrapper Wrapper { get; set; }
+
+    [Parameter]
+    public IBaseFiltersV2 Filters { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
+
+    [Parameter]
+    public List<FieldMapper> FieldMappers { get; set; } // NOTE by Mark, 2021-01-18, 解決排序的一些問題
+
+
+    // === (2) 本地定義的變量 ===
+
+    List<FieldMapper> fieldMappersSorting; // 按照顯示欄位自動生成正序反序的下接列表
+
+    private int F1 { get => 1; }
+
+    // === (3) 所有 protected override ===
+    /// <summary>
+    /// When ready.
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        fieldMappersSorting = new();
+
+        foreach (var x in FieldMappers)
+        {
+            fieldMappersSorting.Add(new FieldMapper(x.Id + "_1", x.Name + "  🔼"));
+            fieldMappersSorting.Add(new FieldMapper(x.Id + "_2", x.Name + "  🔽"));
+        }
+
+        int k = 0;
+        foreach (var x in FieldMappers)
+        {
+            Filters.FilterContainsCol[k] = x.Id;
+            Filters.FilterContainsColName[k] = x.Name;
+
+            k++;
+        }
+    }
+
+
+    // === (4) 自定義的 ===
+
+    private async void SearchOnclick(MouseEventArgs e)
+    {
+        //StateHasChanged();
+
+        await InvokeAsync(() => Wrapper.FilterChanged.InvokeAsync(this));
+    }
+}

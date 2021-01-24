@@ -1,0 +1,212 @@
+﻿@*@layout MainLayoutV2*@
+@page "/Q022SysParameter"
+@*@page "/outbilld/{OutbillId}"*@
+
+@page "/Q022SysParameter/{Page:int}"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavMgr
+
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<TaiweiContext> DbFactory
+@inject NavigationManager Nav
+@* ============================ *@
+@*   NOTE by Mark, 2021-01-17,  *@
+@*   Adapter to new filters      *@
+@* ============================ *@
+@using Inventory.Comp
+
+
+@inject Q999DynamicAdapter QueryAdapter
+
+<PageTitle Title="編碼查表" />
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync">
+    <div class="container-fluid contacts-grid">
+
+        <Q000Search Filters="@QueryAdapter.f"
+                    FieldMappers="@fieldMappers"
+                    FMapper="@FMapper" />
+
+
+
+        @if (QueryAdapter.f.Loading || Parts == null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+
+
+        @if (Parts != null)
+        {
+            // NOTE by Mark, 2021-01-17,
+            //      無返回記錄時由 AutoTableCompV2B 處理
+            //AutoTableCompWhFilterV2
+            <AutoTableCompWhFilterV2 Filters="@QueryAdapter.f"
+                                     IsShowField="false"
+                                     Items="Items"
+                                     ColumsToExcludeCSV="id"
+                                     FieldMapper="fieldMappers" />
+        }
+
+        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
+        @if (@QueryAdapter.f.PageHelper.PageCount > 1)
+        {
+            <Inventory.Shared.Q000BasePagingWhFilterV2_ItemCnt Filters="@QueryAdapter.f" />
+
+        }
+
+
+    </div>
+</GridWrapper>
+
+
+@code
+{
+
+    [Parameter]
+    public int Page
+    {
+        get => QueryAdapter.f.PageHelper.Page;
+        set
+        {
+            QueryAdapter.f.PageHelper.Page = value;
+        }
+    }
+
+    /// <summary>
+    /// A wrapper for grid-related activity
+    /// </summary>
+    private GridWrapper Wrapper { get; set; }
+
+    private ICollection<SysParameter> Parts { get; set; }
+
+    private ICollection<Object> Objs { get; set; }
+
+
+    private List<SysParameter> Items { get; set; }
+    List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
+
+
+    private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
+
+    /// <summary>
+    /// Keeps track of the last page loaded.
+    /// </summary>
+    private int _lastPage = -1;
+
+
+    List<FieldMapper> fieldMappers;
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Ensure we're on the same, er, right page.
+        if (_lastPage < 1)
+        {
+            Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + "1");
+
+            return;
+        }
+
+        // Normalize the page values.
+        if (QueryAdapter.f.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + "1");
+                return;
+            }
+            if (Page > QueryAdapter.f.PageHelper.PageCount)
+            {
+                Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + QueryAdapter.f.PageHelper.PageCount);
+                return;
+            }
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Make sure the page really chagned.
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+        await base.OnParametersSetAsync();
+    }
+
+
+    private async Task ReloadAsync()
+    {
+        if (QueryAdapter.f.Loading || Page < 1)
+        {
+            return;
+        }
+
+        QueryAdapter.f.Loading = true;
+
+        // Consider to refactor it as Objs
+        Parts = null;
+
+        Objs = null;
+
+        using var context = DbFactory.CreateDbContext();
+
+
+
+        // NOTE by Mark, 2021-01-19, V4 just fine
+        //        Parts = await QueryAdapter.FetchAsyncV4(context.SysParameter.AsQueryable());
+        Parts = await QueryAdapter.FetchAsyncV5(context);// *** ONLY GOOD FOR SysParameter
+
+          Objs = await QueryAdapter.FetchAsyncV999(context);
+      //  Objs = await QueryAdapter.FetchAsyncV998(context, "SysParameter");
+
+        Items = new();
+        foreach(SysParameter x in Objs)
+        {
+            Items.Add(x);
+        }
+
+
+        //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
+        //  Items = Parts.ToList();
+
+        //    Items = Objs.ToList<SysParameter>();
+
+
+
+        // now we're done
+        QueryAdapter.f.Loading = false;
+    }
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadAsync();
+    }
+
+
+    protected override void OnInitialized()
+    {
+        QueryAdapter.f.PageHelper.BaseUrl = "/Q022SysParameter/";
+
+        fieldMappers = GetFieldMapper.Q021SysParameter();
+
+        //     0      1         2       3      4      
+        //  FlagId	FlagName  FlagType	Sortid	Memo
+        FMapper = new();
+        FMapper.Add(0);
+        FMapper.Add(1);
+        FMapper.Add(2);
+        FMapper.Add(4);
+    }
+}
+
+

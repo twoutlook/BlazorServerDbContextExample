@@ -1,0 +1,221 @@
+﻿@page "/part"
+@page "/part/{Page:int}"
+
+
+
+@using Inventory.Shared
+
+@using Microsoft.EntityFrameworkCore
+
+
+@inject IPartFilters Filters
+
+@inject IDbContextFactory<TaiweiContext> DbFactory
+@inject NavigationManager Nav
+@* ========================================================================== *@
+@*   NOTE by Mark, 2021-01-12, 這裡的Adapter仍有一個 DI 的 IContactFiltersV4   *@
+@* ========================================================================== *@
+@inject PartGridQueryAdapter QueryAdapter
+
+<PageTitle Title="物料查詢" />
+
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync">
+    <div class="container-fluid contacts-grid">
+
+
+        <PartFieldFilter />
+
+        <div class="row contact-header" style="font-size:104%">
+
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartnumber))">
+                <PartSortIndicator Column="@(PartFilterColumns.Cpartnumber)" />
+                &nbsp;物料編碼
+            </div>
+            <div class="col-2"
+                 @onclick="@(async ()=>await ToggleAsync(PartFilterColumns.Cpartname))">
+                <PartSortIndicator Column="@(PartFilterColumns.Cpartname)" />
+                &nbsp;物料名稱
+            </div>
+
+        </div>
+        @if (Filters.Loading || Parts == null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+        @if (Parts != null && Parts.Count == 0)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-warning">
+                    No records found.
+                </div>
+            </div>
+        }
+
+        @if (Parts != null)
+        {
+            @foreach (var x in Parts)
+            {
+                <PartRow @key=x CurrentPart="@x" />
+            }
+
+
+        }
+
+
+        <PartPaging Filters="@Filters" />
+
+        
+
+    </div>
+</GridWrapper>
+
+
+@code
+{
+    private string IsDisabled(bool condition) =>
+    !Filters.Loading && condition ? "" : "disabled";
+
+    /// <summary>
+    /// Keeps track of the last page loaded.
+    /// </summary>
+    private int _lastPage = -1;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Ensure we're on the same, er, right page.
+        if (_lastPage < 1)
+        {
+            //Filters.PageHelper.
+            // Filters.PageHelper.BaseUrl
+            //            Nav.NavigateTo("/ContactsV4/1");
+            Nav.NavigateTo(Filters.PageHelper.BaseUrl + "1");
+
+            return;
+        }
+
+        // Normalize the page values.
+        if (Filters.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                //Nav.NavigateTo("/ContactsV4/1");
+                Nav.NavigateTo(Filters.PageHelper.BaseUrl + "1");
+                return;
+            }
+            if (Page > Filters.PageHelper.PageCount)
+            {
+                //  Nav.NavigateTo($"/ContactsV4/{Filters.PageHelper.PageCount}");
+                Nav.NavigateTo(Filters.PageHelper.BaseUrl + Filters.PageHelper.PageCount);
+                return;
+            }
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Make sure the page really chagned.
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+        await base.OnParametersSetAsync();
+    }
+
+
+    //https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-5.0
+    [Parameter]
+    public int Page
+    {
+        get => Filters.PageHelper.Page;
+        set
+        {
+            Filters.PageHelper.Page = value;
+        }
+    }
+
+    /// <summary>
+    /// A wrapper for grid-related activity (like delete).
+    /// </summary>
+    private GridWrapper Wrapper { get; set; }
+
+
+
+    private Task ToggleAsync(PartFilterColumns col)
+    {
+        if (Filters.SortColumn == col)
+        {
+            Filters.SortAscending = !Filters.SortAscending;
+        }
+        else
+        {
+            Filters.SortColumn = col;
+        }
+        return ReloadAsync();
+    }
+    private ICollection<BasePart> Parts { get; set; }
+
+    private async Task ReloadAsync()
+    {
+        if (Filters.Loading || Page < 1)
+        {
+            return;
+        }
+
+        Filters.Loading = true;
+
+        if (Wrapper != null)
+        {
+            Wrapper.DeleteRequestId = "";
+        }
+
+        Parts = null;
+
+        using var context = DbFactory.CreateDbContext();
+
+        // run the query to load the current page
+        //Contacts = await QueryAdapter.FetchAsync(context.Contacts.AsQueryable());
+
+        // NOTE by Mark, 2021-01-12, 建立多欄位的 filter
+        Parts = await QueryAdapter.FetchAsyncV4(context.BasePart.AsQueryable());
+
+
+
+
+        // now we're done
+        Filters.Loading = false;
+    }
+
+
+
+    private List<BasePart> partList;
+
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        //using var context = new TaiweiContext();
+        using var context = DbFactory.CreateDbContext();
+
+
+        partList = context.BasePart.OrderBy(o => o.Cpartnumber).Take(10).ToList();
+    }
+
+    protected override void OnInitialized()
+    {
+        //base.OnInitialized();
+
+
+        IncrementCount();
+    }
+}
+
+

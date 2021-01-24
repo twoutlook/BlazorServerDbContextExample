@@ -1,0 +1,269 @@
+﻿@*@layout MainLayoutV2*@
+@page "/Q017VInasn"
+@*@page "/outbilld/{OutbillId}"*@
+
+@page "/Q017VInasn/{Page:int}"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavMgr
+@using System.Linq.Dynamic.Core;
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<TaiweiContext> DbFactory
+@inject NavigationManager Nav
+@* ============================ *@
+@*   NOTE by Mark, 2021-01-17,  *@
+@*   Adapter to new filters      *@
+@* ============================ *@
+@using Inventory.Comp
+
+
+
+<PageTitle Title="庫存調整查詢" />
+
+@*<table class="gridtable">
+        <tr><th>出庫單</th><td>@num</td></tr>
+    </table>
+
+    <hr />*@
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync">
+    <div class="container-fluid contacts-grid">
+
+        <Q000Search Filters="@QueryAdapter.f"
+                    FieldMappers="@fieldMappers"
+                    FMapper="@FMapper" />
+
+
+
+        @if (QueryAdapter.f.Loading || Parts == null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+
+
+        @if (Parts != null)
+        {
+            // NOTE by Mark, 2021-01-17,
+            //      無返回記錄時由 AutoTableCompV2B 處理
+            //AutoTableCompWhFilterV2
+            <AutoTableCompWhFilterV2 Filters="@QueryAdapter.f"
+                                     IsShowField="false"
+                                     Items="Items"
+                                     ColumsToExcludeCSV="id"
+                                     FieldMapper="fieldMappers" />
+        }
+
+
+        <Inventory.Shared.Q000BasePagingWhFilterV2_ItemCnt Filters="@QueryAdapter.f" />
+
+
+
+
+    </div>
+</GridWrapper>
+
+
+@code
+{
+
+    [Parameter]
+    public int Page
+    {
+        get => QueryAdapter.f.PageHelper.Page;
+        set
+        {
+            if (QueryAdapter != null)
+                QueryAdapter.f.PageHelper.Page = value;
+        }
+    }
+
+
+    private Q000Adapter QueryAdapter;
+
+    /// <summary>
+    /// A wrapper for grid-related activity
+    /// </summary>
+    private GridWrapper Wrapper { get; set; }
+
+    // 這裡說明 ICollection 和 List 的差異
+    //https://stackoverflow.com/questions/7655845/icollectiont-vs-listt-in-entity-framework
+    private ICollection<VInasn> Parts { get; set; }
+    private List<VInasn> Items { get; set; }
+
+
+    private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";
+
+    /// <summary>
+    /// Keeps track of the last page loaded.
+    /// </summary>
+    private int _lastPage = -1;
+
+
+    List<FieldMapper> fieldMappers;
+
+    List<int> FMapper; // NOTE by Mark, 2021-01-21,參數用來決定篩選欄位是要取那些顯示欄位.
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Ensure we're on the same, er, right page.
+        if (_lastPage < 1)
+        {
+            Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + "1");
+
+            return;
+        }
+
+        // Normalize the page values.
+        if (QueryAdapter.f.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + "1");
+                return;
+            }
+            if (Page > QueryAdapter.f.PageHelper.PageCount)
+            {
+                Nav.NavigateTo(QueryAdapter.f.PageHelper.BaseUrl + QueryAdapter.f.PageHelper.PageCount);
+                return;
+            }
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Make sure the page really chagned.
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+        await base.OnParametersSetAsync();
+    }
+
+
+    public async Task<ICollection<VInasn>> FetchAsyncV6(TaiweiContext context)
+    {
+        //   .Where("MyColumn.Contains(@0)", myArray)
+        //string v1 = "001";
+        //string strWhere = String.Format(@" Cticketcode.Contains(@0),v1 ";
+
+        string strWhere = " 1==1 "; // 使用傳統的做法
+
+        for (int i = 0; i < 9; i++)
+        {
+            if (QueryAdapter.f.FilterContains[i] != null)
+            {
+                // NOTE by Mark, 2021-01-20
+                // 在前端, 可以和 control 挷定
+                // 那就在這裡處理空白
+                QueryAdapter.f.FilterContains[i] = QueryAdapter.f.FilterContains[i].Trim();
+                if (QueryAdapter.f.FilterContains[i] != "")
+                    strWhere += QueryAdapter.GetContains(QueryAdapter.f.FilterContainsCol[i], QueryAdapter.f.FilterContains[i]);
+            }
+        }
+
+        // NOTE by Mark, 2021-01-21
+        // 需要一個 default SortStr,
+        // 就像 PageHelper 要設 URL
+        if (QueryAdapter.f.SortStr == null)
+        {
+            //f.SortStr = "Cpositioncode_1";   // *** 這裡要改
+            QueryAdapter.f.SortStr = QueryAdapter.DefaultSortStr;
+
+        }
+        string[] str = QueryAdapter.f.SortStr.Split('_');
+
+        string strOrderBy = str[0];
+        if (str[1] == "2") strOrderBy += " desc";
+
+
+        // *** NEED TO CHANGE HERE
+        //调整
+        var qry = context.VInasn.Where(strWhere).OrderBy(strOrderBy);
+
+
+        //   await CountAsync(qry);//更新總筆數
+        //var collection = await context.StockCurrent.Where(strWhere).OrderBy(strOrderBy).ToListAsync();
+
+
+        QueryAdapter.f.PageHelper.TotalItemCount = await qry.CountAsync();
+
+        //var collection = await qry.ToListAsync();
+        //   var collection = await FetchPageQuery(qry).ToListAsync();//獲得分頁的內容
+
+        var collection = await qry.Skip(QueryAdapter.f.PageHelper.Skip)
+            .Take(QueryAdapter.f.PageHelper.PageSize)
+            .AsNoTracking().ToListAsync();
+
+
+
+        QueryAdapter.f.PageHelper.PageItems = collection.Count;//更新返回的筆數
+        return collection;
+
+    }
+
+
+
+    private async Task ReloadAsync()
+    {
+        if (QueryAdapter.f.Loading || Page < 1)
+        {
+            return;
+        }
+
+        QueryAdapter.f.Loading = true;
+
+        // Consider to refactor it as Objs
+        Parts = null;
+
+        using var context = DbFactory.CreateDbContext();
+
+
+
+
+        Parts = await FetchAsyncV6(context);
+        // Parts 只是延用最先實施的料號頁面, 到這裡從數據庫取數據只限分頁的結果.
+
+        //https://stackoverflow.com/questions/580160/how-to-convert-a-collection-to-list
+        Items = Parts.ToList();
+
+
+
+
+        // now we're done
+        QueryAdapter.f.Loading = false;
+    }
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadAsync();
+    }
+
+
+    protected override void OnInitialized()
+    {
+
+        QueryAdapter = new Q000Adapter("/Q017VInasn/", "Cticketcode_1");
+        fieldMappers = GetFieldMapper.Q017VInasn();
+
+
+        //     0      1         2       3      4      5
+        //   單據號 入庫類型 入庫理由碼 制單人 制單日期 狀態
+        FMapper = new();
+        FMapper.Add(0);
+        FMapper.Add(1);
+        FMapper.Add(2);
+        FMapper.Add(5); //狀態
+
+    }
+}
+
+

@@ -1,0 +1,153 @@
+﻿@typeparam TItem
+@using System.Reflection
+@*----------------------------*@
+@*NOTE by Mark, 2021-01-18*@
+@*指定 nav*@
+@*出庫單明細*@
+@*----------------------------*@
+
+<div style="margin-left: -16px">
+
+
+    @if (memberInfo != null && memberInfo.Length > 0)
+    {
+        <table class="gridtable">
+            <thead>
+                <tr>
+                    <th></th>
+                    @foreach (var x in FieldMapper)
+                    {
+                        <th> @x.Name</th>
+                    }
+
+                </tr>
+                @if (IsShowField)
+                {
+                    <tr>
+                        @foreach (var x in FieldMapper)
+                        {
+                            <td> @x.Id</td>
+                        }
+
+                    </tr>
+
+                }
+                @*<tr>
+                        @for ( int i=0; i< memberInfo.Count(); i++)
+                        {
+
+                            @if (memberInfo[i].MemberType == MemberTypes.Property && !ColumsToExcludeCSV.Contains(memberInfo[i].Name, StringComparison.OrdinalIgnoreCase))
+                            {
+                        <th>@memberInfo[i].Name</th>
+                            }
+                        }
+                    </tr>*@
+            </thead>
+            <tbody>
+
+                @foreach (var item in this.Items)
+                {
+                    RecNum = RecNum + 1;
+                <tr>
+                    <th>@RecNum</th>
+
+                    @foreach (var x in FieldMapper)
+                    {
+                        <td> @item.GetType().GetProperty(@x.Id).GetValue(item)</td>
+                    }
+                
+
+                    <td><a href="/v2outbilld/1?num=@item.GetType().GetProperty(@FieldMapper[0].Id).GetValue(item)">go</a></td>
+
+                </tr>
+                }
+
+
+
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12 alert alert-warning">
+                ( 查詢結果, 沒有任何記錄 )
+            </div>
+        </div>
+    }
+
+</div>
+
+@code { //https://www.youtube.com/watch?v=jsWVIV5ykQM
+
+
+
+    [Parameter]
+    public IBaseFilters Filters { get; set; }
+
+    int RecNum;
+
+
+    // public int StartReccordNumber { get; set; }
+
+    MemberInfo[] memberInfo;
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        RecNum = Filters.PageHelper.PageSize * (Filters.PageHelper.Page - 1);
+
+
+        if (Items != null && Items.Count > 0)
+        {
+            Type typeofItem = this.Items[0].GetType();
+            memberInfo = typeofItem.GetMembers();
+        }
+
+
+        foreach (var x in FieldMapper)
+        {
+            if (memberInfo != null) // NOTE by Mark, 2021-01-17, quick fix
+            {
+                for (int i = 0; i < memberInfo.Count(); i++)
+                {
+
+                    if (memberInfo[i].MemberType == MemberTypes.Property)
+                    {
+                        if (memberInfo[i].Name == x.Id)
+                        {
+                            x.Index = i;
+                        }
+
+
+                    }
+                }
+
+            }
+            //  x.Index = 999;
+        }
+    }
+
+    [Parameter]
+    public bool IsShowField { get; set; } = false;
+
+
+    [Parameter]
+    public List<TItem> Items { get; set; }
+
+    [Parameter]
+    public List<FieldMapper> FieldMapper { get; set; }
+
+
+    [Parameter]
+    public string ColumsToExcludeCSV { get; set; }
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+
+
+
+
+}
