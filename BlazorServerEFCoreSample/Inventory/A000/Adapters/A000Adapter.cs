@@ -38,6 +38,20 @@ namespace DreamAITek.T001.Adapter
 
         //public Q028Adapter() { }
 
+
+        // NOTE by Mark, 2021-01-24,
+        // 幾天沒跑步, 終於搞定這部份
+        public List<T> GetConvertedItems<T>(ICollection<Object> Objs)
+        {
+            List<T> Items = new();
+            foreach (T x in Objs)   
+            {
+                Items.Add(x);
+            }
+            return Items;
+        }
+
+
         public void UpdateFMapper(Type type)
         {
             f.FMapper = new () ;
