@@ -40,9 +40,10 @@ namespace DreamAITek.T001.Adapter
        //     FieldMappers = GetFieldMapper.byEntityName("xxx");
 
             // NOTE by Mark, 2021-01-19, 基本功, 先設十組
-            FilterContains = new string[10];
-            FilterContainsCol = new string[10];
-            FilterContainsColName = new string[10];
+            // 2021-01-24, TO 100
+            FilterContains = new string[100];
+            FilterContainsCol = new string[100];
+            FilterContainsColName = new string[100];
             IsDev = false;
         }
 
