@@ -1,21 +1,23 @@
 ﻿@* === TODO　要調整的地方 ===*@
-@page "/A001"
-@page "/A001/{Page:int}"
+@page "/A003"
+@page "/A003/{Page:int}"
 
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-@inject A001Adapter QueryAdapter
-@using System;
-@using System.Reflection;
+
+
+@inject A003Adapter QueryAdapter
 
 
 
-@* === TODO　要調整的地方 ===*@
-<CompPageTitleA000 Title="理由碼設置" />
+
+
+<CompPageTitleA000 Title="@TITLE" />
 
 <WrapperA @ref="Wrapper"
-            FilterChanged="ReloadAsync">
+            FilterChanged="ReloadAsync"
+            >
     <div class="container-fluid contacts-grid">
 
         <CompSearchA000 Filters="@QueryAdapter.f" />
@@ -73,7 +75,7 @@
     private ICollection<Object> Objs { get; set; }
 
     // === 要調整的地方 ===
-    private List<BaseDocureason> Items { get; set; }
+    private List<VCmdMst> Items { get; set; }
 
     //  List<FieldMapper> QueryAdapter.f.FieldMappers;
     // 自動化由顯示欄位自動選出預設, 可以 override
@@ -124,10 +126,10 @@
         await base.OnParametersSetAsync();
     }
 
-
-    private string PRE = "A001";
-    private string ENT = "BaseDocureason";
-    //private string PREENT = "A001BaseDocureason";
+    private string TITLE = "入庫通知單";
+    private string PRE = "A003";
+    private string ENT = "VCmdMst";
+    //private string PREENT = "A003VCmdMst";
 
 
 
@@ -146,7 +148,7 @@
 
 
         // === TODO 要調整的地方 ===
-        //   Objs = await QueryAdapter.FetchAsyncV997(context, "BaseDocureason");
+        //   Objs = await QueryAdapter.FetchAsyncV997(context, "VCmdMst");
         Objs = await QueryAdapter.FetchAsyncV997(context, ENT);
 
 
@@ -155,7 +157,7 @@
 
 
         // === TODO 要調整的地方 ===
-        foreach (BaseDocureason x in Objs)
+        foreach (VCmdMst x in Objs)
         {
             Items.Add(x);
         }
@@ -181,26 +183,37 @@
 
 
 
-
-
-
     protected override void OnInitialized()
     {
 
         // === 要調整的地方 ===
-        //QueryAdapter.f.PageHelper.BaseUrl = "/A001BaseDocureason/";
-        QueryAdapter.f.PageHelper.BaseUrl = "/A001/";
+        //QueryAdapter.f.PageHelper.BaseUrl = "/A003VCmdMst/";
+        QueryAdapter.f.PageHelper.BaseUrl = "/A003/";
 
         // TODO, 準備要由 entity 裡選, 用 LIST 給顯示名
 
 
         // === 要調整的地方 ===
-        Type type = typeof(BaseDocureason);
+        Type type = typeof(VCmdMst);
         PropertyInfo[] properties = type.GetProperties();
 
-       
 
-        QueryAdapter.ReadJson(type, PRE, ENT);
+
+        //ReadJson();
+        QueryAdapter.ReadJson(type,PRE, ENT);
+
+
+        //  QueryAdapter.f.FieldMappers = auto3;
+        // IsShowField = false;
+
+        //    string json = JsonConvert.SerializeObject(plan3.ToArray());
+
+        //write string to file
+        //   System.IO.File.WriteAllText(@"D:\ZZZ\"+PRE+ENT+".json", json);
+
+
+        //  System.IO.File.ReadAllText("wwwroot/data/Users.json");
+        //str strText=System.IO.File.ReadAllText("wwwroot/data/Users.json");
 
 
 
@@ -220,13 +233,13 @@
         QueryAdapter.f.FMapper = new();
 
 
-        //Type type = typeof(BaseDocureason);
+        //Type type = typeof(VCmdMst);
         //PropertyInfo[] properties = type.GetProperties();
         int k = 0;
         foreach (var x in QueryAdapter.f.FieldMappers)
         {
             //  x.Name
-            foreach (var y in typeof(BaseDocureason).GetProperties())
+            foreach (var y in typeof(VCmdMst).GetProperties())
             {
                 if (y.Name == x.Id)
                 {

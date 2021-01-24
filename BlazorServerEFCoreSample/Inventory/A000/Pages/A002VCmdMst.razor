@@ -8,8 +8,7 @@
 
 
 @inject A002Adapter QueryAdapter
-@using System;
-@using System.Reflection;
+
 
 
 
@@ -17,8 +16,7 @@
 <CompPageTitleA000 Title="@TITLE" />
 
 <WrapperA @ref="Wrapper"
-            FilterChanged="ReloadAsync"
-            ToWrite="WriteJson">
+            FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
 
         <CompSearchA000 Filters="@QueryAdapter.f" />
@@ -182,54 +180,6 @@
         await ReloadAsync();
     }
 
-    public void ReadJson()
-    {
-        try
-        {
-            //同一個ENT 可能有不同的顯示方式,用前綴區分
-            var str = System.IO.File.ReadAllText(@"D:\ZZZ\ENT\" + PRE + ENT + ".json");
-            var array = JsonConvert.DeserializeObject<List<FieldMapper>>(str);
-
-            QueryAdapter.f.FieldMappers = new();
-
-            foreach (var item in array)
-            {
-                QueryAdapter.f.FieldMappers.Add(item);
-            }
-
-        }
-        catch
-        {
-            Type type = typeof(VCmdMst);
-            PropertyInfo[] properties = type.GetProperties();
-
-            //  var auto = new List<FieldMapper>();
-            QueryAdapter.f.FieldMappers = new();
-            foreach (PropertyInfo property in properties.Take(5))
-            {
-                string y = property.Name;
-
-                QueryAdapter.f.FieldMappers.Add(new FieldMapper { Id = y, Name = y, Index = -1 });
-            }
-            WriteJson();
-        }
-
-
-
-
-    }
-
-    public void WriteJson()
-    {
-
-        // string json = JsonConvert.SerializeObject(_data.ToArray(), Formatting.Indented);
-
-        //        string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray());
-        string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray(), Formatting.Indented);
-
-        //write string to file
-        System.IO.File.WriteAllText(@"D:\ZZZ\ENT\" + PRE + ENT + ".json", json);
-    }
 
 
     protected override void OnInitialized()
@@ -246,47 +196,10 @@
         Type type = typeof(VCmdMst);
         PropertyInfo[] properties = type.GetProperties();
 
-        //var auto = new List<FieldMapper>();
-        //foreach (PropertyInfo property in properties)
-        //{
-        //    string y = property.Name;
+     
 
-        //    auto.Add(new FieldMapper { Id = y, Name = y, Index = -1 });
-        //}
-
-
-        //QueryAdapter.f.FieldMappers = GetFieldMapper.Q019V2Outasn();
-        //QueryAdapter.f.FieldMappers = auto;
-
-
-        //var auto2 = new List<FieldMapper>();
-        //List<int> plan2 = new List<int> { 3, 1, 2, };
-        //foreach (var x in plan2)
-        //{
-        //    string y = properties[x].Name;
-        //    auto2.Add(new FieldMapper { Id = y, Name = y, Index = -1 });
-        //}
-        //QueryAdapter.f.FieldMappers = auto2;
-
-        var auto3 = new List<FieldMapper>();
-        var plan3 = new List<IdName> {
-          //  Type    Code    ConfigDesc  ConfigValue Memo    Createtime  Createowner Lastupdatetime  Lastupdateowner TypeMemo    Status
-         //   new IdName(0,"id"),
-            new IdName(1,"作用域"),
-            new IdName(3,"理由碼編號"),
-            new IdName(4,"理由碼說明"),
-            new IdName(6,"創建人"),
-            new IdName(5,"制單日期"),
-
-
-        };
-        foreach (var x in plan3)
-        {
-            string Id = properties[x.Id].Name;
-            auto3.Add(new FieldMapper { Id = Id, Name = x.Name, Index = -1 });
-        }
-
-        ReadJson();
+        //ReadJson();
+        QueryAdapter.ReadJson(type, PRE, ENT);
 
         //  QueryAdapter.f.FieldMappers = auto3;
         // IsShowField = false;

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 
 
-namespace DreamAITek.T001.Adapter.Shared
+namespace DreamAITek.T001.Shared
 {
-    public partial class FieldMapper
+    public partial class A000FieldMapper
     {
-        public FieldMapper() { }
-        public FieldMapper(string id, string name)
+        public A000FieldMapper() { }
+        public A000FieldMapper(string id, string name)
         {
             Id = id;
             Name = name;

@@ -1,4 +1,4 @@
-﻿using Inventory.Shared;
+﻿using DreamAITek.T001.Shared;
 using System;
 using System.Collections.Generic;
 
@@ -13,10 +13,10 @@ namespace DreamAITek.T001.Adapter
         /// <summary>
         /// The <see cref="ContactFilterColumns"/> being filtered on.
         /// </summary>
-        ApplicationFilterColumns FilterColumn { get; set; }
+        //ApplicationFilterColumns FilterColumn { get; set; }
 
-        ApplicationFilterColumns DefaultColumn { get; set; }
-        AppSortType SortType { get; set; }
+        //ApplicationFilterColumns DefaultColumn { get; set; }
+        //AppSortType SortType { get; set; }
         string ErrMsg { get; set; }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace DreamAITek.T001.Adapter
         string[] FilterContainsColName { get; set; }
 
         void MakeFieldMappers<T>();
-        List<FieldMapper> FieldMappers { get; set; }
+        List<A000FieldMapper> FieldMappers { get; set; }
         List<int> FMapper { get; set; }
 
 
@@ -61,6 +61,6 @@ namespace DreamAITek.T001.Adapter
         /// <summary>
         /// The <see cref="ContactFilterColumns"/> being sorted.
         /// </summary>
-        ApplicationFilterColumns SortColumn { get; set; }
+   //     ApplicationFilterColumns SortColumn { get; set; }
     }
 }

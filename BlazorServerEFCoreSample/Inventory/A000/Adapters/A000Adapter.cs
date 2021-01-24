@@ -1,11 +1,15 @@
-﻿using Inventory.Data;
+﻿using DreamAITek.T001.Adapter.Shared;
+using DreamAITek.T001.Shared;
+using Inventory.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.DynamicLinq;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace DreamAITek.T001.Adapter
@@ -25,6 +29,54 @@ namespace DreamAITek.T001.Adapter
 
         //public Q028Adapter() { }
 
+        public void ReadJson(Type type ,string PRE, string ENT)
+        {
+            try
+            {
+                //同一個ENT 可能有不同的顯示方式,用前綴區分
+                var str = System.IO.File.ReadAllText(@"D:\ZZZ\ENT2\" + PRE + ENT + ".json");
+                var array = JsonConvert.DeserializeObject<List<A000FieldMapper>>(str);
+
+                f.FieldMappers = new();
+
+                foreach (var item in array)
+                {
+                    f.FieldMappers.Add(item);
+                }
+
+            }
+            catch
+            {
+              //  Type type = typeof(VCmdMst);
+                PropertyInfo[] properties = type.GetProperties();
+
+                //  var auto = new List<FieldMapper>();
+                f.FieldMappers = new();
+                foreach (PropertyInfo property in properties.Take(7))// DOING
+                {
+                    string y = property.Name;
+
+                    f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = y, Index = -1 });
+                }
+                WriteJson(PRE,ENT);
+            }
+
+
+
+
+        }
+
+        public void WriteJson(string PRE, string ENT)
+        {
+
+            // string json = JsonConvert.SerializeObject(_data.ToArray(), Formatting.Indented);
+
+            //        string json = JsonConvert.SerializeObject(QueryAdapter.f.FieldMappers.ToArray());
+            string json = JsonConvert.SerializeObject(f.FieldMappers.ToArray(), Formatting.Indented);
+
+            //write string to file
+            System.IO.File.WriteAllText(@"D:\ZZZ\ENT2\" + PRE + ENT + ".json", json);
+        }
 
         public A000Adapter()
         {

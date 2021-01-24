@@ -1,5 +1,6 @@
-﻿using Inventory.Package1;
-using Inventory.Shared;
+﻿
+using DreamAITek.T001.Shared;
+
 using System;
 using System.Collections.Generic;
 
@@ -54,7 +55,7 @@ namespace DreamAITek.T001.Adapter
         /// <summary>
         /// Column to sort by.
         /// </summary>
-        public ApplicationFilterColumns SortColumn { get; set; }
+       // public ApplicationFilterColumns SortColumn { get; set; }
 
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace DreamAITek.T001.Adapter
         /// <summary>
         /// Column filtered text is against.
         /// </summary>
-        public ApplicationFilterColumns FilterColumn { get; set; }
+     //   public ApplicationFilterColumns FilterColumn { get; set; }
 
 
 
@@ -92,13 +93,13 @@ namespace DreamAITek.T001.Adapter
             Console.WriteLine(typeof(T));
 
         }
-        public List<FieldMapper> FieldMappers { get; set; }
+        public List<A000FieldMapper> FieldMappers { get; set; }
         public List<int> FMapper { get; set; }// for selected filter input
         public string WorkWith { get; set; }
         public string ErrMsg { get; set; }
         public bool IsDev { get; set; } = true;
-        public ApplicationFilterColumns DefaultColumn { get; set; }
-        public AppSortType SortType { get; set; }
+   //     public ApplicationFilterColumns DefaultColumn { get; set; }
+     //   public AppSortType SortType { get; set; }
 
     }
 }
