@@ -44,7 +44,24 @@ namespace DreamAITek.T001.Adapter
         public List<T> GetConvertedItems<T>(ICollection<Object> Objs)
         {
             List<T> Items = new();
-            foreach (T x in Objs)   
+            foreach (T x in Objs)
+            {
+                Items.Add(x);
+            }
+            return Items;
+        }
+
+
+        // NOTE by Mark, 2021-01-24
+        // 將兩段組合在一起
+        //
+        // 1. 取得10筆泛型模型記錄
+        // 2. 寫入到本頁的特定模型
+        public async Task<List<T>> GetConvertedItemsV2Async<T>(TaiweiContext context, string entity)
+        {
+            var Objs =await FetchAsyncV997(context, entity);
+            List<T> Items = new();
+            foreach (T x in Objs)
             {
                 Items.Add(x);
             }
@@ -97,6 +114,20 @@ namespace DreamAITek.T001.Adapter
         //var type = context.Model.FindEntityType(ENT);
 
 
+        public void Start(Type type, string PRE, string ENT)
+        {
+            //1. 指定導航網址
+            f.PageHelper.BaseUrl = "/" + PRE + "/";
+
+            ReadJson(type, PRE, ENT);
+            //3. 設定默認排序    取第一個欄位, 正向排序
+            defaultSortStr = f.FieldMappers[0].Id + "_1";
+
+            //4. 設置篩選欄位, *** 要處理可篩選欄位不足 4 個 的情況
+            UpdateFMapper(type);
+        }
+
+
         public void ReadJson(Type type, string PRE, string ENT)
         {
             try
@@ -130,6 +161,9 @@ namespace DreamAITek.T001.Adapter
             }
 
 
+
+
+           
 
 
         }
