@@ -10,7 +10,8 @@ namespace MyFileGenTool
         {
             //   MakeAdapters();
             // MakeAddService();
-            MakePage("A006", "VInasn");
+     //       MakePage("A006", "VInasn","入庫通知單");
+            MakePage("A007", "VCmdMst", "WCS命令查詢");
         }
 
         static void MakeAdapters()
@@ -45,7 +46,7 @@ namespace MyFileGenTool
 
             //   Console.WriteLine(str);
         }
-        static void MakePage(string PRE, string ENT)
+        static void MakePage(string PRE, string ENT,string TITLE)
         {
             string basePath = @"D:\ZZZ\Gen001\Pages\";
             string path = basePath + "A005V2Outbill.razor";
@@ -57,15 +58,15 @@ namespace MyFileGenTool
                 return;
             }
             string str = File.ReadAllText(path);
+            string key0 = "出庫單";
             string key1 = "A005";
             string key2 = "V2Outbill";
 
             string path2 = basePath + PRE + ENT + ".razor";
 
 
-            string str2;
-            str2 = str.Replace(key1, PRE);
-            str2 = str2.Replace(key2, ENT);
+             
+            var str2 = str.Replace(key0, TITLE).Replace(key1, PRE).Replace(key2, ENT);
 
             File.WriteAllText(path2, str2, Encoding.UTF8);
 
