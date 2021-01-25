@@ -5,4 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Gen\A999V2Outbill.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Gen\A999V2Outbill.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

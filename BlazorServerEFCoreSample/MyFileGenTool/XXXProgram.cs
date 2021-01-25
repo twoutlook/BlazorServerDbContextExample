@@ -4,32 +4,16 @@ using System.Text;
 
 namespace MyFileGenTool
 {
-    class Program
+    class XXXProgram
     {
-        static void Main(string[] args)
+        static void XXXMain(string[] args)
         {
             //   MakeAdapters();
             // MakeAddService();
-            // --------------- maing pages
-            // A999是 原型
-            MakePage("A001", "BaseDocureason", "理由碼設置");
-            MakePage("A002", "VCmdMst", "WCS命令查詢");
-            MakePage("A003", "VInasn", "入庫通知單");
-            MakePage("A004", "V2Outasn", "出庫通知單");
-            MakePage("A006", "VInasn", "出庫單");
+     //       MakePage("A006", "VInasn","入庫通知單");
             MakePage("A007", "VCmdMst", "WCS命令查詢");
-            MakePage("A008", "VStockCurrent", "庫存查詢");
-
-
-
         }
 
-
-        static void GetClass()
-        {
-            //https://stackoverflow.com/questions/2408789/getting-class-type-from-string
-            //     Class <?> cls = Class.forName(className);
-        }
         static void MakeAdapters()
         {
             string basePath = @"D:\ZZZ\Gen001\Adapters\";
@@ -62,38 +46,29 @@ namespace MyFileGenTool
 
             //   Console.WriteLine(str);
         }
-        static void MakePage(string PRE, string ENT, string TITLE)
+        static void MakePage(string PRE, string ENT,string TITLE)
         {
-            string basePath = @"D:\2021\Lab\Hot\BlazorServerDbContextExample\BlazorServerEFCoreSample\MyFileGenTool\Gen\";
+            string basePath = @"D:\ZZZ\Gen001\Pages\";
+            string path = basePath + "A005V2Outbill.razor";
 
-            //NOTE by Mark, 2021-01-25, 直接寫入工作目錄
-            string basePath2 = @"D:\2021\Lab\Hot\BlazorServerDbContextExample\BlazorServerEFCoreSample\Inventory\A000\Pages\";
-
-            string path = basePath + "A999V2Outbill.razor"; //這是提供原型
-       //     string path2 =basePath2 + "A005V2Outbill.razor";
             // This text is added only once to the file.
-
-
             if (!File.Exists(path))
             {
-                Console.WriteLine(path + " 不存在 , 請給 原型");
+                Console.WriteLine(path + " 不存在");
                 return;
             }
-
             string str = File.ReadAllText(path);
             string key0 = "出庫單";
-            string key1 = "A999";
+            string key1 = "A005";
             string key2 = "V2Outbill";
 
-            string pathFinal = basePath + PRE + ENT + ".razor";
-            string path2Final = basePath2 + PRE + ENT + ".razor";
+            string path2 = basePath + PRE + ENT + ".razor";
 
 
+             
+            var str2 = str.Replace(key0, TITLE).Replace(key1, PRE).Replace(key2, ENT);
 
-            var strFinal = str.Replace(key0, TITLE).Replace(key1, PRE).Replace(key2, ENT);
-
-            File.WriteAllText(pathFinal, strFinal, Encoding.UTF8);
-            File.WriteAllText(path2Final, strFinal, Encoding.UTF8);
+            File.WriteAllText(path2, str2, Encoding.UTF8);
 
 
             //   Console.WriteLine(str);

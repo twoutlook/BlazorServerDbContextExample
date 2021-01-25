@@ -1,0 +1,133 @@
+﻿@page "/Note0"
+<PageTitle Title="HOME 主頁" />
+<style>
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+    }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+
+        blockquote p {
+            display: inline;
+        }
+</style>
+<blockquote class="blockquote">
+    <span style="font-size:125%">   2021年春節前後的主軸就是建立這個 Codebase</span>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --- by Mark陳炳陵
+</blockquote>
+<hr />
+<PageTitle Title="鋼骨結構建立制式查詢系統" />
+<ul>
+    <li>頁面A001至A999。</li>
+    <li>每頁主體為模型Entity。</li>
+    <li>每頁自動生成最多八個文本類型的篩選和兩組所有顯示欄位的排序。</li>
+    <li>用戶可以自定義欄位顯示文字。</li>
+</ul>
+
+<PageTitle Title="系統結構概述" />
+<ul>
+    <li>每頁面以Blazor自帶路由實現。</li>
+    <li>每頁主體以Wrapper為大框架, 內構三個主要元件:(1)查詢(2)顯示(3)分頁。</li>
+    <li>每頁必需有獨位的Adapter, 每個Adapter各自的Filter和 PageHelper。</li>
+    <li>技術元素: Blazor Server, EF Core, Dynamic LINQ</li>
+</ul>
+
+<PageTitle Title="T001實做" />
+<ul>
+    <li>Models:EF Core 生成 Entity。指定Namespace DreamAITek.T001,獨立打包</li>
+    <li>Data: T001Context</li>
+    <li>Adapters:A001Adapter 至 A999Adapter, 包括共用元件Wrapper, Filter, PageHelper</li>
+    <li>A000/Pages:A001 至 A999<ul>
+    <li>由A001BaseDocureason 複製成A002BaseDocureason, 並在頁內 replace A001 with A002, working!  </li>
+
+    <li>replace BaseDocureason with VCmdMst, working!  </li>
+    <li>***FetchAsyncV997  </li>
+    <li>_Imports.razor
+        <ul>
+            <li>&commat;using DreamAITek.T001.Adapter</li>
+</ul>  </li>
+
+
+</ul></li>
+    <li>Componets: SearchComp,TableComp,PagingComp</li>
+    <li>NavMenu:</li>
+    <li>
+        用戶端管理員介面:
+        <ul><li>指定顯示欄位和順序,包括顯示字樣。</li></ul>
+    </li>
+
+</ul>
+
+<PageTitle Title="Service" />
+<ul>
+    <li>Input:獨位導出的數據庫備份</li>
+    <li>Output:部署在指定旳服務器</li>
+
+</ul>
+
+<PageTitle Title="Dev Note" />
+<ul>
+    <li>各頁面先讀取指定目錄的指定檔案來決定顯示欄位</li>
+    <li>上述檔案如不存在, 則系統按基本模板自動生成</li>
+
+</ul>
+
+
+
+<PageTitle Title="MAIN PURPOSE" />
+<ul>
+    <li>先實現各種查詢, 一方面模擬系統的操作功能, 一方面方便顯示系統的內部設計。</li>
+    <li>顯示系統的內部設計是方便開發人員參考和內部開發培訓使用。</li>
+    <li>整個系統優化以疊代更新進行。考量現已在客戶現場正式的系統, 數據庫部份先保持不動。</li>
+    <li>類以項目如需求有明顯變動部份,優先部份調整數據庫。</li>
+
+    <li>
+        現有權限平台在.NET5 的環境已不適用。簡易型可以直接使用內建的Role Authorization，必要時可以升級使用 Identity Server 4
+        。
+    </li>
+
+    <li>將標準的部份先固化出來, 針對不同頁的需求,制定SOP。</li>
+    <li>上述固化部份, 應做成單獨 Library 並打包成 NuGet Package。</li>
+    <li>上述打包的 NuGet Package, 予以公開發佈, 方便新項目或新人加入時直接安裝使用。</li>
+
+</ul>
+<hr />
+<PageTitle Title="CHECK LIST" />
+<ul>
+    <li>查詢時的下拉選項, 採用 === 請選擇 === 表示尚未做任何選擇。</li>
+    <li>查詢結果的欄位排序, 允許在設定的欄位直接點擊欄位顯示切換正序或反序排序,並用🔼🔽標示出來。</li>
+    <li>上述🔼🔽如果要改用其它符號, 包括如果要標示可排序和不可排序的欄位,需要額外處理 。</li>
+    <li>查詢欄位是日期時, 起止日期用兩週前至今天。如果不使用該日期, 需要額外處理。 </li>
+    <li>以庫存調整單的狀態為例, 其顯示中文是在數據庫的SYS_PARAMETER, 多語時使用額外處理。</li>
+    <li>以庫存調整單的狀態為例, 用來做查詢時, 下拉元件可以單獨給值, 但是如果有新增狀態在當筆狀態欄位或是SYS_PARAMETER時, 需要額外處理。</li>
+    <li>以庫存調整單的製單人員和審核人員, 其顯示名需要透過人員主檔取得。如果測試或正式環境有不在人員主檔的帳號, 需要額外處理。</li>
+    <li>以庫存調整單的製單人員和審核人員為例, 其顯示名需要透過人員主檔取得, 先以建VIEW V2為前綴再使用 EF Core 建 Entity class 方式處理。</li>
+    <li>上述另一種做法是用LINQ 實施 JOIN。</li>
+
+    <li>以庫存調整單的狀態為例, 以EF Core的做法是有單獨的查表, 可以充份應用 Navigation 功能。目前整個查表統一放在SYS_PARAMETER, 各有利弊。 </li>
+    <li>以庫存調整單的狀態為例,如果要使用 EF Core的 Navigation 功能。是否可以將查表部份直接以代碼實現,不進數據庫取值? 這是為了保持數據庫完整,也實驗這部份混用的可行性。</li>
+
+</ul>
+
+<PageTitle Title="TODO" />
+<ul>
+    <li>頁面的razor file, 應該命名如 Q004Parameter.razor。其使用的標準附件也應該有前綴Q004Parameter。</li>
+    <li>Filter 或 GridQueryAdapter, 其中之一應該成為 generic 。</li>
+    <li>Paging.razor 也應該可以成為泛型。</li>
+
+
+</ul>
+
+

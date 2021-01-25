@@ -1,26 +1,15 @@
-﻿@* === TODO　要調整的地方 ===*@
-@page "/A004"
+﻿@page "/A004"
 @page "/A004/{Page:int}"
-
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-
-
 @inject A004Adapter QueryAdapter
-
-
-
-
 
 <CompPageTitleA000 Title="@TITLE" />
 
-<WrapperA @ref="Wrapper"
-          FilterChanged="ReloadAsync">
+<WrapperA @ref="Wrapper" FilterChanged="ReloadAsync">
     <div class="container-fluid contacts-grid">
-
         <CompSearchA000 Filters="@QueryAdapter.f" />
-
         @if (QueryAdapter.f.Loading || Items == null)
         {
             <div class="row">
@@ -32,23 +21,18 @@
 
         @if (Items != null)
         {
-            <CompTableA000 Filters="@QueryAdapter.f"
-                           Items="Items" />
+            <CompTableA000 Filters="@QueryAdapter.f" Items="Items" />
         }
 
-        @*NOTE by Mark,2021-01-18, 如果只有一頁, 不顯示分頁*@
         @if (@QueryAdapter.f.PageHelper.PageCount > 1)
         {
             <CompPagingA000 Filters="@QueryAdapter.f" />
-
         }
     </div>
 </WrapperA>
 
-
 @code
 {
-
     [Parameter]
     public int Page // 原範例,已更換變量 //頁面上的分頁
     {
@@ -120,22 +104,26 @@
         QueryAdapter.f.Loading = true; // --- start
 
         // 1. 取得10筆泛型模型記錄
-        Objs = await QueryAdapter.FetchAsyncV997(DbFactory.CreateDbContext(), ENT);
+        //   Objs = await QueryAdapter.FetchAsyncV997(DbFactory.CreateDbContext(), ENT);
 
         // 2. 寫入到本頁的特定模型
-        UpdateItems();
+        //   Items = QueryAdapter.GetConvertedItems<V2Outasn>(Objs);
 
+        Items =await QueryAdapter.GetConvertedItemsV2Async<V2Outasn>( DbFactory.CreateDbContext(), ENT);
         QueryAdapter.f.Loading = false;// --- end
     }
 
-    private void UpdateItems()
-    {
-        Items = new();
-        foreach (V2Outasn x in Objs)   // === 要調整的地方 ===
-        {
-            Items.Add(x);
-        }
-    }
+    //private void UpdateItems()
+    //{
+    //    Items = new();
+    //    foreach (V2Outasn x in Objs)   // === 要調整的地方 ===
+    //    {
+    //        Items.Add(x);
+    //    }
+
+    //}
+
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -144,22 +132,22 @@
 
     protected override void OnInitialized()
     {
+        QueryAdapter.Start(typeof(V2Outasn), PRE, ENT);
+
         //1. 指定導航網址
-        QueryAdapter.f.PageHelper.BaseUrl = "/" + PRE + "/";
+        //QueryAdapter.f.PageHelper.BaseUrl = "/" + PRE + "/";
 
-        //2. 讀取欄位定義, 如果不存在,以標準模板建立使用
-        Type type = typeof(V2Outasn); //注意模型還未放到指定的 namespace   // === 要調整的地方 ===
-        PropertyInfo[] properties = type.GetProperties();
-        QueryAdapter.ReadJson(type, PRE, ENT);
+        ////2. 讀取欄位定義, 如果不存在,以標準模板建立使用
+        //Type type = typeof(V2Outasn); //注意模型還未放到指定的 namespace   // === 要調整的地方 ===
+        //PropertyInfo[] properties = type.GetProperties();
+        //QueryAdapter.ReadJson(type, PRE, ENT);
 
-        //3. 設定默認排序    取第一個欄位, 正向排序
-        QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
+        ////3. 設定默認排序    取第一個欄位, 正向排序
+        //QueryAdapter.defaultSortStr = QueryAdapter.f.FieldMappers[0].Id + "_1";
 
-        //4. 設置篩選欄位, *** 要處理可篩選欄位不足 4 個 的情況
-        QueryAdapter.UpdateFMapper(type);
-
+        ////4. 設置篩選欄位, *** 要處理可篩選欄位不足 4 個 的情況
+        //QueryAdapter.UpdateFMapper(type);
     }
-
 }
 
 
