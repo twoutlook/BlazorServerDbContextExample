@@ -1,6 +1,7 @@
 ﻿using DreamAITek.T001.Adapter.Shared;
 using DreamAITek.T001.Shared;
 using Inventory.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.DynamicLinq;
 using Microsoft.Extensions.Caching.Memory;
@@ -11,6 +12,9 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Threading.Tasks;
+
+
+
 
 
 /***
@@ -28,6 +32,9 @@ namespace DreamAITek.T001.Adapter
     //public class Q029Adapter
     public class A000Adapter
     {
+        //private IHostingEnvironment Environment;
+
+        private string TABLE_CONFIG_ROOT = @"C:\ZZZ_TABLES_CONFIG\";
         private int MAX_ITEM_COL_CNT = 12;
         private int FIX_FITER_CNT = 8;// 這是指在 search, 最上兩個ROW, 各有 4 個 text filter control
 
@@ -59,7 +66,7 @@ namespace DreamAITek.T001.Adapter
         // 2. 寫入到本頁的特定模型
         public async Task<List<T>> GetConvertedItemsV2Async<T>(TaiweiContext context, string entity)
         {
-            var Objs =await FetchAsyncV997(context, entity);
+            var Objs = await FetchAsyncV997(context, entity);
             List<T> Items = new();
             foreach (T x in Objs)
             {
@@ -71,7 +78,7 @@ namespace DreamAITek.T001.Adapter
 
         public void UpdateFMapper(Type type)
         {
-            f.FMapper = new () ;
+            f.FMapper = new();
 
 
             //Type type = typeof(VInasn);
@@ -82,9 +89,9 @@ namespace DreamAITek.T001.Adapter
             {
                 //  x.Name
                 //foreach (var y in typeof(VInasn).GetProperties())
-                    foreach (var y in type.GetProperties())
-                    {
-                        if (y.Name == x.Id)
+                foreach (var y in type.GetProperties())
+                {
+                    if (y.Name == x.Id)
                     {
                         if (y.PropertyType.Name.ToString() == "String")
                         {
@@ -103,7 +110,7 @@ namespace DreamAITek.T001.Adapter
             // Note by Mark, 2021-01-24, 這是處理可篩選的欄位不足4個的時候
             // 另外在search componet 要禁制掉補 -1 的
             // FIX WHEN FILTER_FILED_CNT<=4
-            for (int i= f.FILTER_FILED_CNT; i < FIX_FITER_CNT; i++)
+            for (int i = f.FILTER_FILED_CNT; i < FIX_FITER_CNT; i++)
             {
                 f.FMapper.Add(-1);
             }
@@ -118,7 +125,7 @@ namespace DreamAITek.T001.Adapter
         {
             //1. 指定導航網址
             f.PageHelper.BaseUrl = "/" + PRE + "/";
-
+            //2. 
             ReadJson(type, PRE, ENT);
             //3. 設定默認排序    取第一個欄位, 正向排序
             defaultSortStr = f.FieldMappers[0].Id + "_1";
@@ -128,19 +135,39 @@ namespace DreamAITek.T001.Adapter
         }
 
 
+
+
+        //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files?view=aspnetcore-5.0
         public void ReadJson(Type type, string PRE, string ENT)
         {
             try
             {
                 //同一個ENT 可能有不同的顯示方式,用前綴區分
-                var str = System.IO.File.ReadAllText(@"D:\ZZZ\ENT2\" + PRE + ENT + ".json");
+                //var str = System.IO.File.ReadAllText(@"D:\ZZZ\ENT2\" + PRE + ENT + ".json");
+
+
+                var str = System.IO.File.ReadAllText(TABLE_CONFIG_ROOT + PRE + ENT + ".json");
                 var array = JsonConvert.DeserializeObject<List<A000FieldMapper>>(str);
 
+
+                // NOTE by Mark, 2021-01-25
+                // 改用法
+                // Id = id;   所有的欄位名
+                // Name = name;自定義顯示名
+                // Index = -1;大於0顯示, 小於或等於0不顯示
                 f.FieldMappers = new();
+
+                array.Sort(delegate (A000FieldMapper x, A000FieldMapper y)
+                {
+                    //https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.sort?view=net-5.0
+                    return x.Index.CompareTo(y.Index);
+                });
+
 
                 foreach (var item in array)
                 {
-                    f.FieldMappers.Add(item);
+                    if (item.Index > 0)
+                        f.FieldMappers.Add(item);
                 }
 
             }
@@ -151,19 +178,35 @@ namespace DreamAITek.T001.Adapter
 
                 //  var auto = new List<FieldMapper>();
                 f.FieldMappers = new();
-                foreach (PropertyInfo property in properties.Take(MAX_ITEM_COL_CNT))// DOING
-                {
-                    string y = property.Name;
 
-                    f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = y, Index = -1 });
+                //     // NOTE by Mark, 2021-01-25
+                //foreach (PropertyInfo property in properties.Take(MAX_ITEM_COL_CNT))// DOING
+                //{
+                //    string y = property.Name;
+
+                //    f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = y, Index = -1 });
+                //}
+
+                // NOTE by Mark, 2021-01-25
+                // 全部欄位都要輸出, 但是改變 Index, 仿 BASIC 10, 20 ...
+                int k = 0;
+                foreach (PropertyInfo property in properties)// DOING
+                {
+                    k += 1;
+                    string y = property.Name;
+                    int k2 = k * 10;
+                    k2 = k <= MAX_ITEM_COL_CNT ? k2 : (-1) * k2;
+                    f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = "顯示" + y, Index = k2 });
                 }
+
+
                 WriteJson(PRE, ENT);
             }
 
 
 
 
-           
+
 
 
         }
@@ -177,9 +220,12 @@ namespace DreamAITek.T001.Adapter
             string json = JsonConvert.SerializeObject(f.FieldMappers.ToArray(), Formatting.Indented);
 
             //write string to file
-            System.IO.File.WriteAllText(@"D:\ZZZ\ENT2\" + PRE + ENT + ".json", json);
+            //System.IO.File.WriteAllText(@"D:\ZZZ\ENT2\" + PRE + ENT + ".json", json);
+            System.IO.File.WriteAllText(TABLE_CONFIG_ROOT + PRE + ENT + ".json", json);
         }
 
+
+        // 使用最簡約的繼承時, 不能有參數
         public A000Adapter()
         {
             //https://docs.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-5.0#stateful-reconnection-after-prerendering
