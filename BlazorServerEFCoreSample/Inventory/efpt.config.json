@@ -81,6 +81,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[V_STOCK_CURRENT]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[V2_OUTASN]",
          "ObjectType": 3
       },

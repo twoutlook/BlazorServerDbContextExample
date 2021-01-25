@@ -1,9 +1,9 @@
-﻿@page "/A003"
-@page "/A003/{Page:int}"
+﻿@page "/A011"
+@page "/A011/{Page:int}"
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-@inject A003Adapter QueryAdapter
+@inject A011Adapter QueryAdapter
 
 <CompPageTitleA000 Title="@TITLE" />
 
@@ -91,7 +91,7 @@
     }
 
     private string TITLE = "入庫通知單";
-    private string PRE = "A003";
+    private string PRE = "A011";
     private string ENT = "VInasn";
 
     private async Task ReloadAsync()

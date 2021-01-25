@@ -39,6 +39,7 @@ namespace Inventory.Data
         public virtual DbSet<VInasn> VInasn { get; set; }
         public virtual DbSet<VInoutType> VInoutType { get; set; }
         public virtual DbSet<VOutasnlist> VOutasnlist { get; set; }
+        public virtual DbSet<VStockCurrent> VStockCurrent { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -2299,6 +2300,61 @@ namespace Inventory.Data
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("worktype");
+            });
+
+            modelBuilder.Entity<VStockCurrent>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("V_STOCK_CURRENT");
+
+                entity.Property(e => e.Cdatecode)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cdatecode");
+
+                entity.Property(e => e.Cinvcode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("cinvcode");
+
+                entity.Property(e => e.Cinvname)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("cinvname");
+
+                entity.Property(e => e.Cposition)
+                    .HasMaxLength(100)
+                    .HasColumnName("cposition");
+
+                entity.Property(e => e.Cpositioncode)
+                    .HasMaxLength(100)
+                    .HasColumnName("cpositioncode");
+
+                entity.Property(e => e.Cwarehouse)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cwarehouse");
+
+                entity.Property(e => e.Cwarehousecode)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("cwarehousecode");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Ioccupyqty)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("ioccupyqty");
+
+                entity.Property(e => e.Iqty)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("iqty");
+
+                entity.Property(e => e.LockNum).HasColumnType("decimal(18, 6)");
             });
 
             modelBuilder.HasSequence("ASRS_cmdno_SEQ")

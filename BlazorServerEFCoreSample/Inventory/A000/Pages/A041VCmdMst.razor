@@ -1,9 +1,9 @@
-﻿@page "/A008"
-@page "/A008/{Page:int}"
+﻿@page "/A041"
+@page "/A041/{Page:int}"
 @inject NavigationManager NavMgr
 @inject IDbContextFactory<TaiweiContext> DbFactory
 @inject NavigationManager Nav
-@inject A008Adapter QueryAdapter
+@inject A041Adapter QueryAdapter
 
 <CompPageTitleA000 Title="@TITLE" />
 
@@ -47,7 +47,7 @@
 
     private ICollection<Object> Objs { get; set; } // 技術梗,適時使用泛型
 
-    private List<VStockCurrent> Items { get; set; } // 本頁面要顯示的內容     // === 要調整的地方 ===
+    private List<VCmdMst> Items { get; set; } // 本頁面要顯示的內容     // === 要調整的地方 ===
 
     private string IsDisabled(bool condition) => !QueryAdapter.f.Loading && condition ? "" : "disabled";// 原範例,已更換變量
 
@@ -90,9 +90,9 @@
         await base.OnParametersSetAsync();
     }
 
-    private string TITLE = "庫存查詢";
-    private string PRE = "A008";
-    private string ENT = "VStockCurrent";
+    private string TITLE = "WCS命令查詢";
+    private string PRE = "A041";
+    private string ENT = "VCmdMst";
 
     private async Task ReloadAsync()
     {
@@ -107,16 +107,16 @@
         //   Objs = await QueryAdapter.FetchAsyncV997(DbFactory.CreateDbContext(), ENT);
 
         // 2. 寫入到本頁的特定模型
-        //   Items = QueryAdapter.GetConvertedItems<VStockCurrent>(Objs);
+        //   Items = QueryAdapter.GetConvertedItems<VCmdMst>(Objs);
 
-        Items =await QueryAdapter.GetConvertedItemsV2Async<VStockCurrent>( DbFactory.CreateDbContext(), ENT);
+        Items =await QueryAdapter.GetConvertedItemsV2Async<VCmdMst>( DbFactory.CreateDbContext(), ENT);
         QueryAdapter.f.Loading = false;// --- end
     }
 
     //private void UpdateItems()
     //{
     //    Items = new();
-    //    foreach (VStockCurrent x in Objs)   // === 要調整的地方 ===
+    //    foreach (VCmdMst x in Objs)   // === 要調整的地方 ===
     //    {
     //        Items.Add(x);
     //    }
@@ -132,13 +132,13 @@
 
     protected override void OnInitialized()
     {
-        QueryAdapter.Start(typeof(VStockCurrent), PRE, ENT);
+        QueryAdapter.Start(typeof(VCmdMst), PRE, ENT);
 
         //1. 指定導航網址
         //QueryAdapter.f.PageHelper.BaseUrl = "/" + PRE + "/";
 
         ////2. 讀取欄位定義, 如果不存在,以標準模板建立使用
-        //Type type = typeof(VStockCurrent); //注意模型還未放到指定的 namespace   // === 要調整的地方 ===
+        //Type type = typeof(VCmdMst); //注意模型還未放到指定的 namespace   // === 要調整的地方 ===
         //PropertyInfo[] properties = type.GetProperties();
         //QueryAdapter.ReadJson(type, PRE, ENT);
 

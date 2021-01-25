@@ -1,0 +1,4 @@
+﻿case "BasePart":
+    f.PageHelper.TotalItemCount = await context.BasePart.Where(strWhere).CountAsync();
+    collection = context.BasePart.Where(strWhere).OrderBy(strOrderBy).Skip(f.PageHelper.Skip).Take(f.PageHelper.PageSize).ToList<Object>();
+    break;
