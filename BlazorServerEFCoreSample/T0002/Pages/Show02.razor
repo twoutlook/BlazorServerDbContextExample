@@ -1,0 +1,28 @@
+﻿@page "/Show02"
+
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.EntityFrameworkCore.Metadata;
+
+@inject IDbContextFactory<TaiweiContext> DbFactory
+<h3>Show</h3>
+<ul>
+
+    @foreach (var x in entList)
+    {
+        <li>@x.Name</li>
+    }
+</ul>
+
+
+
+@code {
+
+    List<IEntityType> entList;
+    protected override void OnInitialized()
+    {
+        var db = DbFactory.CreateDbContext();
+        //     foreach(var x in db.Model.GetEntityTypes()) { }
+        entList = db.Model.GetEntityTypes().ToList();
+
+    }
+}

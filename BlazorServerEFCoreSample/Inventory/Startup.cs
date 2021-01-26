@@ -111,6 +111,9 @@ namespace Inventory
 
             services.AddScoped<A000Adapter>(); //原型
             services.AddScoped<A999Adapter>(); //特別給 頁面的原型使用
+            services.AddScoped<A998Adapter>(); //特別給 doing ...使用
+
+
             services.AddScoped<A001Adapter>();
             services.AddScoped<A002Adapter>();
             services.AddScoped<A003Adapter>();
