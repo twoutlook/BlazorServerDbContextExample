@@ -1,4 +1,4 @@
-﻿@page "/Show02"
+﻿@page "/Show2"
 
 @using Microsoft.EntityFrameworkCore;
 @using Microsoft.EntityFrameworkCore.Metadata;
@@ -9,7 +9,16 @@
 
     @foreach (var x in entList)
     {
-        <li>@x.Name</li>
+        <li>
+            @x.Name
+            <ul>
+                @foreach (var x2 in x.GetProperties())
+                {
+                    <li>@x2.Name  @x2.GetColumnType()</li>
+
+                }
+            </ul>
+        </li>
     }
 </ul>
 
