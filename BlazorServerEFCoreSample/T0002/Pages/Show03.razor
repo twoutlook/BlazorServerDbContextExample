@@ -1,0 +1,52 @@
+﻿@page "/Show3"
+
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.EntityFrameworkCore.Metadata;
+@typeparam TItem
+@using System.Reflection
+
+@inject IDbContextFactory<TaiweiContext> DbFactory
+<h3>Show</h3>
+
+<h3>Show MemberInfo</h3>
+
+<ul>
+
+    @foreach (var x in dataList)
+    {
+        <li>
+
+          
+                        @x.Id
+
+             
+
+        </li>
+    }
+</ul>
+
+
+
+
+
+@code {
+
+    List<IEntityType> entList;
+    List<BasePart> dataList;
+
+    MemberInfo[] memberInfo;
+
+    protected override void OnInitialized()
+    {
+        var db = DbFactory.CreateDbContext();
+        //     foreach(var x in db.Model.GetEntityTypes()) { }
+        //  entList = db.Model.GetEntityTypes().ToList();
+
+
+        dataList = db.BasePart.Take(3).ToList();
+
+        // Type typeofItem = x[0].GetType();
+     //   memberInfo = x[0].GetType().GetMembers();
+
+    }
+}
