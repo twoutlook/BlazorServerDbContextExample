@@ -1,0 +1,2465 @@
+﻿{
+   "ContextClassName": "TaiweiContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Data",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "T0002",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[ALLOCATE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_D_BN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_D_MERGE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_D_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_LINE_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_LISTOUT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ALLOCATE_SCAN_QTY]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ASRS_SHOWINFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_CARTON]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_CARTON_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_CARTON_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_CARTON_M]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_CARTON_M_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_PACK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_PALLET]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_PALLET_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_PALLET_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_PALLET_M]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_PALLET_M_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_REPACK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_REPACK_RECORD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_SN_SPLIT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_SN_SPLIT_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BAR_TYPE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_AREA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_ASRS_DB]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_BAR_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_BARCODE_PRINT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_BARCODE_PRINT_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_BARCODE_RULE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_BARCODE_RULE_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_BOM]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_BOM_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGO_RMA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGOOUT_PART]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGOSPACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGOSPACE_CX]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGOSPACE_NEW_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGOSPACE_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGOSPACE_XX]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CARGOSPACEBAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CLIENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CRANECONFIG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CRANECONFIG_D_Trade]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CRANECONFIG_DETIAL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CRANECONFIG_DETIAL_SCAN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CRANECONFIG_PLCADDR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CRANECONFIG_TRADETYPE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_CRANECONFIG_TRADETYPE_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_DELIVER_DEPARTMENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_DEPARTMENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_DEPARTMENT_OTYPE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_DOCUCLASS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_DOCUREASON]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_FILEUPLOD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Base_Interface_RunTime]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_INTERFACELOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_INTERFACELOG_202003]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_INTERFACELOG_202004]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Base_JOB_RunTime]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_LINE_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_LINE_LIST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_LINE_VENDOR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_MATERIALS_AREA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_MRB_MAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_OF_CC]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_OP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_OPERATOR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_OPERATOR_AREA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_OPERATOR_AREA_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_OPERATOR_AREA_NEW]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Base_PackageScan]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Base_PackageScan_New]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART_AREA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART_AREA_BACK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART_AREA_CX]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART_AREA_XX]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART_CARGOSPACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PART_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_PLC_CURRENT_STATUS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_REPLACEPALLETCODE_RECORD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Base_Resources]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_RULES]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_SENDEMAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_SENDEMAILPELON]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_SERIAL_NUMBER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_STRONGPICK_PART]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_TV_ShowInfo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_TypeMapping]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Base_UserLanguage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_VENDOR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_WAREHOUSE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BASE_WAREHOUSE_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BaseRGV_AREA_PackageNo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BaseRGV_TV_PackageNo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CErpCode]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CHECKERRORMSG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CHECKERRORMSG_APP_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_AGVPositionCodeDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_AgvTask]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_EquipTask]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_LIFT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_MST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_MST_Error]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_MST_LOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_MST_RGV]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMD_MST_Scan]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CMDByPalletCode]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CREATEOUTASN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CURRENT001]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CX_FLOW_SWR_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DATA_INPUT_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DATE_EMP_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DATE_EMP_TEMPBAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DATECODE_STOCK_CURRENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DATECODE_STOCK_CURRENT_DETAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DEPARTMENT_LINE_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EBS_MO_END]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EBS_YD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[G_PART_MAP_WMS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[G_PART_MAP_WMS_CACHE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HANDLE_LOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HD_SQLMAP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IN_MERGE_PALLETE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IN_MO_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASN_APP_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASN_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASN_D_APP_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASN_D_ISTOCK_SPLIT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASN_IA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASN_IA_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASNCHANGE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASNCHANGE_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASSIT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INASSIT_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INBILL_D_BN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INBILL_D_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INPO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INPO_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INTERFACE_LOST_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INTYPE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INTYPE_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[INTYPEBAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LINE_EXCEPT_MO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LOG_OUTSN_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LOG_REVOKE_TEMPINBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LOG_SYSERROR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LOG_SYSERROR_APP_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MLOG$_EBS_OPEN_QUANTITY]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MLOG$_STOCK_CURRENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MO_CINVCODE_FLAG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MO_DEPARTMENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MTL_INTERFACE_CACHE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_GROUP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_GROUP_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_GROUP_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_GROUP_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_HANDOVER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_HANDOVER_CHECK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_HANDOVER_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_PART]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_TEST_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_TRANSPORTATIONPLAN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUT_UNPART]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_APP_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_BUILD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_D_APP_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_D_SPLIT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_D_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_DBACK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_TEMP_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASN2013]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASNBACK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASNCHANGE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASNCHANGE_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASNNOTUSEOUTTYPE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASSIT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASSIT_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASSIT_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTASSIT_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_D_BN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_D_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_D_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTBILL_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTMIXED]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTMIXED_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTORDER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTORDER_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTTYPE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTTYPE_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OUTTYPEBAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[P_InAsnCT_Code]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[P_SITEID]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[P_WAREHOUSEID]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PDA_LESS_CINVCODE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PDA_LESS_ERPCODE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PLAN_TABLE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PLC_CMD_MST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PO_GET_CACHE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PROC_FUN_RETURN_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PROCLOGS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RCV_INTERFACE_CACHE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[REPORT_PART_MORE_SPACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RETURNTOVENDORPARTLIST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RGV_CURRENT_STATUS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RPT_STOCK_DISCREPENCY]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RPT_STOCK_DISCREPENCY_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesOrder_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesOrder_M]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SN_ITEM_HEAD_CONFIG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SnResetOperateInfo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SSX_Site_Monitor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_ADJUST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_ALLO_SCAN_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CHECK_PLAN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CHECKBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CHECKBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CHECKBILL_POSITION]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CHECKEDBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CHECKEDBILL_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CHECKEDBILL_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_ADJUST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_ADJUST_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_BEGIN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_BN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_DETAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_OLD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Stock_CURRENT_PalletCode]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_CURRENT_SN_RESET]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_DEDUCT_DETAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_DEDUCT_SN_DETAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_DURATION]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_OCCUPANCY_RELEASE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_RECHECK_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_SN_ERPUNLOCK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STOCK_SN_LOCK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[stock_temp]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_Area]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_BILLLOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_CONFIG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_COUNTLOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_DbBackup]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_FilterIP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_Items]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_ItemsDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_Job]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_LANGUAGE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_LOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_LOG_Type]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_Module]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_ModuleButton]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_ModuleForm]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_ModuleFormInstance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_Organize]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_PARAMETER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_PARAMETERGROUP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_PARAMETERNAME]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_PRINTER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_Role]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_RoleAuthorize]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_SCANINLOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_STOCKDIFF_LOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_User]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sys_UserLogOn]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SYS_VERSION]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[T_OUT_RELEASEOFOCCUPIED]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TASK_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Tb_test]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TB_TEST_FLOAT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_ALLOCATE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_AREA_PAET_WAREHOUSE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_AREA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_CARGOSPACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_CLIENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_DEPARTMENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_LINE_LIST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_PART_CARGOSPACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_STOCK_CURRENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BASE_VENDOR]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_BIN_CARD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_CPOSITIONCODE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_DIGITALSINGE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_EBS_RESULT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_EBS_YD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_IMPORT_SPACE_PART_AREA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_IMPORTOUTASNDETAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_IN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_IN_MO_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_INANDOUTBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_INASSIT_BASE_CARGOSPACE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_INBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_INBILLTOTALQTY]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_LESS_CINVCODE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_LESS_DEPTMAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_LESS_ERPCODE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OASN_ERPCODE_N]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OF_ZYL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_ORDERCOMPISSUE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUT_TRANSPORTATIONPLAN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUTASN_ID]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUTBILL_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUTBILL_D_HIS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUTBILL_D_T]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUTBILL_D_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUTBILLTOTALQTY]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_OUTMIXED_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Temp_QueryInOutdetailsReport]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Temp_QueryInOutSummaryReport]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_REPORT_STOCK_DURATION]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_SELECTASND]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_SN_ERPUNLOCK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_CHECK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_CHECKEDBILL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_CHECKEDBILL_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_CURRENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_CURRENT_SN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_DURATION]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_DURATION1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCK_SNRESET]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_STOCKCURRENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_TVShowInfo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TEMP_USER_AREA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TempTable_allocate_t]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TempTable_AsnInfo_t]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TempTable_info_t]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TempTable_StockPositionInfo_t]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TempTable_TempOutbillInfo_t]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TRANS_LOG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TRANSACTION_TIME_CONFIG]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TRANSINTEFACEFORASNCHANGE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserFunction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[V_EBS_TRAN_TEST]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[V_User_Dept]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WARN_CARGO_MAIL]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WARN_PART_SHELFLIFE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WARN_TEMP_STOCK_INFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WCS_TaskProcess]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WCS_TaskProcess_D]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WCSAGVCallBackNotice]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WIP_CL_PARTINFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WIP_CL_PARTINFO_BAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WIP_DISCRETE_JOBS_V]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WIP_RETURN_ERRORERPCODE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WIPNEGATIVEISSUE_TEMP]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WIPRETURNINFO]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WMS_TABLE_RELATION]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WMS_YD]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WRITE_BACK_TIME_SET]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ZSICT1_USER]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PDA_V_InAsnList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[PDA_V_InAssitDetails]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[PDA_V_InAssitScan]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[PDA_V_SNPDStockInfo]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[PDA_V_StockQuery]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[PDA_V_StockReset]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_STOCK]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_STOCK_CELL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_WH]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_WH_L]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_WH_STOCK]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_WH_STOCK_DT_L_X_CNT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_WH_STOCK_IS_USED]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_WH_Y]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[R09_WH_Z]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Stock_Current_Detail_Fun]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[stock_current_sn_Fun]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[test1]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[TW_BASE_PART]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[TW_BASE_PART_PRE]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[TW_BASE_WH]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[TW_WH]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[TW_WH01]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[TW_WH02]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[TW_WH03]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[UserFunction2]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ALLOCATE]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ALLOCATE_AUTO]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ALLOCATE_DReport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ALLOCATE_L]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_AsrsList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_AsrsList_New]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_bar_carton_m]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_bar_pallet_m]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_bar_pallet_m_sn]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BAR_SN_SPLIT_D_Query]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BAR_SN_SPLITSQuery]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_AREA]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_base_bar_sn]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_BAR_SNQuery]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_BASE_CARGOSPACE]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_CARGOSPACE_L]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_CARGOSPACE_PK]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_CARGOSPACE_SC]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_CARGOSPACE_T]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_base_cargospace_temp]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_CARGOSPACEListQuery]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_CLIENT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_OPERATOR]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_PART_BOM]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_base_part_temp]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_VENDOR]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_BASE_WAREHOUSE]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_base_warehouse_temp]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_CARGOSPACE_Report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_CHAYIReport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_CHAYIReport_Report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_cinvcode_control]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_CMD_AgvTask]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_CMD_MST]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_CMD_MST_LOG]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_CMD_MST_RGV]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_DiffTime_Report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_digitalsignage]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_EMT_INASNList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_EMT_INEMTList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_gd_minsets]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_GetInAsn_Ten]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_GetPOLine]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_GetPOList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ImportDateList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_IN_MERGE_PALLETE]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INASN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Inasn_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Inasn_D_Edit]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_InAsn_PO]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INASN_REPORT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_InAsnEmt]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INASNSplit]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INASSIT_Report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_InAssitList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INBILL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INBILL_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INBILL_DAndSN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INBILL_DSN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INBILL_REPORT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_InOrOutType]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INOutType]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INPO]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_INPUBOMCOUNT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_JIANHUO_REPORT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Merge_ErpCode_Report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Merge_ErpCode_Report_test]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_MixedIngredients]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_notuse_positioncode]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_operator_area]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ORA_TEST]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OrderFinish_Stock]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OutAsn_Adj]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Outasn_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTASN_D_L]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTASN_DL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTASN_REPORT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTASN_SPLIT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTASNList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_outassit_detail]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_outassit_detail_erp]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTBILL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OutBill_Adj]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_outbill_detail]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_outbill_detail_erp]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTBILL_REPORT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTBILL_SN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTBILLEdit]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTMIXED_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTMIXED_JF_Detials_D_List]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTMIXED_JF_Detials_List]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OUTMIXED_JF_List]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OutMixedList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_OutReturn_In]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PANDIANReport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PartInfo_BasePart]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PartInfo_InAsn_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PartInfo_OutAsn_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PartInfo_WIP]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PartList_ByArea]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PartList_ByWareHouse]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PARTUNIONBOM]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_Allocate_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_ALLOCATE_EditShow]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_AllocateList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_BASE_CRANECONFIG_DETIALList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_InAsnEmtList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_Inassit_All]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_InBillRevoke]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_InEmtList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_INEmtQueryList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_MergeOutAssitList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_MergeOutBillDeliverList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_OutAssit_All]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_OutAssitList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_OutBill_Items]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_OutBillDeliverList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_OutMixed_DList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_OutMixedList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_QueryINASND]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_QueryINASSIT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_QueryOutASND]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_QueryOutASSIT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_QueryOutBill]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_QueryTEMP_InBill_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_QueryTEMP_OutBill_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_STOCK_ALLO_SCAN_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_TemporaryAlloList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_TemporaryInItems]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_TemporaryInList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_TemporaryOutItems]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PDA_TemporaryOutList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_PLC_CMD_MST]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_QueryINPO]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_QuickMIXED]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_rational_issue]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_RD_INASSITListQuery]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ScanInAllocateInfo]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ScanInAssitInfo]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Seral_Details]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_SerialNumberInfo]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ShowSN_IN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_ShowSN_Stock]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_ShowSNSplit]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_sn_item_head_config]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Stock_Base_Cargospace]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_BILLList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_stock_checkbill_d]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_STOCK_CHECKBILL_List]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_CHECKBILLList]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_CHECKDBILL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Stock_CheckDiffSearch]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_stock_checkedbill]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_CHECKEDBILL_CY]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_CHECKEDBILL_LIST]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_CURRENT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_stock_current_adjust_d]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_Current_ALL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_CURRENT_List]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Stock_DataCode_Edit]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_Stock_DateCode]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_ElectBinCard]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_FORERP]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_OCCUPY]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_STOCK_POSTITON]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_StockDiffTime_Report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_SUM_STOCKCURRENT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_SYS_CONFIG]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_SYS_LOG]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_SYS_PARAMETER]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_SystemLog]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_area_paet_warehouse]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_base_area]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_base_client]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_base_department]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_base_line_list]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_base_stock_current]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_base_vendor]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_TEMP_IN_MO_INFO]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_outbill_d_cin_t]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_temp_outbill_d_cin_t_erpcode]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_TemporaryAreaCinv_Report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_TRADETYPE]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_UserFunction]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_WARNINGSTOCK_REPORT]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_WCS_TaskProcess]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V_WmsAndEbsQtyDiffReport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTASN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTBILL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTBILL_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_STOCK_CURRENT_ADJUST]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_cargo_rma]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_firstdatecode]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_handover_check]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_palorcar_qty]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_palorcar_type]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_part_norecode]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_pc_cinvcount]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_sn_locklist]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_sn_x]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_snlist_report]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_get_stock_datecodenum]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_inbill_snreport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_inventory_turnin]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_outbill_snreport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[View_OUTBILLEdit]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_position_nostocklist_line]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_position_stock_line]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_position_stock_ratio]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_STOCK_CHECKBILL_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_stock_checkdiff]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_stock_current]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[view_transaction_sn]",
+         "ObjectType": 3
+      }
+   ],
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false
+}
