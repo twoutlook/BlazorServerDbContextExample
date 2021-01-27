@@ -196,7 +196,17 @@ namespace DreamAITek.T001.Adapter
                     string y = property.Name;
                     int k2 = k * 10;
                     k2 = k <= MAX_ITEM_COL_CNT ? k2 : (-1) * k2;
-                    f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = "顯示" + y, Index = k2 });
+
+                    // 加了 顯示 會擠到LAYOUT,
+                    string strName = y;
+                    if (y.Length > 10)
+                    {
+                        strName = y.Substring(0, 8) + "__";
+                    }
+
+
+                    //f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = "顯示" + y, Index = k2 });
+                    f.FieldMappers.Add(new A000FieldMapper { Id = y, Name = strName, Index = k2 });
                 }
 
 
