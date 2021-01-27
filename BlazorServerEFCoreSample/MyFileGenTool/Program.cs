@@ -39,16 +39,54 @@ namespace MyFileGenTool
         }
 
 
+        //https://docs.microsoft.com/en-us/ef/core/querying/raw-sql
+        //    var blogs = context.Blogs
+        //.FromSqlRaw("SELECT * FROM dbo.Blogs")
+        //.ToList();
+
+
+        //    SELECT
+        //        OBJECT_DEFINITION(
+        //            OBJECT_ID(
+        //                'V_STOCK_CURRENT'
+        //    )
+        //) view_info;
+
+
+
+
+        //https://stackoverflow.com/questions/45667126/how-to-get-table-name-of-mapped-entity-in-entity-framework-core
+        //var entityType = dbContext.Model.FindEntityType(typeof(YourEntity));
+        //var schema = entityType.GetSchema();
+        //var tableName = entityType.GetTableName();
         public static void LoopDbSet()
         {
             DbContextOptions<TaiweiContext> b = new();
-          //  DbContextOptionsBuilder< TaiweiContext> b = new();
+            //  DbContextOptionsBuilder< TaiweiContext> b = new();
             var db = new TaiweiContext(b);
             //   IEnumerable<Type> 
             var entityTypes = db.Model.GetEntityTypes();
             foreach (var x in entityTypes)
             {
-                Console.WriteLine( x.DisplayName());
+                Console.WriteLine(x.DisplayName() + "," + x.GetTableName() + "," + x.GetViewName());
+
+                if (!(x.GetViewName() == null || x.GetViewName() == ""))
+                {
+                    Console.WriteLine("To get View info");
+                    
+                    var Info = db.SimpleReturn.FromSqlRaw(@"  SELECT
+                                        OBJECT_DEFINITION(
+                                        OBJECT_ID(
+                                                'V_STOCK_CURRENT'
+                                    )
+                                ) Info;").ToList();
+                    foreach (var x2 in Info)
+                    {
+                        Console.WriteLine("=*** ="+x2.Info);
+
+                    }
+                }
+           
             }
         }
 

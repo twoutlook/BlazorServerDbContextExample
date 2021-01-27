@@ -28,6 +28,7 @@ namespace Inventory.Data
         }
 
 
+        public virtual DbSet<V2ViewDef> V2ViewDef { get; set; }
         public virtual DbSet<BaseDocureason> BaseDocureason { get; set; }
         public virtual DbSet<BaseOperator> BaseOperator { get; set; }
         public virtual DbSet<BasePart> BasePart { get; set; }
@@ -50,11 +51,22 @@ namespace Inventory.Data
         public virtual DbSet<VInoutType> VInoutType { get; set; }
         public virtual DbSet<VOutasnlist> VOutasnlist { get; set; }
         public virtual DbSet<VStockCurrent> VStockCurrent { get; set; }
+        public virtual DbSet<SimpleReturn> SimpleReturn { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Chinese_PRC_CI_AS");
 
+            modelBuilder.Entity<SimpleReturn>(entity =>
+            {
+                entity.HasNoKey();
+
+            });
+            modelBuilder.Entity<V2ViewDef>(entity =>
+            {
+                entity.HasNoKey();
+
+            });
             modelBuilder.Entity<BaseDocureason>(entity =>
             {
                 entity.ToTable("BASE_DOCUREASON");

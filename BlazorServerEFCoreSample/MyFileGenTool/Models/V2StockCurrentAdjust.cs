@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace T0002.Models
+namespace MyFileGenTool.Models
 {
     public partial class V2StockCurrentAdjust
     {

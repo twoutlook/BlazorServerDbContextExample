@@ -6,12 +6,16 @@
    "IncludeConnectionString": true,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Models2",
+   "OutputPath": "Models",
    "ProjectRootNamespace": "MyFileGenTool",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
+      {
+         "Name": "[dbo].[V2_ViewDef]",
+         "ObjectType": 0
+      },
       {
          "Name": "[dbo].[V2_OUTASN]",
          "ObjectType": 3
