@@ -34,7 +34,7 @@ namespace DreamAITek.T001.Adapter
     {
         //private IHostingEnvironment Environment;
 
-        private string TABLE_CONFIG_ROOT = @"C:\ZZZ_TABLES_CONFIG\";
+        private string TABLE_CONFIG_ROOT = @"C:\ZZZ_TABLES_CONFIG_7777\";
         private int MAX_ITEM_COL_CNT = 12;
         private int FIX_FITER_CNT = 8;// 這是指在 search, 最上兩個ROW, 各有 4 個 text filter control
 

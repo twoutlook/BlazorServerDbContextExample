@@ -91,7 +91,7 @@ namespace MyFileGenTool
         }
 
 
-        public static (string,string) GetDbSetTableOrView(string target)
+        public static (string, string) GetDbSetTableOrView(string target)
         {
             DbContextOptions<TaiweiContext> b = new();
             var db = new TaiweiContext(b);
@@ -104,7 +104,7 @@ namespace MyFileGenTool
                     {
                         return ("View", x.GetViewName());
                     }
-                    return  ("Table", x.GetTableName());
+                    return ("Table", x.GetTableName());
 
 
                     if (!(x.GetViewName() == null || x.GetViewName() == ""))
@@ -126,10 +126,46 @@ namespace MyFileGenTool
                 }
 
             }
-            return ("???","---");
+            return ("???", "---");
         }
 
+        public static void WriteDbSetWhenView(string target, string path)
+        {
+            DbContextOptions<TaiweiContext> b = new();
+            var db = new TaiweiContext(b);
+            var entityTypes = db.Model.GetEntityTypes();
+            foreach (var x in entityTypes)
+            {
+                if (x.DisplayName() == target)
+                {
+                    if (!(x.GetViewName() == null || x.GetViewName() == ""))
+                    {
+                        Console.WriteLine("To get View info");
 
+                      //  string strSQL = String.Format(" SELECT OBJECT_DEFINITION(OBJECT_ID('{0}')) Info;", target);
+                     //   string strSQL = String.Format(" SELECT OBJECT_DEFINITION(OBJECT_ID('{0}')) Info;", target);
+                        StringBuilder sb = new();
+                        sb.Append(" SELECT OBJECT_DEFINITION(OBJECT_ID('");
+                        sb.Append(x.GetViewName());
+                        sb.Append("')) Info;");
+                        string strSQL = sb.ToString();
+                        var Info = db.SimpleReturn.FromSqlRaw(strSQL).ToList();
+
+
+                        File.WriteAllText(path + x.GetViewName() + ".sql", Info[0].Info);
+
+                        //foreach (var x2 in Info)
+                        //{
+                        //    Console.WriteLine("=*** =" + x2.Info);
+
+                        //}
+
+                    }
+
+                }
+
+            }
+        }
         static void Main(string[] args)
         {
             //   MakeAdapters();
@@ -229,7 +265,9 @@ namespace MyFileGenTool
             foreach (var x in GetNavInfoList())
             {
                 k++;
-                sb.Append(MakeIndexCore(k,x));
+                sb.Append(MakeIndexCore(k, x));
+
+                WriteDbSetWhenView(x.ENT, basePath);
                 sb.Append(Environment.NewLine);
 
             }
@@ -240,7 +278,7 @@ namespace MyFileGenTool
             Console.WriteLine("Please check file: " + path);
         }
 
-        private static string MakeIndexCore(int seq,NavInfo x)
+        private static string MakeIndexCore(int seq, NavInfo x)
         {
             StringBuilder sb = new();
             sb.Append("<tr>");
