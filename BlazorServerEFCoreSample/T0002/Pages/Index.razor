@@ -4,4 +4,40 @@
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.EntityFrameworkCore.Metadata;
+@using System;
+@using System.Reflection;
+@inject IDbContextFactory<TaiweiContext> DbFactory
+<h3>Show</h3>
+<ul>
+
+    @foreach (var x in entList)
+    {
+        <li>@x.Name</li>
+    }
+</ul>
+
+
+
+@code {
+
+    List<IEntityType> entList;
+    protected override void OnInitialized()
+    {
+        var db = DbFactory.CreateDbContext();
+        //     foreach(var x in db.Model.GetEntityTypes()) { }
+        entList = db.Model.GetEntityTypes().ToList();
+
+
+        var entityType = Type.GetType("T0002.Models.BasePart");
+
+        //   var v1 = db[db.GetType().GetProperty("BasePart")];
+
+        //  foreach ( var p in builder.Model)
+        //   var dbSet = db.Set<T0002.Models.BasePart>(entityType);
+
+        var sql= db.BasePart.Where(o=>o.Cpartnumber.Contains("x")).ToQueryString();
+    }
+}

@@ -6,13 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Gen\A999V2Outbill.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Gen\A999V2Outbill.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
   </ItemGroup>
 
 </Project>

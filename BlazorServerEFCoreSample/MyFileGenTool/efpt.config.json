@@ -1,0 +1,41 @@
+﻿{
+   "ContextClassName": "TaiweiContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models2",
+   "ProjectRootNamespace": "MyFileGenTool",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[V2_OUTASN]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTBILL]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_OUTBILL_D]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[V2_STOCK_CURRENT_ADJUST]",
+         "ObjectType": 3
+      }
+   ],
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false
+}
