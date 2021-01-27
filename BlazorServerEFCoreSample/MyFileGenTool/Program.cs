@@ -73,7 +73,7 @@ namespace MyFileGenTool
                 if (!(x.GetViewName() == null || x.GetViewName() == ""))
                 {
                     Console.WriteLine("To get View info");
-                    
+
                     var Info = db.SimpleReturn.FromSqlRaw(@"  SELECT
                                         OBJECT_DEFINITION(
                                         OBJECT_ID(
@@ -82,13 +82,53 @@ namespace MyFileGenTool
                                 ) Info;").ToList();
                     foreach (var x2 in Info)
                     {
-                        Console.WriteLine("=*** ="+x2.Info);
+                        Console.WriteLine("=*** =" + x2.Info);
 
                     }
                 }
-           
+
             }
         }
+
+
+        public static (string,string) GetDbSetTableOrView(string target)
+        {
+            DbContextOptions<TaiweiContext> b = new();
+            var db = new TaiweiContext(b);
+            var entityTypes = db.Model.GetEntityTypes();
+            foreach (var x in entityTypes)
+            {
+                if (x.DisplayName() == target)
+                {
+                    if (!(x.GetViewName() == null || x.GetViewName() == ""))
+                    {
+                        return ("View", x.GetViewName());
+                    }
+                    return  ("Table", x.GetTableName());
+
+
+                    if (!(x.GetViewName() == null || x.GetViewName() == ""))
+                    {
+                        Console.WriteLine("To get View info");
+
+                        var Info = db.SimpleReturn.FromSqlRaw(@"  SELECT
+                                        OBJECT_DEFINITION(
+                                        OBJECT_ID(
+                                                'V_STOCK_CURRENT'
+                                    )
+                                ) Info;").ToList();
+                        foreach (var x2 in Info)
+                        {
+                            Console.WriteLine("=*** =" + x2.Info);
+
+                        }
+                    }
+                }
+
+            }
+            return ("???","---");
+        }
+
 
         static void Main(string[] args)
         {
@@ -96,10 +136,12 @@ namespace MyFileGenTool
             // MakeAddService();
             // MakePages();
             //MakeIndexPage();
+            MakeIndex();
+
             //   MakeSwitch();
             //  ShowEntTypes("Inventory.Data");
 
-            LoopDbSet();
+            //LoopDbSet();
 
         }
         static void MakeSwitch()
@@ -171,6 +213,74 @@ namespace MyFileGenTool
             }
 
         }
+
+        static void MakeIndex()
+        {
+            // --------------- maing pages
+            // A999是 原型
+            string basePath = @"D:\ZZZ\Gen001\";
+            string path = basePath + "index_list.txt";
+            StringBuilder sb = new();
+            sb.Append("<table class=\"gridtable\">");
+            sb.Append(Environment.NewLine);
+            sb.Append("<tr><th></th><th>PRE</th><th>Entity</th><th>頁面顯示名稱</th><th>T/V</th><th>數據庫Table/View</th></tr>");
+            sb.Append(Environment.NewLine);
+            int k = 0;
+            foreach (var x in GetNavInfoList())
+            {
+                k++;
+                sb.Append(MakeIndexCore(k,x));
+                sb.Append(Environment.NewLine);
+
+            }
+            sb.Append("</table>");
+            sb.Append(Environment.NewLine);
+
+            File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+            Console.WriteLine("Please check file: " + path);
+        }
+
+        private static string MakeIndexCore(int seq,NavInfo x)
+        {
+            StringBuilder sb = new();
+            sb.Append("<tr>");
+            sb.Append("<th>");
+            sb.Append(seq);
+            sb.Append("</th>");
+            sb.Append("<td>");
+            sb.Append("<a href=\"");
+            sb.Append(x.PRE);
+
+            sb.Append("\">");
+            sb.Append(x.PRE);
+            sb.Append("</a>");
+
+
+            sb.Append("</td>");
+
+
+
+            sb.Append("<td>");
+            sb.Append(x.ENT);
+            sb.Append("</td>");
+            sb.Append("<td>");
+            sb.Append(x.TITLE);
+            sb.Append("</td>");
+            string v1, v2;
+            (v1, v2) = GetDbSetTableOrView(x.ENT);
+            sb.Append("<td>");
+            sb.Append(v1);
+            sb.Append("</td>");
+            sb.Append("<td>");
+            sb.Append(v2);
+            sb.Append("</td>");
+
+            sb.Append("</tr>");
+
+            return sb.ToString();
+            //    Console.WriteLine("" + x.PRE);
+        }
+
         static void MakePages_OLD()
         {
             // --------------- maing pages
@@ -355,6 +465,7 @@ namespace MyFileGenTool
             return "";
         }
 
+
         static void MakePage(string PRE, string ENT, string TITLE)
         {
             string basePath = @"D:\2021\Lab\Hot\BlazorServerDbContextExample\BlazorServerEFCoreSample\MyFileGenTool\Gen\";
@@ -393,6 +504,84 @@ namespace MyFileGenTool
         }
 
         static void MakeAddService()
+        {
+            //https://docs.microsoft.com/en-us/dotnet/api/system.io.file.readalltext?view=net-5.0
+            string path = @"D:\ZZZ\Gen001\Startup_AddService.txt";
+
+            // This text is added only once to the file.
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                string createText = "services.AddScoped<A001Adapter>();" + Environment.NewLine;
+
+
+                File.WriteAllText(path, createText, Encoding.UTF8);
+            }
+
+            // This text is always added, making the file longer over time
+            // if it is not deleted.
+            string fmt = "000";
+            string SEQ = "002";
+            string appendText = "services.AddScoped<A002Adapter>();";
+            for (int i = 2; i <= 99; i++)
+            {
+                SEQ = i.ToString(fmt);
+                appendText = "services.AddScoped<A" + SEQ + "Adapter>();" + Environment.NewLine;
+                File.AppendAllText(path, appendText, Encoding.UTF8);
+            }
+
+            //   appendText = appendText.Replace("extra", "額外的");
+
+
+
+            // Open the file to read from.
+            //      string readText = File.ReadAllText(path);
+            //      Console.WriteLine(readText);
+        }
+
+
+        static void MakePageV2(PageInfo p)
+        {
+            string PRE = p.PRE;
+            string ENT = p.ENT;
+            string TITLE = p.TITLE;
+
+            string basePath = @"D:\2021\Lab\Hot\BlazorServerDbContextExample\BlazorServerEFCoreSample\MyFileGenTool\Gen\";
+
+            //NOTE by Mark, 2021-01-25, 直接寫入工作目錄
+            string basePath2 = @"D:\2021\Lab\Hot\BlazorServerDbContextExample\BlazorServerEFCoreSample\Inventory\A000\Pages\";
+
+            string path = basePath + "A999V2Outbill.razor"; //這是提供原型
+                                                            //     string path2 =basePath2 + "A005V2Outbill.razor";
+                                                            // This text is added only once to the file.
+
+
+            if (!File.Exists(path))
+            {
+                Console.WriteLine(path + " 不存在 , 請給 原型");
+                return;
+            }
+
+            string str = File.ReadAllText(path);
+            string key0 = "出庫單";
+            string key1 = "A999";
+            string key2 = "V2Outbill";
+
+            string pathFinal = basePath + PRE + ENT + ".razor";
+            string path2Final = basePath2 + PRE + ENT + ".razor";
+
+
+
+            var strFinal = str.Replace(key0, TITLE).Replace(key1, PRE).Replace(key2, ENT);
+
+            File.WriteAllText(pathFinal, strFinal, Encoding.UTF8);
+            File.WriteAllText(path2Final, strFinal, Encoding.UTF8);
+
+
+            //   Console.WriteLine(str);
+        }
+
+        static void XXXMakeAddService()
         {
             //https://docs.microsoft.com/en-us/dotnet/api/system.io.file.readalltext?view=net-5.0
             string path = @"D:\ZZZ\Gen001\Startup_AddService.txt";
