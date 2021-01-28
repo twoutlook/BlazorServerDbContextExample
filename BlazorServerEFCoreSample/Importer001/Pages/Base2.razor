@@ -1,18 +1,18 @@
-﻿@page "/Base1"
+﻿@page "/Base2"
 @using Importer001.Data
 @using Importer001.Models
 
 @using Microsoft.EntityFrameworkCore
 @inject IDbContextFactory<Importer001Context> DbFactory
-<h1>Customers V1</h1>
+<h1>Customers V2</h1>
 
 <table class="gridtable">
-    <tr><th>Customer Id</th><th>Company Name</th></tr>
+    <tr><th></th><th>Customer Id</th><th>Company Name</th></tr>
 
-    
-    @foreach (var t in @Items)
+
+    @for (int i = 1; i <= @Items.Count; i++)
     {
-        <tr><td>@t.CustomerId</td><td>@t.CompanyName</td></tr>
+        <tr><th>@i</th><td>@Items[i-1].CustomerId</td><td>@Items[i-1].CompanyName</td></tr>
     }
 
 
