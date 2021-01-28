@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFileGenTool", "MyFileGenT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T0002", "T0002\T0002.csproj", "{ABC4F2C6-BEB2-4420-B66D-53D35ACF12AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Importer001", "Importer001\Importer001.csproj", "{261AAD21-4E8E-4E74-828B-3855EC68BAD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Importer001", "Importer001\Importer001.csproj", "{261AAD21-4E8E-4E74-828B-3855EC68BAD3}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database2", "..\..\Database2\Database2.sqlproj", "{41AA90C4-418E-4ED0-ABEC-40E520FCB940}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,12 @@ Global
 		{261AAD21-4E8E-4E74-828B-3855EC68BAD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{261AAD21-4E8E-4E74-828B-3855EC68BAD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{261AAD21-4E8E-4E74-828B-3855EC68BAD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,229 @@
+﻿{
+   "ContextClassName": "Importer001Context",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Data",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "Importer001",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[Application].[Cities]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[Cities_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[Countries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[Countries_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[DeliveryMethods]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[DeliveryMethods_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[PaymentMethods]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[PaymentMethods_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[People]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[People_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[StateProvinces]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[StateProvinces_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[SystemParameters]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[TransactionTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Application].[TransactionTypes_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Purchasing].[PurchaseOrderLines]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Purchasing].[PurchaseOrders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Purchasing].[SupplierCategories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Purchasing].[SupplierCategories_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Purchasing].[Suppliers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Purchasing].[Suppliers_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Purchasing].[SupplierTransactions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[BuyingGroups]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[BuyingGroups_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[CustomerCategories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[CustomerCategories_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[Customers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[Customers_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[CustomerTransactions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[InvoiceLines]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[Invoices]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[OrderLines]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[Orders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sales].[SpecialDeals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[ColdRoomTemperatures]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[ColdRoomTemperatures_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[Colors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[Colors_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[PackageTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[PackageTypes_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[StockGroups]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[StockGroups_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[StockItemHoldings]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[StockItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[StockItems_Archive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[StockItemStockGroups]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[StockItemTransactions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Warehouse].[VehicleTemperatures]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Website].[Customers]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Website].[Suppliers]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Website].[VehicleTemperatures]",
+         "ObjectType": 3
+      }
+   ],
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false
+}
