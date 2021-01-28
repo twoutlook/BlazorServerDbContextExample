@@ -1,0 +1,54 @@
+﻿@page "/Base1"
+@using Importer001.Data
+@using Importer001.Models
+
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<Importer001Context> DbFactory
+<h1>Test DB </h1>
+
+<table>
+
+        @foreach (var t in @Items)
+        {
+            <tr><td>@t.CustomerId</td><td>@t.CompanyName</td></tr>
+        }
+
+    
+</table>
+
+
+@code
+{
+
+    private bool Loading;
+
+    List<Customers> Items;
+
+    protected override Task OnInitializedAsync()
+    {
+        using var db = DbFactory.CreateDbContext();
+
+        var Items = db.Customers.Take(10);
+
+        StateHasChanged();
+        return base.OnInitializedAsync();
+
+    }
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
+    }
+    protected override void OnParametersSet()
+    {
+        using var db = DbFactory.CreateDbContext();
+
+         Items = db.Customers.Take(10).ToList();
+    }
+
+ 
+
+    // System.InvalidOperationException: Multiple constructors accepting all given argument types have been found in type 'Importer001.Data.Importer001Context'. There should only be one applicable constructor.
+    //at
+
+    // https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases
+}

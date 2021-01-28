@@ -10,2292 +10,773 @@ namespace Importer001.Data
 {
     public partial class Importer001Context : DbContext
     {
-        public Importer001Context()
-        {
-        }
+        //public Importer001Context()
+        //{
+        //}
 
         public Importer001Context(DbContextOptions<Importer001Context> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<BuyingGroups> BuyingGroups { get; set; }
-        public virtual DbSet<BuyingGroupsArchive> BuyingGroupsArchive { get; set; }
-        public virtual DbSet<Cities> Cities { get; set; }
-        public virtual DbSet<CitiesArchive> CitiesArchive { get; set; }
-        public virtual DbSet<ColdRoomTemperatures> ColdRoomTemperatures { get; set; }
-        public virtual DbSet<ColdRoomTemperaturesArchive> ColdRoomTemperaturesArchive { get; set; }
-        public virtual DbSet<Colors> Colors { get; set; }
-        public virtual DbSet<ColorsArchive> ColorsArchive { get; set; }
-        public virtual DbSet<Countries> Countries { get; set; }
-        public virtual DbSet<CountriesArchive> CountriesArchive { get; set; }
-        public virtual DbSet<CustomerCategories> CustomerCategories { get; set; }
-        public virtual DbSet<CustomerCategoriesArchive> CustomerCategoriesArchive { get; set; }
-        public virtual DbSet<CustomerTransactions> CustomerTransactions { get; set; }
+        public virtual DbSet<AlphabeticalListOfProducts> AlphabeticalListOfProducts { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<CategorySalesFor1997> CategorySalesFor1997 { get; set; }
+        public virtual DbSet<CurrentProductList> CurrentProductList { get; set; }
+        public virtual DbSet<CustomerAndSuppliersByCity> CustomerAndSuppliersByCity { get; set; }
+        public virtual DbSet<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
+        public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<Customers1> Customers1 { get; set; }
-        public virtual DbSet<CustomersArchive> CustomersArchive { get; set; }
-        public virtual DbSet<DeliveryMethods> DeliveryMethods { get; set; }
-        public virtual DbSet<DeliveryMethodsArchive> DeliveryMethodsArchive { get; set; }
-        public virtual DbSet<InvoiceLines> InvoiceLines { get; set; }
+        public virtual DbSet<EmployeeTerritories> EmployeeTerritories { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Invoices> Invoices { get; set; }
-        public virtual DbSet<OrderLines> OrderLines { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<OrderDetailsExtended> OrderDetailsExtended { get; set; }
+        public virtual DbSet<OrderSubtotals> OrderSubtotals { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<PackageTypes> PackageTypes { get; set; }
-        public virtual DbSet<PackageTypesArchive> PackageTypesArchive { get; set; }
-        public virtual DbSet<PaymentMethods> PaymentMethods { get; set; }
-        public virtual DbSet<PaymentMethodsArchive> PaymentMethodsArchive { get; set; }
-        public virtual DbSet<People> People { get; set; }
-        public virtual DbSet<PeopleArchive> PeopleArchive { get; set; }
-        public virtual DbSet<PurchaseOrderLines> PurchaseOrderLines { get; set; }
-        public virtual DbSet<PurchaseOrders> PurchaseOrders { get; set; }
-        public virtual DbSet<SpecialDeals> SpecialDeals { get; set; }
-        public virtual DbSet<StateProvinces> StateProvinces { get; set; }
-        public virtual DbSet<StateProvincesArchive> StateProvincesArchive { get; set; }
-        public virtual DbSet<StockGroups> StockGroups { get; set; }
-        public virtual DbSet<StockGroupsArchive> StockGroupsArchive { get; set; }
-        public virtual DbSet<StockItemHoldings> StockItemHoldings { get; set; }
-        public virtual DbSet<StockItemStockGroups> StockItemStockGroups { get; set; }
-        public virtual DbSet<StockItemTransactions> StockItemTransactions { get; set; }
-        public virtual DbSet<StockItems> StockItems { get; set; }
-        public virtual DbSet<StockItemsArchive> StockItemsArchive { get; set; }
-        public virtual DbSet<SupplierCategories> SupplierCategories { get; set; }
-        public virtual DbSet<SupplierCategoriesArchive> SupplierCategoriesArchive { get; set; }
-        public virtual DbSet<SupplierTransactions> SupplierTransactions { get; set; }
+        public virtual DbSet<OrdersQry> OrdersQry { get; set; }
+        public virtual DbSet<ProductSalesFor1997> ProductSalesFor1997 { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ProductsAboveAveragePrice> ProductsAboveAveragePrice { get; set; }
+        public virtual DbSet<ProductsByCategory> ProductsByCategory { get; set; }
+        public virtual DbSet<QuarterlyOrders> QuarterlyOrders { get; set; }
+        public virtual DbSet<Region> Region { get; set; }
+        public virtual DbSet<SalesByCategory> SalesByCategory { get; set; }
+        public virtual DbSet<SalesTotalsByAmount> SalesTotalsByAmount { get; set; }
+        public virtual DbSet<Shippers> Shippers { get; set; }
+        public virtual DbSet<SummaryOfSalesByQuarter> SummaryOfSalesByQuarter { get; set; }
+        public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYear { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
-        public virtual DbSet<Suppliers1> Suppliers1 { get; set; }
-        public virtual DbSet<SuppliersArchive> SuppliersArchive { get; set; }
-        public virtual DbSet<SystemParameters> SystemParameters { get; set; }
-        public virtual DbSet<TransactionTypes> TransactionTypes { get; set; }
-        public virtual DbSet<TransactionTypesArchive> TransactionTypesArchive { get; set; }
-        public virtual DbSet<VehicleTemperatures> VehicleTemperatures { get; set; }
-        public virtual DbSet<VehicleTemperatures1> VehicleTemperatures1 { get; set; }
+        public virtual DbSet<Territories> Territories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Scaffolding:ConnectionString", "Data Source=(local);Initial Catalog=Database2;Integrated Security=true");
+            modelBuilder.HasAnnotation("Scaffolding:ConnectionString", "Data Source=(local);Initial Catalog=Northwind;Integrated Security=true");
 
-            modelBuilder.Entity<BuyingGroups>(entity =>
-            {
-                entity.HasKey(e => e.BuyingGroupId)
-                    .HasName("PK_Sales_BuyingGroups");
-
-                entity.ToTable("BuyingGroups", "Sales");
-
-                entity.HasIndex(e => e.BuyingGroupName, "UQ_Sales_BuyingGroups_BuyingGroupName")
-                    .IsUnique();
-
-                entity.Property(e => e.BuyingGroupId)
-                    .HasColumnName("BuyingGroupID")
-                    .HasDefaultValueSql("next value for [sequences].[buyinggroupid]");
-
-                entity.Property(e => e.BuyingGroupName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.BuyingGroups)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_BuyingGroups_Application_People");
-            });
-
-            modelBuilder.Entity<BuyingGroupsArchive>(entity =>
+            modelBuilder.Entity<AlphabeticalListOfProducts>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("BuyingGroups_Archive", "Sales");
+                entity.ToView("Alphabetical list of products");
 
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_BuyingGroups_Archive")
-                    .IsClustered();
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.Property(e => e.BuyingGroupId).HasColumnName("BuyingGroupID");
-
-                entity.Property(e => e.BuyingGroupName)
+                entity.Property(e => e.CategoryName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
+
+                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
+
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
 
-            modelBuilder.Entity<Cities>(entity =>
+            modelBuilder.Entity<Categories>(entity =>
             {
-                entity.HasKey(e => e.CityId)
-                    .HasName("PK_Application_Cities");
+                entity.HasKey(e => e.CategoryId);
 
-                entity.ToTable("Cities", "Application");
+                entity.HasIndex(e => e.CategoryName, "CategoryName");
 
-                entity.HasIndex(e => e.StateProvinceId, "FK_Application_Cities_StateProvinceID");
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.Property(e => e.CityId)
-                    .HasColumnName("CityID")
-                    .HasDefaultValueSql("next value for [sequences].[cityid]");
-
-                entity.Property(e => e.CityName)
+                entity.Property(e => e.CategoryName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(15);
 
-                entity.Property(e => e.StateProvinceId).HasColumnName("StateProvinceID");
+                entity.Property(e => e.Description).HasColumnType("ntext");
 
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.Cities)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_Cities_Application_People");
-
-                entity.HasOne(d => d.StateProvince)
-                    .WithMany(p => p.Cities)
-                    .HasForeignKey(d => d.StateProvinceId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_Cities_StateProvinceID_Application_StateProvinces");
+                entity.Property(e => e.Picture).HasColumnType("image");
             });
 
-            modelBuilder.Entity<CitiesArchive>(entity =>
+            modelBuilder.Entity<CategorySalesFor1997>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("Cities_Archive", "Application");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_Cities_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.CityId).HasColumnName("CityID");
-
-                entity.Property(e => e.CityName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.StateProvinceId).HasColumnName("StateProvinceID");
+                entity.ToView("Category Sales for 1997");
             });
 
-            modelBuilder.Entity<ColdRoomTemperatures>(entity =>
+            modelBuilder.Entity<CurrentProductList>(entity =>
             {
-                entity.HasKey(e => e.ColdRoomTemperatureId)
-                    .HasName("PK_Warehouse_ColdRoomTemperatures")
+                entity.HasNoKey();
+
+                entity.ToView("Current Product List");
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+            });
+
+            modelBuilder.Entity<CustomerAndSuppliersByCity>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Customer and Suppliers by City");
+
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.ContactName).HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<CustomerCustomerDemo>(entity =>
+            {
+                entity.HasKey(e => new { e.CustomerId, e.CustomerTypeId })
                     .IsClustered(false);
 
-                entity.ToTable("ColdRoomTemperatures", "Warehouse");
-
-                entity.HasAnnotation("SqlServer:MemoryOptimized", true);
-
-                entity.HasIndex(e => e.ColdRoomSensorNumber, "IX_Warehouse_ColdRoomTemperatures_ColdRoomSensorNumber");
-
-                entity.Property(e => e.ColdRoomTemperatureId).HasColumnName("ColdRoomTemperatureID");
-
-                entity.Property(e => e.Temperature).HasColumnType("decimal(10, 2)");
-            });
-
-            modelBuilder.Entity<ColdRoomTemperaturesArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("ColdRoomTemperatures_Archive", "Warehouse");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_ColdRoomTemperatures_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.ColdRoomTemperatureId).HasColumnName("ColdRoomTemperatureID");
-
-                entity.Property(e => e.Temperature).HasColumnType("decimal(10, 2)");
-            });
-
-            modelBuilder.Entity<Colors>(entity =>
-            {
-                entity.HasKey(e => e.ColorId)
-                    .HasName("PK_Warehouse_Colors");
-
-                entity.ToTable("Colors", "Warehouse");
-
-                entity.HasIndex(e => e.ColorName, "UQ_Warehouse_Colors_ColorName")
-                    .IsUnique();
-
-                entity.Property(e => e.ColorId)
-                    .HasColumnName("ColorID")
-                    .HasDefaultValueSql("next value for [sequences].[colorid]");
-
-                entity.Property(e => e.ColorName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.Colors)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_Colors_Application_People");
-            });
-
-            modelBuilder.Entity<ColorsArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("Colors_Archive", "Warehouse");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_Colors_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.ColorId).HasColumnName("ColorID");
-
-                entity.Property(e => e.ColorName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-            });
-
-            modelBuilder.Entity<Countries>(entity =>
-            {
-                entity.HasKey(e => e.CountryId)
-                    .HasName("PK_Application_Countries");
-
-                entity.ToTable("Countries", "Application");
-
-                entity.HasIndex(e => e.CountryName, "UQ_Application_Countries_CountryName")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.FormalName, "UQ_Application_Countries_FormalName")
-                    .IsUnique();
-
-                entity.Property(e => e.CountryId)
-                    .HasColumnName("CountryID")
-                    .HasDefaultValueSql("next value for [sequences].[countryid]");
-
-                entity.Property(e => e.Continent)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.CountryName)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.CountryType).HasMaxLength(20);
-
-                entity.Property(e => e.FormalName)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.IsoAlpha3Code).HasMaxLength(3);
-
-                entity.Property(e => e.Region)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.Subregion)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.Countries)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_Countries_Application_People");
-            });
-
-            modelBuilder.Entity<CountriesArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("Countries_Archive", "Application");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_Countries_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.Continent)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
-
-                entity.Property(e => e.CountryName)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.CountryType).HasMaxLength(20);
-
-                entity.Property(e => e.FormalName)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.IsoAlpha3Code).HasMaxLength(3);
-
-                entity.Property(e => e.Region)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.Subregion)
-                    .IsRequired()
-                    .HasMaxLength(30);
-            });
-
-            modelBuilder.Entity<CustomerCategories>(entity =>
-            {
-                entity.HasKey(e => e.CustomerCategoryId)
-                    .HasName("PK_Sales_CustomerCategories");
-
-                entity.ToTable("CustomerCategories", "Sales");
-
-                entity.HasIndex(e => e.CustomerCategoryName, "UQ_Sales_CustomerCategories_CustomerCategoryName")
-                    .IsUnique();
-
-                entity.Property(e => e.CustomerCategoryId)
-                    .HasColumnName("CustomerCategoryID")
-                    .HasDefaultValueSql("next value for [sequences].[customercategoryid]");
-
-                entity.Property(e => e.CustomerCategoryName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.CustomerCategories)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_CustomerCategories_Application_People");
-            });
-
-            modelBuilder.Entity<CustomerCategoriesArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("CustomerCategories_Archive", "Sales");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_CustomerCategories_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.CustomerCategoryId).HasColumnName("CustomerCategoryID");
-
-                entity.Property(e => e.CustomerCategoryName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<CustomerTransactions>(entity =>
-            {
-                entity.HasKey(e => e.CustomerTransactionId)
-                    .HasName("PK_Sales_CustomerTransactions")
-                    .IsClustered(false);
-
-                entity.ToTable("CustomerTransactions", "Sales");
-
-                entity.HasIndex(e => e.TransactionDate, "CX_Sales_CustomerTransactions")
-                    .IsClustered();
-
-                entity.HasIndex(e => e.CustomerId, "FK_Sales_CustomerTransactions_CustomerID");
-
-                entity.HasIndex(e => e.InvoiceId, "FK_Sales_CustomerTransactions_InvoiceID");
-
-                entity.HasIndex(e => e.PaymentMethodId, "FK_Sales_CustomerTransactions_PaymentMethodID");
-
-                entity.HasIndex(e => e.TransactionTypeId, "FK_Sales_CustomerTransactions_TransactionTypeID");
-
-                entity.Property(e => e.CustomerTransactionId)
-                    .HasColumnName("CustomerTransactionID")
-                    .HasDefaultValueSql("next value for [sequences].[transactionid]");
-
-                entity.Property(e => e.AmountExcludingTax).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-
-                entity.Property(e => e.FinalizationDate).HasColumnType("date");
-
-                entity.Property(e => e.InvoiceId).HasColumnName("InvoiceID");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.OutstandingBalance).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.PaymentMethodId).HasColumnName("PaymentMethodID");
-
-                entity.Property(e => e.TaxAmount).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.TransactionAmount).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.TransactionDate).HasColumnType("date");
-
-                entity.Property(e => e.TransactionTypeId).HasColumnName("TransactionTypeID");
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.CustomerTypeId)
+                    .HasMaxLength(10)
+                    .HasColumnName("CustomerTypeID")
+                    .IsFixedLength(true);
 
                 entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.CustomerTransactions)
+                    .WithMany(p => p.CustomerCustomerDemo)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_CustomerTransactions_CustomerID_Sales_Customers");
+                    .HasConstraintName("FK_CustomerCustomerDemo_Customers");
 
-                entity.HasOne(d => d.Invoice)
-                    .WithMany(p => p.CustomerTransactions)
-                    .HasForeignKey(d => d.InvoiceId)
-                    .HasConstraintName("FK_Sales_CustomerTransactions_InvoiceID_Sales_Invoices");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.CustomerTransactions)
-                    .HasForeignKey(d => d.LastEditedBy)
+                entity.HasOne(d => d.CustomerType)
+                    .WithMany(p => p.CustomerCustomerDemo)
+                    .HasForeignKey(d => d.CustomerTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_CustomerTransactions_Application_People");
+                    .HasConstraintName("FK_CustomerCustomerDemo");
+            });
 
-                entity.HasOne(d => d.PaymentMethod)
-                    .WithMany(p => p.CustomerTransactions)
-                    .HasForeignKey(d => d.PaymentMethodId)
-                    .HasConstraintName("FK_Sales_CustomerTransactions_PaymentMethodID_Application_PaymentMethods");
+            modelBuilder.Entity<CustomerDemographics>(entity =>
+            {
+                entity.HasKey(e => e.CustomerTypeId)
+                    .IsClustered(false);
 
-                entity.HasOne(d => d.TransactionType)
-                    .WithMany(p => p.CustomerTransactions)
-                    .HasForeignKey(d => d.TransactionTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_CustomerTransactions_TransactionTypeID_Application_TransactionTypes");
+                entity.Property(e => e.CustomerTypeId)
+                    .HasMaxLength(10)
+                    .HasColumnName("CustomerTypeID")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.CustomerDesc).HasColumnType("ntext");
             });
 
             modelBuilder.Entity<Customers>(entity =>
             {
-                entity.HasKey(e => e.CustomerId)
-                    .HasName("PK_Sales_Customers");
+                entity.HasKey(e => e.CustomerId);
 
-                entity.ToTable("Customers", "Sales");
+                entity.HasIndex(e => e.City, "City");
 
-                entity.HasIndex(e => e.AlternateContactPersonId, "FK_Sales_Customers_AlternateContactPersonID");
+                entity.HasIndex(e => e.CompanyName, "CompanyName");
 
-                entity.HasIndex(e => e.BuyingGroupId, "FK_Sales_Customers_BuyingGroupID");
+                entity.HasIndex(e => e.PostalCode, "PostalCode");
 
-                entity.HasIndex(e => e.CustomerCategoryId, "FK_Sales_Customers_CustomerCategoryID");
-
-                entity.HasIndex(e => e.DeliveryCityId, "FK_Sales_Customers_DeliveryCityID");
-
-                entity.HasIndex(e => e.DeliveryMethodId, "FK_Sales_Customers_DeliveryMethodID");
-
-                entity.HasIndex(e => e.PostalCityId, "FK_Sales_Customers_PostalCityID");
-
-                entity.HasIndex(e => e.PrimaryContactPersonId, "FK_Sales_Customers_PrimaryContactPersonID");
-
-                entity.HasIndex(e => new { e.IsOnCreditHold, e.CustomerId, e.BillToCustomerId }, "IX_Sales_Customers_Perf_20160301_06");
-
-                entity.HasIndex(e => e.CustomerName, "UQ_Sales_Customers_CustomerName")
-                    .IsUnique();
+                entity.HasIndex(e => e.Region, "Region");
 
                 entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
                     .HasColumnName("CustomerID")
-                    .HasDefaultValueSql("next value for [sequences].[customerid]");
+                    .IsFixedLength(true);
 
-                entity.Property(e => e.AccountOpenedDate).HasColumnType("date");
+                entity.Property(e => e.Address).HasMaxLength(60);
 
-                entity.Property(e => e.AlternateContactPersonId).HasColumnName("AlternateContactPersonID");
+                entity.Property(e => e.City).HasMaxLength(15);
 
-                entity.Property(e => e.BillToCustomerId).HasColumnName("BillToCustomerID");
-
-                entity.Property(e => e.BuyingGroupId).HasColumnName("BuyingGroupID");
-
-                entity.Property(e => e.CreditLimit).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.CustomerCategoryId).HasColumnName("CustomerCategoryID");
-
-                entity.Property(e => e.CustomerName)
+                entity.Property(e => e.CompanyName)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(40);
 
-                entity.Property(e => e.DeliveryAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
+                entity.Property(e => e.ContactName).HasMaxLength(30);
 
-                entity.Property(e => e.DeliveryAddressLine2).HasMaxLength(60);
+                entity.Property(e => e.ContactTitle).HasMaxLength(30);
 
-                entity.Property(e => e.DeliveryCityId).HasColumnName("DeliveryCityID");
+                entity.Property(e => e.Country).HasMaxLength(15);
 
-                entity.Property(e => e.DeliveryMethodId).HasColumnName("DeliveryMethodID");
+                entity.Property(e => e.Fax).HasMaxLength(24);
 
-                entity.Property(e => e.DeliveryPostalCode)
+                entity.Property(e => e.Phone).HasMaxLength(24);
+
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.Region).HasMaxLength(15);
+            });
+
+            modelBuilder.Entity<EmployeeTerritories>(entity =>
+            {
+                entity.HasKey(e => new { e.EmployeeId, e.TerritoryId })
+                    .IsClustered(false);
+
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+                entity.Property(e => e.TerritoryId)
+                    .HasMaxLength(20)
+                    .HasColumnName("TerritoryID");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.EmployeeTerritories)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeeTerritories_Employees");
+
+                entity.HasOne(d => d.Territory)
+                    .WithMany(p => p.EmployeeTerritories)
+                    .HasForeignKey(d => d.TerritoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeeTerritories_Territories");
+            });
+
+            modelBuilder.Entity<Employees>(entity =>
+            {
+                entity.HasKey(e => e.EmployeeId);
+
+                entity.HasIndex(e => e.LastName, "LastName");
+
+                entity.HasIndex(e => e.PostalCode, "PostalCode");
+
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+                entity.Property(e => e.Address).HasMaxLength(60);
+
+                entity.Property(e => e.BirthDate).HasColumnType("datetime");
+
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.Extension).HasMaxLength(4);
+
+                entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasMaxLength(10);
 
-                entity.Property(e => e.DeliveryRun).HasMaxLength(5);
+                entity.Property(e => e.HireDate).HasColumnType("datetime");
 
-                entity.Property(e => e.FaxNumber)
+                entity.Property(e => e.HomePhone).HasMaxLength(24);
+
+                entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(20);
 
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
+                entity.Property(e => e.Notes).HasColumnType("ntext");
 
-                entity.Property(e => e.PostalAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
+                entity.Property(e => e.Photo).HasColumnType("image");
 
-                entity.Property(e => e.PostalAddressLine2).HasMaxLength(60);
+                entity.Property(e => e.PhotoPath).HasMaxLength(255);
 
-                entity.Property(e => e.PostalCityId).HasColumnName("PostalCityID");
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
 
-                entity.Property(e => e.PostalPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
+                entity.Property(e => e.Region).HasMaxLength(15);
 
-                entity.Property(e => e.PrimaryContactPersonId).HasColumnName("PrimaryContactPersonID");
+                entity.Property(e => e.Title).HasMaxLength(30);
 
-                entity.Property(e => e.RunPosition).HasMaxLength(5);
+                entity.Property(e => e.TitleOfCourtesy).HasMaxLength(25);
 
-                entity.Property(e => e.StandardDiscountPercentage).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.WebsiteUrl)
-                    .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("WebsiteURL");
-
-                entity.HasOne(d => d.AlternateContactPerson)
-                    .WithMany(p => p.CustomersAlternateContactPerson)
-                    .HasForeignKey(d => d.AlternateContactPersonId)
-                    .HasConstraintName("FK_Sales_Customers_AlternateContactPersonID_Application_People");
-
-                entity.HasOne(d => d.BillToCustomer)
-                    .WithMany(p => p.InverseBillToCustomer)
-                    .HasForeignKey(d => d.BillToCustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customers_BillToCustomerID_Sales_Customers");
-
-                entity.HasOne(d => d.BuyingGroup)
-                    .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.BuyingGroupId)
-                    .HasConstraintName("FK_Sales_Customers_BuyingGroupID_Sales_BuyingGroups");
-
-                entity.HasOne(d => d.CustomerCategory)
-                    .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.CustomerCategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customers_CustomerCategoryID_Sales_CustomerCategories");
-
-                entity.HasOne(d => d.DeliveryCity)
-                    .WithMany(p => p.CustomersDeliveryCity)
-                    .HasForeignKey(d => d.DeliveryCityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customers_DeliveryCityID_Application_Cities");
-
-                entity.HasOne(d => d.DeliveryMethod)
-                    .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.DeliveryMethodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customers_DeliveryMethodID_Application_DeliveryMethods");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.CustomersLastEditedByNavigation)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customers_Application_People");
-
-                entity.HasOne(d => d.PostalCity)
-                    .WithMany(p => p.CustomersPostalCity)
-                    .HasForeignKey(d => d.PostalCityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customers_PostalCityID_Application_Cities");
-
-                entity.HasOne(d => d.PrimaryContactPerson)
-                    .WithMany(p => p.CustomersPrimaryContactPerson)
-                    .HasForeignKey(d => d.PrimaryContactPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customers_PrimaryContactPersonID_Application_People");
-            });
-
-            modelBuilder.Entity<Customers1>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToView("Customers", "Website");
-
-                entity.Property(e => e.AlternateContact)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.BuyingGroupName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.CityName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.CustomerCategoryName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-
-                entity.Property(e => e.CustomerName)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.DeliveryMethod)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.DeliveryRun).HasMaxLength(5);
-
-                entity.Property(e => e.FaxNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PrimaryContact)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.RunPosition).HasMaxLength(5);
-
-                entity.Property(e => e.WebsiteUrl)
-                    .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("WebsiteURL");
-            });
-
-            modelBuilder.Entity<CustomersArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("Customers_Archive", "Sales");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_Customers_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.AccountOpenedDate).HasColumnType("date");
-
-                entity.Property(e => e.AlternateContactPersonId).HasColumnName("AlternateContactPersonID");
-
-                entity.Property(e => e.BillToCustomerId).HasColumnName("BillToCustomerID");
-
-                entity.Property(e => e.BuyingGroupId).HasColumnName("BuyingGroupID");
-
-                entity.Property(e => e.CreditLimit).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.CustomerCategoryId).HasColumnName("CustomerCategoryID");
-
-                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-
-                entity.Property(e => e.CustomerName)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.DeliveryAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryCityId).HasColumnName("DeliveryCityID");
-
-                entity.Property(e => e.DeliveryMethodId).HasColumnName("DeliveryMethodID");
-
-                entity.Property(e => e.DeliveryPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.DeliveryRun).HasMaxLength(5);
-
-                entity.Property(e => e.FaxNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PostalAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.PostalAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.PostalCityId).HasColumnName("PostalCityID");
-
-                entity.Property(e => e.PostalPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.PrimaryContactPersonId).HasColumnName("PrimaryContactPersonID");
-
-                entity.Property(e => e.RunPosition).HasMaxLength(5);
-
-                entity.Property(e => e.StandardDiscountPercentage).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.WebsiteUrl)
-                    .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("WebsiteURL");
-            });
-
-            modelBuilder.Entity<DeliveryMethods>(entity =>
-            {
-                entity.HasKey(e => e.DeliveryMethodId)
-                    .HasName("PK_Application_DeliveryMethods");
-
-                entity.ToTable("DeliveryMethods", "Application");
-
-                entity.HasIndex(e => e.DeliveryMethodName, "UQ_Application_DeliveryMethods_DeliveryMethodName")
-                    .IsUnique();
-
-                entity.Property(e => e.DeliveryMethodId)
-                    .HasColumnName("DeliveryMethodID")
-                    .HasDefaultValueSql("next value for [sequences].[deliverymethodid]");
-
-                entity.Property(e => e.DeliveryMethodName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.DeliveryMethods)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_DeliveryMethods_Application_People");
-            });
-
-            modelBuilder.Entity<DeliveryMethodsArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("DeliveryMethods_Archive", "Application");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_DeliveryMethods_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.DeliveryMethodId).HasColumnName("DeliveryMethodID");
-
-                entity.Property(e => e.DeliveryMethodName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<InvoiceLines>(entity =>
-            {
-                entity.HasKey(e => e.InvoiceLineId)
-                    .HasName("PK_Sales_InvoiceLines");
-
-                entity.ToTable("InvoiceLines", "Sales");
-
-                entity.HasIndex(e => e.InvoiceId, "FK_Sales_InvoiceLines_InvoiceID");
-
-                entity.HasIndex(e => e.PackageTypeId, "FK_Sales_InvoiceLines_PackageTypeID");
-
-                entity.HasIndex(e => e.StockItemId, "FK_Sales_InvoiceLines_StockItemID");
-
-                entity.Property(e => e.InvoiceLineId)
-                    .HasColumnName("InvoiceLineID")
-                    .HasDefaultValueSql("next value for [sequences].[invoicelineid]");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.ExtendedPrice).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.InvoiceId).HasColumnName("InvoiceID");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.LineProfit).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.PackageTypeId).HasColumnName("PackageTypeID");
-
-                entity.Property(e => e.StockItemId).HasColumnName("StockItemID");
-
-                entity.Property(e => e.TaxAmount).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.TaxRate).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
-
-                entity.HasOne(d => d.Invoice)
-                    .WithMany(p => p.InvoiceLines)
-                    .HasForeignKey(d => d.InvoiceId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_InvoiceLines_InvoiceID_Sales_Invoices");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.InvoiceLines)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_InvoiceLines_Application_People");
-
-                entity.HasOne(d => d.PackageType)
-                    .WithMany(p => p.InvoiceLines)
-                    .HasForeignKey(d => d.PackageTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_InvoiceLines_PackageTypeID_Warehouse_PackageTypes");
-
-                entity.HasOne(d => d.StockItem)
-                    .WithMany(p => p.InvoiceLines)
-                    .HasForeignKey(d => d.StockItemId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_InvoiceLines_StockItemID_Warehouse_StockItems");
+                entity.HasOne(d => d.ReportsToNavigation)
+                    .WithMany(p => p.InverseReportsToNavigation)
+                    .HasForeignKey(d => d.ReportsTo)
+                    .HasConstraintName("FK_Employees_Employees");
             });
 
             modelBuilder.Entity<Invoices>(entity =>
             {
-                entity.HasKey(e => e.InvoiceId)
-                    .HasName("PK_Sales_Invoices");
+                entity.HasNoKey();
 
-                entity.ToTable("Invoices", "Sales");
+                entity.ToView("Invoices");
 
-                entity.HasIndex(e => e.AccountsPersonId, "FK_Sales_Invoices_AccountsPersonID");
+                entity.Property(e => e.Address).HasMaxLength(60);
 
-                entity.HasIndex(e => e.BillToCustomerId, "FK_Sales_Invoices_BillToCustomerID");
+                entity.Property(e => e.City).HasMaxLength(15);
 
-                entity.HasIndex(e => e.ContactPersonId, "FK_Sales_Invoices_ContactPersonID");
+                entity.Property(e => e.Country).HasMaxLength(15);
 
-                entity.HasIndex(e => e.CustomerId, "FK_Sales_Invoices_CustomerID");
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength(true);
 
-                entity.HasIndex(e => e.DeliveryMethodId, "FK_Sales_Invoices_DeliveryMethodID");
+                entity.Property(e => e.CustomerName)
+                    .IsRequired()
+                    .HasMaxLength(40);
 
-                entity.HasIndex(e => e.OrderId, "FK_Sales_Invoices_OrderID");
+                entity.Property(e => e.Freight).HasColumnType("money");
 
-                entity.HasIndex(e => e.PackedByPersonId, "FK_Sales_Invoices_PackedByPersonID");
-
-                entity.HasIndex(e => e.SalespersonPersonId, "FK_Sales_Invoices_SalespersonPersonID");
-
-                entity.Property(e => e.InvoiceId)
-                    .HasColumnName("InvoiceID")
-                    .HasDefaultValueSql("next value for [sequences].[invoiceid]");
-
-                entity.Property(e => e.AccountsPersonId).HasColumnName("AccountsPersonID");
-
-                entity.Property(e => e.BillToCustomerId).HasColumnName("BillToCustomerID");
-
-                entity.Property(e => e.ContactPersonId).HasColumnName("ContactPersonID");
-
-                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-
-                entity.Property(e => e.CustomerPurchaseOrderNumber).HasMaxLength(20);
-
-                entity.Property(e => e.DeliveryMethodId).HasColumnName("DeliveryMethodID");
-
-                entity.Property(e => e.DeliveryRun).HasMaxLength(5);
-
-                entity.Property(e => e.InvoiceDate).HasColumnType("date");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.PackedByPersonId).HasColumnName("PackedByPersonID");
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
 
-                entity.Property(e => e.RunPosition).HasMaxLength(5);
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-                entity.Property(e => e.SalespersonPersonId).HasColumnName("SalespersonPersonID");
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(40);
 
-                entity.HasOne(d => d.AccountsPerson)
-                    .WithMany(p => p.InvoicesAccountsPerson)
-                    .HasForeignKey(d => d.AccountsPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_AccountsPersonID_Application_People");
+                entity.Property(e => e.Region).HasMaxLength(15);
 
-                entity.HasOne(d => d.BillToCustomer)
-                    .WithMany(p => p.InvoicesBillToCustomer)
-                    .HasForeignKey(d => d.BillToCustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_BillToCustomerID_Sales_Customers");
+                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.ContactPerson)
-                    .WithMany(p => p.InvoicesContactPerson)
-                    .HasForeignKey(d => d.ContactPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_ContactPersonID_Application_People");
+                entity.Property(e => e.ShipAddress).HasMaxLength(60);
 
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.InvoicesCustomer)
-                    .HasForeignKey(d => d.CustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_CustomerID_Sales_Customers");
+                entity.Property(e => e.ShipCity).HasMaxLength(15);
 
-                entity.HasOne(d => d.DeliveryMethod)
-                    .WithMany(p => p.Invoices)
-                    .HasForeignKey(d => d.DeliveryMethodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_DeliveryMethodID_Application_DeliveryMethods");
+                entity.Property(e => e.ShipCountry).HasMaxLength(15);
 
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.InvoicesLastEditedByNavigation)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_Application_People");
+                entity.Property(e => e.ShipName).HasMaxLength(40);
 
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.Invoices)
-                    .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK_Sales_Invoices_OrderID_Sales_Orders");
+                entity.Property(e => e.ShipPostalCode).HasMaxLength(10);
 
-                entity.HasOne(d => d.PackedByPerson)
-                    .WithMany(p => p.InvoicesPackedByPerson)
-                    .HasForeignKey(d => d.PackedByPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_PackedByPersonID_Application_People");
+                entity.Property(e => e.ShipRegion).HasMaxLength(15);
 
-                entity.HasOne(d => d.SalespersonPerson)
-                    .WithMany(p => p.InvoicesSalespersonPerson)
-                    .HasForeignKey(d => d.SalespersonPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Invoices_SalespersonPersonID_Application_People");
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ShipperName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
 
-            modelBuilder.Entity<OrderLines>(entity =>
+            modelBuilder.Entity<OrderDetails>(entity =>
             {
-                entity.HasKey(e => e.OrderLineId)
-                    .HasName("PK_Sales_OrderLines");
+                entity.HasKey(e => new { e.OrderId, e.ProductId })
+                    .HasName("PK_Order_Details");
 
-                entity.ToTable("OrderLines", "Sales");
+                entity.ToTable("Order Details");
 
-                entity.HasIndex(e => e.OrderId, "FK_Sales_OrderLines_OrderID");
+                entity.HasIndex(e => e.OrderId, "OrderID");
 
-                entity.HasIndex(e => e.PackageTypeId, "FK_Sales_OrderLines_PackageTypeID");
+                entity.HasIndex(e => e.OrderId, "OrdersOrder_Details");
 
-                entity.HasIndex(e => e.StockItemId, "IX_Sales_OrderLines_AllocatedStockItems");
+                entity.HasIndex(e => e.ProductId, "ProductID");
 
-                entity.HasIndex(e => new { e.PickingCompletedWhen, e.OrderId, e.OrderLineId }, "IX_Sales_OrderLines_Perf_20160301_01");
-
-                entity.HasIndex(e => new { e.StockItemId, e.PickingCompletedWhen }, "IX_Sales_OrderLines_Perf_20160301_02");
-
-                entity.Property(e => e.OrderLineId)
-                    .HasColumnName("OrderLineID")
-                    .HasDefaultValueSql("next value for [sequences].[orderlineid]");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
+                entity.HasIndex(e => e.ProductId, "ProductsOrder_Details");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.PackageTypeId).HasColumnName("PackageTypeID");
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-                entity.Property(e => e.StockItemId).HasColumnName("StockItemID");
+                entity.Property(e => e.Quantity).HasDefaultValueSql("1");
 
-                entity.Property(e => e.TaxRate).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.OrderLines)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_OrderLines_Application_People");
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Order)
-                    .WithMany(p => p.OrderLines)
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_OrderLines_OrderID_Sales_Orders");
+                    .HasConstraintName("FK_Order_Details_Orders");
 
-                entity.HasOne(d => d.PackageType)
-                    .WithMany(p => p.OrderLines)
-                    .HasForeignKey(d => d.PackageTypeId)
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_OrderLines_PackageTypeID_Warehouse_PackageTypes");
+                    .HasConstraintName("FK_Order_Details_Products");
+            });
 
-                entity.HasOne(d => d.StockItem)
-                    .WithMany(p => p.OrderLines)
-                    .HasForeignKey(d => d.StockItemId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_OrderLines_StockItemID_Warehouse_StockItems");
+            modelBuilder.Entity<OrderDetailsExtended>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Order Details Extended");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<OrderSubtotals>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Order Subtotals");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
             });
 
             modelBuilder.Entity<Orders>(entity =>
             {
-                entity.HasKey(e => e.OrderId)
-                    .HasName("PK_Sales_Orders");
+                entity.HasKey(e => e.OrderId);
 
-                entity.ToTable("Orders", "Sales");
+                entity.HasIndex(e => e.CustomerId, "CustomerID");
 
-                entity.HasIndex(e => e.ContactPersonId, "FK_Sales_Orders_ContactPersonID");
+                entity.HasIndex(e => e.CustomerId, "CustomersOrders");
 
-                entity.HasIndex(e => e.CustomerId, "FK_Sales_Orders_CustomerID");
+                entity.HasIndex(e => e.EmployeeId, "EmployeeID");
 
-                entity.HasIndex(e => e.PickedByPersonId, "FK_Sales_Orders_PickedByPersonID");
+                entity.HasIndex(e => e.EmployeeId, "EmployeesOrders");
 
-                entity.HasIndex(e => e.SalespersonPersonId, "FK_Sales_Orders_SalespersonPersonID");
+                entity.HasIndex(e => e.OrderDate, "OrderDate");
 
-                entity.Property(e => e.OrderId)
-                    .HasColumnName("OrderID")
-                    .HasDefaultValueSql("next value for [sequences].[orderid]");
+                entity.HasIndex(e => e.ShipPostalCode, "ShipPostalCode");
 
-                entity.Property(e => e.BackorderOrderId).HasColumnName("BackorderOrderID");
+                entity.HasIndex(e => e.ShippedDate, "ShippedDate");
 
-                entity.Property(e => e.ContactPersonId).HasColumnName("ContactPersonID");
+                entity.HasIndex(e => e.ShipVia, "ShippersOrders");
 
-                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.CustomerPurchaseOrderNumber).HasMaxLength(20);
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength(true);
 
-                entity.Property(e => e.ExpectedDeliveryDate).HasColumnType("date");
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
+                entity.Property(e => e.Freight)
+                    .HasColumnType("money")
+                    .HasDefaultValueSql("0");
 
-                entity.Property(e => e.OrderDate).HasColumnType("date");
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
-                entity.Property(e => e.PickedByPersonId).HasColumnName("PickedByPersonID");
+                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
 
-                entity.Property(e => e.SalespersonPersonId).HasColumnName("SalespersonPersonID");
+                entity.Property(e => e.ShipAddress).HasMaxLength(60);
 
-                entity.HasOne(d => d.BackorderOrder)
-                    .WithMany(p => p.InverseBackorderOrder)
-                    .HasForeignKey(d => d.BackorderOrderId)
-                    .HasConstraintName("FK_Sales_Orders_BackorderOrderID_Sales_Orders");
+                entity.Property(e => e.ShipCity).HasMaxLength(15);
 
-                entity.HasOne(d => d.ContactPerson)
-                    .WithMany(p => p.OrdersContactPerson)
-                    .HasForeignKey(d => d.ContactPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Orders_ContactPersonID_Application_People");
+                entity.Property(e => e.ShipCountry).HasMaxLength(15);
+
+                entity.Property(e => e.ShipName).HasMaxLength(40);
+
+                entity.Property(e => e.ShipPostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.ShipRegion).HasMaxLength(15);
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Orders_CustomerID_Sales_Customers");
+                    .HasConstraintName("FK_Orders_Customers");
 
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.OrdersLastEditedByNavigation)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Orders_Application_People");
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK_Orders_Employees");
 
-                entity.HasOne(d => d.PickedByPerson)
-                    .WithMany(p => p.OrdersPickedByPerson)
-                    .HasForeignKey(d => d.PickedByPersonId)
-                    .HasConstraintName("FK_Sales_Orders_PickedByPersonID_Application_People");
-
-                entity.HasOne(d => d.SalespersonPerson)
-                    .WithMany(p => p.OrdersSalespersonPerson)
-                    .HasForeignKey(d => d.SalespersonPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Orders_SalespersonPersonID_Application_People");
+                entity.HasOne(d => d.ShipViaNavigation)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.ShipVia)
+                    .HasConstraintName("FK_Orders_Shippers");
             });
 
-            modelBuilder.Entity<PackageTypes>(entity =>
-            {
-                entity.HasKey(e => e.PackageTypeId)
-                    .HasName("PK_Warehouse_PackageTypes");
-
-                entity.ToTable("PackageTypes", "Warehouse");
-
-                entity.HasIndex(e => e.PackageTypeName, "UQ_Warehouse_PackageTypes_PackageTypeName")
-                    .IsUnique();
-
-                entity.Property(e => e.PackageTypeId)
-                    .HasColumnName("PackageTypeID")
-                    .HasDefaultValueSql("next value for [sequences].[packagetypeid]");
-
-                entity.Property(e => e.PackageTypeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.PackageTypes)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_PackageTypes_Application_People");
-            });
-
-            modelBuilder.Entity<PackageTypesArchive>(entity =>
+            modelBuilder.Entity<OrdersQry>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("PackageTypes_Archive", "Warehouse");
+                entity.ToView("Orders Qry");
 
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_PackageTypes_Archive")
-                    .IsClustered();
+                entity.Property(e => e.Address).HasMaxLength(60);
 
-                entity.Property(e => e.PackageTypeId).HasColumnName("PackageTypeID");
+                entity.Property(e => e.City).HasMaxLength(15);
 
-                entity.Property(e => e.PackageTypeName)
+                entity.Property(e => e.CompanyName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+                entity.Property(e => e.Freight).HasColumnType("money");
+
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.Region).HasMaxLength(15);
+
+                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ShipAddress).HasMaxLength(60);
+
+                entity.Property(e => e.ShipCity).HasMaxLength(15);
+
+                entity.Property(e => e.ShipCountry).HasMaxLength(15);
+
+                entity.Property(e => e.ShipName).HasMaxLength(40);
+
+                entity.Property(e => e.ShipPostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.ShipRegion).HasMaxLength(15);
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<PaymentMethods>(entity =>
-            {
-                entity.HasKey(e => e.PaymentMethodId)
-                    .HasName("PK_Application_PaymentMethods");
-
-                entity.ToTable("PaymentMethods", "Application");
-
-                entity.HasIndex(e => e.PaymentMethodName, "UQ_Application_PaymentMethods_PaymentMethodName")
-                    .IsUnique();
-
-                entity.Property(e => e.PaymentMethodId)
-                    .HasColumnName("PaymentMethodID")
-                    .HasDefaultValueSql("next value for [sequences].[paymentmethodid]");
-
-                entity.Property(e => e.PaymentMethodName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.PaymentMethods)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_PaymentMethods_Application_People");
-            });
-
-            modelBuilder.Entity<PaymentMethodsArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("PaymentMethods_Archive", "Application");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_PaymentMethods_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.PaymentMethodId).HasColumnName("PaymentMethodID");
-
-                entity.Property(e => e.PaymentMethodName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<People>(entity =>
-            {
-                entity.HasKey(e => e.PersonId)
-                    .HasName("PK_Application_People");
-
-                entity.ToTable("People", "Application");
-
-                entity.HasIndex(e => e.FullName, "IX_Application_People_FullName");
-
-                entity.HasIndex(e => e.IsEmployee, "IX_Application_People_IsEmployee");
-
-                entity.HasIndex(e => e.IsSalesperson, "IX_Application_People_IsSalesperson");
-
-                entity.HasIndex(e => new { e.IsPermittedToLogon, e.PersonId }, "IX_Application_People_Perf_20160301_05");
-
-                entity.Property(e => e.PersonId)
-                    .HasColumnName("PersonID")
-                    .HasDefaultValueSql("next value for [sequences].[personid]");
-
-                entity.Property(e => e.EmailAddress).HasMaxLength(256);
-
-                entity.Property(e => e.FaxNumber).HasMaxLength(20);
-
-                entity.Property(e => e.FullName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.LogonName).HasMaxLength(50);
-
-                entity.Property(e => e.PhoneNumber).HasMaxLength(20);
-
-                entity.Property(e => e.PreferredName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.InverseLastEditedByNavigation)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_People_Application_People");
-            });
-
-            modelBuilder.Entity<PeopleArchive>(entity =>
+            modelBuilder.Entity<ProductSalesFor1997>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("People_Archive", "Application");
+                entity.ToView("Product Sales for 1997");
 
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_People_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.EmailAddress).HasMaxLength(256);
-
-                entity.Property(e => e.FaxNumber).HasMaxLength(20);
-
-                entity.Property(e => e.FullName)
+                entity.Property(e => e.CategoryName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(15);
 
-                entity.Property(e => e.LogonName).HasMaxLength(50);
-
-                entity.Property(e => e.PersonId).HasColumnName("PersonID");
-
-                entity.Property(e => e.PhoneNumber).HasMaxLength(20);
-
-                entity.Property(e => e.PreferredName)
+                entity.Property(e => e.ProductName)
                     .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.SearchName)
-                    .IsRequired()
-                    .HasMaxLength(101);
+                    .HasMaxLength(40);
             });
 
-            modelBuilder.Entity<PurchaseOrderLines>(entity =>
+            modelBuilder.Entity<Products>(entity =>
             {
-                entity.HasKey(e => e.PurchaseOrderLineId)
-                    .HasName("PK_Purchasing_PurchaseOrderLines");
+                entity.HasKey(e => e.ProductId);
 
-                entity.ToTable("PurchaseOrderLines", "Purchasing");
+                entity.HasIndex(e => e.CategoryId, "CategoriesProducts");
 
-                entity.HasIndex(e => e.PackageTypeId, "FK_Purchasing_PurchaseOrderLines_PackageTypeID");
+                entity.HasIndex(e => e.CategoryId, "CategoryID");
 
-                entity.HasIndex(e => e.PurchaseOrderId, "FK_Purchasing_PurchaseOrderLines_PurchaseOrderID");
+                entity.HasIndex(e => e.ProductName, "ProductName");
 
-                entity.HasIndex(e => e.StockItemId, "FK_Purchasing_PurchaseOrderLines_StockItemID");
+                entity.HasIndex(e => e.SupplierId, "SupplierID");
 
-                entity.HasIndex(e => new { e.IsOrderLineFinalized, e.StockItemId }, "IX_Purchasing_PurchaseOrderLines_Perf_20160301_4");
+                entity.HasIndex(e => e.SupplierId, "SuppliersProducts");
 
-                entity.Property(e => e.PurchaseOrderLineId)
-                    .HasColumnName("PurchaseOrderLineID")
-                    .HasDefaultValueSql("next value for [sequences].[purchaseorderlineid]");
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-                entity.Property(e => e.Description)
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+
+                entity.Property(e => e.ProductName)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(40);
 
-                entity.Property(e => e.ExpectedUnitPricePerOuter).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
 
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.LastReceiptDate).HasColumnType("date");
-
-                entity.Property(e => e.PackageTypeId).HasColumnName("PackageTypeID");
-
-                entity.Property(e => e.PurchaseOrderId).HasColumnName("PurchaseOrderID");
-
-                entity.Property(e => e.StockItemId).HasColumnName("StockItemID");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.PurchaseOrderLines)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrderLines_Application_People");
-
-                entity.HasOne(d => d.PackageType)
-                    .WithMany(p => p.PurchaseOrderLines)
-                    .HasForeignKey(d => d.PackageTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrderLines_PackageTypeID_Warehouse_PackageTypes");
-
-                entity.HasOne(d => d.PurchaseOrder)
-                    .WithMany(p => p.PurchaseOrderLines)
-                    .HasForeignKey(d => d.PurchaseOrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrderLines_PurchaseOrderID_Purchasing_PurchaseOrders");
-
-                entity.HasOne(d => d.StockItem)
-                    .WithMany(p => p.PurchaseOrderLines)
-                    .HasForeignKey(d => d.StockItemId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrderLines_StockItemID_Warehouse_StockItems");
-            });
-
-            modelBuilder.Entity<PurchaseOrders>(entity =>
-            {
-                entity.HasKey(e => e.PurchaseOrderId)
-                    .HasName("PK_Purchasing_PurchaseOrders");
-
-                entity.ToTable("PurchaseOrders", "Purchasing");
-
-                entity.HasIndex(e => e.ContactPersonId, "FK_Purchasing_PurchaseOrders_ContactPersonID");
-
-                entity.HasIndex(e => e.DeliveryMethodId, "FK_Purchasing_PurchaseOrders_DeliveryMethodID");
-
-                entity.HasIndex(e => e.SupplierId, "FK_Purchasing_PurchaseOrders_SupplierID");
-
-                entity.Property(e => e.PurchaseOrderId)
-                    .HasColumnName("PurchaseOrderID")
-                    .HasDefaultValueSql("next value for [sequences].[purchaseorderid]");
-
-                entity.Property(e => e.ContactPersonId).HasColumnName("ContactPersonID");
-
-                entity.Property(e => e.DeliveryMethodId).HasColumnName("DeliveryMethodID");
-
-                entity.Property(e => e.ExpectedDeliveryDate).HasColumnType("date");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.OrderDate).HasColumnType("date");
+                entity.Property(e => e.ReorderLevel).HasDefaultValueSql("0");
 
                 entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
 
-                entity.Property(e => e.SupplierReference).HasMaxLength(20);
+                entity.Property(e => e.UnitPrice)
+                    .HasColumnType("money")
+                    .HasDefaultValueSql("0");
 
-                entity.HasOne(d => d.ContactPerson)
-                    .WithMany(p => p.PurchaseOrdersContactPerson)
-                    .HasForeignKey(d => d.ContactPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrders_ContactPersonID_Application_People");
+                entity.Property(e => e.UnitsInStock).HasDefaultValueSql("0");
 
-                entity.HasOne(d => d.DeliveryMethod)
-                    .WithMany(p => p.PurchaseOrders)
-                    .HasForeignKey(d => d.DeliveryMethodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrders_DeliveryMethodID_Application_DeliveryMethods");
+                entity.Property(e => e.UnitsOnOrder).HasDefaultValueSql("0");
 
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.PurchaseOrdersLastEditedByNavigation)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrders_Application_People");
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("FK_Products_Categories");
 
                 entity.HasOne(d => d.Supplier)
-                    .WithMany(p => p.PurchaseOrders)
+                    .WithMany(p => p.Products)
                     .HasForeignKey(d => d.SupplierId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_PurchaseOrders_SupplierID_Purchasing_Suppliers");
+                    .HasConstraintName("FK_Products_Suppliers");
             });
 
-            modelBuilder.Entity<SpecialDeals>(entity =>
-            {
-                entity.HasKey(e => e.SpecialDealId)
-                    .HasName("PK_Sales_SpecialDeals");
-
-                entity.ToTable("SpecialDeals", "Sales");
-
-                entity.HasIndex(e => e.BuyingGroupId, "FK_Sales_SpecialDeals_BuyingGroupID");
-
-                entity.HasIndex(e => e.CustomerCategoryId, "FK_Sales_SpecialDeals_CustomerCategoryID");
-
-                entity.HasIndex(e => e.CustomerId, "FK_Sales_SpecialDeals_CustomerID");
-
-                entity.HasIndex(e => e.StockGroupId, "FK_Sales_SpecialDeals_StockGroupID");
-
-                entity.HasIndex(e => e.StockItemId, "FK_Sales_SpecialDeals_StockItemID");
-
-                entity.Property(e => e.SpecialDealId)
-                    .HasColumnName("SpecialDealID")
-                    .HasDefaultValueSql("next value for [sequences].[specialdealid]");
-
-                entity.Property(e => e.BuyingGroupId).HasColumnName("BuyingGroupID");
-
-                entity.Property(e => e.CustomerCategoryId).HasColumnName("CustomerCategoryID");
-
-                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-
-                entity.Property(e => e.DealDescription)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.DiscountAmount).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.DiscountPercentage).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.EndDate).HasColumnType("date");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.StartDate).HasColumnType("date");
-
-                entity.Property(e => e.StockGroupId).HasColumnName("StockGroupID");
-
-                entity.Property(e => e.StockItemId).HasColumnName("StockItemID");
-
-                entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
-
-                entity.HasOne(d => d.BuyingGroup)
-                    .WithMany(p => p.SpecialDeals)
-                    .HasForeignKey(d => d.BuyingGroupId)
-                    .HasConstraintName("FK_Sales_SpecialDeals_BuyingGroupID_Sales_BuyingGroups");
-
-                entity.HasOne(d => d.CustomerCategory)
-                    .WithMany(p => p.SpecialDeals)
-                    .HasForeignKey(d => d.CustomerCategoryId)
-                    .HasConstraintName("FK_Sales_SpecialDeals_CustomerCategoryID_Sales_CustomerCategories");
-
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.SpecialDeals)
-                    .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK_Sales_SpecialDeals_CustomerID_Sales_Customers");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.SpecialDeals)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_SpecialDeals_Application_People");
-
-                entity.HasOne(d => d.StockGroup)
-                    .WithMany(p => p.SpecialDeals)
-                    .HasForeignKey(d => d.StockGroupId)
-                    .HasConstraintName("FK_Sales_SpecialDeals_StockGroupID_Warehouse_StockGroups");
-
-                entity.HasOne(d => d.StockItem)
-                    .WithMany(p => p.SpecialDeals)
-                    .HasForeignKey(d => d.StockItemId)
-                    .HasConstraintName("FK_Sales_SpecialDeals_StockItemID_Warehouse_StockItems");
-            });
-
-            modelBuilder.Entity<StateProvinces>(entity =>
-            {
-                entity.HasKey(e => e.StateProvinceId)
-                    .HasName("PK_Application_StateProvinces");
-
-                entity.ToTable("StateProvinces", "Application");
-
-                entity.HasIndex(e => e.CountryId, "FK_Application_StateProvinces_CountryID");
-
-                entity.HasIndex(e => e.SalesTerritory, "IX_Application_StateProvinces_SalesTerritory");
-
-                entity.HasIndex(e => e.StateProvinceName, "UQ_Application_StateProvinces_StateProvinceName")
-                    .IsUnique();
-
-                entity.Property(e => e.StateProvinceId)
-                    .HasColumnName("StateProvinceID")
-                    .HasDefaultValueSql("next value for [sequences].[stateprovinceid]");
-
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
-
-                entity.Property(e => e.SalesTerritory)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.StateProvinceCode)
-                    .IsRequired()
-                    .HasMaxLength(5);
-
-                entity.Property(e => e.StateProvinceName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.Country)
-                    .WithMany(p => p.StateProvinces)
-                    .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_StateProvinces_CountryID_Application_Countries");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.StateProvinces)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_StateProvinces_Application_People");
-            });
-
-            modelBuilder.Entity<StateProvincesArchive>(entity =>
+            modelBuilder.Entity<ProductsAboveAveragePrice>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("StateProvinces_Archive", "Application");
+                entity.ToView("Products Above Average Price");
 
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_StateProvinces_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
-
-                entity.Property(e => e.SalesTerritory)
+                entity.Property(e => e.ProductName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(40);
 
-                entity.Property(e => e.StateProvinceCode)
-                    .IsRequired()
-                    .HasMaxLength(5);
-
-                entity.Property(e => e.StateProvinceId).HasColumnName("StateProvinceID");
-
-                entity.Property(e => e.StateProvinceName)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
 
-            modelBuilder.Entity<StockGroups>(entity =>
-            {
-                entity.HasKey(e => e.StockGroupId)
-                    .HasName("PK_Warehouse_StockGroups");
-
-                entity.ToTable("StockGroups", "Warehouse");
-
-                entity.HasIndex(e => e.StockGroupName, "UQ_Warehouse_StockGroups_StockGroupName")
-                    .IsUnique();
-
-                entity.Property(e => e.StockGroupId)
-                    .HasColumnName("StockGroupID")
-                    .HasDefaultValueSql("next value for [sequences].[stockgroupid]");
-
-                entity.Property(e => e.StockGroupName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.StockGroups)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockGroups_Application_People");
-            });
-
-            modelBuilder.Entity<StockGroupsArchive>(entity =>
+            modelBuilder.Entity<ProductsByCategory>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("StockGroups_Archive", "Warehouse");
+                entity.ToView("Products by Category");
 
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_StockGroups_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.StockGroupId).HasColumnName("StockGroupID");
-
-                entity.Property(e => e.StockGroupName)
+                entity.Property(e => e.CategoryName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
             });
 
-            modelBuilder.Entity<StockItemHoldings>(entity =>
+            modelBuilder.Entity<QuarterlyOrders>(entity =>
             {
-                entity.HasKey(e => e.StockItemId)
-                    .HasName("PK_Warehouse_StockItemHoldings");
+                entity.HasNoKey();
 
-                entity.ToTable("StockItemHoldings", "Warehouse");
+                entity.ToView("Quarterly Orders");
 
-                entity.Property(e => e.StockItemId)
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.CustomerId)
+                    .IsRequired()
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<Region>(entity =>
+            {
+                entity.HasKey(e => e.RegionId)
+                    .IsClustered(false);
+
+                entity.Property(e => e.RegionId)
                     .ValueGeneratedNever()
-                    .HasColumnName("StockItemID");
+                    .HasColumnName("RegionID");
 
-                entity.Property(e => e.BinLocation)
+                entity.Property(e => e.RegionDescription)
                     .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.LastCostPrice).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.StockItemHoldings)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemHoldings_Application_People");
-
-                entity.HasOne(d => d.StockItem)
-                    .WithOne(p => p.StockItemHoldings)
-                    .HasForeignKey<StockItemHoldings>(d => d.StockItemId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("PKFK_Warehouse_StockItemHoldings_StockItemID_Warehouse_StockItems");
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
             });
 
-            modelBuilder.Entity<StockItemStockGroups>(entity =>
-            {
-                entity.HasKey(e => e.StockItemStockGroupId)
-                    .HasName("PK_Warehouse_StockItemStockGroups");
-
-                entity.ToTable("StockItemStockGroups", "Warehouse");
-
-                entity.HasIndex(e => new { e.StockGroupId, e.StockItemId }, "UQ_StockItemStockGroups_StockGroupID_Lookup")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.StockItemId, e.StockGroupId }, "UQ_StockItemStockGroups_StockItemID_Lookup")
-                    .IsUnique();
-
-                entity.Property(e => e.StockItemStockGroupId)
-                    .HasColumnName("StockItemStockGroupID")
-                    .HasDefaultValueSql("next value for [sequences].[stockitemstockgroupid]");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.StockGroupId).HasColumnName("StockGroupID");
-
-                entity.Property(e => e.StockItemId).HasColumnName("StockItemID");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.StockItemStockGroups)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemStockGroups_Application_People");
-
-                entity.HasOne(d => d.StockGroup)
-                    .WithMany(p => p.StockItemStockGroups)
-                    .HasForeignKey(d => d.StockGroupId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemStockGroups_StockGroupID_Warehouse_StockGroups");
-
-                entity.HasOne(d => d.StockItem)
-                    .WithMany(p => p.StockItemStockGroups)
-                    .HasForeignKey(d => d.StockItemId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemStockGroups_StockItemID_Warehouse_StockItems");
-            });
-
-            modelBuilder.Entity<StockItemTransactions>(entity =>
-            {
-                entity.HasKey(e => e.StockItemTransactionId)
-                    .HasName("PK_Warehouse_StockItemTransactions")
-                    .IsClustered(false);
-
-                entity.ToTable("StockItemTransactions", "Warehouse");
-
-                entity.HasIndex(e => e.CustomerId, "FK_Warehouse_StockItemTransactions_CustomerID");
-
-                entity.HasIndex(e => e.InvoiceId, "FK_Warehouse_StockItemTransactions_InvoiceID");
-
-                entity.HasIndex(e => e.PurchaseOrderId, "FK_Warehouse_StockItemTransactions_PurchaseOrderID");
-
-                entity.HasIndex(e => e.StockItemId, "FK_Warehouse_StockItemTransactions_StockItemID");
-
-                entity.HasIndex(e => e.SupplierId, "FK_Warehouse_StockItemTransactions_SupplierID");
-
-                entity.HasIndex(e => e.TransactionTypeId, "FK_Warehouse_StockItemTransactions_TransactionTypeID");
-
-                entity.Property(e => e.StockItemTransactionId)
-                    .HasColumnName("StockItemTransactionID")
-                    .HasDefaultValueSql("next value for [sequences].[transactionid]");
-
-                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-
-                entity.Property(e => e.InvoiceId).HasColumnName("InvoiceID");
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.PurchaseOrderId).HasColumnName("PurchaseOrderID");
-
-                entity.Property(e => e.Quantity).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.StockItemId).HasColumnName("StockItemID");
-
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-
-                entity.Property(e => e.TransactionTypeId).HasColumnName("TransactionTypeID");
-
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.StockItemTransactions)
-                    .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_CustomerID_Sales_Customers");
-
-                entity.HasOne(d => d.Invoice)
-                    .WithMany(p => p.StockItemTransactions)
-                    .HasForeignKey(d => d.InvoiceId)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_InvoiceID_Sales_Invoices");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.StockItemTransactions)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_Application_People");
-
-                entity.HasOne(d => d.PurchaseOrder)
-                    .WithMany(p => p.StockItemTransactions)
-                    .HasForeignKey(d => d.PurchaseOrderId)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_PurchaseOrderID_Purchasing_PurchaseOrders");
-
-                entity.HasOne(d => d.StockItem)
-                    .WithMany(p => p.StockItemTransactions)
-                    .HasForeignKey(d => d.StockItemId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_StockItemID_Warehouse_StockItems");
-
-                entity.HasOne(d => d.Supplier)
-                    .WithMany(p => p.StockItemTransactions)
-                    .HasForeignKey(d => d.SupplierId)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_SupplierID_Purchasing_Suppliers");
-
-                entity.HasOne(d => d.TransactionType)
-                    .WithMany(p => p.StockItemTransactions)
-                    .HasForeignKey(d => d.TransactionTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_TransactionTypeID_Application_TransactionTypes");
-            });
-
-            modelBuilder.Entity<StockItems>(entity =>
-            {
-                entity.HasKey(e => e.StockItemId)
-                    .HasName("PK_Warehouse_StockItems");
-
-                entity.ToTable("StockItems", "Warehouse");
-
-                entity.HasIndex(e => e.ColorId, "FK_Warehouse_StockItems_ColorID");
-
-                entity.HasIndex(e => e.OuterPackageId, "FK_Warehouse_StockItems_OuterPackageID");
-
-                entity.HasIndex(e => e.SupplierId, "FK_Warehouse_StockItems_SupplierID");
-
-                entity.HasIndex(e => e.UnitPackageId, "FK_Warehouse_StockItems_UnitPackageID");
-
-                entity.HasIndex(e => e.StockItemName, "UQ_Warehouse_StockItems_StockItemName")
-                    .IsUnique();
-
-                entity.Property(e => e.StockItemId)
-                    .HasColumnName("StockItemID")
-                    .HasDefaultValueSql("next value for [sequences].[stockitemid]");
-
-                entity.Property(e => e.Barcode).HasMaxLength(50);
-
-                entity.Property(e => e.Brand).HasMaxLength(50);
-
-                entity.Property(e => e.ColorId).HasColumnName("ColorID");
-
-                entity.Property(e => e.OuterPackageId).HasColumnName("OuterPackageID");
-
-                entity.Property(e => e.RecommendedRetailPrice).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.Size).HasMaxLength(20);
-
-                entity.Property(e => e.StockItemName)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-
-                entity.Property(e => e.TaxRate).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.TypicalWeightPerUnit).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.UnitPackageId).HasColumnName("UnitPackageID");
-
-                entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
-
-                entity.HasOne(d => d.Color)
-                    .WithMany(p => p.StockItems)
-                    .HasForeignKey(d => d.ColorId)
-                    .HasConstraintName("FK_Warehouse_StockItems_ColorID_Warehouse_Colors");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.StockItems)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItems_Application_People");
-
-                entity.HasOne(d => d.OuterPackage)
-                    .WithMany(p => p.StockItemsOuterPackage)
-                    .HasForeignKey(d => d.OuterPackageId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItems_OuterPackageID_Warehouse_PackageTypes");
-
-                entity.HasOne(d => d.Supplier)
-                    .WithMany(p => p.StockItems)
-                    .HasForeignKey(d => d.SupplierId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItems_SupplierID_Purchasing_Suppliers");
-
-                entity.HasOne(d => d.UnitPackage)
-                    .WithMany(p => p.StockItemsUnitPackage)
-                    .HasForeignKey(d => d.UnitPackageId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItems_UnitPackageID_Warehouse_PackageTypes");
-            });
-
-            modelBuilder.Entity<StockItemsArchive>(entity =>
+            modelBuilder.Entity<SalesByCategory>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("StockItems_Archive", "Warehouse");
+                entity.ToView("Sales by Category");
 
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_StockItems_Archive")
-                    .IsClustered();
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.Property(e => e.Barcode).HasMaxLength(50);
-
-                entity.Property(e => e.Brand).HasMaxLength(50);
-
-                entity.Property(e => e.ColorId).HasColumnName("ColorID");
-
-                entity.Property(e => e.OuterPackageId).HasColumnName("OuterPackageID");
-
-                entity.Property(e => e.RecommendedRetailPrice).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.SearchDetails).IsRequired();
-
-                entity.Property(e => e.Size).HasMaxLength(20);
-
-                entity.Property(e => e.StockItemId).HasColumnName("StockItemID");
-
-                entity.Property(e => e.StockItemName)
+                entity.Property(e => e.CategoryName)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(15);
 
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-
-                entity.Property(e => e.TaxRate).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.TypicalWeightPerUnit).HasColumnType("decimal(18, 3)");
-
-                entity.Property(e => e.UnitPackageId).HasColumnName("UnitPackageID");
-
-                entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(40);
             });
 
-            modelBuilder.Entity<SupplierCategories>(entity =>
-            {
-                entity.HasKey(e => e.SupplierCategoryId)
-                    .HasName("PK_Purchasing_SupplierCategories");
-
-                entity.ToTable("SupplierCategories", "Purchasing");
-
-                entity.HasIndex(e => e.SupplierCategoryName, "UQ_Purchasing_SupplierCategories_SupplierCategoryName")
-                    .IsUnique();
-
-                entity.Property(e => e.SupplierCategoryId)
-                    .HasColumnName("SupplierCategoryID")
-                    .HasDefaultValueSql("next value for [sequences].[suppliercategoryid]");
-
-                entity.Property(e => e.SupplierCategoryName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.SupplierCategories)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_SupplierCategories_Application_People");
-            });
-
-            modelBuilder.Entity<SupplierCategoriesArchive>(entity =>
+            modelBuilder.Entity<SalesTotalsByAmount>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("SupplierCategories_Archive", "Purchasing");
+                entity.ToView("Sales Totals by Amount");
 
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_SupplierCategories_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.SupplierCategoryId).HasColumnName("SupplierCategoryID");
-
-                entity.Property(e => e.SupplierCategoryName)
+                entity.Property(e => e.CompanyName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<SupplierTransactions>(entity =>
+            modelBuilder.Entity<Shippers>(entity =>
             {
-                entity.HasKey(e => e.SupplierTransactionId)
-                    .HasName("PK_Purchasing_SupplierTransactions")
-                    .IsClustered(false);
+                entity.HasKey(e => e.ShipperId);
 
-                entity.ToTable("SupplierTransactions", "Purchasing");
+                entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
 
-                entity.HasIndex(e => e.TransactionDate, "CX_Purchasing_SupplierTransactions")
-                    .IsClustered();
+                entity.Property(e => e.CompanyName)
+                    .IsRequired()
+                    .HasMaxLength(40);
 
-                entity.HasIndex(e => e.PaymentMethodId, "FK_Purchasing_SupplierTransactions_PaymentMethodID");
+                entity.Property(e => e.Phone).HasMaxLength(24);
+            });
 
-                entity.HasIndex(e => e.PurchaseOrderId, "FK_Purchasing_SupplierTransactions_PurchaseOrderID");
+            modelBuilder.Entity<SummaryOfSalesByQuarter>(entity =>
+            {
+                entity.HasNoKey();
 
-                entity.HasIndex(e => e.SupplierId, "FK_Purchasing_SupplierTransactions_SupplierID");
+                entity.ToView("Summary of Sales by Quarter");
 
-                entity.HasIndex(e => e.TransactionTypeId, "FK_Purchasing_SupplierTransactions_TransactionTypeID");
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.SupplierTransactionId)
-                    .HasColumnName("SupplierTransactionID")
-                    .HasDefaultValueSql("next value for [sequences].[transactionid]");
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+            });
 
-                entity.Property(e => e.AmountExcludingTax).HasColumnType("decimal(18, 2)");
+            modelBuilder.Entity<SummaryOfSalesByYear>(entity =>
+            {
+                entity.HasNoKey();
 
-                entity.Property(e => e.FinalizationDate).HasColumnType("date");
+                entity.ToView("Summary of Sales by Year");
 
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.OutstandingBalance).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.PaymentMethodId).HasColumnName("PaymentMethodID");
-
-                entity.Property(e => e.PurchaseOrderId).HasColumnName("PurchaseOrderID");
-
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-
-                entity.Property(e => e.SupplierInvoiceNumber).HasMaxLength(20);
-
-                entity.Property(e => e.TaxAmount).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.TransactionAmount).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.TransactionDate).HasColumnType("date");
-
-                entity.Property(e => e.TransactionTypeId).HasColumnName("TransactionTypeID");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.SupplierTransactions)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_SupplierTransactions_Application_People");
-
-                entity.HasOne(d => d.PaymentMethod)
-                    .WithMany(p => p.SupplierTransactions)
-                    .HasForeignKey(d => d.PaymentMethodId)
-                    .HasConstraintName("FK_Purchasing_SupplierTransactions_PaymentMethodID_Application_PaymentMethods");
-
-                entity.HasOne(d => d.PurchaseOrder)
-                    .WithMany(p => p.SupplierTransactions)
-                    .HasForeignKey(d => d.PurchaseOrderId)
-                    .HasConstraintName("FK_Purchasing_SupplierTransactions_PurchaseOrderID_Purchasing_PurchaseOrders");
-
-                entity.HasOne(d => d.Supplier)
-                    .WithMany(p => p.SupplierTransactions)
-                    .HasForeignKey(d => d.SupplierId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_SupplierTransactions_SupplierID_Purchasing_Suppliers");
-
-                entity.HasOne(d => d.TransactionType)
-                    .WithMany(p => p.SupplierTransactions)
-                    .HasForeignKey(d => d.TransactionTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_SupplierTransactions_TransactionTypeID_Application_TransactionTypes");
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Suppliers>(entity =>
             {
-                entity.HasKey(e => e.SupplierId)
-                    .HasName("PK_Purchasing_Suppliers");
+                entity.HasKey(e => e.SupplierId);
 
-                entity.ToTable("Suppliers", "Purchasing");
+                entity.HasIndex(e => e.CompanyName, "CompanyName");
 
-                entity.HasIndex(e => e.AlternateContactPersonId, "FK_Purchasing_Suppliers_AlternateContactPersonID");
-
-                entity.HasIndex(e => e.DeliveryCityId, "FK_Purchasing_Suppliers_DeliveryCityID");
-
-                entity.HasIndex(e => e.DeliveryMethodId, "FK_Purchasing_Suppliers_DeliveryMethodID");
-
-                entity.HasIndex(e => e.PostalCityId, "FK_Purchasing_Suppliers_PostalCityID");
-
-                entity.HasIndex(e => e.PrimaryContactPersonId, "FK_Purchasing_Suppliers_PrimaryContactPersonID");
-
-                entity.HasIndex(e => e.SupplierCategoryId, "FK_Purchasing_Suppliers_SupplierCategoryID");
-
-                entity.HasIndex(e => e.SupplierName, "UQ_Purchasing_Suppliers_SupplierName")
-                    .IsUnique();
-
-                entity.Property(e => e.SupplierId)
-                    .HasColumnName("SupplierID")
-                    .HasDefaultValueSql("next value for [sequences].[supplierid]");
-
-                entity.Property(e => e.AlternateContactPersonId).HasColumnName("AlternateContactPersonID");
-
-                entity.Property(e => e.BankAccountBranch).HasMaxLength(50);
-
-                entity.Property(e => e.BankAccountCode).HasMaxLength(20);
-
-                entity.Property(e => e.BankAccountName).HasMaxLength(50);
-
-                entity.Property(e => e.BankAccountNumber).HasMaxLength(20);
-
-                entity.Property(e => e.BankInternationalCode).HasMaxLength(20);
-
-                entity.Property(e => e.DeliveryAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryCityId).HasColumnName("DeliveryCityID");
-
-                entity.Property(e => e.DeliveryMethodId).HasColumnName("DeliveryMethodID");
-
-                entity.Property(e => e.DeliveryPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.FaxNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PostalAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.PostalAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.PostalCityId).HasColumnName("PostalCityID");
-
-                entity.Property(e => e.PostalPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.PrimaryContactPersonId).HasColumnName("PrimaryContactPersonID");
-
-                entity.Property(e => e.SupplierCategoryId).HasColumnName("SupplierCategoryID");
-
-                entity.Property(e => e.SupplierName)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.SupplierReference).HasMaxLength(20);
-
-                entity.Property(e => e.WebsiteUrl)
-                    .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("WebsiteURL");
-
-                entity.HasOne(d => d.AlternateContactPerson)
-                    .WithMany(p => p.SuppliersAlternateContactPerson)
-                    .HasForeignKey(d => d.AlternateContactPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_Suppliers_AlternateContactPersonID_Application_People");
-
-                entity.HasOne(d => d.DeliveryCity)
-                    .WithMany(p => p.SuppliersDeliveryCity)
-                    .HasForeignKey(d => d.DeliveryCityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_Suppliers_DeliveryCityID_Application_Cities");
-
-                entity.HasOne(d => d.DeliveryMethod)
-                    .WithMany(p => p.Suppliers)
-                    .HasForeignKey(d => d.DeliveryMethodId)
-                    .HasConstraintName("FK_Purchasing_Suppliers_DeliveryMethodID_Application_DeliveryMethods");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.SuppliersLastEditedByNavigation)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_Suppliers_Application_People");
-
-                entity.HasOne(d => d.PostalCity)
-                    .WithMany(p => p.SuppliersPostalCity)
-                    .HasForeignKey(d => d.PostalCityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_Suppliers_PostalCityID_Application_Cities");
-
-                entity.HasOne(d => d.PrimaryContactPerson)
-                    .WithMany(p => p.SuppliersPrimaryContactPerson)
-                    .HasForeignKey(d => d.PrimaryContactPersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_Suppliers_PrimaryContactPersonID_Application_People");
-
-                entity.HasOne(d => d.SupplierCategory)
-                    .WithMany(p => p.Suppliers)
-                    .HasForeignKey(d => d.SupplierCategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_Suppliers_SupplierCategoryID_Purchasing_SupplierCategories");
-            });
-
-            modelBuilder.Entity<Suppliers1>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToView("Suppliers", "Website");
-
-                entity.Property(e => e.AlternateContact)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.CityName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.DeliveryMethod)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.FaxNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PrimaryContact)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.SupplierCategoryName)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.HasIndex(e => e.PostalCode, "PostalCode");
 
                 entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
 
-                entity.Property(e => e.SupplierName)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.Property(e => e.Address).HasMaxLength(60);
 
-                entity.Property(e => e.SupplierReference).HasMaxLength(20);
+                entity.Property(e => e.City).HasMaxLength(15);
 
-                entity.Property(e => e.WebsiteUrl)
+                entity.Property(e => e.CompanyName)
                     .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("WebsiteURL");
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.ContactName).HasMaxLength(30);
+
+                entity.Property(e => e.ContactTitle).HasMaxLength(30);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.Fax).HasMaxLength(24);
+
+                entity.Property(e => e.HomePage).HasColumnType("ntext");
+
+                entity.Property(e => e.Phone).HasMaxLength(24);
+
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.Region).HasMaxLength(15);
             });
 
-            modelBuilder.Entity<SuppliersArchive>(entity =>
+            modelBuilder.Entity<Territories>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.ToTable("Suppliers_Archive", "Purchasing");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_Suppliers_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.AlternateContactPersonId).HasColumnName("AlternateContactPersonID");
-
-                entity.Property(e => e.BankAccountBranch).HasMaxLength(50);
-
-                entity.Property(e => e.BankAccountCode).HasMaxLength(20);
-
-                entity.Property(e => e.BankAccountName).HasMaxLength(50);
-
-                entity.Property(e => e.BankAccountNumber).HasMaxLength(20);
-
-                entity.Property(e => e.BankInternationalCode).HasMaxLength(20);
-
-                entity.Property(e => e.DeliveryAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryCityId).HasColumnName("DeliveryCityID");
-
-                entity.Property(e => e.DeliveryMethodId).HasColumnName("DeliveryMethodID");
-
-                entity.Property(e => e.DeliveryPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.FaxNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.PostalAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.PostalAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.PostalCityId).HasColumnName("PostalCityID");
-
-                entity.Property(e => e.PostalPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.PrimaryContactPersonId).HasColumnName("PrimaryContactPersonID");
-
-                entity.Property(e => e.SupplierCategoryId).HasColumnName("SupplierCategoryID");
-
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-
-                entity.Property(e => e.SupplierName)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.SupplierReference).HasMaxLength(20);
-
-                entity.Property(e => e.WebsiteUrl)
-                    .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("WebsiteURL");
-            });
-
-            modelBuilder.Entity<SystemParameters>(entity =>
-            {
-                entity.HasKey(e => e.SystemParameterId)
-                    .HasName("PK_Application_SystemParameters");
-
-                entity.ToTable("SystemParameters", "Application");
-
-                entity.HasIndex(e => e.DeliveryCityId, "FK_Application_SystemParameters_DeliveryCityID");
-
-                entity.HasIndex(e => e.PostalCityId, "FK_Application_SystemParameters_PostalCityID");
-
-                entity.Property(e => e.SystemParameterId)
-                    .HasColumnName("SystemParameterID")
-                    .HasDefaultValueSql("next value for [sequences].[systemparameterid]");
-
-                entity.Property(e => e.ApplicationSettings).IsRequired();
-
-                entity.Property(e => e.DeliveryAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.DeliveryCityId).HasColumnName("DeliveryCityID");
-
-                entity.Property(e => e.DeliveryPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("sysdatetime()");
-
-                entity.Property(e => e.PostalAddressLine1)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.PostalAddressLine2).HasMaxLength(60);
-
-                entity.Property(e => e.PostalCityId).HasColumnName("PostalCityID");
-
-                entity.Property(e => e.PostalPostalCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-                entity.HasOne(d => d.DeliveryCity)
-                    .WithMany(p => p.SystemParametersDeliveryCity)
-                    .HasForeignKey(d => d.DeliveryCityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_SystemParameters_DeliveryCityID_Application_Cities");
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.SystemParameters)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_SystemParameters_Application_People");
-
-                entity.HasOne(d => d.PostalCity)
-                    .WithMany(p => p.SystemParametersPostalCity)
-                    .HasForeignKey(d => d.PostalCityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_SystemParameters_PostalCityID_Application_Cities");
-            });
-
-            modelBuilder.Entity<TransactionTypes>(entity =>
-            {
-                entity.HasKey(e => e.TransactionTypeId)
-                    .HasName("PK_Application_TransactionTypes");
-
-                entity.ToTable("TransactionTypes", "Application");
-
-                entity.HasIndex(e => e.TransactionTypeName, "UQ_Application_TransactionTypes_TransactionTypeName")
-                    .IsUnique();
-
-                entity.Property(e => e.TransactionTypeId)
-                    .HasColumnName("TransactionTypeID")
-                    .HasDefaultValueSql("next value for [sequences].[transactiontypeid]");
-
-                entity.Property(e => e.TransactionTypeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.LastEditedByNavigation)
-                    .WithMany(p => p.TransactionTypes)
-                    .HasForeignKey(d => d.LastEditedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Application_TransactionTypes_Application_People");
-            });
-
-            modelBuilder.Entity<TransactionTypesArchive>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("TransactionTypes_Archive", "Application");
-
-                entity.HasIndex(e => new { e.ValidTo, e.ValidFrom }, "ix_TransactionTypes_Archive")
-                    .IsClustered();
-
-                entity.Property(e => e.TransactionTypeId).HasColumnName("TransactionTypeID");
-
-                entity.Property(e => e.TransactionTypeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<VehicleTemperatures>(entity =>
-            {
-                entity.HasKey(e => e.VehicleTemperatureId)
-                    .HasName("PK_Warehouse_VehicleTemperatures")
+                entity.HasKey(e => e.TerritoryId)
                     .IsClustered(false);
 
-                entity.ToTable("VehicleTemperatures", "Warehouse");
+                entity.Property(e => e.TerritoryId)
+                    .HasMaxLength(20)
+                    .HasColumnName("TerritoryID");
 
-                entity.HasAnnotation("SqlServer:MemoryOptimized", true);
+                entity.Property(e => e.RegionId).HasColumnName("RegionID");
 
-                entity.Property(e => e.VehicleTemperatureId).HasColumnName("VehicleTemperatureID");
-
-                entity.Property(e => e.FullSensorData).HasMaxLength(1000);
-
-                entity.Property(e => e.Temperature).HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.VehicleRegistration)
+                entity.Property(e => e.TerritoryDescription)
                     .IsRequired()
-                    .HasMaxLength(20);
-            });
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
 
-            modelBuilder.Entity<VehicleTemperatures1>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToView("VehicleTemperatures", "Website");
-
-                entity.Property(e => e.Temperature).HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.VehicleRegistration)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.VehicleTemperatureId).HasColumnName("VehicleTemperatureID");
+                entity.HasOne(d => d.Region)
+                    .WithMany(p => p.Territories)
+                    .HasForeignKey(d => d.RegionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Territories_Region");
             });
 
             OnModelCreatingPartial(modelBuilder);

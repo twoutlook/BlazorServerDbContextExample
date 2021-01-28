@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Importer001", "Importer001\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database2", "..\..\Database2\Database2.sqlproj", "{41AA90C4-418E-4ED0-ABEC-40E520FCB940}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Northwind", "C:\Users\user\source\repos\Northwind\Northwind.sqlproj", "{A1FFBA60-2E00-42D8-916F-796DB45B204C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,12 @@ Global
 		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41AA90C4-418E-4ED0-ABEC-40E520FCB940}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A1FFBA60-2E00-42D8-916F-796DB45B204C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1FFBA60-2E00-42D8-916F-796DB45B204C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1FFBA60-2E00-42D8-916F-796DB45B204C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A1FFBA60-2E00-42D8-916F-796DB45B204C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1FFBA60-2E00-42D8-916F-796DB45B204C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1FFBA60-2E00-42D8-916F-796DB45B204C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
