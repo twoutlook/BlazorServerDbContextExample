@@ -1,0 +1,164 @@
+﻿@page "/Base4"
+@page "/Base4/{Page:int}"
+
+@using Importer001.Data
+@using Importer001.Models
+
+@inject NavigationManager Nav
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<Importer001Context> DbFactory
+<h1>Customers V3</h1>
+
+<table class="gridtable">
+    <tr><th></th><th>Customer Id</th><th>Company Name</th></tr>
+
+    @if (!Loading && Items !=null ){
+    @for (int i = 1 + Offset; i <= @Items.Count + Offset; i++)
+    {
+        <tr><th>@i</th><td>@Items[i - 1 - Offset].CustomerId</td><td>@Items[i - 1 - Offset].CompanyName</td></tr>
+    }
+    }
+
+
+</table>
+Total Record Count is @ItemCnt
+<br />Page: @Page
+<br />Last Page Number: @LastPageNum
+
+
+@code
+{
+    [Parameter]
+    public int Page // 原範例,已更換變量 //頁面上的分頁
+    {
+        get => _Page;
+        set
+        {
+            _Page = value;
+        }
+    }
+    private int Offset
+    {
+        get => ItemsPerPage * (Page - 1);
+    }
+
+    private int SkipX
+    {
+        get => ItemsPerPage * (Page - 1);
+    }
+    private int _Page;
+    private int ItemsPerPage = 10;
+    private int LastPageNum;
+    private int ShowItemCnt;
+
+    private int _lastPage = -1;// 原範例,不動
+    private bool Loading;
+
+    List<Customers> Items;
+    int ItemCnt;
+
+
+    protected override void OnAfterRender(bool firstRender) // 原範例,已調整導航
+    {
+        // Ensure we're on the same, er, right page.
+        if (_lastPage < 1)
+        {
+            Nav.NavigateTo("Base4/" + "1");
+            return;
+        }
+
+        // Normalize the page values.
+        if (ShowItemCnt > 0)
+        {
+            if (Page < 1)
+            {
+                Nav.NavigateTo("Base4/" + "1");
+                return;
+            }
+            if (Page > LastPageNum)
+            {
+                Nav.NavigateTo("Base4/" + LastPageNum);
+                return;
+            }
+        }
+
+        if (Page < 1)
+        {
+            Nav.NavigateTo("Base4/" + "1");
+            return;
+        }
+        if (Page > LastPageNum)
+        {
+            Nav.NavigateTo("Base4/" + LastPageNum);
+            return;
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    protected async override Task OnParametersSetAsync() // 原範例,不動
+    {
+        // Make sure the page really chagned.
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+        await base.OnParametersSetAsync();
+    }
+
+    private async Task ReloadAsync()
+    {
+        if (Loading || Page < 1)
+        {
+            return;
+        }
+
+        Loading = true; // --- start
+
+        // 1. 取得10筆泛型模型記錄
+        //   Objs = await QueryAdapter.FetchAsyncV997(DbFactory.CreateDbContext(), ENT);
+
+        // 2. 寫入到本頁的特定模型
+        //   Items = QueryAdapter.GetConvertedItems<V2StockCurrentAdjust>(Objs);
+
+        //  Items = await QueryAdapter.GetConvertedItemsV2Async<V2StockCurrentAdjust>(DbFactory.CreateDbContext(), ENT);
+        using var db = DbFactory.CreateDbContext();
+        //   int x = ItemsPerPage * (Page - 1);
+
+        Items = db.Customers.Skip(SkipX).Take(10).ToList();
+
+        Loading = false;// --- end
+    }
+
+
+    //protected override void OnParametersSet()
+    //{
+    //    using var db = DbFactory.CreateDbContext();
+
+    //    //Items = db.Customers.Take(10).ToList();
+    //    //  int x = 0;
+    //    if (Page < 1) Page = 1;
+
+    //    ItemCnt = db.Customers.Count();
+    //    LastPageNum = ItemCnt / ItemsPerPage; // 91/10 9..1
+    //    ShowItemCnt = ItemCnt - ItemsPerPage * (LastPageNum - 1);
+    //    if (ShowItemCnt > 0) LastPageNum++;
+    //    if (Page > LastPageNum) Page = LastPageNum;
+
+    //    Nav.NavigateTo("Base4/" + Page);
+
+    //    int x = ItemsPerPage * (Page - 1);
+
+    //    //      Nav.NavigateTo("Base4/" + Page);
+
+    //    Items = db.Customers.Skip(x).Take(10).ToList();
+
+    //}
+
+
+
+    // System.InvalidOperationException: Multiple constructors accepting all given argument types have been found in type 'Importer001.Data.Importer001Context'. There should only be one applicable constructor.
+    //at
+
+    // https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases
+}

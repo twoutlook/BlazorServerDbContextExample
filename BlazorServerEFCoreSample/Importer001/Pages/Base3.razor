@@ -1,0 +1,79 @@
+﻿@page "/Base3"
+@page "/Base3/{Page:int}"
+
+@using Importer001.Data
+@using Importer001.Models
+
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<Importer001Context> DbFactory
+<h1>Customers V3</h1>
+
+<table class="gridtable">
+    <tr><th></th><th>Customer Id</th><th>Company Name</th></tr>
+
+
+    @for (int i = 1; i <= @Items.Count; i++)
+    {
+        <tr><th>@i</th><td>@Items[i - 1].CustomerId</td><td>@Items[i - 1].CompanyName</td></tr>
+    }
+
+
+</table>
+Total Record Count is @ItemCnt
+<br />Page: @Page
+<br />Last Page Number: @LastPageNum
+
+
+@code
+{
+    [Parameter]
+    public int Page // 原範例,已更換變量 //頁面上的分頁
+    {
+        get => _Page;
+        set
+        {
+            _Page = value;
+        }
+    }
+    private int _Page;
+    private int ItemsPerPage = 10;
+    private int LastPageNum;
+    private int ShowItemCnt;
+
+
+    private bool Loading;
+
+    List<Customers> Items;
+    int ItemCnt;
+
+
+    protected override void OnParametersSet()
+    {
+        using var db = DbFactory.CreateDbContext();
+
+        //Items = db.Customers.Take(10).ToList();
+        //  int x = 0;
+        if (Page < 1) Page = 1;
+
+        ItemCnt = db.Customers.Count();
+        LastPageNum = ItemCnt / ItemsPerPage; // 91/10 9..1
+        ShowItemCnt = ItemCnt - ItemsPerPage * (LastPageNum - 1);
+        if (ShowItemCnt > 0) LastPageNum++;
+        if (Page > LastPageNum) Page = LastPageNum;
+
+
+        int x = ItemsPerPage * (Page - 1);
+
+
+
+        Items = db.Customers.Skip(x).Take(10).ToList();
+
+    }
+
+
+
+    // System.InvalidOperationException: Multiple constructors accepting all given argument types have been found in type 'Importer001.Data.Importer001Context'. There should only be one applicable constructor.
+    //at
+
+    // https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases
+}
