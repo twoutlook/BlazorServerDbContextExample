@@ -27,6 +27,8 @@ namespace BlazorServer001.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var pathBase = HttpContext.Request.PathBase;
+
             if (!(Email == "admin@example.com" && Password == "password"))
             {
                 return Page();

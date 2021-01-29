@@ -11,6 +11,13 @@ namespace BlazorServer001.Pages
 {
     public class LogoutModel : PageModel
     {
+        //public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnPostAsync()
+        {
+            await HttpContext
+                .SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return LocalRedirect(Url.Content("~/"));
+        }
         public async Task<IActionResult> OnGetAsync()
         {
             await HttpContext
