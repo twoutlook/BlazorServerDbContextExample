@@ -36,6 +36,7 @@ namespace BlazorServer001.Pages
             {
                 new Claim(ClaimTypes.Name, "Mark"),
                 new Claim(ClaimTypes.Email, Email),
+                new Claim(ClaimTypes.Role, "Admin"),
             };
 
             var claimsIdentity = new ClaimsIdentity(
