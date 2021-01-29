@@ -23,8 +23,19 @@ Logout not working?
     <input name="__RequestVerificationToken" type="text"
            value="@TokenProvider.XsrfToken" />
     <input clas="nav-link btn btn-link" type="submit" value="應該可以觸發">
-        
-    
+
+
     <input type="submit" value="Submit">
 </form>
 
+<AuthorizeView>
+    <Authorized>
+
+        @foreach (var x in context.User.Claims)
+        {
+            @x.Type<br /> @x.Value<hr />
+        }
+    </Authorized>
+
+
+</AuthorizeView>
