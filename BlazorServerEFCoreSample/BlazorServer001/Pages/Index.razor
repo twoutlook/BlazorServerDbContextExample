@@ -1,7 +1,26 @@
 ﻿@page "/"
+@inject BlazorServer001.Services.TokenProvider TokenProvider
+
+
+@using System.Net.Http
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+Logout not working?
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+<form action="/Logout" method="post" style="color:black">
+    <buttn clas="nav-link btn btn-link" type="submit">
+        Logout
+    </buttn>
+    <input name="__RequestVerificationToken" type="hidden"
+           value="@TokenProvider.XsrfToken" />
+
+</form>
+
+
+<form action="/Logout" method="post">
+
+    <input type="submit" value="Submit">
+</form>
+
